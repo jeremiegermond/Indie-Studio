@@ -7,15 +7,10 @@
 
 #include "main.hpp"
 
-int main() {
-    InitWindow(800, 600, "Bomberman");
-    SetTargetFPS(60);
+int main()
+{
+    bomberman::Game game;
 
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        ClearBackground(BLACK);
-        DrawText("Bomberman", 900, 0, 16, RAYWHITE);
-        EndDrawing();
-    }
-    CloseWindow();
+    game.run();
+    return 0;
 }
