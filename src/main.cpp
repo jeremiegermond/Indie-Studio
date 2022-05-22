@@ -11,6 +11,7 @@ int main()
 {
     bomberman::Game game;
 
+    game.loadObjects();
     game.run();
     return 0;
 }

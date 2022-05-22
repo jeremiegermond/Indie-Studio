@@ -11,6 +11,7 @@
 #include <iostream>
 #include <cmath>
 #include "raylib.h"
+#include "map.hpp"
 
 namespace bomberman {
 
@@ -24,13 +25,17 @@ namespace bomberman {
         int animFrameCounter;
 
         Camera3D camera;
+
         Model model;
-        ModelAnimation *animation;
         Texture2D texture;
+        ModelAnimation *animation;
+
+        Map map;
     public:
         Game();
         ~Game();
 
+        void loadObjects();
         void run();
     };
 

@@ -12,10 +12,10 @@ namespace bomberman {
         this->width = 1920;
         this->height = 1080;
         this->count = 1;
-        this->cam_angle = 50;
-        this->cam_radius = 1.57;
+        this->cam_angle = 0;
+        this->cam_radius = 5;
         this->animFrameCounter = 0;
-        this->camera.position = (Vector3){ -20, 5, -15};
+        this->camera.position = (Vector3){ 150, 5, -200};
         this->camera.target = (Vector3){ 0.0f, 2.0f, 0.0f };
         this->camera.up = (Vector3){ 0.0f, 2.0f, 0.0f };
         this->camera.fovy = 90.0f;
@@ -32,15 +32,19 @@ namespace bomberman {
         CloseWindow();
     }
 
-    void Game::run() {
+    void Game::loadObjects() {
         InitWindow(this->width, this->height, "Indie Studio");
+
         this->model = LoadModel("../assets/model.iqm");
         this->texture = LoadTexture("../assets/txr_model.png");
         this->animation = LoadModelAnimations("../assets/model.iqm", &count);
+
         SetMaterialTexture(&model.materials[0], MATERIAL_MAP_DIFFUSE, this->texture);
         SetCameraMode(this->camera, CAMERA_CUSTOM);
         SetTargetFPS(60);
+    }
 
+    void Game::run() {
         while (!WindowShouldClose()) {
             UpdateCamera(&camera);
             if (IsKeyDown('Q')) {
@@ -51,6 +55,7 @@ namespace bomberman {
             }
             this->camera.position.x = cam_radius * std::cos(this->cam_angle);
             this->camera.position.z = cam_radius * std::sin(this->cam_angle);
+
             UpdateModelAnimation(model, this->animation[0], animFrameCounter);
             animFrameCounter++;
             if (animFrameCounter >= this->animation[0].frameCount) {
@@ -59,6 +64,7 @@ namespace bomberman {
 
             BeginDrawing();
             BeginMode3D(camera);
+            this->map.drawMap();
             ClearBackground(BLACK);
             DrawModel(model, (Vector3){0, 1, 0}, 1, WHITE);
 
