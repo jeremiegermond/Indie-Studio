@@ -35,6 +35,7 @@ namespace bomberman {
     }
 
     void Game::loadObjects() {
+        SetConfigFlags(FLAG_MSAA_4X_HINT);
         InitWindow(this->width, this->height, "Indie Studio");
         InitAudioDevice();
 
@@ -49,7 +50,8 @@ namespace bomberman {
     }
 
     void Game::run() {
-        Shader shader = LoadShader(0, TextFormat("../resources/shaders/glsl%i/bloom.fs", 330));
+        Shader shader = LoadShader(0, TextFormat("../Assets/Shaders/bloom.fs", 330));
+        RenderTexture2D target = LoadRenderTexture(this->width, this->height);
         while (!WindowShouldClose()) {
             UpdateCamera(&camera);
 //            if (IsKeyDown('Q')) {
@@ -69,15 +71,21 @@ namespace bomberman {
             if (IsKeyPressed(KEY_SPACE)) {
                 PlaySound(this->sound);
             }
+
+            BeginTextureMode(target);
+                ClearBackground(BLACK);
+                BeginMode3D(camera);
+                this->map.drawMap();
+                DrawModel(model, (Vector3){0, 1, 0}, 1, WHITE);
+                DrawGrid(15, 1.0);
+                EndMode3D();
+            EndTextureMode();
+
             BeginDrawing();
-            BeginMode3D(camera);
-            this->map.drawMap();
-            ClearBackground(BLACK);
-            BeginShaderMode(shader);
-            DrawModel(model, (Vector3){0, 1, 0}, 1, WHITE);
-            EndShaderMode();
-            DrawGrid(15, 1.0);
-            EndMode3D();
+                ClearBackground(BLACK);
+                BeginShaderMode(shader);
+                    DrawTextureRec(target.texture, (Rectangle){ 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2){ 0, 0 }, WHITE);
+                EndShaderMode();
             EndDrawing();
         }
     }
