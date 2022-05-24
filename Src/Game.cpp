@@ -52,6 +52,8 @@ namespace bomberman {
     void Game::run() {
         Shader shader = LoadShader(0, TextFormat("../Assets/Shaders/bloom.fs", 330));
         RenderTexture2D target = LoadRenderTexture(this->width, this->height);
+
+        PlaySound(this->sound);
         while (!WindowShouldClose()) {
             UpdateCamera(&camera);
 //            if (IsKeyDown('Q')) {
@@ -68,9 +70,6 @@ namespace bomberman {
             if (animFrameCounter >= this->animation[0].frameCount) {
                 animFrameCounter = 0;
             }
-            if (IsKeyPressed(KEY_SPACE)) {
-                PlaySound(this->sound);
-            }
 
             BeginTextureMode(target);
                 ClearBackground(BLACK);
@@ -83,7 +82,7 @@ namespace bomberman {
 
             BeginDrawing();
                 ClearBackground(BLACK);
-                if (IsKeyPressed(KEY_B)) {
+                if (IsKeyDown(KEY_B)) {
                     DrawTextureRec(target.texture, (Rectangle){ 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2){ 0, 0 }, WHITE);
                 }
                 else {
