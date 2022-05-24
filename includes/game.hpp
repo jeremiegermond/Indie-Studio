@@ -11,7 +11,7 @@
 #include <iostream>
 #include <cmath>
 #include "raylib.h"
-#include "map.hpp"
+#include "Map.hpp"
 
 namespace bomberman {
 

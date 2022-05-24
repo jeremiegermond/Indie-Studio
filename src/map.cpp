@@ -5,7 +5,7 @@
 ** TODO
 */
 
-#include "map.hpp"
+#include "Map.hpp"
 
 namespace bomberman {
     void Map::drawMap() {

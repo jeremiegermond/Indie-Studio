@@ -5,7 +5,7 @@
 ** TODO
 */
 
-#include "game.hpp"
+#include "Game.hpp"
 
 namespace bomberman {
     Game::Game() {
@@ -38,10 +38,10 @@ namespace bomberman {
         InitWindow(this->width, this->height, "Indie Studio");
         InitAudioDevice();
 
-        this->model = LoadModel("../assets/model.iqm");
-        this->texture = LoadTexture("../assets/txr_model.png");
-        this->animation = LoadModelAnimations("../assets/model.iqm", &count);
-        this->sound = LoadSound("../assets/Songs/ForestSong.mp3");
+        this->model = LoadModel("../Assets/model.iqm");
+        this->texture = LoadTexture("../Assets/txr_model.png");
+        this->animation = LoadModelAnimations("../Assets/model.iqm", &count);
+        this->sound = LoadSound("../Assets/Songs/ForestSong.mp3");
 
         SetMaterialTexture(&model.materials[0], MATERIAL_MAP_DIFFUSE, this->texture);
         SetCameraMode(this->camera, CAMERA_CUSTOM);
