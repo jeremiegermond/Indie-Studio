@@ -29,6 +29,7 @@ namespace bomberman {
         Model model;
         Texture2D texture;
         ModelAnimation *animation;
+        Sound sound;
 
         Map map;
     public:

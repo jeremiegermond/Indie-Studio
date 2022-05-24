@@ -27,17 +27,21 @@ namespace bomberman {
             UnloadModelAnimation(animation[i]);
         }
         RL_FREE(animation);
+        UnloadSound(this->sound);
         UnloadTexture(texture);
         UnloadModel(model);
+        CloseAudioDevice();
         CloseWindow();
     }
 
     void Game::loadObjects() {
         InitWindow(this->width, this->height, "Indie Studio");
+        InitAudioDevice();
 
         this->model = LoadModel("../assets/model.iqm");
         this->texture = LoadTexture("../assets/txr_model.png");
         this->animation = LoadModelAnimations("../assets/model.iqm", &count);
+        this->sound = LoadSound("../assets/Songs/ForestSong.mp3");
 
         SetMaterialTexture(&model.materials[0], MATERIAL_MAP_DIFFUSE, this->texture);
         SetCameraMode(this->camera, CAMERA_CUSTOM);
@@ -61,7 +65,9 @@ namespace bomberman {
             if (animFrameCounter >= this->animation[0].frameCount) {
                 animFrameCounter = 0;
             }
-
+            if (IsKeyPressed(KEY_SPACE)) {
+                PlaySound(this->sound);
+            }
             BeginDrawing();
             BeginMode3D(camera);
             this->map.drawMap();
