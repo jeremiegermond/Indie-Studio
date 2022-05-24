@@ -15,10 +15,10 @@ namespace bomberman {
         this->cam_angle = 0;
         this->cam_radius = 5;
         this->animFrameCounter = 0;
-        this->camera.position = (Vector3){ 150, 5, -200};
+        this->camera.position = (Vector3){ 6.0f, 3.0f, 6.0f};
         this->camera.target = (Vector3){ 0.0f, 2.0f, 0.0f };
         this->camera.up = (Vector3){ 0.0f, 2.0f, 0.0f };
-        this->camera.fovy = 90.0f;
+        this->camera.fovy = 45.0f;
         this->camera.projection = CAMERA_PERSPECTIVE;
     }
 
@@ -44,21 +44,21 @@ namespace bomberman {
         this->sound = LoadSound("../Assets/Songs/ForestSong.mp3");
 
         SetMaterialTexture(&model.materials[0], MATERIAL_MAP_DIFFUSE, this->texture);
-        SetCameraMode(this->camera, CAMERA_CUSTOM);
+        SetCameraMode(this->camera, CAMERA_ORBITAL);
         SetTargetFPS(60);
     }
 
     void Game::run() {
         while (!WindowShouldClose()) {
             UpdateCamera(&camera);
-            if (IsKeyDown('Q')) {
-                this->cam_angle += 0.02;
-            }
-            if (IsKeyDown('E')) {
-                this->cam_angle -= 0.02;
-            }
-            this->camera.position.x = cam_radius * std::cos(this->cam_angle);
-            this->camera.position.z = cam_radius * std::sin(this->cam_angle);
+//            if (IsKeyDown('Q')) {
+//                this->cam_angle += 0.02;
+//            }
+//            if (IsKeyDown('E')) {
+//                this->cam_angle -= 0.02;
+//            }
+//            this->camera.position.x = cam_radius * std::cos(this->cam_angle);
+//            this->camera.position.z = cam_radius * std::sin(this->cam_angle);
 
             UpdateModelAnimation(model, this->animation[0], animFrameCounter);
             animFrameCounter++;
