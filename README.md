@@ -1,5 +1,7 @@
 # Indie Studio
 
+![](bomberman.png)
+
 > binary name: `bomberman` <br>
 > language: `c` <br>
 > compilation: `cmake 3.17`
