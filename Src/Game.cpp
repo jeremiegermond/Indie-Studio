@@ -49,6 +49,7 @@ namespace bomberman {
     }
 
     void Game::run() {
+        Shader shader = LoadShader(0, TextFormat("../resources/shaders/glsl%i/bloom.fs", 330));
         while (!WindowShouldClose()) {
             UpdateCamera(&camera);
 //            if (IsKeyDown('Q')) {
@@ -72,8 +73,9 @@ namespace bomberman {
             BeginMode3D(camera);
             this->map.drawMap();
             ClearBackground(BLACK);
+            BeginShaderMode(shader);
             DrawModel(model, (Vector3){0, 1, 0}, 1, WHITE);
-
+            EndShaderMode();
             DrawGrid(15, 1.0);
             EndMode3D();
             EndDrawing();
