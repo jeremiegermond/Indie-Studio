@@ -8,6 +8,8 @@ include_directories(Includes)
 add_executable(bomberman
         Src/Game.cpp
         Src/Map.cpp
-        Src/Main.cpp)
+        Src/Main.cpp
+        Src/GameObject.cpp
+        Src/Scene.cpp)
 
 target_link_libraries(bomberman raylib)

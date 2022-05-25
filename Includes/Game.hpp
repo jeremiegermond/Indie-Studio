@@ -13,36 +13,10 @@
 #include <vector>
 #include "raylib.h"
 #include "Map.hpp"
+#include "GameObject.hpp"
+#include "Scene.hpp"
 
 namespace bomberman {
-
-    class GameObject {
-    private:
-        unsigned int count;
-        int animFrameCounter;
-        std::string model_path;
-        std::string texture_path{};
-        std::string anim_path{};
-        Model model;
-        Texture2D texture{};
-        ModelAnimation *animation{};
-    public:
-        GameObject(std::string modelPath, std::string texturePath, std::string animPath);
-        GameObject(std::string modelPath);
-        ~GameObject();
-        void load();
-        void UpdtModelAnim();
-        void draw();
-    };
-
-    class Scene {
-    private:
-        std::vector<GameObject *> GameObjects;
-    public:
-        void addGameObject(GameObject *GameObject);
-        void loadGameObjects();
-        std::vector<GameObject *> *getGameObjects();
-    };
 
     class Game {
     private:
@@ -63,7 +37,7 @@ namespace bomberman {
 
         void createWindow();
         Scene *createScene();
-        Scene *getScene(int pos);
+        Scene *getScene();
         void loadScene(){};
 
         void run();
