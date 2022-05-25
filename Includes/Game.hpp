@@ -10,33 +10,61 @@
 
 #include <iostream>
 #include <cmath>
+#include <vector>
 #include "raylib.h"
 #include "Map.hpp"
 
 namespace bomberman {
 
+    class Element {
+    private:
+        unsigned int count;
+        int animFrameCounter;
+        std::string model_path;
+        std::string texture_path;
+        std::string anim_path;
+        Model model;
+        Texture2D texture;
+        ModelAnimation *animation;
+    public:
+        Element(std::string modelPath, std::string texturePath, std::string animPath);
+        ~Element();
+        void load();
+        void UpdtModelAnim();
+        void draw(RenderTexture2D *target, Camera3D *camera, Map *map);
+    };
+
+    class Scene {
+    private:
+        std::vector<Element *> elements;
+    public:
+        void addElement(Element *element);
+        void loadElements();
+        std::vector<Element *> *getElements();
+    };
+
     class Game {
     private:
         int width;
         int height;
-        unsigned int count;
         float cam_angle;
         float cam_radius;
-        int animFrameCounter;
 
         Camera3D camera;
-
-        Model model;
-        Texture2D texture;
-        ModelAnimation *animation;
         Sound sound;
+
+        std::vector<Scene *> scenes;
 
         Map map;
     public:
         Game();
         ~Game();
 
-        void loadObjects();
+        void createWindow();
+        Scene *createScene();
+        Scene *getScene(int pos);
+        void loadScene(){};
+
         void run();
     };
 
