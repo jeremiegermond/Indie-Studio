@@ -94,10 +94,12 @@ namespace bomberman {
     }
 
     void GameObject::UpdtModelAnim() {
-        UpdateModelAnimation(model, animation[0], animFrameCounter);
-        animFrameCounter++;
-        if (animFrameCounter >= animation[0].frameCount)
-            animFrameCounter = 0;
+        if (!anim_path.empty()) {
+            UpdateModelAnimation(model, animation[0], animFrameCounter);
+            animFrameCounter++;
+            if (animFrameCounter >= animation[0].frameCount)
+                animFrameCounter = 0;
+        }
     }
 
     GameObject::GameObject(std::string modelPath, std::string texturePath, std::string animPath) {
