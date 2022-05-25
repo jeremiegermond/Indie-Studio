@@ -16,31 +16,32 @@
 
 namespace bomberman {
 
-    class Element {
+    class GameObject {
     private:
         unsigned int count;
         int animFrameCounter;
         std::string model_path;
-        std::string texture_path;
-        std::string anim_path;
+        std::string texture_path{};
+        std::string anim_path{};
         Model model;
-        Texture2D texture;
-        ModelAnimation *animation;
+        Texture2D texture{};
+        ModelAnimation *animation{};
     public:
-        Element(std::string modelPath, std::string texturePath, std::string animPath);
-        ~Element();
+        GameObject(std::string modelPath, std::string texturePath, std::string animPath);
+        GameObject(std::string modelPath);
+        ~GameObject();
         void load();
         void UpdtModelAnim();
-        void draw(RenderTexture2D *target, Camera3D *camera, Map *map);
+        void draw();
     };
 
     class Scene {
     private:
-        std::vector<Element *> elements;
+        std::vector<GameObject *> GameObjects;
     public:
-        void addElement(Element *element);
-        void loadElements();
-        std::vector<Element *> *getElements();
+        void addGameObject(GameObject *GameObject);
+        void loadGameObjects();
+        std::vector<GameObject *> *getGameObjects();
     };
 
     class Game {

@@ -13,8 +13,8 @@ int main()
 
     game.createWindow();
     auto scene = game.createScene();
-    scene->addElement(new bomberman::Element("../Assets/model.iqm", "../Assets/txr_model.png", "../Assets/model.iqm"));
-    scene->loadElements();
+    scene->addGameObject(new bomberman::GameObject("../Assets/model.iqm", "../Assets/txr_model.png", "../Assets/model.iqm"));
+    scene->loadGameObjects();
     game.run();
     return 0;
 }

@@ -52,10 +52,16 @@ namespace bomberman {
         while (!WindowShouldClose()) {
             UpdateCamera(&camera);
             Scene *ActualScene = getScene(0);
-            for (auto elem : *ActualScene->getElements()) {
+            BeginTextureMode(target);
+            ClearBackground(BLACK);
+            BeginMode3D(camera);
+            DrawGrid(15, 1.0);
+            for (auto elem : *ActualScene->getGameObjects()) {
                 elem->UpdtModelAnim();
-                elem->draw(&target, &camera, &map);
+                elem->draw();
             }
+            EndMode3D();
+            EndTextureMode();
             BeginDrawing();
                 ClearBackground(BLACK);
                 if (IsKeyDown(KEY_B)) {
@@ -70,39 +76,31 @@ namespace bomberman {
         }
     }
 
-    void Scene::addElement(Element *element) {
-        elements.push_back(element);
+    void Scene::addGameObject(GameObject *GameObject) {
+        GameObjects.push_back(GameObject);
     }
 
-    void Scene::loadElements() {
-        for (auto element : elements)
-            element->load();
+    void Scene::loadGameObjects() {
+        for (auto GameObject : GameObjects)
+            GameObject->load();
     }
 
-    std::vector<Element *> *Scene::getElements() {
-        return &elements;
+    std::vector<GameObject *> *Scene::getGameObjects() {
+        return &GameObjects;
     }
 
-    void Element::draw(RenderTexture2D *target, Camera3D *camera, Map *map) {
-        BeginTextureMode(*target);
-            ClearBackground(BLACK);
-            BeginMode3D(*camera);
-            map->drawMap();
+    void GameObject::draw() {
             DrawModel(model, (Vector3){0, 1, 0}, 1, WHITE);
-            DrawGrid(15, 1.0);
-            DrawModel(model, (Vector3){0, 1, 0}, 1, WHITE);
-            EndMode3D();
-        EndTextureMode();
     }
 
-    void Element::UpdtModelAnim() {
+    void GameObject::UpdtModelAnim() {
         UpdateModelAnimation(model, animation[0], animFrameCounter);
         animFrameCounter++;
         if (animFrameCounter >= animation[0].frameCount)
             animFrameCounter = 0;
     }
 
-    Element::Element(std::string modelPath, std::string texturePath, std::string animPath) {
+    GameObject::GameObject(std::string modelPath, std::string texturePath, std::string animPath) {
         count = 1;
         animFrameCounter = 0;
         model_path = modelPath;
@@ -110,18 +108,30 @@ namespace bomberman {
         anim_path = animPath;
     }
 
-    Element::~Element() {
-        for (unsigned int i = 0; i < count; i++)
-            UnloadModelAnimation(animation[i]);
-        RL_FREE(animation);
-        UnloadTexture(texture);
+    GameObject::GameObject(std::string modelPath) {
+        count = 1;
+        animFrameCounter = 0;
+        model_path = modelPath;
+    }
+
+    GameObject::~GameObject() {
+        if (!anim_path.empty()) {
+            for (unsigned int i = 0; i < count; i++)
+                UnloadModelAnimation(animation[i]);
+            RL_FREE(animation);
+        }
+        if (!texture_path.empty())
+            UnloadTexture(texture);
         UnloadModel(model);
     }
 
-    void Element::load() {
+    void GameObject::load() {
         model = LoadModel(model_path.c_str());
-        texture = LoadTexture(texture_path.c_str());
-        animation = LoadModelAnimations(anim_path.c_str(), &count);
-        SetMaterialTexture(&model.materials[0], MATERIAL_MAP_DIFFUSE, texture);
+        if (!texture_path.empty()) {
+            texture = LoadTexture(texture_path.c_str());
+            SetMaterialTexture(&model.materials[0], MATERIAL_MAP_DIFFUSE, texture);
+        }
+        if (!anim_path.empty())
+            animation = LoadModelAnimations(anim_path.c_str(), &count);
     }
 }
