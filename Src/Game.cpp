@@ -13,10 +13,10 @@ namespace bomberman {
         height = 1080;
         cam_angle = 0;
         cam_radius = 5;
-        camera.position = (Vector3){ 6.0f, 3.0f, 6.0f};
-        camera.target = (Vector3){ 0.0f, 2.0f, 0.0f };
-        camera.up = (Vector3){ 0.0f, 2.0f, 0.0f };
-        camera.fovy = 45.0f;
+        camera.position = (Vector3){ -10.0f, 15.0f, -10.0f };
+        camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
+        camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };           
+        camera.fovy = 20.0f;
         camera.projection = CAMERA_PERSPECTIVE;
     }
 
