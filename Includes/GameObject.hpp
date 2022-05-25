@@ -20,7 +20,7 @@ namespace bomberman {
         std::string model_path;
         std::string texture_path{};
         std::string anim_path{};
-        Model model;
+        Model model{};
         Texture2D texture{};
         ModelAnimation *animation{};
     public:

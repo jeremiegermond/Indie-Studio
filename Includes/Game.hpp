@@ -12,6 +12,7 @@
 #include <cmath>
 #include <vector>
 #include "raylib.h"
+#include "rlgl.h"
 #include "Map.hpp"
 #include "GameObject.hpp"
 #include "Scene.hpp"

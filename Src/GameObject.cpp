@@ -7,9 +7,11 @@
 
 #include "GameObject.hpp"
 
+#include <utility>
+
 namespace bomberman {
     void GameObject::draw() {
-        DrawModel(model, (Vector3){0, 1, 0}, 1, WHITE);
+        DrawModel(model, Vector3 {0, 0, 0}, 1, WHITE);
     }
 
     void GameObject::UpdateAnimation() {
@@ -26,13 +28,13 @@ namespace bomberman {
         animFrameCounter = 0;
         model_path = std::move(modelPath);
         texture_path = std::move(texturePath);
-        anim_path = animPath;
+        anim_path = std::move(animPath);
     }
 
     GameObject::GameObject(std::string modelPath) {
         count = 1;
         animFrameCounter = 0;
-        model_path = modelPath;
+        model_path = std::move(modelPath);
     }
 
     GameObject::~GameObject() {
