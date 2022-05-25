@@ -15,6 +15,7 @@ int main()
     auto scene = game.createScene();
 //    scene->addGameObject(new bomberman::GameObject("../Assets/model.iqm", "../Assets/txr_model.png", "../Assets/model.iqm"));
     scene->addGameObject(new bomberman::GameObject("../Assets/Level/forest.obj"));
+    scene->addGameObject(new bomberman::GameObject("../Assets/Level/leafs.obj"));
     scene->loadGameObjects();
     game.run();
     return 0;
