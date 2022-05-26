@@ -7,8 +7,6 @@
 
 #include "Game.hpp"
 
-#include <utility>
-
 namespace bomberman {
     Game::Game::Game() {
         width = 1920;
@@ -23,7 +21,6 @@ namespace bomberman {
     }
 
     Game::~Game() {
-        UnloadSound(sound);
         CloseAudioDevice();
         CloseWindow();
     }
@@ -33,36 +30,24 @@ namespace bomberman {
         rlDisableBackfaceCulling();
         SetConfigFlags(FLAG_MSAA_4X_HINT);
         InitAudioDevice();
-        sound = LoadSound("../Assets/Songs/ForestSong.mp3");
         SetCameraMode(camera, CAMERA_ORBITAL);
         SetTargetFPS(60);
-    }
-
-    Scene *Game::createScene() {
-        scenes.push_back(new Scene);
-        return scenes.back();
-    }
-
-    Scene *Game::getScene() {
-        return scenes.back(); // debug
+        scenes.LoadScenes();
     }
 
     void Game::run() {
         Shader shader = LoadShader(0, TextFormat("../Assets/Shaders/bloom.fs", 330));
         RenderTexture2D target = LoadRenderTexture(width, height);
 
-        PlaySound(sound);
+        scenes.GetScene(0).StartScene();
         while (!WindowShouldClose()) {
+            Scene currentScene = scenes.GetScene(0);
             UpdateCamera(&camera);
-            Scene *ActualScene = getScene();
             BeginTextureMode(target);
             ClearBackground(BLACK);
             BeginMode3D(camera);
             DrawGrid(15, 1.0);
-            for (auto elem : *ActualScene->getGameObjects()) {
-                elem->UpdateAnimation();
-                elem->draw();
-            }
+            currentScene.DrawScene();
             EndMode3D();
             EndTextureMode();
             BeginDrawing();

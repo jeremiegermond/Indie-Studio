@@ -14,13 +14,22 @@
 namespace bomberman {
     class Scene {
     private:
-        std::vector<GameObject *> GameObjects;
+        std::vector<IObject *> GameObjects;
+        std::vector<Sound> GameSounds;
+// std::vector<Camera> GameCameras;
+// std::vector<Shader> GameShaders;
     public:
-        void addGameObject(GameObject *GameObject);
+        Scene() = default;
 
-        void loadGameObjects();
+        virtual ~Scene() = default;
 
-        std::vector<GameObject *> *getGameObjects();
+        void AddGameObject(IObject *GameObject);
+
+        void AddSound(Sound sound);
+
+        void StartScene();
+
+        void DrawScene();
     };
 }
 

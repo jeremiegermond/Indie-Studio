@@ -13,9 +13,8 @@
 #include <vector>
 #include "raylib.h"
 #include "rlgl.h"
-#include "Map.hpp"
 #include "GameObject.hpp"
-#include "Scene.hpp"
+#include "SceneManager.hpp"
 
 namespace bomberman {
 
@@ -26,12 +25,10 @@ namespace bomberman {
         float cam_angle;
         float cam_radius;
 
-        Camera3D camera;
-        Sound sound;
+        Camera3D camera{};
+        Sound sound{};
 
-        std::vector<Scene *> scenes;
-
-        Map map;
+        SceneManager scenes;
     public:
         Game();
         ~Game();

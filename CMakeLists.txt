@@ -6,10 +6,11 @@ include(cmake/Findraylib.cmake)
 include_directories(Includes)
 
 add_executable(bomberman
-        Src/Game.cpp
+        Src/Game/Game.cpp
         Src/Map.cpp
         Src/Main.cpp
-        Src/GameObject.cpp
-        Src/Scene.cpp)
+        Src/Game/GameObject.cpp
+        Src/Scene/Scene.cpp
+        Src/Scene/SceneManager.cpp)
 
 target_link_libraries(bomberman raylib)

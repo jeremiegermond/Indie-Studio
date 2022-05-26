@@ -10,26 +10,55 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+
 #include "raylib.h"
+#include "IObject.hpp"
 
 namespace bomberman {
-    class GameObject {
+    class StaticGameObject : public IObject{
     private:
-        unsigned int count;
-        int animFrameCounter;
-        std::string model_path;
-        std::string texture_path{};
-        std::string anim_path{};
         Model model{};
-        Texture2D texture{};
-        ModelAnimation *animation{};
+        Vector3 position{};
+        float scale{};
+        Color tint{};
+        bool active{};
     public:
-        GameObject(std::string modelPath, std::string texturePath, std::string animPath);
-        explicit GameObject(std::string modelPath);
-        ~GameObject();
-        void load();
-        void UpdateAnimation();
-        void draw();
+        explicit StaticGameObject(const std::string& modelPath);
+        ~StaticGameObject() override;
+        void Draw() override;
+        void Update() override {};
+        void SetPosition(Vector3 newPosition) override;
+        void SetAnimation(int newSelectedAnimation) override {
+            (void) newSelectedAnimation;
+        }
+        void SetActive(bool activate) override;
+        void Move(Vector3 velocity) override;
+    };
+
+    class AnimatedGameObject : public IObject{
+    private:
+        Model model{};
+        Vector3 position{};
+        float scale{};
+        Color tint{};
+        bool active{};
+        Texture2D texture{};
+        ModelAnimation *animations{};
+        unsigned int animationNb;
+        int animationFrame{};
+        int animationSelected{};
+    public:
+        AnimatedGameObject(const std::string& modelPath,
+                           const std::string& texturePath,
+                           const std::string& animationPath,
+                           unsigned int animationCount);
+        ~AnimatedGameObject() override;
+        void Draw() override;
+        void Update() override;
+        void SetPosition(Vector3 newPosition) override;
+        void SetAnimation(int newSelectedAnimation) override;
+        void SetActive(bool activate) override;
+        void Move(Vector3 velocity) override;
     };
 }
 
