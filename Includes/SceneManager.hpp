@@ -12,7 +12,7 @@
 namespace bomberman {
     class SceneManager {
     private:
-        int currentScene{};
+//        int currentScene{};
         std::vector<Scene> scenes;
     public:
         SceneManager() = default;
@@ -26,8 +26,6 @@ namespace bomberman {
         void CreateLevelScene();
 
         Scene GetScene(int sceneId);
-
-
     };
 }
 

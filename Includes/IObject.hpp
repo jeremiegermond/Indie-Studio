@@ -8,22 +8,18 @@
 #ifndef BOMBERMAN_IOBJECT_HPP
 #define BOMBERMAN_IOBJECT_HPP
 
+#include "IEntity.hpp"
+
 namespace bomberman {
-    class IObject {
+    class IObject : public IEntity {
     public:
-        virtual ~IObject() = default;
+        ~IObject() override = default;
 
         virtual void Draw() = 0;
-
-        virtual void Update() = 0;
 
         virtual void SetPosition(Vector3 position) = 0;
 
         virtual void SetAnimation(int newSelectedAnimation) = 0;
-
-        virtual void SetActive(bool activate) = 0;
-
-        virtual void Move(Vector3 velocity) = 0;
     };
 }
 #endif //BOMBERMAN_IOBJECT_HPP

@@ -4,18 +4,23 @@
 ** File description:
 ** TODO
 */
+
 #ifndef BOMBERMAN_SCENE_HPP
 #define BOMBERMAN_SCENE_HPP
 
 #include <vector>
+
 #include "GameObject.hpp"
+#include "GameCamera.hpp"
+#include "GameSound.hpp"
 
 
 namespace bomberman {
     class Scene {
     private:
         std::vector<IObject *> GameObjects;
-        std::vector<Sound> GameSounds;
+        std::vector<GameSound *> GameSounds;
+        std::vector<GameCamera *> GameCameras;
 // std::vector<Camera> GameCameras;
 // std::vector<Shader> GameShaders;
     public:
@@ -23,9 +28,7 @@ namespace bomberman {
 
         virtual ~Scene() = default;
 
-        void AddGameObject(IObject *GameObject);
-
-        void AddSound(Sound sound);
+        void AddEntity(IEntity *entity);
 
         void StartScene();
 

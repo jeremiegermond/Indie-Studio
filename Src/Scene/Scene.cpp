@@ -8,23 +8,35 @@
 #include "Scene.hpp"
 
 namespace bomberman {
-    void Scene::AddGameObject(IObject *GameObject) {
-        GameObjects.push_back(GameObject);
-    }
+    void Scene::AddEntity(IEntity *entity) {
+        auto camera = dynamic_cast<GameCamera *>(entity);
+        if (camera)
+            GameCameras.push_back(camera);
 
-    void Scene::AddSound(Sound sound) {
-        GameSounds.push_back(sound);
+        auto object = dynamic_cast<IObject *>(entity);
+        if (object)
+            GameObjects.push_back(object);
+
+        auto sound = dynamic_cast<GameSound *>(entity);
+        if (sound)
+            GameSounds.push_back(sound);
     }
 
     void Scene::StartScene() {
         for (auto sound: GameSounds)
-            PlaySound(sound);
+            sound->Play();
+        GameCameras.front()->SetMode(CAMERA_ORBITAL);
     }
 
     void Scene::DrawScene() {
-        for (auto object : GameObjects) {
+        GameCamera *camera = GameCameras.front();
+        camera->Update();
+        BeginMode3D(camera->GetCamera());
+        DrawGrid(15, 1.0);
+        for (auto object: GameObjects) {
             object->Update();
             object->Draw();
         }
+        EndMode3D();
     }
 }

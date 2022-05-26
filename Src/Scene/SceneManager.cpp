@@ -15,18 +15,20 @@ namespace bomberman {
 
     void SceneManager::CreateMenuScene() {
         Scene menu;
-        menu.AddGameObject(new StaticGameObject("../Assets/Level/forest.obj"));
-        menu.AddGameObject(new StaticGameObject("../Assets/Level/leafs.obj"));
-        // Todo make sound object so it calls unload sound easily
-        menu.AddSound(LoadSound("../Assets/Songs/ForestSong.mp3"));
+        menu.AddEntity(new GameCamera());
+        menu.AddEntity(new StaticGameObject("../Assets/Level/forest.obj"));
+        menu.AddEntity(new StaticGameObject("../Assets/Level/leafs.obj"));
+        menu.AddEntity(new GameSound("../Assets/Songs/ForestSong.mp3"));
         scenes.push_back(menu);
     }
 
     void SceneManager::CreateLevelScene() {
         Scene level;
-        level.AddGameObject(new AnimatedGameObject("../Assets/model.iqm",
-                                                   "../Assets/txr_model.png",
-                                                   "../Assets/model.iqm", 0));
+        level.AddEntity(new GameCamera());
+        level.AddEntity(new AnimatedGameObject("../Assets/model.iqm",
+                                               "../Assets/txr_model.png",
+                                               "../Assets/model.iqm",
+                                               0));
         scenes.push_back(level);
     }
 

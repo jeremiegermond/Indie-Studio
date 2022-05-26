@@ -22,21 +22,14 @@ namespace bomberman {
     private:
         int width;
         int height;
-        float cam_angle;
-        float cam_radius;
-
-        Camera3D camera{};
-        Sound sound{};
 
         SceneManager scenes;
     public:
         Game();
+
         ~Game();
 
         void createWindow();
-        Scene *createScene();
-        Scene *getScene();
-        void loadScene(){};
 
         void run();
     };
