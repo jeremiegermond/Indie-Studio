@@ -12,12 +12,13 @@
 
 namespace bomberman {
     class GameText : public IEntity {
-        public:
-            GameText();
-            ~GameText();
-
-        protected:
         private:
+            Font font;
+
+        public:
+            GameText(Font font);
+            ~GameText();
+            void LinkFontText();
     };
 }
 
