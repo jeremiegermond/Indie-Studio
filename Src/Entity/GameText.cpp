@@ -16,6 +16,8 @@ namespace bomberman {
         _fontPosition.x = x;
         _fontPosition.y = y;
         _color = color;
+        _flash = flash;
+        _framesCounter = 0;
     }
 
     GameText::~GameText()
@@ -24,7 +26,13 @@ namespace bomberman {
 
     void GameText::Draw()
     {
-        DrawTextEx(_font, _msg.c_str(), _fontPosition, _fontSize, 0, _color);
+        _framesCounter++;
+        if (_flash == false) {
+            DrawTextEx(_font, _msg.c_str(), _fontPosition, _fontSize, 0, _color);
+        }
+        else {
+            if (((_framesCounter/30)%2)) DrawTextEx(_font, _msg.c_str(), _fontPosition, _fontSize, 0, _color);
+        }
     }
 
     void GameText::Update()

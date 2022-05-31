@@ -20,6 +20,7 @@ namespace bomberman {
             bool _flash;
             Color _color;
             bool active;
+            int _framesCounter;
 
         public:
             GameText(const std::string &font, const std::string &msg, float x, float y, float fontSize, Color color, bool flash = false);
