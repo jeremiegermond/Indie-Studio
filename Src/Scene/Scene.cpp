@@ -33,17 +33,25 @@ namespace bomberman {
             return;
         }
 
+
+        auto text = dynamic_cast<GameText *>(entity);
+        if (text) {
+            GameTexts.push_back(text);
+            return;
+        }
+        auto script = dynamic_cast<GameScript *>(entity);
+        if (script) {
+            GameScripts.push_back(script);
+            return;
+        }
     }
 
     void Scene::StartScene() {
         for (auto sound: GameSounds)
             sound->Play();
-        std::cout << "PQueue size: " << PlayerQueue.size() << std::endl;
         GameCameras.front()->SetMode(CAMERA_ORBITAL);
         Players.push_back(PlayerQueue.front());
         PlayerQueue.erase(PlayerQueue.begin());
-
-        std::cout << "P size: " << Players.size() << std::endl;
     }
 
     void Scene::DrawScene() {
@@ -67,5 +75,12 @@ namespace bomberman {
             player->Draw();
         }
         EndMode3D();
+        for (auto text: GameTexts) {
+            text->Update();
+            text->Draw();
+        }
+        for (auto script: GameScripts) {
+            script->Update();
+        }
     }
 }

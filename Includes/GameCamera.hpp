@@ -8,6 +8,7 @@
 #ifndef BOMBERMAN_GAMECAMERA_HPP
 #define BOMBERMAN_GAMECAMERA_HPP
 
+#pragma once
 #include "IEntity.hpp"
 
 namespace bomberman {

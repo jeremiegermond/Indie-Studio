@@ -8,18 +8,20 @@
 #define BOMBERMAN_SCENEMANAGER_HPP
 
 #include "Scene.hpp"
+#include "Game.hpp"
 
 namespace bomberman {
     class SceneManager {
     private:
-//        int currentScene{};
         std::vector<Scene *> scenes;
+        Game *gameRef;
+
     public:
         SceneManager() = default;
 
         virtual ~SceneManager() = default;
 
-        void LoadScenes();
+        void LoadScenes(Game *game);
 
         void CreateMenuScene();
 

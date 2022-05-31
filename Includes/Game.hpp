@@ -8,6 +8,7 @@
 #ifndef BOMBERMAN_GAME_HPP
 #define BOMBERMAN_GAME_HPP
 
+#pragma once
 #include <iostream>
 #include <cmath>
 #include <vector>
@@ -17,7 +18,6 @@
 #include "SceneManager.hpp"
 
 namespace bomberman {
-
     class Game {
     private:
         int width;
@@ -25,12 +25,10 @@ namespace bomberman {
 
         SceneManager scenes;
     public:
+        int currentScene;
         Game();
-
         ~Game();
-
         void createWindow();
-
         void run();
     };
 

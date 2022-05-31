@@ -8,7 +8,8 @@
 #include "SceneManager.hpp"
 
 namespace bomberman {
-    void SceneManager::LoadScenes() {
+    void SceneManager::LoadScenes(Game *game) {
+        gameRef = game;
         CreateMenuScene();
         CreateLevelScene();
     }
@@ -17,7 +18,6 @@ namespace bomberman {
         auto *menu = new Scene;
         menu->AddEntity(new GameCamera());
         menu->AddEntity(new StaticGameObject("../Assets/Level/forest.obj"));
-        // menu.AddEntity(new StaticGameObject("../Assets/Level/leafs.obj"));
         menu->AddEntity(new GameSound("../Assets/Songs/ForestSong.mp3"));
         menu->AddEntity(new GamePlayer("../Assets/Take001.iqm",
                                       "../Assets/maya_baseColor.png",
@@ -51,6 +51,9 @@ namespace bomberman {
                                        "../Assets/AnimalsCharacters/TexGazelle.png",
                                        "../Assets/AnimalsCharacters/Gazelle.iqm",
                                        0));
+        menu.AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Forest Bomberman", 525, 100, 200, WHITE));
+        menu.AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Press Enter To Play", 625, 400, 125, WHITE, true));
+        menu.AddEntity(new GameScript(gameRef, 1));
         menu->StartScene();
         scenes.push_back(menu);
     }
@@ -68,5 +71,4 @@ namespace bomberman {
     Scene *SceneManager::GetScene(int sceneId) {
         return scenes.at(sceneId);
     }
-
 }

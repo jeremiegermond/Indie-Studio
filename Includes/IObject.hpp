@@ -8,6 +8,7 @@
 #ifndef BOMBERMAN_IOBJECT_HPP
 #define BOMBERMAN_IOBJECT_HPP
 
+#pragma once
 #include "IEntity.hpp"
 
 namespace bomberman {

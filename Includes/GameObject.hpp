@@ -7,9 +7,9 @@
 #ifndef BOMBERMAN_GAMEOBJECT_HPP
 #define BOMBERMAN_GAMEOBJECT_HPP
 
+#pragma once
 #include <cmath>
 #include <vector>
-
 #include "IObject.hpp"
 
 namespace bomberman {
