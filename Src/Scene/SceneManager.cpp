@@ -20,10 +20,6 @@ namespace bomberman {
         menu->AddEntity(new GameCamera());
         menu->AddEntity(new StaticGameObject("../Assets/Level/forest.obj"));
         menu->AddEntity(new GameSound("../Assets/Songs/ForestSong.mp3"));
-        menu->AddEntity(new GamePlayer("../Assets/Take001.iqm",
-                                      "../Assets/maya_baseColor.png",
-                                      "../Assets/Take001.iqm",
-                                      0));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Fox.iqm",
                                        "../Assets/AnimalsCharacters/TexFox.png",
                                        "../Assets/AnimalsCharacters/Fox.iqm",
