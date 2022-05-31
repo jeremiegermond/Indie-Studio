@@ -16,8 +16,8 @@ namespace bomberman {
     class StaticGameObject : public IObject {
     protected:
         Model model{};
-    private:
         Vector3 position;
+    private:
         Vector3 startPosition;
         float scale;
         float startScale;

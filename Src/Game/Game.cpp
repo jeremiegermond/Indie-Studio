@@ -32,12 +32,10 @@ namespace bomberman {
         RenderTexture2D target = LoadRenderTexture(width, height);
         auto rTarget = Rectangle{0, 0, float(width), float(-height)};
 
-        scenes.GetScene(0).StartScene();
         while (!WindowShouldClose()) {
-            Scene currentScene = scenes.GetScene(0);
             BeginTextureMode(target);
             ClearBackground(BLACK);
-            currentScene.DrawScene();
+            scenes.GetScene(0)->DrawScene();
             EndTextureMode();
             BeginDrawing();
             ClearBackground(BLACK);

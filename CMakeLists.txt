@@ -13,6 +13,7 @@ add_executable(bomberman
         Src/Entity/GameCamera.cpp
         Src/Entity/GameSound.cpp
         Src/Scene/Scene.cpp
-        Src/Scene/SceneManager.cpp)
+        Src/Scene/SceneManager.cpp
+        Src/Entity/GamePlayer.cpp)
 
 target_link_libraries(bomberman raylib)

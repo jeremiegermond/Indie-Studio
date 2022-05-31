@@ -13,11 +13,13 @@
 #include "GameObject.hpp"
 #include "GameCamera.hpp"
 #include "GameSound.hpp"
-
+#include "GamePlayer.hpp"
 
 namespace bomberman {
     class Scene {
     private:
+        std::vector<IObject *> PlayerQueue;
+        std::vector<IObject *> Players;
         std::vector<IObject *> GameObjects;
         std::vector<GameSound *> GameSounds;
         std::vector<GameCamera *> GameCameras;
