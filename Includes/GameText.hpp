@@ -8,6 +8,7 @@
 #ifndef GAMETEXT_HPP_
 #define GAMETEXT_HPP_
 
+#pragma once
 #include "IEntity.hpp"
 
 namespace bomberman {

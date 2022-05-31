@@ -24,6 +24,9 @@ namespace bomberman {
         auto text = dynamic_cast<GameText *>(entity);
         if (text)
             GameTexts.push_back(text);
+        auto script = dynamic_cast<GameScript *>(entity);
+        if (script)
+            GameScripts.push_back(script);
     }
 
     void Scene::StartScene() {
@@ -45,6 +48,9 @@ namespace bomberman {
         for (auto text: GameTexts) {
             text->Update();
             text->Draw();
+        }
+        for (auto script: GameScripts) {
+            script->Update();
         }
     }
 }

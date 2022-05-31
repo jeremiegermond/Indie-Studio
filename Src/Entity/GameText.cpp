@@ -27,11 +27,11 @@ namespace bomberman {
     void GameText::Draw()
     {
         _framesCounter++;
-        if (_flash == false) {
+        if (_flash == false)
             DrawTextEx(_font, _msg.c_str(), _fontPosition, _fontSize, 0, _color);
-        }
         else {
-            if (((_framesCounter/30)%2)) DrawTextEx(_font, _msg.c_str(), _fontPosition, _fontSize, 0, _color);
+            if (((_framesCounter / 30) % 2)) 
+                DrawTextEx(_font, _msg.c_str(), _fontPosition, _fontSize, 0, _color);
         }
     }
 
