@@ -8,21 +8,23 @@
 #ifndef BOMBERMAN_SCENE_HPP
 #define BOMBERMAN_SCENE_HPP
 
+#pragma once
 #include <vector>
-
 #include "GameObject.hpp"
 #include "GameCamera.hpp"
 #include "GameSound.hpp"
 #include "GameText.hpp"
-
+#include "GameScript.hpp"
 
 namespace bomberman {
+    class GameScript;
     class Scene {
     private:
         std::vector<IObject *> GameObjects;
         std::vector<GameSound *> GameSounds;
         std::vector<GameCamera *> GameCameras;
         std::vector<GameText *> GameTexts;
+        std::vector<GameScript *> GameScripts;
 // std::vector<Camera> GameCameras;
 // std::vector<Shader> GameShaders;
     public:

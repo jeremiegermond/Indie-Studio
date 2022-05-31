@@ -8,8 +8,8 @@
 #ifndef BOMBERMAN_IENTITY_HPP
 #define BOMBERMAN_IENTITY_HPP
 
+#pragma once
 #include <iostream>
-
 #include "raylib.h"
 
 namespace bomberman {

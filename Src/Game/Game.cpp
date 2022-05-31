@@ -11,6 +11,7 @@ namespace bomberman {
     Game::Game::Game() {
         width = 1920;
         height = 1080;
+        currentScene = 0;
     }
 
     Game::~Game() {
@@ -24,7 +25,7 @@ namespace bomberman {
         SetConfigFlags(FLAG_MSAA_4X_HINT);
         InitAudioDevice();
         SetTargetFPS(60);
-        scenes.LoadScenes();
+        scenes.LoadScenes(this);
     }
 
     void Game::run() {
@@ -34,10 +35,10 @@ namespace bomberman {
 
         scenes.GetScene(0).StartScene();
         while (!WindowShouldClose()) {
-            Scene currentScene = scenes.GetScene(0);
+            Scene scene = scenes.GetScene(currentScene);
             BeginTextureMode(target);
             ClearBackground(BLACK);
-            currentScene.DrawScene();
+            scene.DrawScene();
             EndTextureMode();
             BeginDrawing();
             ClearBackground(BLACK);

@@ -8,6 +8,7 @@
 #ifndef BOMBERMAN_GAMESOUND_HPP
 #define BOMBERMAN_GAMESOUND_HPP
 
+#pragma once
 #include "IEntity.hpp"
 
 namespace bomberman {
