@@ -13,6 +13,7 @@
 #include "GameObject.hpp"
 #include "GameCamera.hpp"
 #include "GameSound.hpp"
+#include "GameText.hpp"
 
 
 namespace bomberman {
@@ -21,6 +22,7 @@ namespace bomberman {
         std::vector<IObject *> GameObjects;
         std::vector<GameSound *> GameSounds;
         std::vector<GameCamera *> GameCameras;
+        std::vector<GameText *> GameTexts;
 // std::vector<Camera> GameCameras;
 // std::vector<Shader> GameShaders;
     public:

@@ -12,6 +12,7 @@ add_executable(bomberman
         Src/Entity/GameObject.cpp
         Src/Entity/GameCamera.cpp
         Src/Entity/GameSound.cpp
+        Src/Entity/GameText.cpp
         Src/Scene/Scene.cpp
         Src/Scene/SceneManager.cpp)
 

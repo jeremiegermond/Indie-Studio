@@ -20,6 +20,10 @@ namespace bomberman {
         auto sound = dynamic_cast<GameSound *>(entity);
         if (sound)
             GameSounds.push_back(sound);
+
+        auto text = dynamic_cast<GameText *>(entity);
+        if (text)
+            GameTexts.push_back(text);
     }
 
     void Scene::StartScene() {
@@ -38,5 +42,9 @@ namespace bomberman {
             object->Draw();
         }
         EndMode3D();
+        for (auto text: GameTexts) {
+            text->Update();
+            text->Draw();
+        }
     }
 }
