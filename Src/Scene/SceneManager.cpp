@@ -6,6 +6,7 @@
 */
 
 #include "SceneManager.hpp"
+#include "Game.hpp"
 
 namespace bomberman {
     void SceneManager::LoadScenes(Game *game) {
@@ -51,9 +52,9 @@ namespace bomberman {
                                        "../Assets/AnimalsCharacters/TexGazelle.png",
                                        "../Assets/AnimalsCharacters/Gazelle.iqm",
                                        0));
-        menu.AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Forest Bomberman", 525, 100, 200, WHITE));
-        menu.AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Press Enter To Play", 625, 400, 125, WHITE, true));
-        menu.AddEntity(new GameScript(gameRef, 1));
+        menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Forest Bomberman", 525, 100, 200, WHITE));
+        menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Press Enter To Play", 625, 400, 125, WHITE, true));
+        menu->AddEntity(new GameScript(gameRef, 1));
         menu->StartScene();
         scenes.push_back(menu);
     }

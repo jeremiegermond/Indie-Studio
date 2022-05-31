@@ -8,9 +8,9 @@
 #define BOMBERMAN_SCENEMANAGER_HPP
 
 #include "Scene.hpp"
-#include "Game.hpp"
 
 namespace bomberman {
+    class Game;
     class SceneManager {
     private:
         std::vector<Scene *> scenes;

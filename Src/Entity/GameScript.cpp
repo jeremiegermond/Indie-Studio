@@ -6,6 +6,7 @@
 */
 
 #include "GameScript.hpp"
+#include "Game.hpp"
 
 namespace bomberman {
     GameScript::GameScript(Game *game, int nbScript)

@@ -8,11 +8,10 @@
 #ifndef GAMESCRIPT_HPP_
 #define GAMESCRIPT_HPP_
 
-#pragma once
 #include "IEntity.hpp"
-#include "Game.hpp"
 
 namespace bomberman {
+    class Game;
     class GameScript : public IEntity {
         private:
             bool active;
