@@ -22,7 +22,7 @@ namespace bomberman {
             bool active;
 
         public:
-            GameText(const std::string &font, const std::string &msg, float x, float y, float fontSize, Color color);
+            GameText(const std::string &font, const std::string &msg, float x, float y, float fontSize, Color color, bool flash = false);
             ~GameText() override;
             void Draw();
 

@@ -8,7 +8,7 @@
 #include "GameText.hpp"
 
 namespace bomberman {
-    GameText::GameText(const std::string &font, const std::string &msg, float x, float y, float fontSize, Color color)
+    GameText::GameText(const std::string &font, const std::string &msg, float x, float y, float fontSize, Color color, bool flash)
     {
         _fontSize = fontSize;
         _font = LoadFontEx(font.c_str(), _fontSize, 0, 250);

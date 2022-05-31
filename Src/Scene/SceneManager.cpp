@@ -20,6 +20,7 @@ namespace bomberman {
         menu.AddEntity(new StaticGameObject("../Assets/Level/leafs.obj"));
         menu.AddEntity(new GameSound("../Assets/Songs/ForestSong.mp3"));
         menu.AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Forest Bomberman", 525, 100, 200, WHITE));
+        menu.AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Press Enter To Play", 575, 400, 150, WHITE, true));
         scenes.push_back(menu);
     }
 
