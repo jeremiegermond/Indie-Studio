@@ -155,8 +155,9 @@ namespace bomberman {
         return GetWindowScaleDPI();
     }
     
-    inline const char *getMonitorName(const int &monitor) {
-        return GetMonitorName(monitor);
+    inline const std::string getMonitorName(const int &monitor) {
+        const std::string monitorName(GetMonitorName(monitor));
+        return monitorName;
     }
     
     inline void setClipboardText(const std::string &text) {

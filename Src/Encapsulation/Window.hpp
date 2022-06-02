@@ -25,114 +25,114 @@ namespace bomberman {
         ~Window();
 
         // Check if KEY_ESCAPE pressed or Close icon pressed
-        bool WindowShouldClose(void);
+        inline bool shouldClose(void);
 
         // Check if window has been initialized successfully
-        bool IsWindowReady(void);
+        inline bool isReady(void);
 
         // Check if window is currently fullscreen
-        bool IsWindowFullscreen(void);
+        inline bool isFullscreen(void);
 
         // Check if window is currently hidden (only PLATFORM_DESKTOP)
-        bool IsWindowHidden(void);
+        inline bool isHidden(void);
 
         // Check if window is currently minimized (only PLATFORM_DESKTOP)
-        bool IsWindowMinimized(void);
+        inline bool isMinimized(void);
 
         // Check if window is currently maximized (only PLATFORM_DESKTOP)
-        bool IsWindowMaximized(void);
+        inline bool isMaximized(void);
 
         // Check if window is currently focused (only PLATFORM_DESKTOP)
-        bool IsWindowFocused(void);
+        inline bool isFocused(void);
 
         // Check if window has been resized last frame
-        bool IsWindowResized(void);
+        inline bool isResized(void);
 
         // Check if one specific window flag is enabled
-        bool IsWindowState(unsigned int flag);
+        inline bool isState(const unsigned int &flag);
 
         // Set window configuration state using flags
-        void SetWindowState(unsigned int flags);
+        inline void setState(const unsigned int &flags);
 
         // Clear window configuration state flags
-        void ClearWindowState(unsigned int flags);
+        inline void clearState(const unsigned int &flags);
 
         // Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)
-        void ToggleFullscreen(void);
+        inline void toggleFullscreen(void);
 
         // Set window state: maximized, if resizable (only PLATFORM_DESKTOP)
-        void MaximizeWindow(void);
+        inline void maximize(void);
 
         // Set window state: minimized, if resizable (only PLATFORM_DESKTOP)
-        void MinimizeWindow(void);
+        inline void minimize(void);
 
         // Set window state: not minimized/maximized (only PLATFORM_DESKTOP)
-        void RestoreWindow(void);
+        inline void restore(void);
 
         // Set icon for window (only PLATFORM_DESKTOP)
-        void SetWindowIcon(Image image);
+        inline void setIcon(const Image &image);
 
         // Set title for window (only PLATFORM_DESKTOP)
-        void SetWindowTitle(const char *title);
+        inline void setTitle(const std::string &title);
 
         // Set window position on screen (only PLATFORM_DESKTOP)
-        void SetWindowPosition(int x, int y);
+        inline void setPosition(const int &x, const int &y);
 
         // Set monitor for the current window (fullscreen mode)
-        void SetWindowMonitor(int monitor);
+        inline void setMonitor(const int &monitor);
 
         // Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)
-        void SetWindowMinSize(int width, int height);
+        inline void setMinSize(const int &width, const int &height);
 
         // Set window dimensions
-        void SetWindowSize(int width, int height);
+        inline void setSize(const int &width, const int &height);
 
         // Get native window handle
-        void *GetWindowHandle(void);
+        inline void *getHandle(void);
 
         // Get current screen width
-        int GetScreenWidth(void);
+        inline int getScreenWidth(void);
 
         // Get current screen height
-        int GetScreenHeight(void);
+        inline int getScreenHeight(void);
 
         // Get number of connected monitors
-        int GetMonitorCount(void);
+        inline int getMonitorCount(void);
 
         // Get current connected monitor
-        int GetCurrentMonitor(void);
+        inline int getCurrentMonitor(void);
 
         // Get specified monitor position
-        Vector2 GetMonitorPosition(int monitor);
+        inline Vector2 getMonitorPosition(const int &monitor);
 
         // Get specified monitor width (max available by monitor)
-        int GetMonitorWidth(int monitor);
+        inline int getMonitorWidth(const int &monitor);
 
         // Get specified monitor height (max available by monitor)
-        int GetMonitorHeight(int monitor);
+        inline int getMonitorHeight(const int &monitor);
 
         // Get specified monitor physical width in millimetres
-        int GetMonitorPhysicalWidth(int monitor);
+        inline int getMonitorPhysicalWidth(const int &monitor);
 
         // Get specified monitor physical height in millimetres
-        int GetMonitorPhysicalHeight(int monitor);
+        inline int getMonitorPhysicalHeight(const int &monitor);
 
         // Get specified monitor refresh rate
-        int GetMonitorRefreshRate(int monitor);
+        inline int getMonitorRefreshRate(const int &monitor);
 
         // Get window position XY on monitor
-        Vector2 GetWindowPosition(void);
+        inline Vector2 getPosition(void);
 
         // Get window scale DPI factor
-        Vector2 GetWindowScaleDPI(void);
+        inline Vector2 getScaleDPI(void);
 
         // Get the human-readable, UTF-8 encoded name of the primary monitor
-        const char *GetMonitorName(int monitor);
+        inline const std::string getMonitorName(const int &monitor);
 
         // Set clipboard text content
-        void SetClipboardText(const char *text);
+        inline void setClipboardText(const std::string &text);
 
         // Get clipboard text content
-        const char *GetClipboardText(void);
+        inline const char *getClipboardText(void);
     };
 }
