@@ -4,6 +4,7 @@ set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -Wextra -fpermissive")
 
 include(cmake/Findraylib.cmake)
 include_directories(Includes)
+include_directories(Includes/Encapsulation)
 
 add_executable(bomberman
         Src/Game/Game.cpp

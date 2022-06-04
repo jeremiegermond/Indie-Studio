@@ -14,6 +14,8 @@
 namespace bomberman {
     class Draw {
     public:
+        Draw();
+        ~Draw();
         // Set background color (framebuffer clear color)
         inline void clearBackground(Color color);
 
