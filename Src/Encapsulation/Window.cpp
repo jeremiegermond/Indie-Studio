@@ -26,7 +26,7 @@ namespace bomberman {
     inline bool isReady(void) {
         return IsWindowReady();
     }
-    
+
     inline bool isFullscreen(void) {
         return IsWindowFullscreen();
     }

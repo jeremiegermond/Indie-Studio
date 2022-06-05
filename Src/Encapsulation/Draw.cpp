@@ -6,9 +6,10 @@
 */
 
 #include "Draw.hpp"
+#include "Color.hpp"
 
 namespace bomberman {
-    inline void clearBackground(const Color &color) {
+    inline void clearBackground(const MyColor &color) {
         return ClearBackground(color);
     }
     

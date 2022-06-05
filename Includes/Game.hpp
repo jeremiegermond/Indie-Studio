@@ -16,6 +16,7 @@
 #include "rlgl.h"
 #include "GameObject.hpp"
 #include "SceneManager.hpp"
+#include "Objects.hpp"
 
 namespace bomberman {
     class Game {
