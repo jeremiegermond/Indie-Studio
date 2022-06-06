@@ -20,15 +20,15 @@
 namespace bomberman {
     class Scene {
     private:
-        std::vector<IObject *> PlayerQueue;
-        std::vector<IObject *> Players;
-        std::vector<IObject *> GameObjects;
+        std::vector<GamePlayer *> PlayerQueue;
+        std::vector<GamePlayer *> Players;
+        std::vector<GameObject *> GameObjects;
         std::vector<GameSound *> GameSounds;
         std::vector<GameCamera *> GameCameras;
         std::vector<GameText *> GameTexts;
         std::vector<GameScript *> GameScripts;
-// std::vector<Camera> GameCameras;
-// std::vector<Shader> GameShaders;
+        // std::vector<Camera> GameCameras;
+        // std::vector<Shader> GameShaders;
     public:
         Scene() = default;
 
@@ -39,6 +39,8 @@ namespace bomberman {
         void StartScene();
 
         void DrawScene();
+
+        void UnloadScene();
     };
 }
 

@@ -8,12 +8,14 @@
 #include "GameObject.hpp"
 
 namespace bomberman {
-    StaticGameObject::StaticGameObject(const std::string &modelPath,
-                                       MyVector3 position,
-                                       float scale,
-                                       MyColor tint)
+    GameObject::GameObject(const std::string &modelPath,
+                           MyVector3 position,
+                           float scale,
+                           MyColor tint)
             : position(position),
+              rotation(MyVector3 {0.0f, 0.0f, 0.0f}),
               startPosition(position),
+              startRotation(rotation),
               scale(scale),
               startScale(scale),
               tint(tint),
@@ -23,44 +25,51 @@ namespace bomberman {
         model = LoadModel(modelPath.c_str());
     };
 
-    StaticGameObject::~StaticGameObject() {
+    GameObject::~GameObject() {
         UnloadModel(model);
     }
 
-    void StaticGameObject::Draw() {
-        if (active)
+    void GameObject::Draw() {
+        if (active) {
             // DrawModel(model, position, scale, tint);
-            DrawModelEx(model, position, MyVector3{1.0f, 0.0f,0.0f}, -90.0f, MyVector3{scale, scale, scale}, tint);
+            model.transform = MatrixRotateXYZ(rotation);
+            DrawModelEx(model, position, MyVector3{1.0f, 0.0f, 0.0f}, -90.0f, MyVector3{scale, scale, scale}, tint);
+        }
     }
 
-    void StaticGameObject::Reset() {
+    void GameObject::Reset() {
         ResetPosition();
+        ResetRotation();
         ResetScale();
         ResetTint();
         SetActive(true);
     }
 
-    void StaticGameObject::ResetPosition() {
+    void GameObject::ResetPosition() {
         SetPosition(startPosition);
     }
 
-    void StaticGameObject::ResetScale() {
+    void GameObject::ResetRotation() {
+        rotation = startRotation;
+    }
+
+    void GameObject::ResetScale() {
         scale = startScale;
     }
 
-    void StaticGameObject::ResetTint() {
+    void GameObject::ResetTint() {
         tint = startTint;
     }
 
-    void StaticGameObject::SetPosition(MyVector3 newPosition) {
+    void GameObject::SetPosition(MyVector3 newPosition) {
         position = newPosition;
     }
 
-    void StaticGameObject::SetActive(bool activate) {
+    void GameObject::SetActive(bool activate) {
         active = activate;
     }
 
-    void StaticGameObject::Move(MyVector3 velocity) {
+    void GameObject::Move(MyVector3 velocity) {
         position.x += velocity.x;
         position.y += velocity.y;
         position.z += velocity.z;
@@ -70,7 +79,7 @@ namespace bomberman {
                                            const std::string &texturePath,
                                            const std::string &animationPath,
                                            unsigned int animationCount)
-            : StaticGameObject(modelPath), animationNb(animationCount) {
+            : GameObject(modelPath), animationNb(animationCount) {
         texture = LoadTexture(texturePath.c_str());
         SetMaterialTexture(&model.materials[0], MATERIAL_MAP_DIFFUSE, texture);
         animations = LoadModelAnimations(animationPath.c_str(), &animationNb);
@@ -87,25 +96,43 @@ namespace bomberman {
 
     void AnimatedGameObject::Update() {
         UpdateModelAnimation(model, animations[animationSelected], animationFrame);
-        if (IsKeyDown(KEY_SPACE))
-            animationFrame++;
-        if (animationFrame >= animations[animationSelected].frameCount)
-            animationFrame = 0;
         if (IsKeyDown(KEY_A)) {
             Move(MyVector3 {0.01f, 0.0f, 0.0f});
+            rotation.z = -1.5;
+            animationFrame++;
         } else if (IsKeyDown(KEY_D)) {
             Move(MyVector3 {-0.01f, 0.0f, 0.0f});
+            rotation.z = 1.5;
+            animationFrame++;
         } else if (IsKeyDown(KEY_W)) {
             Move(MyVector3 {0.0f, 0.0f, 0.01f});
+            rotation.z = 0;
+            animationFrame++;
         } else if (IsKeyDown(KEY_S)) {
             Move(MyVector3 {0.0f, 0.0f, -0.01f});
-        } else if (IsKeyDown(KEY_Q)) {
-            Move(MyVector3 {0.0f, 0.01f, 0.0f});
-        } else if (IsKeyDown(KEY_E)) {
-            Move(MyVector3 {0.0f, -0.01f, 0.0f});
-        }
+            rotation.z = 3;
+            animationFrame++;
+            }
+        if (animationFrame >= animations[animationSelected].frameCount)
+            animationFrame = 0;
+        if (IsKeyDown(KEY_J))
+            rotation.x += .01;
+        if (IsKeyDown(KEY_K))
+            rotation.x -= .01;
+        if (IsKeyDown(KEY_N))
+            rotation.z += .01;
+        if (IsKeyDown(KEY_M))
+            rotation.z -= .01;
+        if (IsKeyDown(KEY_I))
+            rotation.y += .01;
+        if (IsKeyDown(KEY_O))
+            rotation.y -= .01;
+        if (IsKeyDown(KEY_R))
+            ResetRotation();
+
         if (IsKeyPressed(KEY_P)) {
-            std::cout << position.x << "x " << position.y << "y "<< position.z << "z" << std::endl;
+            std::cout << "Pos: " << position.x << "x " << position.y << "y " << position.z << "z" << std::endl;
+            std::cout << "Rot: " << rotation.x << "x " << rotation.y << "y " << rotation.z << "z" << std::endl;
         }
     }
 

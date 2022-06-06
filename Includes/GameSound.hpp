@@ -21,10 +21,10 @@ namespace bomberman {
         explicit GameSound(const std::string &soundPath);
         ~GameSound() override;
 
-        void Update() override {}
-        void Reset() override;
-        void SetActive(bool activate) override;
-        void Move(MyVector3 velocity) override {
+        void Update() {}
+        void Reset();
+        void SetActive(bool activate);
+        void Move(MyVector3 velocity) {
             (void) velocity;
         }
         void Play();

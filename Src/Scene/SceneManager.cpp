@@ -18,7 +18,7 @@ namespace bomberman {
     void SceneManager::CreateMenuScene() {
         auto *menu = new Scene;
         menu->AddEntity(new GameCamera());
-        menu->AddEntity(new StaticGameObject("../Assets/Level/forest.obj"));
+        menu->AddEntity(new GameObject("../Assets/Level/forest.obj"));
         menu->AddEntity(new GameSound("../Assets/Songs/ForestSong.mp3"));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Fox.iqm",
                                        "../Assets/AnimalsCharacters/TexFox.png",
@@ -62,6 +62,7 @@ namespace bomberman {
                                                "../Assets/txr_model.png",
                                                "../Assets/model.iqm",
                                                0));
+        level->AddEntity(new GameSound("../Assets/Songs/CoffeeSong.mp3"));
         scenes.push_back(level);
     }
 

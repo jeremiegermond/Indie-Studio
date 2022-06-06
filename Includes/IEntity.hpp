@@ -10,21 +10,15 @@
 
 #pragma once
 #include <iostream>
+
 #include "raylib.h"
 #include "Objects.hpp"
+#include "Logics.hpp"
 
 namespace bomberman {
     class IEntity {
     public:
         virtual ~IEntity() = default;
-
-        virtual void Update() = 0;
-
-        virtual void Reset() = 0;
-
-        virtual void SetActive(bool activate) = 0;
-
-        virtual void Move(MyVector3 velocity) = 0;
     };
 }
 #endif //BOMBERMAN_IENTITY_HPP
