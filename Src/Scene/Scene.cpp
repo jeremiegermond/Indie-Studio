@@ -50,7 +50,7 @@ namespace bomberman {
         for (auto sound: GameSounds)
             sound->Play();
         GameCameras.front()->SetMode(CAMERA_ORBITAL);
-        if (Players.empty())
+        if (PlayerQueue.empty())
             return;
         Players.push_back(PlayerQueue.front());
         PlayerQueue.erase(PlayerQueue.begin());
