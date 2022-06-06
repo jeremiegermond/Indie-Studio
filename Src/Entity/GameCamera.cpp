@@ -8,9 +8,9 @@
 #include "GameCamera.hpp"
 
 namespace bomberman {
-    GameCamera::GameCamera(Vector3 position,
-                           Vector3 target,
-                           Vector3 up,
+    GameCamera::GameCamera(MyVector3 position,
+                           MyVector3 target,
+                           MyVector3 up,
                            float fov,
                            int projection)
             : startPosition(position),
@@ -43,7 +43,7 @@ namespace bomberman {
         active = activate;
     }
 
-    void GameCamera::Move(Vector3 velocity) {
+    void GameCamera::Move(MyVector3 velocity) {
         camera.position.x += velocity.x;
         camera.position.y += velocity.y;
         camera.position.z += velocity.z;

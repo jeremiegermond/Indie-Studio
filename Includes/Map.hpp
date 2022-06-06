@@ -13,7 +13,7 @@ namespace bomberman {
     class Map {
     private:
     public:
-        void drawMap();
+        static void drawMap();
     };
 }
 

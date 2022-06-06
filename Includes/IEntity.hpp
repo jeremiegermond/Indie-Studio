@@ -11,6 +11,7 @@
 #pragma once
 #include <iostream>
 #include "raylib.h"
+#include "Objects.hpp"
 
 namespace bomberman {
     class IEntity {
@@ -23,7 +24,7 @@ namespace bomberman {
 
         virtual void SetActive(bool activate) = 0;
 
-        virtual void Move(Vector3 velocity) = 0;
+        virtual void Move(MyVector3 velocity) = 0;
     };
 }
 #endif //BOMBERMAN_IENTITY_HPP

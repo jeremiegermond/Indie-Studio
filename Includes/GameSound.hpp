@@ -5,11 +5,10 @@
 ** TODO
 */
 
-#ifndef BOMBERMAN_GAMESOUND_HPP
-#define BOMBERMAN_GAMESOUND_HPP
-
 #pragma once
+
 #include "IEntity.hpp"
+#include "Objects.hpp"
 
 namespace bomberman {
     class GameSound : public IEntity {
@@ -17,25 +16,18 @@ namespace bomberman {
         Sound sound{};
         bool active;
         bool startActive;
+
     public:
         explicit GameSound(const std::string &soundPath);
-
         ~GameSound() override;
 
-        void Update() override {
-        }
-
+        void Update() override {}
         void Reset() override;
-
         void SetActive(bool activate) override;
-
-        void Move(Vector3 velocity) override {
+        void Move(MyVector3 velocity) override {
             (void) velocity;
         }
-
         void Play();
-
         void Stop();
     };
 }
-#endif //BOMBERMAN_GAMESOUND_HPP

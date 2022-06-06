@@ -8,10 +8,9 @@
 #include "GameText.hpp"
 
 namespace bomberman {
-    GameText::GameText(const std::string &font, const std::string &msg, float x, float y, float fontSize, Color color, bool flash)
-    {
+    GameText::GameText(const std::string &font, const std::string &msg, float x, float y, float fontSize, MyColor color, bool flash) {
         _fontSize = fontSize;
-        _font = LoadFontEx(font.c_str(), _fontSize, 0, 250);
+        _font = LoadFontEx(font.c_str(), (int)_fontSize, nullptr, 250);
         _msg = msg;
         _fontPosition.x = x;
         _fontPosition.y = y;
@@ -20,14 +19,9 @@ namespace bomberman {
         _framesCounter = 0;
     }
 
-    GameText::~GameText()
-    {
-    }
-
-    void GameText::Draw()
-    {
+    void GameText::Draw() {
         _framesCounter++;
-        if (_flash == false)
+        if (!_flash)
             DrawTextEx(_font, _msg.c_str(), _fontPosition, _fontSize, 0, _color);
         else {
             if (((_framesCounter / 30) % 2)) 
@@ -35,21 +29,15 @@ namespace bomberman {
         }
     }
 
-    void GameText::Update()
-    {
-    }
+    void GameText::Update() {}
 
-    void GameText::SetActive(bool activate)
-    {
+    void GameText::SetActive(bool activate) {
         active = activate;
     }
 
-    void GameText::Reset()
-    {
-    }
+    void GameText::Reset() {}
 
-    void GameText::Move(Vector3 velocity)
-    {
+    void GameText::Move(MyVector3 velocity) {
         (void)velocity;
     }
 }

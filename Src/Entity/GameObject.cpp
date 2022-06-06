@@ -9,9 +9,9 @@
 
 namespace bomberman {
     StaticGameObject::StaticGameObject(const std::string &modelPath,
-                                       Vector3 position,
+                                       MyVector3 position,
                                        float scale,
-                                       Color tint)
+                                       MyColor tint)
             : position(position),
               startPosition(position),
               scale(scale),
@@ -30,7 +30,7 @@ namespace bomberman {
     void StaticGameObject::Draw() {
         if (active)
             // DrawModel(model, position, scale, tint);
-            DrawModelEx(model, position, Vector3{1.0f, 0.0f,0.0f}, -90.0f, Vector3{scale, scale, scale}, tint);
+            DrawModelEx(model, position, MyVector3{1.0f, 0.0f,0.0f}, -90.0f, MyVector3{scale, scale, scale}, tint);
     }
 
     void StaticGameObject::Reset() {
@@ -52,7 +52,7 @@ namespace bomberman {
         tint = startTint;
     }
 
-    void StaticGameObject::SetPosition(Vector3 newPosition) {
+    void StaticGameObject::SetPosition(MyVector3 newPosition) {
         position = newPosition;
     }
 
@@ -60,7 +60,7 @@ namespace bomberman {
         active = activate;
     }
 
-    void StaticGameObject::Move(Vector3 velocity) {
+    void StaticGameObject::Move(MyVector3 velocity) {
         position.x += velocity.x;
         position.y += velocity.y;
         position.z += velocity.z;
@@ -92,17 +92,17 @@ namespace bomberman {
         if (animationFrame >= animations[animationSelected].frameCount)
             animationFrame = 0;
         if (IsKeyDown(KEY_A)) {
-            Move(Vector3 {0.01f, 0.0f, 0.0f});
+            Move(MyVector3 {0.01f, 0.0f, 0.0f});
         } else if (IsKeyDown(KEY_D)) {
-            Move(Vector3 {-0.01f, 0.0f, 0.0f});
+            Move(MyVector3 {-0.01f, 0.0f, 0.0f});
         } else if (IsKeyDown(KEY_W)) {
-            Move(Vector3 {0.0f, 0.0f, 0.01f});
+            Move(MyVector3 {0.0f, 0.0f, 0.01f});
         } else if (IsKeyDown(KEY_S)) {
-            Move(Vector3 {0.0f, 0.0f, -0.01f});
+            Move(MyVector3 {0.0f, 0.0f, -0.01f});
         } else if (IsKeyDown(KEY_Q)) {
-            Move(Vector3 {0.0f, 0.01f, 0.0f});
+            Move(MyVector3 {0.0f, 0.01f, 0.0f});
         } else if (IsKeyDown(KEY_E)) {
-            Move(Vector3 {0.0f, -0.01f, 0.0f});
+            Move(MyVector3 {0.0f, -0.01f, 0.0f});
         }
         if (IsKeyPressed(KEY_P)) {
             std::cout << position.x << "x " << position.y << "y "<< position.z << "z" << std::endl;

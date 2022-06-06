@@ -41,10 +41,10 @@ namespace bomberman {
             BeginDrawing();
             ClearBackground(BLACK);
             if (IsKeyDown(KEY_B)) {
-                DrawTextureRec(target.texture, rTarget, Vector2{0, 0}, WHITE);
+                DrawTextureRec(target.texture, rTarget, MyVector2{0, 0}, WHITE);
             } else {
                 BeginShaderMode(shader);
-                DrawTextureRec(target.texture, rTarget, Vector2{0, 0}, WHITE);
+                DrawTextureRec(target.texture, rTarget, MyVector2{0, 0}, WHITE);
                 EndShaderMode();
             }
             EndDrawing();

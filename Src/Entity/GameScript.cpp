@@ -9,18 +9,12 @@
 #include "Game.hpp"
 
 namespace bomberman {
-    GameScript::GameScript(Game *game, int nbScript)
-    {
+    GameScript::GameScript(Game *game, int nbScript) {
        _nbScript = nbScript;
        _game = game;
     }
 
-    GameScript::~GameScript()
-    {
-    }
-
-    void GameScript::Update()
-    {
+    void GameScript::Update() {
         switch(_nbScript) {
             case 1:
                 PressEnterToPlay();
@@ -33,17 +27,13 @@ namespace bomberman {
         }
     }
 
-    void GameScript::SetActive(bool activate)
-    {
+    void GameScript::SetActive(bool activate) {
         active = activate;
     }
 
-    void GameScript::Reset()
-    {
-    }
+    void GameScript::Reset() {}
 
-    void GameScript::Move(Vector3 velocity)
-    {
+    void GameScript::Move(MyVector3 velocity) {
         (void)velocity;
     }
 

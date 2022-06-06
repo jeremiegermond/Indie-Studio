@@ -5,11 +5,10 @@
 ** TODO
 */
 
-#ifndef BOMBERMAN_IOBJECT_HPP
-#define BOMBERMAN_IOBJECT_HPP
-
 #pragma once
+
 #include "IEntity.hpp"
+#include "Objects.hpp"
 
 namespace bomberman {
     class IObject : public IEntity {
@@ -18,9 +17,8 @@ namespace bomberman {
 
         virtual void Draw() = 0;
 
-        virtual void SetPosition(Vector3 position) = 0;
+        virtual void SetPosition(MyVector3 position) = 0;
 
         virtual void SetAnimation(int newSelectedAnimation) = 0;
     };
 }
-#endif //BOMBERMAN_IOBJECT_HPP
