@@ -16,9 +16,7 @@ namespace bomberman {
         ~IObject() override = default;
 
         virtual void Draw() = 0;
-
         virtual void SetPosition(MyVector3 position) = 0;
-
         virtual void SetAnimation(int newSelectedAnimation) = 0;
     };
 }

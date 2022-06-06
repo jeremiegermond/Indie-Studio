@@ -9,55 +9,49 @@
 
 #include <cmath>
 #include <vector>
-#include "IObject.hpp"
 #include "Objects.hpp"
 #include "Color.hpp"
+#include "IEntity.hpp"
 
 namespace bomberman {
-    class StaticGameObject : public IObject {
+    class GameObject : public IEntity {
     protected:
         Model model{};
         MyVector3 position;
+        MyVector3 rotation;
     private:
         MyVector3 startPosition;
+        MyVector3 startRotation;
         float scale;
         float startScale;
         MyColor tint;
         MyColor startTint;
         bool active;
     public:
-        explicit StaticGameObject(const std::string &modelPath)
-                : StaticGameObject(modelPath, MyVector3{0, 0, 0}, 1, WHITE) {
+        explicit GameObject(const std::string &modelPath)
+                : GameObject(modelPath, MyVector3{0, 0, 0}, 1, WHITE) {
         };
 
-        StaticGameObject(const std::string &modelPath, MyVector3 position, float scale, MyColor tint);
+        GameObject(const std::string &modelPath,
+                   MyVector3 position,
+                   float scale,
+                   MyColor tint);
 
-        ~StaticGameObject() override;
+        ~GameObject() override;
 
-        void Draw() override;
-
-        void Update() override {}
-
-        void Reset() override;
-
+        void Draw();
+        virtual void Update() {};
+        virtual void Reset();
         void ResetPosition();
-
+        void ResetRotation();
         void ResetScale();
-
         void ResetTint();
-
-        void SetPosition(MyVector3 newPosition) override;
-
-        void SetAnimation(int newSelectedAnimation) override {
-            (void) newSelectedAnimation;
-        }
-
-        void SetActive(bool activate) override;
-
-        void Move(MyVector3 velocity) override;
+        void SetPosition(MyVector3 newPosition);
+        void SetActive(bool activate);
+        void Move(MyVector3 velocity);
     };
 
-    class AnimatedGameObject : public StaticGameObject {
+    class AnimatedGameObject : public GameObject {
     private:
         Texture2D texture{};
         ModelAnimation *animations{};
@@ -72,6 +66,7 @@ namespace bomberman {
         void Update() override;
         void Reset() override;
         void ResetAnimation();
-        void SetAnimation(int newSelectedAnimation) override;
+
+        void SetAnimation(int newSelectedAnimation);
     };
 }

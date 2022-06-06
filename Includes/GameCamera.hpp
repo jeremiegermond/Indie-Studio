@@ -30,10 +30,10 @@ namespace bomberman {
         GameCamera(MyVector3 position, MyVector3 target, MyVector3 up, float fov, int projection);
         ~GameCamera() override = default;
 
-        void Reset() override;
-        void Update() override;
-        void SetActive(bool activate) override;
-        void Move(MyVector3 velocity) override;
+        void Reset();
+        void Update();
+        void SetActive(bool activate);
+        void Move(MyVector3 velocity);
 
         MyCamera GetCamera() {
             return camera;

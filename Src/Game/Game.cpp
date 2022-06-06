@@ -50,4 +50,10 @@ namespace bomberman {
             EndDrawing();
         }
     }
+
+    void Game::ChangeScene(int i) {
+        scenes.GetScene(currentScene)->UnloadScene();
+        currentScene = i;
+        scenes.GetScene(currentScene)->StartScene();
+    }
 }

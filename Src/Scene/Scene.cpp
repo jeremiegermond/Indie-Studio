@@ -21,7 +21,7 @@ namespace bomberman {
             return;
         }
 
-        auto object = dynamic_cast<IObject *>(entity);
+        auto object = dynamic_cast<GameObject *>(entity);
         if (object) {
             GameObjects.push_back(object);
             return;
@@ -50,6 +50,8 @@ namespace bomberman {
         for (auto sound: GameSounds)
             sound->Play();
         GameCameras.front()->SetMode(CAMERA_ORBITAL);
+        if (PlayerQueue.empty())
+            return;
         Players.push_back(PlayerQueue.front());
         PlayerQueue.erase(PlayerQueue.begin());
     }
@@ -63,7 +65,7 @@ namespace bomberman {
             object->Update();
             object->Draw();
         }
-        if (IsKeyPressed(KEY_L)) {
+        if (IsKeyPressed(KEY_L) && !Players.empty()) {
             Players.push_back(PlayerQueue.front());
             PlayerQueue.erase(PlayerQueue.begin());
             PlayerQueue.push_back(Players.front());
@@ -82,5 +84,10 @@ namespace bomberman {
         for (auto script: GameScripts) {
             script->Update();
         }
+    }
+
+    void Scene::UnloadScene() {
+        for (auto sound : GameSounds)
+            sound->Stop();
     }
 }
