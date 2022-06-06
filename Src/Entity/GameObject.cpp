@@ -13,7 +13,9 @@ namespace bomberman {
                            float scale,
                            Color tint)
             : position(position),
+              rotation(Vector3 {0.0f, 0.0f, 0.0f}),
               startPosition(position),
+              startRotation(rotation),
               scale(scale),
               startScale(scale),
               tint(tint),
@@ -28,13 +30,16 @@ namespace bomberman {
     }
 
     void GameObject::Draw() {
-        if (active)
+        if (active) {
             // DrawModel(model, position, scale, tint);
-            DrawModelEx(model, position, Vector3{1.0f, 0.0f,0.0f}, -90.0f, Vector3{scale, scale, scale}, tint);
+            model.transform = MatrixRotateXYZ(rotation);
+            DrawModelEx(model, position, Vector3{1.0f, 0.0f, 0.0f}, -90.0f, Vector3{scale, scale, scale}, tint);
+        }
     }
 
     void GameObject::Reset() {
         ResetPosition();
+        ResetRotation();
         ResetScale();
         ResetTint();
         SetActive(true);
@@ -42,6 +47,10 @@ namespace bomberman {
 
     void GameObject::ResetPosition() {
         SetPosition(startPosition);
+    }
+
+    void GameObject::ResetRotation() {
+        rotation = startRotation;
     }
 
     void GameObject::ResetScale() {
@@ -89,21 +98,42 @@ namespace bomberman {
         UpdateModelAnimation(model, animations[animationSelected], animationFrame);
         if (IsKeyDown(KEY_A)) {
             Move(Vector3 {0.01f, 0.0f, 0.0f});
+            rotation.z = -1.5;
             animationFrame++;
         } else if (IsKeyDown(KEY_D)) {
             Move(Vector3 {-0.01f, 0.0f, 0.0f});
+            rotation.z = 1.5;
             animationFrame++;
         } else if (IsKeyDown(KEY_W)) {
             Move(Vector3 {0.0f, 0.0f, 0.01f});
+            rotation.z = 0;
             animationFrame++;
         } else if (IsKeyDown(KEY_S)) {
             Move(Vector3 {0.0f, 0.0f, -0.01f});
+            rotation.z = 3;
             animationFrame++;
             }
         if (animationFrame >= animations[animationSelected].frameCount)
             animationFrame = 0;
-        if (IsKeyPressed(KEY_P))
-            std::cout << position.x << "x " << position.y << "y "<< position.z << "z" << std::endl;
+        if (IsKeyDown(KEY_J))
+            rotation.x += .01;
+        if (IsKeyDown(KEY_K))
+            rotation.x -= .01;
+        if (IsKeyDown(KEY_N))
+            rotation.z += .01;
+        if (IsKeyDown(KEY_M))
+            rotation.z -= .01;
+        if (IsKeyDown(KEY_I))
+            rotation.y += .01;
+        if (IsKeyDown(KEY_O))
+            rotation.y -= .01;
+        if (IsKeyDown(KEY_R))
+            ResetRotation();
+
+        if (IsKeyPressed(KEY_P)) {
+            std::cout << "Pos: " << position.x << "x " << position.y << "y " << position.z << "z" << std::endl;
+            std::cout << "Rot: " << rotation.x << "x " << rotation.y << "y " << rotation.z << "z" << std::endl;
+        }
     }
 
     void AnimatedGameObject::Reset() {

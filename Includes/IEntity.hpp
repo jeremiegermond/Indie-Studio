@@ -10,7 +10,9 @@
 
 #pragma once
 #include <iostream>
+
 #include "raylib.h"
+#include "Logics.hpp"
 
 namespace bomberman {
     class IEntity {

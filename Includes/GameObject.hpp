@@ -18,8 +18,10 @@ namespace bomberman {
     protected:
         Model model{};
         Vector3 position;
+        Vector3 rotation;
     private:
         Vector3 startPosition;
+        Vector3 startRotation;
         float scale;
         float startScale;
         Color tint;
@@ -44,6 +46,8 @@ namespace bomberman {
         virtual void Reset();
 
         void ResetPosition();
+
+        void ResetRotation();
 
         void ResetScale();
 

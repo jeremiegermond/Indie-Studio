@@ -16,6 +16,7 @@ add_executable(bomberman
         Src/Entity/GameText.cpp
         Src/Scene/Scene.cpp
         Src/Scene/SceneManager.cpp
-        Src/Entity/GamePlayer.cpp)
+        Src/Entity/GamePlayer.cpp
+        Src/Logics.cpp)
 
 target_link_libraries(bomberman raylib)
