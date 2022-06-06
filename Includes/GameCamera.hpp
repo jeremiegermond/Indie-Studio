@@ -38,13 +38,13 @@ namespace bomberman {
 
         ~GameCamera() override = default;
 
-        void Reset() override;
+        void Reset();
 
-        void Update() override;
+        void Update();
 
-        void SetActive(bool activate) override;
+        void SetActive(bool activate);
 
-        void Move(Vector3 velocity) override;
+        void Move(Vector3 velocity);
 
         Camera3D GetCamera() {
             return camera;

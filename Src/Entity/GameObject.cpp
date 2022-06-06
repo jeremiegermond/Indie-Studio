@@ -8,10 +8,10 @@
 #include "GameObject.hpp"
 
 namespace bomberman {
-    StaticGameObject::StaticGameObject(const std::string &modelPath,
-                                       Vector3 position,
-                                       float scale,
-                                       Color tint)
+    GameObject::GameObject(const std::string &modelPath,
+                           Vector3 position,
+                           float scale,
+                           Color tint)
             : position(position),
               startPosition(position),
               scale(scale),
@@ -23,44 +23,44 @@ namespace bomberman {
         model = LoadModel(modelPath.c_str());
     };
 
-    StaticGameObject::~StaticGameObject() {
+    GameObject::~GameObject() {
         UnloadModel(model);
     }
 
-    void StaticGameObject::Draw() {
+    void GameObject::Draw() {
         if (active)
             // DrawModel(model, position, scale, tint);
             DrawModelEx(model, position, Vector3{1.0f, 0.0f,0.0f}, -90.0f, Vector3{scale, scale, scale}, tint);
     }
 
-    void StaticGameObject::Reset() {
+    void GameObject::Reset() {
         ResetPosition();
         ResetScale();
         ResetTint();
         SetActive(true);
     }
 
-    void StaticGameObject::ResetPosition() {
+    void GameObject::ResetPosition() {
         SetPosition(startPosition);
     }
 
-    void StaticGameObject::ResetScale() {
+    void GameObject::ResetScale() {
         scale = startScale;
     }
 
-    void StaticGameObject::ResetTint() {
+    void GameObject::ResetTint() {
         tint = startTint;
     }
 
-    void StaticGameObject::SetPosition(Vector3 newPosition) {
+    void GameObject::SetPosition(Vector3 newPosition) {
         position = newPosition;
     }
 
-    void StaticGameObject::SetActive(bool activate) {
+    void GameObject::SetActive(bool activate) {
         active = activate;
     }
 
-    void StaticGameObject::Move(Vector3 velocity) {
+    void GameObject::Move(Vector3 velocity) {
         position.x += velocity.x;
         position.y += velocity.y;
         position.z += velocity.z;
@@ -70,7 +70,7 @@ namespace bomberman {
                                            const std::string &texturePath,
                                            const std::string &animationPath,
                                            unsigned int animationCount)
-            : StaticGameObject(modelPath), animationNb(animationCount) {
+            : GameObject(modelPath), animationNb(animationCount) {
         texture = LoadTexture(texturePath.c_str());
         SetMaterialTexture(&model.materials[0], MATERIAL_MAP_DIFFUSE, texture);
         animations = LoadModelAnimations(animationPath.c_str(), &animationNb);

@@ -10,10 +10,11 @@
 #pragma once
 #include <cmath>
 #include <vector>
-#include "IObject.hpp"
+
+#include "IEntity.hpp"
 
 namespace bomberman {
-    class StaticGameObject : public IObject {
+    class GameObject : public IEntity {
     protected:
         Model model{};
         Vector3 position;
@@ -25,23 +26,22 @@ namespace bomberman {
         Color startTint;
         bool active;
     public:
-        explicit StaticGameObject(const std::string &modelPath)
-                : StaticGameObject(modelPath, Vector3{0, 0, 0}, 1, WHITE) {
+        explicit GameObject(const std::string &modelPath)
+                : GameObject(modelPath, Vector3{0, 0, 0}, 1, WHITE) {
         };
 
-        StaticGameObject(const std::string &modelPath,
-                         Vector3 position,
-                         float scale,
-                         Color tint);
+        GameObject(const std::string &modelPath,
+                   Vector3 position,
+                   float scale,
+                   Color tint);
 
-        ~StaticGameObject() override;
+        ~GameObject() override;
 
-        void Draw() override;
+        void Draw();
 
-        void Update() override {
-        };
+        virtual void Update() {};
 
-        void Reset() override;
+        virtual void Reset();
 
         void ResetPosition();
 
@@ -49,18 +49,14 @@ namespace bomberman {
 
         void ResetTint();
 
-        void SetPosition(Vector3 newPosition) override;
+        void SetPosition(Vector3 newPosition);
 
-        void SetAnimation(int newSelectedAnimation) override {
-            (void) newSelectedAnimation;
-        }
+        void SetActive(bool activate);
 
-        void SetActive(bool activate) override;
-
-        void Move(Vector3 velocity) override;
+        void Move(Vector3 velocity);
     };
 
-    class AnimatedGameObject : public StaticGameObject {
+    class AnimatedGameObject : public GameObject {
     private:
         Texture2D texture{};
         ModelAnimation *animations{};
@@ -81,7 +77,7 @@ namespace bomberman {
 
         void ResetAnimation();
 
-        void SetAnimation(int newSelectedAnimation) override;
+        void SetAnimation(int newSelectedAnimation);
     };
 }
 

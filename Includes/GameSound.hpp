@@ -22,14 +22,14 @@ namespace bomberman {
 
         ~GameSound() override;
 
-        void Update() override {
+        void Update() {
         }
 
-        void Reset() override;
+        void Reset();
 
-        void SetActive(bool activate) override;
+        void SetActive(bool activate);
 
-        void Move(Vector3 velocity) override {
+        void Move(Vector3 velocity) {
             (void) velocity;
         }
 

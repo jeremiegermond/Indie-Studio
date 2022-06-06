@@ -16,14 +16,6 @@ namespace bomberman {
     class IEntity {
     public:
         virtual ~IEntity() = default;
-
-        virtual void Update() = 0;
-
-        virtual void Reset() = 0;
-
-        virtual void SetActive(bool activate) = 0;
-
-        virtual void Move(Vector3 velocity) = 0;
     };
 }
 #endif //BOMBERMAN_IENTITY_HPP

@@ -49,7 +49,7 @@ namespace bomberman {
 
     void GameScript::PressEnterToPlay() {
         if (IsKeyPressed(KEY_ENTER)) {
-            _game->currentScene++;
+            _game->ChangeScene(1);
         }
     }
     void GameScript::FinishSelectGoToPlay() {

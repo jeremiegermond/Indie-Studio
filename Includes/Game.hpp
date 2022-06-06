@@ -22,14 +22,15 @@ namespace bomberman {
     private:
         int width;
         int height;
+        int currentScene;
 
         SceneManager scenes;
     public:
-        int currentScene;
         Game();
         ~Game();
         void createWindow();
         void run();
+        void ChangeScene(int i);
     };
 
 }

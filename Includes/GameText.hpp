@@ -28,10 +28,10 @@ namespace bomberman {
             ~GameText() override;
             void Draw();
 
-            void Reset() override;
-            void Update() override;
-            void SetActive(bool activate) override;
-            void Move(Vector3 velocity) override;
+            void Reset();
+            void Update();
+            void SetActive(bool activate);
+            void Move(Vector3 velocity);
     };
 }
 
