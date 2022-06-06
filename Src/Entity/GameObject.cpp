@@ -87,26 +87,23 @@ namespace bomberman {
 
     void AnimatedGameObject::Update() {
         UpdateModelAnimation(model, animations[animationSelected], animationFrame);
-        if (IsKeyDown(KEY_SPACE))
-            animationFrame++;
-        if (animationFrame >= animations[animationSelected].frameCount)
-            animationFrame = 0;
         if (IsKeyDown(KEY_A)) {
             Move(Vector3 {0.01f, 0.0f, 0.0f});
+            animationFrame++;
         } else if (IsKeyDown(KEY_D)) {
             Move(Vector3 {-0.01f, 0.0f, 0.0f});
+            animationFrame++;
         } else if (IsKeyDown(KEY_W)) {
             Move(Vector3 {0.0f, 0.0f, 0.01f});
+            animationFrame++;
         } else if (IsKeyDown(KEY_S)) {
             Move(Vector3 {0.0f, 0.0f, -0.01f});
-        } else if (IsKeyDown(KEY_Q)) {
-            Move(Vector3 {0.0f, 0.01f, 0.0f});
-        } else if (IsKeyDown(KEY_E)) {
-            Move(Vector3 {0.0f, -0.01f, 0.0f});
-        }
-        if (IsKeyPressed(KEY_P)) {
+            animationFrame++;
+            }
+        if (animationFrame >= animations[animationSelected].frameCount)
+            animationFrame = 0;
+        if (IsKeyPressed(KEY_P))
             std::cout << position.x << "x " << position.y << "y "<< position.z << "z" << std::endl;
-        }
     }
 
     void AnimatedGameObject::Reset() {
