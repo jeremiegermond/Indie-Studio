@@ -10,7 +10,7 @@
 namespace bomberman {
 
     GameDrawMap::GameDrawMap(MyColor color) {
-         _cubePosition.x = 0;
+        _cubePosition.x = 0;
         _cubePosition.y = 0;
         _cubePosition.z = 0;
         _color = color;
