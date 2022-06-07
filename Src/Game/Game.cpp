@@ -25,7 +25,7 @@ namespace bomberman {
         SetConfigFlags(FLAG_MSAA_4X_HINT);
         InitAudioDevice();
         SetTargetFPS(60);
-        scenes.LoadScenes(this);
+        scenes = SceneManager(this);
     }
 
     void Game::run() {
@@ -36,24 +36,28 @@ namespace bomberman {
         while (!WindowShouldClose()) {
             BeginTextureMode(target);
             ClearBackground(BLACK);
-            scenes.GetScene(currentScene)->DrawScene();
+            GetScene()->DrawScene();
             EndTextureMode();
             BeginDrawing();
             ClearBackground(BLACK);
             if (IsKeyDown(KEY_B)) {
-                DrawTextureRec(target.texture, rTarget, MyVector2{0, 0}, WHITE);
-            } else {
                 BeginShaderMode(shader);
                 DrawTextureRec(target.texture, rTarget, MyVector2{0, 0}, WHITE);
                 EndShaderMode();
+            } else {
+                DrawTextureRec(target.texture, rTarget, MyVector2{0, 0}, WHITE);
             }
             EndDrawing();
         }
     }
 
     void Game::ChangeScene(int i) {
-        scenes.GetScene(currentScene)->UnloadScene();
+        GetScene()->UnloadScene();
         currentScene = i;
-        scenes.GetScene(currentScene)->StartScene();
+        GetScene()->StartScene();
+    }
+
+    Scene *Game::GetScene() {
+        return scenes.GetScene(currentScene);
     }
 }

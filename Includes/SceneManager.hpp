@@ -18,10 +18,9 @@ namespace bomberman {
 
     public:
         SceneManager() = default;
+        explicit SceneManager(Game *pGame);
 
         virtual ~SceneManager() = default;
-
-        void LoadScenes(Game *game);
 
         void CreateMenuScene();
 

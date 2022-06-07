@@ -16,7 +16,8 @@ namespace bomberman {
         GamePlayer(const std::string &modelPath,
                    const std::string &texturePath,
                    const std::string &animationPath,
-                   unsigned int animationCount);
+                   unsigned int animationCount,
+                   float scale = 1.0f);
         void Update() override;
     };
 }

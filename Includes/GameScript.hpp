@@ -16,19 +16,18 @@ namespace bomberman {
     class GameScript : public IEntity {
         private:
             bool active{};
-            int _nbScript;
+            int currentScript;
             Game *_game;
         
         public:
-            GameScript(Game *game, int nbScript);
+            GameScript(Game *game, int script);
             ~GameScript() override = default;
-            void PressEnterToPlay();
-            void FinishSelectGoToPlay();
+            void PressToZoom();
+            void PressToPlay();
 
             void Reset();
             void Update();
             void SetActive(bool activate);
-            void Move(MyVector3 velocity);
     };
 }
 

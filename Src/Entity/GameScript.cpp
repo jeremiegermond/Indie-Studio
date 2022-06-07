@@ -9,18 +9,21 @@
 #include "Game.hpp"
 
 namespace bomberman {
-    GameScript::GameScript(Game *game, int nbScript) {
-       _nbScript = nbScript;
+    GameScript::GameScript(Game *game, int script) {
+        currentScript = script;
        _game = game;
+       active = true;
     }
 
     void GameScript::Update() {
-        switch(_nbScript) {
+        if (!active)
+            return;
+        switch(currentScript) {
             case 1:
-                PressEnterToPlay();
+                PressToZoom();
                 break;
             case 2:
-                FinishSelectGoToPlay();
+                PressToPlay();
                 break;
             default:
                 break;
@@ -31,18 +34,19 @@ namespace bomberman {
         active = activate;
     }
 
-    void GameScript::Reset() {}
-
-    void GameScript::Move(MyVector3 velocity) {
-        (void)velocity;
+    void GameScript::Reset() {
+        SetActive(true);
     }
 
-    void GameScript::PressEnterToPlay() {
+    void GameScript::PressToZoom() {
+        if (IsKeyPressed(KEY_ENTER)) {
+            _game->GetScene()->ChangeCamera = true;
+            currentScript = 2;
+        }
+    }
+    void GameScript::PressToPlay() {
         if (IsKeyPressed(KEY_ENTER)) {
             _game->ChangeScene(1);
         }
-    }
-    void GameScript::FinishSelectGoToPlay() {
-        PressEnterToPlay();
     }
 }

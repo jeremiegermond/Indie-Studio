@@ -12,8 +12,8 @@
 #include <iostream>
 
 #include "raylib.h"
+#include "raymath.h"
 #include "Objects.hpp"
-#include "Logics.hpp"
 
 namespace bomberman {
     class IEntity {

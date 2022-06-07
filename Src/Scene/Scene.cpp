@@ -55,7 +55,7 @@ namespace bomberman {
     void Scene::StartScene() {
         for (auto sound: GameSounds)
             sound->Play();
-        GameCameras.front()->SetMode(CAMERA_ORBITAL);
+        // GameCameras.front()->SetMode(CAMERA_ORBITAL);
         if (PlayerQueue.empty())
             return;
         Players.push_back(PlayerQueue.front());
@@ -64,6 +64,22 @@ namespace bomberman {
 
     void Scene::DrawScene() {
         GameCamera *camera = GameCameras.front();
+        if (ChangeCamera) {
+            GameCamera *newCam = GameCameras.at(1);
+            if (!ChangedCamera) {
+                ChangedCamera = true;
+                camera->SetObjectiveCam(newCam->GetCamera());
+            }
+            if (Vector3Distance(camera->GetCamera().position, newCam->GetStartPosition()) < 0.5f) {
+                ChangeCamera = false;
+                ChangedCamera = false;
+                GameCameras.push_back(camera);
+                GameCameras.erase(GameCameras.begin());
+                camera->Reset();
+                camera = newCam;
+            }
+        } else
+            ChangedCamera = false;
         camera->Update();
         BeginMode3D(camera->GetCamera());
         DrawGrid(15, 1.0);
