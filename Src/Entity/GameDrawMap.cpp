@@ -9,10 +9,11 @@
 
 namespace bomberman {
 
-    GameDrawMap::GameDrawMap(MyColor color) {
+    GameDrawMap::GameDrawMap(const std::string &texturePath, MyColor color) {
         _cubePosition.x = 0;
         _cubePosition.y = 0;
         _cubePosition.z = 0;
+        _texture = LoadTexture(texturePath.c_str());
         _color = color;
         GenerateMap();
     }
@@ -27,7 +28,7 @@ namespace bomberman {
             _cubePosition.x = -10;
             for (auto x: y) {  
                 if (x == '1') {
-                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, _color);
+                    DrawCubeTexture(_texture, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 }
                 _cubePosition.x++;
             }
@@ -96,4 +97,4 @@ namespace bomberman {
         }
         return ('0');
     }
-}   
+}

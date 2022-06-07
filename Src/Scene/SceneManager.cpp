@@ -69,7 +69,7 @@ namespace bomberman {
         level->GetCamera(0)->SetMode(CAMERA_ORBITAL);
         ///level->AddEntity(new GameObject("../Assets/Level/forest.obj"));
         level->AddEntity(new GameSound("../Assets/Songs/CoffeeSong.mp3"));
-        level->AddEntity(new GameDrawMap(BROWN));
+        level->AddEntity(new GameDrawMap("../Assets/Texture/txr_brick.jpeg", BROWN));
         scenes.push_back(level);
     }
 
