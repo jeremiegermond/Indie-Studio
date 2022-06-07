@@ -10,6 +10,7 @@
 
 #include "IEntity.hpp"
 #include "Color.hpp"
+#include "vector"
 
 namespace bomberman {
     class GameDrawMap : public IEntity {
@@ -17,11 +18,14 @@ namespace bomberman {
             bool active{};
             MyVector3 _cubePosition;
             MyColor _color;
+            std::vector<std::vector<char>> _map;
         
         public:
-            GameDrawMap(MyVector3 cubePosition, MyColor color);
-            ~GameDrawMap() override = default;
+            GameDrawMap(MyColor color);
+            ~GameDrawMap() override;
             void Draw();
+            void GenerateMap();
+            char Populate(int enemyTotal);
 
             void Update() {}
             void Reset() {}
