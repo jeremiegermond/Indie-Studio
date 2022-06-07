@@ -58,11 +58,9 @@ namespace bomberman {
     void SceneManager::CreateLevelScene() {
         auto *level = new Scene;
         level->AddEntity(new GameCamera());
-        level->AddEntity(new AnimatedGameObject("../Assets/model.iqm",
-                                               "../Assets/txr_model.png",
-                                               "../Assets/model.iqm",
-                                               0));
+        level->AddEntity(new GameObject("../Assets/Level/forest.obj"));
         level->AddEntity(new GameSound("../Assets/Songs/CoffeeSong.mp3"));
+        level->AddEntity(new GameDrawMap({ 0.0f, 0.0f, 0.0f }, BROWN));
         scenes.push_back(level);
     }
 

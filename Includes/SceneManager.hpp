@@ -14,7 +14,7 @@ namespace bomberman {
     class SceneManager {
     private:
         std::vector<Scene *> scenes;
-        Game *gameRef{};
+        Game *gameRef;
 
     public:
         SceneManager() = default;
