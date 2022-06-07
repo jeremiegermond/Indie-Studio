@@ -41,6 +41,10 @@ namespace bomberman {
         void DrawScene();
 
         void UnloadScene();
+
+        bool ChangeCamera{};
+
+        bool ChangedCamera{};
     };
 }
 

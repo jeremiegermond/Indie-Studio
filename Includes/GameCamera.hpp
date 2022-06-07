@@ -14,6 +14,7 @@ namespace bomberman {
     private:
         MyCamera camera{};
         MyVector3 startPosition;
+        MyCamera objectiveCam{};
         MyVector3 startTarget;
         MyVector3 startUp;
         float startFov;
@@ -33,10 +34,17 @@ namespace bomberman {
         void Reset();
         void Update();
         void SetActive(bool activate);
-        void Move(MyVector3 velocity);
+        void Move(Vector3 velocity);
+        void SetObjectiveCam(MyCamera objective);
+        bool IsOnObjective();
+        void MoveToObjective();
 
         MyCamera GetCamera() {
             return camera;
+        }
+
+        MyVector3 GetStartPosition() {
+            return startPosition;
         }
 
         void SetMode(int mode);

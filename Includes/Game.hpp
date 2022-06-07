@@ -24,7 +24,6 @@ namespace bomberman {
         int width;
         int height;
         int currentScene;
-
         SceneManager scenes;
     public:
         Game();
@@ -32,6 +31,7 @@ namespace bomberman {
         void createWindow();
         void run();
         void ChangeScene(int i);
+        Scene *GetScene();
     };
 
 }

@@ -29,7 +29,7 @@ namespace bomberman {
         bool active;
     public:
         explicit GameObject(const std::string &modelPath)
-                : GameObject(modelPath, MyVector3{0, 0, 0}, 1, WHITE) {
+                : GameObject(modelPath, MyVector3{0, 0, 0}, 1.0f, WHITE) {
         };
 
         GameObject(const std::string &modelPath,
@@ -40,14 +40,24 @@ namespace bomberman {
         ~GameObject() override;
 
         void Draw();
-        virtual void Update() {};
+
+        virtual void Update() {
+        };
+
         virtual void Reset();
+
         void ResetPosition();
+
         void ResetRotation();
+
         void ResetScale();
+
         void ResetTint();
+
         void SetPosition(MyVector3 newPosition);
+
         void SetActive(bool activate);
+
         void Move(MyVector3 velocity);
     };
 
@@ -60,11 +70,18 @@ namespace bomberman {
         int animationSelected{};
 
     public:
-        AnimatedGameObject(const std::string &modelPath, const std::string &texturePath, const std::string &animationPath, unsigned int animationCount);
+        AnimatedGameObject(const std::string &modelPath,
+                           const std::string &texturePath,
+                           const std::string &animationPath,
+                           unsigned int animationCount,
+                           float scale = 1.0f);
+
         ~AnimatedGameObject() override;
 
         void Update() override;
+
         void Reset() override;
+
         void ResetAnimation();
 
         void SetAnimation(int newSelectedAnimation);

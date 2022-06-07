@@ -10,8 +10,9 @@ namespace bomberman {
     GamePlayer::GamePlayer(const std::string &modelPath,
                            const std::string &texturePath,
                            const std::string &animationPath,
-                           unsigned int animationCount)
-            : AnimatedGameObject(modelPath, texturePath, animationPath, animationCount) {
+                           unsigned int animationCount,
+                           float scale)
+            : AnimatedGameObject(modelPath, texturePath, animationPath, animationCount, scale) {
 
     }
 
