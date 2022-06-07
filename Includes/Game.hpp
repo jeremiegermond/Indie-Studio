@@ -32,6 +32,7 @@ namespace bomberman {
         void createWindow();
         void run();
         void ChangeScene(int i);
+        int GetScene();
     };
 
 }

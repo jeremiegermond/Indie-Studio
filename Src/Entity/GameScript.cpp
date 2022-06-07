@@ -38,7 +38,7 @@ namespace bomberman {
     }
 
     void GameScript::PressEnterToPlay() {
-        if (IsKeyPressed(KEY_ENTER)) {
+        if (IsKeyPressed(KEY_ENTER) && _game->GetScene() == 0) {
             _game->ChangeScene(1);
         }
     }

@@ -56,4 +56,8 @@ namespace bomberman {
         currentScene = i;
         scenes.GetScene(currentScene)->StartScene();
     }
+
+    int Game::GetScene() {
+        return currentScene;
+    }
 }
