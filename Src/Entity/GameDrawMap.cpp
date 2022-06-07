@@ -22,16 +22,16 @@ namespace bomberman {
     }
             
     void GameDrawMap::Draw() {
-        _cubePosition.y = 0;
+        _cubePosition.z = -10;
         for (auto y: _map) {
-            _cubePosition.x = 0;
+            _cubePosition.x = -10;
             for (auto x: y) {  
                 if (x == '1') {
                     DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 }
                 _cubePosition.x++;
             }
-            _cubePosition.y++;
+            _cubePosition.z++;
         }
     }
 
