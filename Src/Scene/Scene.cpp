@@ -33,15 +33,21 @@ namespace bomberman {
             return;
         }
 
-
         auto text = dynamic_cast<GameText *>(entity);
         if (text) {
             GameTexts.push_back(text);
             return;
         }
+
         auto script = dynamic_cast<GameScript *>(entity);
         if (script) {
             GameScripts.push_back(script);
+            return;
+        }
+
+        auto drawmap = dynamic_cast<GameDrawMap *>(entity);
+        if (drawmap) {
+            GameDrawMaps.push_back(drawmap);
             return;
         }
     }
@@ -86,10 +92,12 @@ namespace bomberman {
             PlayerQueue.push_back(Players.front());
             Players.erase(Players.begin());
         }
-
         for (auto player: Players) {
             player->Update();
             player->Draw();
+        }
+        for (auto drawmap: GameDrawMaps) {
+            drawmap->Draw();
         }
         EndMode3D();
         for (auto text: GameTexts) {
