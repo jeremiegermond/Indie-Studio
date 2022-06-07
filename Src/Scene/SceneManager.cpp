@@ -18,6 +18,7 @@ namespace bomberman {
     void SceneManager::CreateMenuScene() {
         auto *menu = new Scene;
         menu->AddEntity(new GameCamera());
+        menu->GetCamera(0)->SetMode(CAMERA_ORBITAL);
         menu->AddEntity(new GameCamera(MyVector3{-1.7f, 0.5f, -1.1f},
                                        MyVector3{0.0f, 0.0f, 0.0f},
                                        MyVector3{0.0f, 1.0f, 0.0f},
@@ -55,6 +56,8 @@ namespace bomberman {
                                        0, 0.1f));
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Forest Bomberman", 525, 100, 200, WHITE));
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Press Enter To Play", 625, 400, 125, WHITE, true));
+        menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Select players", 625, 100, 200, WHITE));
+        menu->GetText(2)->SetActive(false);
         menu->AddEntity(new GameScript(gameRef, 1));
         menu->StartScene();
         scenes.push_back(menu);

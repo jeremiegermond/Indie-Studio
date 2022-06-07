@@ -40,8 +40,12 @@ namespace bomberman {
 
     void GameScript::PressToZoom() {
         if (IsKeyPressed(KEY_ENTER)) {
+            _game->GetScene()->GetCamera(0)->SetMode(CAMERA_CUSTOM);
             _game->GetScene()->ChangeCamera = true;
             currentScript = 2;
+            _game->GetScene()->GetText(0)->SetActive(false);
+            _game->GetScene()->GetText(1)->SetActive(false);
+            _game->GetScene()->GetText(2)->SetActive(true);
         }
     }
     void GameScript::PressToPlay() {

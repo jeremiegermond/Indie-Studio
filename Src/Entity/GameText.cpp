@@ -17,10 +17,12 @@ namespace bomberman {
         _color = color;
         _flash = flash;
         _framesCounter = 0;
+        active = true;
     }
 
     void GameText::Draw() {
-        _framesCounter++;
+        if (!active)
+            return;
         if (!_flash)
             DrawTextEx(_font, _msg.c_str(), _fontPosition, _fontSize, 0, _color);
         else {
@@ -29,15 +31,12 @@ namespace bomberman {
         }
     }
 
-    void GameText::Update() {}
+    void GameText::Update() {
+        if (active)
+            _framesCounter++;
+    }
 
     void GameText::SetActive(bool activate) {
         active = activate;
-    }
-
-    void GameText::Reset() {}
-
-    void GameText::Move(MyVector3 velocity) {
-        (void)velocity;
     }
 }

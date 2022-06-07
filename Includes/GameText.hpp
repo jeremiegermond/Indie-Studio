@@ -29,11 +29,8 @@ namespace bomberman {
             GameText(const std::string &font, const std::string &msg, float x, float y, float fontSize, MyColor color, bool flash = false);
             ~GameText() override = default;
             void Draw();
-
-            void Reset();
             void Update();
             void SetActive(bool activate);
-            void Move(MyVector3 velocity);
     };
 }
 

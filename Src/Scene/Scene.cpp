@@ -49,7 +49,6 @@ namespace bomberman {
     void Scene::StartScene() {
         for (auto sound: GameSounds)
             sound->Play();
-        // GameCameras.front()->SetMode(CAMERA_ORBITAL);
         if (PlayerQueue.empty())
             return;
         Players.push_back(PlayerQueue.front());
@@ -105,5 +104,13 @@ namespace bomberman {
     void Scene::UnloadScene() {
         for (auto sound : GameSounds)
             sound->Stop();
+    }
+
+    GameCamera *Scene::GetCamera(int i) {
+        return GameCameras.at(i);
+    }
+
+    GameText *Scene::GetText(int i) {
+        return GameTexts.at(i);
     }
 }

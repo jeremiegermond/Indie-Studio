@@ -45,6 +45,10 @@ namespace bomberman {
         bool ChangeCamera{};
 
         bool ChangedCamera{};
+
+        GameCamera *GetCamera(int i);
+
+        GameText *GetText(int i);
     };
 }
 
