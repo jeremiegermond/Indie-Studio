@@ -22,22 +22,21 @@ namespace bomberman {
 
     void GameShaderMode::Draw() {
         // Vector2 mousePoint = { 0.0f, 0.0f };
-        // mousePoint = GetMousePosition();
-        // Rectangle button = { _imageDarkmode.width, _imageDarkmode.height, (float)_imageDarkmode.width, (float)_imageDarkmode.height/3 };
-        // if (darkmode == true) {
-            DrawTexture(_textureDarkmode, _position.x, _position.y, _color);
-        //     if (CheckCollisionPointRec(mousePoint, button)) {
-        //         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-        //             darkmode == false;
-        //     }
-        // }
-        // if (darkmode == false) {
-        //     DrawTexture(_textureLightmode, _position.x - 50, _position.y - 25, _color);
-        //     if (CheckCollisionPointRec(mousePoint, button)) {
-        //         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-        //             darkmode == true;
-        //     }
-        // }
+        Vector2 mouse = GetMousePosition();
+        Rectangle button = { _position.x, _position.y, float (_imageDarkmode.width), float (_imageDarkmode.height) };
+        if (darkmode) {
+            DrawTexture(_textureDarkmode, int (_position.x), int (_position.y), _color);
+            if (CheckCollisionPointRec(mouse, button)) {
+                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+                    darkmode = false;
+            }
+        } else {
+            DrawTexture(_textureLightmode, int (_position.x - 50), int (_position.y - 25), _color);
+            if (CheckCollisionPointRec(mouse, button)) {
+                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+                    darkmode = true;
+            }
+        }
     }
 
     void GameShaderMode::SetActive(bool activate) {
