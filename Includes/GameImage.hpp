@@ -23,7 +23,10 @@ namespace bomberman {
         public:
             GameImage(const std::string &image, float x, float y, MyColor color);
             ~GameImage() override = default;
-            void Draw();
+            void DrawPlayerOne();
+            void DrawPlayerTwo();
+            void DrawPlayerThree();
+            void DrawPlayerFour();
 
             void Update() {}
             void Reset() {}

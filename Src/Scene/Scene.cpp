@@ -123,7 +123,10 @@ namespace bomberman {
             script->Update();
         }
         for (auto image: GameImages) {
-            image->Draw();
+            image->DrawPlayerOne();
+            image->DrawPlayerTwo();
+            image->DrawPlayerThree();
+            image->DrawPlayerFour();
         }
         for (auto shadermode: GameShaderModes) {
             shadermode->Draw();
