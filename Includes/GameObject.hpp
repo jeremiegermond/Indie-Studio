@@ -64,11 +64,11 @@ namespace bomberman {
     class AnimatedGameObject : public GameObject {
     private:
         Texture2D texture{};
-        ModelAnimation *animations{};
         unsigned int animationNb;
-        int animationFrame{};
+        ModelAnimation *animations{};
         int animationSelected{};
-
+        int animationFrame{};
+        float tick{};
     public:
         AnimatedGameObject(const std::string &modelPath,
                            const std::string &texturePath,
@@ -85,5 +85,7 @@ namespace bomberman {
         void ResetAnimation();
 
         void SetAnimation(int newSelectedAnimation);
+
+        void NextFrame();
     };
 }
