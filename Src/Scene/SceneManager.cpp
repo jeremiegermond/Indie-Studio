@@ -25,6 +25,10 @@ namespace bomberman {
                                        32.0f,
                                        CAMERA_PERSPECTIVE));
         menu->AddEntity(new GameObject("../Assets/Level/forest.obj"));
+        menu->AddEntity(new GameBomb("../Assets/Level/bomb.iqm",
+                                     "../Assets/Level/bomb.png",
+                                     "../Assets/Level/bomb.iqm",
+                                     0));
         menu->AddEntity(new GameSound("../Assets/Songs/ForestSong.mp3"));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Fox.iqm",
                                        "../Assets/AnimalsCharacters/TexFox.png",
