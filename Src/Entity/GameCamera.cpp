@@ -41,24 +41,38 @@ namespace bomberman {
             if (!IsOnObjective()) {
                 MoveToObjective();
             }
-            if (IsKeyDown(KEY_J))
+            if (IsKeyDown(KEY_J)) {
+                camera.position.x += .01;
                 objectiveCam.position.x += .01;
-            if (IsKeyDown(KEY_K))
+            }
+            if (IsKeyDown(KEY_K)) {
+                camera.position.x -= .01;
                 objectiveCam.position.x -= .01;
-            if (IsKeyDown(KEY_N))
-                objectiveCam.position.z += .01;
-            if (IsKeyDown(KEY_M))
+            }
+            if (IsKeyDown(KEY_N)) {
+                camera.position.z += .01;
+             objectiveCam.position.z += .01;
+            }
+            if (IsKeyDown(KEY_M)) {
+                camera.position.z -= .01;
                 objectiveCam.position.z -= .01;
-            if (IsKeyDown(KEY_I))
+            }
+            if (IsKeyDown(KEY_I)) {
+                camera.position.y += .01;
                 objectiveCam.position.y += .01;
-            if (IsKeyDown(KEY_O))
+            }
+            if (IsKeyDown(KEY_O)) {
+                camera.position.y -= .01;
                 objectiveCam.position.y -= .01;
+            }
             if (IsKeyDown(KEY_R))
                 objectiveCam.position = startPosition;
-            if (IsKeyDown(KEY_C))
+            if (IsKeyDown(KEY_C)) {
                 objectiveCam.fovy -= 1;
-            if (IsKeyDown(KEY_V))
+            }
+            if (IsKeyDown(KEY_V)) {
                 objectiveCam.fovy += 1;
+            }
             if (IsKeyPressed(KEY_P)) {
                 printf("targ: %f %f %f\n", camera.position.x, camera.position.y, camera.position.z);
                 printf("fov: %f\n", camera.fovy);
@@ -98,7 +112,7 @@ namespace bomberman {
     void GameCamera::MoveToObjective() {
         Vector3 v1 = camera.position;
         Vector3 v2 = objectiveCam.position;
-        Vector3 v3 = Vector3Lerp(v1, v2, 0.5f);
+        Vector3 v3 = Vector3Lerp(v1, v2, 0.3f);
         Move(v3);
         camera.fovy = Lerp(camera.fovy, objectiveCam.fovy, 1.0f);
     }

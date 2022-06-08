@@ -81,6 +81,7 @@ namespace bomberman {
                                            unsigned int animationCount,
                                            float scale)
             : GameObject(modelPath, MyVector3{0, 0, 0}, scale, WHITE), animationNb(animationCount) {
+        tick = .0f;
         texture = LoadTexture(texturePath.c_str());
         SetMaterialTexture(&model.materials[0], MATERIAL_MAP_DIFFUSE, texture);
         animations = LoadModelAnimations(animationPath.c_str(), &animationNb);
@@ -96,27 +97,24 @@ namespace bomberman {
     }
 
     void AnimatedGameObject::Update() {
-        UpdateModelAnimation(model, animations[animationSelected], animationFrame);
         if (IsKeyDown(KEY_A)) {
-            Move(MyVector3 {1.0f, 0.0f, 0.0f});
+            Move(MyVector3{1.0f, 0.0f, 0.0f});
             rotation.z = -1.5;
-            animationFrame++;
+            NextFrame();
         } else if (IsKeyDown(KEY_D)) {
-            Move(MyVector3 {-1.0f, 0.0f, 0.0f});
+            Move(MyVector3{-1.0f, 0.0f, 0.0f});
             rotation.z = 1.5;
-            animationFrame++;
+            NextFrame();
         } else if (IsKeyDown(KEY_W)) {
-            Move(MyVector3 {0.0f, 0.0f, 1.0f});
+            Move(MyVector3{0.0f, 0.0f, 1.0f});
             rotation.z = 0;
-            animationFrame++;
+            NextFrame();
         } else if (IsKeyDown(KEY_S)) {
-            Move(MyVector3 {0.0f, 0.0f, -1.0f});
+            Move(MyVector3{0.0f, 0.0f, -1.0f});
             rotation.z = 3;
-            animationFrame++;
+            NextFrame();
         } else if (animationFrame)
-            animationFrame++;
-        if (animationFrame >= animations[animationSelected].frameCount)
-            animationFrame = 0;
+            NextFrame();
     }
 
     void AnimatedGameObject::Reset() {
@@ -129,10 +127,19 @@ namespace bomberman {
 
     void AnimatedGameObject::ResetAnimation() {
         animationFrame = 0;
+        tick = .0f;
     }
 
     void AnimatedGameObject::SetAnimation(int newSelectedAnimation) {
         animationSelected = newSelectedAnimation;
-        animationFrame = 0;
+        ResetAnimation();
+    }
+
+    void AnimatedGameObject::NextFrame() {
+        UpdateModelAnimation(model, animations[animationSelected], animationFrame);
+        tick += 24.0f * GetFrameTime();
+        animationFrame = int (round(tick));
+        if (animationFrame >= animations[animationSelected].frameCount)
+           ResetAnimation();
     }
 }
