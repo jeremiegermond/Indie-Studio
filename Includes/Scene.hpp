@@ -32,6 +32,7 @@ namespace bomberman {
         std::vector<GameScript *> GameScripts;
         std::vector<GameDrawMap *> GameDrawMaps;
         std::vector<GameImage *> GameImages;
+        std::vector<GameShaderMode *> GameShaderModes;
     public:
         Scene() = default;
 
