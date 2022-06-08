@@ -31,7 +31,6 @@ namespace bomberman {
 
     void GameObject::Draw() {
         if (active) {
-            // DrawModel(model, position, scale, tint);
             model.transform = MatrixRotateXYZ(rotation);
             DrawModelEx(model, position, MyVector3{1.0f, 0.0f, 0.0f}, -90.0f, MyVector3{scale, scale, scale}, tint);
         }

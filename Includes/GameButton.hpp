@@ -6,18 +6,47 @@
 */
 #ifndef BOMBERMAN_GAMEBUTTON_HPP
 #define BOMBERMAN_GAMEBUTTON_HPP
-#include "IObject.hpp"
+
+#include "IEntity.hpp"
+
 namespace bomberman {
-    class GameButton : public IObject {
+    typedef enum {
+        BUTTON_MENU = 0,
+        BUTTON_SELECT,
+        BUTTON_GAME,
+        BUTTON_SETTINGS
+    } ButtonType;
+    class GameButton : public IEntity {
     private:
         bool active;
         bool state;
-        Texture texture;
+        Texture onTexture{};
+        Texture offTexture{};
+        int posX;
+        int posY;
+        int type;
+        Rectangle collision{};
+        Color tint{};
     public:
-        GameButton(std::string onTexture, std::string offTexure);
+        GameButton(int x,
+                   int y,
+                   const std::string &onPath,
+                   const std::string &offPath,
+                   int type = BUTTON_MENU);
+
         ~GameButton() override;
+
         void Update();
+
         void Draw();
+
+        void SetActive(bool activated);
+
+        void SetState(bool newState);
+
+        bool GetState() const;
+
+        int GetType() const;
     };
 }
 #endif //BOMBERMAN_GAMEBUTTON_HPP

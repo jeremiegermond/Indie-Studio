@@ -57,9 +57,9 @@ namespace bomberman {
             return;
         }
 
-        auto shadermode = dynamic_cast<GameShaderMode *>(entity);
-        if (shadermode) {
-            GameShaderModes.push_back(shadermode);
+        auto button = dynamic_cast<GameButton *>(entity);
+        if (button) {
+            GameButtons.push_back(button);
             return;
         }
     }
@@ -118,8 +118,9 @@ namespace bomberman {
             image->DrawPlayerThree();
             image->DrawPlayerFour();
         }
-        for (auto shadermode: GameShaderModes) {
-            shadermode->Draw();
+        for (auto button: GameButtons) {
+            button->Update();
+            button->Draw();
         }
     }
 
@@ -151,5 +152,13 @@ namespace bomberman {
     void Scene::Populate(const std::vector<GamePlayer *>& newPlayers) {
         for (auto player: newPlayers)
             Players.push_back(player);
+    }
+
+    std::vector<GameButton *> Scene::GetButtons() {
+        return GameButtons;
+    }
+
+    void Scene::ChangePlayer(int i) {
+        Players[i] = PopPlayer(Players[i]);
     }
 }

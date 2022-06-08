@@ -18,7 +18,7 @@
 #include "GameScript.hpp"
 #include "GameDrawMap.hpp"
 #include "GameImage.hpp"
-#include "GameShaderMode.hpp"
+#include "GameButton.hpp"
 
 namespace bomberman {
     class Scene {
@@ -32,7 +32,7 @@ namespace bomberman {
         std::vector<GameScript *> GameScripts;
         std::vector<GameDrawMap *> GameDrawMaps;
         std::vector<GameImage *> GameImages;
-        std::vector<GameShaderMode *> GameShaderModes;
+        std::vector<GameButton *> GameButtons;
     public:
         Scene() = default;
 
@@ -59,6 +59,10 @@ namespace bomberman {
         void Populate(const std::vector<GamePlayer *>& newPlayers);
 
         GamePlayer *PopPlayer(GamePlayer *push = nullptr);
+
+        void ChangePlayer(int i);
+
+        std::vector<GameButton *> GetButtons();
     };
 }
 
