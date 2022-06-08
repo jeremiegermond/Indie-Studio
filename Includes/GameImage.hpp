@@ -17,7 +17,7 @@ namespace bomberman {
             bool active{};
 
         public:
-            GameImage();
+            GameImage(const std::string &image);
             ~GameImage();
             void Draw();
 

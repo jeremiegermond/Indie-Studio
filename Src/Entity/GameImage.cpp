@@ -14,4 +14,12 @@ namespace bomberman {
 
     GameImage::~GameImage() {
     }
+
+    void GameImage::Draw() {
+
+    }
+
+    void GameImage::SetActive(bool activate) {
+        active = activate;
+    }
 }

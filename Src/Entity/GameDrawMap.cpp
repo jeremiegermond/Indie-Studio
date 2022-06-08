@@ -43,8 +43,8 @@ namespace bomberman {
     void GameDrawMap::GenerateMap() {
         char type = '0';
         int enemyTotal = 4;
-        int width = 20;
-        int height = 20;
+        int width = 21;
+        int height = 21;
 
         srand(time(NULL));
         _map.resize(height);
