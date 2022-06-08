@@ -50,6 +50,12 @@ namespace bomberman {
             GameDrawMaps.push_back(drawmap);
             return;
         }
+
+        auto image = dynamic_cast<GameImage *>(entity);
+        if (image) {
+            GameImages.push_back(image);
+            return;
+        }
     }
 
     void Scene::StartScene() {
@@ -109,6 +115,9 @@ namespace bomberman {
         }
         for (auto script: GameScripts) {
             script->Update();
+        }
+        for (auto image: GameImages) {
+            image->Draw();
         }
     }
 

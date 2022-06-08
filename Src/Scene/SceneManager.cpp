@@ -72,12 +72,16 @@ namespace bomberman {
 
     void SceneManager::CreateLevelScene() {
         auto *level = new Scene;
-        level->AddEntity(new GameCamera());
-        level->GetCamera(0)->SetMode(CAMERA_ORBITAL);
+        level->AddEntity(new GameCamera(MyVector3{-12.0f, 14.78f, 0.0f},
+                                       MyVector3{0.0f, 0.0f, 0.0f},
+                                       MyVector3{0.0f, 1.0f, 0.0f},
+                                       94.0f,
+                                       CAMERA_PERSPECTIVE));
         ///level->AddEntity(new GameObject("../Assets/Level/forest.obj"));
         level->AddEntity(new GameSound("../Assets/Songs/CoffeeSong.mp3"));
-        level->AddEntity(new GameDrawMap("../Assets/Texture/txr_brick.jpeg", BROWN));
+        level->AddEntity(new GameDrawMap("../Assets/Texture/brick.png", "../Assets/Texture/wood.png", WHITE));
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Level 1", 875, 80, 125, WHITE));
+        level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 10, 10, WHITE));
         scenes.push_back(level);
     }
 
