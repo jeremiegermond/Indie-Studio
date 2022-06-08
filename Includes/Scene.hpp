@@ -31,8 +31,6 @@ namespace bomberman {
         std::vector<GameScript *> GameScripts;
         std::vector<GameDrawMap *> GameDrawMaps;
         std::vector<GameImage *> GameImages;
-        // std::vector<Camera> GameCameras;
-        // std::vector<Shader> GameShaders;
     public:
         Scene() = default;
 
@@ -53,6 +51,12 @@ namespace bomberman {
         GameCamera *GetCamera(int i);
 
         GameText *GetText(int i);
+
+        GamePlayer *GetPlayer(int i);
+
+        void Populate(const std::vector<GamePlayer *>& newPlayers);
+
+        GamePlayer *PopPlayer(GamePlayer *push = nullptr);
     };
 }
 

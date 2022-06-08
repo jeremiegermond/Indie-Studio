@@ -65,6 +65,10 @@ namespace bomberman {
         position = newPosition;
     }
 
+    void GameObject::SetRotation(MyVector3 newRotation) {
+        rotation = newRotation;
+    }
+
     void GameObject::SetActive(bool activate) {
         active = activate;
     }
@@ -115,14 +119,13 @@ namespace bomberman {
             NextFrame();
         } else if (animationFrame)
             NextFrame();
+        if (IsKeyDown(KEY_P))
+            printf("Ppos: %f %f %f\n", position.x, position.y, position.z);
     }
 
     void AnimatedGameObject::Reset() {
-        ResetPosition();
-        ResetScale();
-        ResetTint();
+        GameObject::Reset();
         ResetAnimation();
-        SetActive(true);
     }
 
     void AnimatedGameObject::ResetAnimation() {

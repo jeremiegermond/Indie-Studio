@@ -59,6 +59,8 @@ namespace bomberman {
         void SetActive(bool activate);
 
         void Move(MyVector3 velocity);
+
+        void SetRotation(MyVector3 newRotation);
     };
 
     class AnimatedGameObject : public GameObject {

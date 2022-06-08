@@ -61,10 +61,6 @@ namespace bomberman {
     void Scene::StartScene() {
         for (auto sound: GameSounds)
             sound->Play();
-        if (PlayerQueue.empty())
-            return;
-        Players.push_back(PlayerQueue.front());
-        PlayerQueue.erase(PlayerQueue.begin());
     }
 
     void Scene::DrawScene(Model skybox) {
@@ -94,12 +90,6 @@ namespace bomberman {
         for (auto object: GameObjects) {
             object->Update();
             object->Draw();
-        }
-        if (IsKeyPressed(KEY_L) && !Players.empty()) {
-            Players.push_back(PlayerQueue.front());
-            PlayerQueue.erase(PlayerQueue.begin());
-            PlayerQueue.push_back(Players.front());
-            Players.erase(Players.begin());
         }
         for (auto player: Players) {
             player->Update();
@@ -132,5 +122,22 @@ namespace bomberman {
 
     GameText *Scene::GetText(int i) {
         return GameTexts.at(i);
+    }
+
+    GamePlayer *Scene::GetPlayer(int i) {
+        return  Players.at(i);
+    }
+
+    GamePlayer *Scene::PopPlayer(GamePlayer *push) {
+        GamePlayer *pop = PlayerQueue.front();
+        PlayerQueue.erase(PlayerQueue.begin());
+        if (push != nullptr)
+            PlayerQueue.push_back(push);
+        return pop;
+    }
+
+    void Scene::Populate(const std::vector<GamePlayer *>& newPlayers) {
+        for (auto player: newPlayers)
+            Players.push_back(player);
     }
 }
