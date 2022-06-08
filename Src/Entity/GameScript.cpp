@@ -72,6 +72,6 @@ namespace bomberman {
             _game->ChangeScene(1);
             _game->GetScene()->Populate(players);
         }
-        std::vector<Rectangle>
+        // std::vector<Rectangle>
     }
 }
