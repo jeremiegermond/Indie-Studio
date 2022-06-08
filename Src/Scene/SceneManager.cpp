@@ -63,7 +63,7 @@ namespace bomberman {
                                        0, 0.1f));
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Forest Bomberman", 525, 100, 200, WHITE));
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Press Enter To Play", 625, 400, 125, WHITE, true));
-        menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Select players", 625, 100, 200, WHITE));
+        menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Select players", 645, 100, 200, WHITE));
         menu->GetText(2)->SetActive(false);
         menu->AddEntity(new GameScript(gameRef, 1));
         menu->StartScene();
@@ -77,6 +77,7 @@ namespace bomberman {
         ///level->AddEntity(new GameObject("../Assets/Level/forest.obj"));
         level->AddEntity(new GameSound("../Assets/Songs/CoffeeSong.mp3"));
         level->AddEntity(new GameDrawMap("../Assets/Texture/txr_brick.jpeg", BROWN));
+        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Level 1", 875, 80, 125, WHITE));
         scenes.push_back(level);
     }
 
