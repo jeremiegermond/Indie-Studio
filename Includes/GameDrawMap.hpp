@@ -18,12 +18,14 @@ namespace bomberman {
             bool active{};
             MyVector3 _cubePosition;
             MyColor _color;
-            Texture2D _texture;
+            Texture2D _textureBrick;
+            Texture2D _textureWood;
             std::vector<std::vector<char>> _map;
-            Image _image;
+            Image _imageBrick;
+            Image _imageWood;
         
         public:
-            GameDrawMap(const std::string &texturePath, MyColor color);
+            GameDrawMap(const std::string &texturePathBrick, const std::string &texturePathWood, MyColor color);
             ~GameDrawMap() override;
             void Draw();
             void GenerateMap();

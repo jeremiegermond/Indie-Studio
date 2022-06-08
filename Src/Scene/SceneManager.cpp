@@ -79,7 +79,7 @@ namespace bomberman {
                                        CAMERA_PERSPECTIVE));
         ///level->AddEntity(new GameObject("../Assets/Level/forest.obj"));
         level->AddEntity(new GameSound("../Assets/Songs/CoffeeSong.mp3"));
-        level->AddEntity(new GameDrawMap("../Assets/Texture/txr_brick.png", WHITE));
+        level->AddEntity(new GameDrawMap("../Assets/Texture/txr_brick.png", "../Assets/Texture/txr_wood.png", WHITE));
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Level 1", 875, 80, 125, WHITE));
         scenes.push_back(level);
     }
