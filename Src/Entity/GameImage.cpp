@@ -17,13 +17,10 @@ namespace bomberman {
         UnloadImage(_image);
     }
 
-    GameImage::~GameImage() {
-    }
-
     void GameImage::Draw() {
-        DrawTexture(_texture, _position.x, _position.y, WHITE);
-        DrawTexture(_texture, _position.x + 100, _position.y, WHITE);
-        DrawTexture(_texture, _position.x + 200, _position.y, WHITE);
+        DrawTexture(_texture, _position.x, _position.y, _color);
+        DrawTexture(_texture, _position.x + 100, _position.y, _color);
+        DrawTexture(_texture, _position.x + 200, _position.y, _color);
     }
 
     void GameImage::SetActive(bool activate) {

@@ -56,6 +56,12 @@ namespace bomberman {
             GameImages.push_back(image);
             return;
         }
+
+        auto shadermode = dynamic_cast<GameShaderMode *>(entity);
+        if (shadermode) {
+            GameShaderModes.push_back(shadermode);
+            return;
+        }
     }
 
     void Scene::StartScene() {
@@ -115,6 +121,9 @@ namespace bomberman {
         }
         for (auto image: GameImages) {
             image->Draw();
+        }
+        for (auto shadermode: GameShaderModes) {
+            shadermode->Draw();
         }
     }
 
