@@ -17,6 +17,7 @@
 #include "GameText.hpp"
 #include "GameScript.hpp"
 #include "GameDrawMap.hpp"
+#include "GameBomb.hpp"
 
 namespace bomberman {
     class Scene {
@@ -29,6 +30,7 @@ namespace bomberman {
         std::vector<GameText *> GameTexts;
         std::vector<GameScript *> GameScripts;
         std::vector<GameDrawMap *> GameDrawMaps;
+        std::vector<GameBomb *> GameBombs;
         // std::vector<Camera> GameCameras;
         // std::vector<Shader> GameShaders;
     public:

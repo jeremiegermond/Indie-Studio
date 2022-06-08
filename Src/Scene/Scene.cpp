@@ -15,6 +15,12 @@ namespace bomberman {
             return;
         }
 
+        auto bomb = dynamic_cast<GameBomb *>(entity);
+        if (bomb) {
+            GameBombs.push_back(bomb);
+            return;
+        }
+
         auto player = dynamic_cast<GamePlayer *>(entity);
         if (player) {
             PlayerQueue.push_back(player);
@@ -98,6 +104,10 @@ namespace bomberman {
         }
         for (auto drawmap: GameDrawMaps) {
             drawmap->Draw();
+        }
+        for (auto bomb: GameBombs) {
+            bomb->Update();
+            bomb->Draw();
         }
         EndMode3D();
         for (auto text: GameTexts) {
