@@ -20,6 +20,7 @@ namespace bomberman {
             MyColor _color;
             Texture2D _texture;
             std::vector<std::vector<char>> _map;
+            Image _image;
         
         public:
             GameDrawMap(const std::string &texturePath, MyColor color);

@@ -13,7 +13,8 @@ namespace bomberman {
         _cubePosition.x = 0;
         _cubePosition.y = 0;
         _cubePosition.z = 0;
-        _texture = LoadTexture(texturePath.c_str());
+        _image = LoadImage(texturePath.c_str());
+        _texture = LoadTextureFromImage(_image);
         _color = color;
         GenerateMap();
     }
