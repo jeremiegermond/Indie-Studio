@@ -12,7 +12,15 @@
 #include <iostream>
 
 #include "raylib.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wall"
+#pragma GCC diagnostic ignored "-Wextra"
+#pragma GCC diagnostic ignored "-Wmissing-field-initializers"
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 #include "raymath.h"
+#pragma GCC diagnostic pop
+#include "rlgl.h"
 #include "Objects.hpp"
 
 namespace bomberman {
