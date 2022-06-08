@@ -81,6 +81,7 @@ namespace bomberman {
         level->AddEntity(new GameSound("../Assets/Songs/CoffeeSong.mp3"));
         level->AddEntity(new GameDrawMap("../Assets/Texture/brick.png", "../Assets/Texture/wood.png", WHITE));
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Level 1", 875, 80, 125, WHITE));
+        level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 10, 10, WHITE));
         scenes.push_back(level);
     }
 

@@ -21,8 +21,8 @@ namespace bomberman {
             Texture2D _textureBrick;
             Texture2D _textureWood;
             std::vector<std::vector<char>> _map;
-            MyImage _imageBrick;
-            MyImage _imageWood;
+            Image _imageBrick;
+            Image _imageWood;
         
         public:
             GameDrawMap(const std::string &texturePathBrick, const std::string &texturePathWood, MyColor color);
