@@ -18,6 +18,7 @@
 #include "GameScript.hpp"
 #include "GameDrawMap.hpp"
 #include "GameImage.hpp"
+#include "GameShaderMode.hpp"
 
 namespace bomberman {
     class Scene {

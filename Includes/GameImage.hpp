@@ -19,10 +19,10 @@ namespace bomberman {
             MyColor _color;
             MyVector2 _position;
             bool active{};
-            
+
         public:
             GameImage(const std::string &image, float x, float y, MyColor color);
-            ~GameImage();
+            ~GameImage() override = default;
             void Draw();
 
             void Update() {}
