@@ -64,11 +64,10 @@ namespace bomberman {
         menu->AddEntity(new GameButton(50, 50, "../Assets/Buttons/darkmode.png", "../Assets/Buttons/lightmode.png"));
         menu->AddEntity(new GameButton(1750, 50, "../Assets/Buttons/settings.png"));
         menu->AddEntity(new GameButton(1750, 950, "../Assets/Buttons/howtoplay.png"));
-        // menu->AddEntity(new GameButton(250, 700, "../Assets/Buttons/leftOff.png", "../Assets/Buttons/leftOn.png", BUTTON_SELECT));
-        menu->AddEntity(new GameButton(450, 750, "../Assets/Buttons/rightOff.png", "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
-        menu->AddEntity(new GameButton(800, 750, "../Assets/Buttons/rightOff.png", "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
-        menu->AddEntity(new GameButton(1400, 750, "../Assets/Buttons/rightOff.png", "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
-        menu->AddEntity(new GameButton(1700, 750, "../Assets/Buttons/rightOff.png", "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
+        menu->AddEntity(new GameButton(450, 750, "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
+        menu->AddEntity(new GameButton(800, 750, "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
+        menu->AddEntity(new GameButton(1400, 750, "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
+        menu->AddEntity(new GameButton(1700, 750, "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
         menu->GetText(2)->SetActive(false);
         menu->AddEntity(new GameScript(gameRef, 1));
         menu->StartScene();

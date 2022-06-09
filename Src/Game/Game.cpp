@@ -57,7 +57,7 @@ namespace bomberman {
             EndTextureMode();
             BeginDrawing();
             ClearBackground(BLACK);
-            if (IsKeyDown(KEY_B)) {
+            if (scenes.GetScene(0)->GetButtons()[0]->GetState()) {
                 BeginShaderMode(shader);
                 DrawTextureRec(target.texture, rTarget, MyVector2{0, 0}, WHITE);
                 EndShaderMode();
