@@ -11,11 +11,9 @@
 
 namespace bomberman {
     typedef enum {
-        BUTTON_MENU = 0,
-        BUTTON_SELECT,
-        BUTTON_GAME,
-        BUTTON_SETTINGS
+        BUTTON_MENU = 0, BUTTON_SELECT, BUTTON_GAME, BUTTON_SETTINGS
     } ButtonType;
+
     class GameButton : public IEntity {
     private:
         bool active;
@@ -33,6 +31,13 @@ namespace bomberman {
                    const std::string &onPath,
                    const std::string &offPath,
                    int type = BUTTON_MENU);
+
+        GameButton(int x,
+                   int y,
+                   const std::string &onPath,
+                   int type = BUTTON_MENU)
+                : GameButton(x, y, onPath, onPath, type) {
+        }
 
         ~GameButton() override;
 
