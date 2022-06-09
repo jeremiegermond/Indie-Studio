@@ -116,8 +116,14 @@ namespace bomberman {
             Move(MyVector3{0.0f, 0.0f, -1.0f});
             rotation.z = 3;
             NextFrame();
-        } else if (animationFrame)
+        } else if (animationNb > 1) {
+            std::cout << animationNb <<std::endl;
+            if (!animationSelected)
+                SetAnimation(1);
             NextFrame();
+        } else if (animationFrame) {
+            NextFrame();
+        }
         if (IsKeyDown(KEY_P))
             printf("Ppos: %f %f %f\n", position.x, position.y, position.z);
     }
@@ -143,5 +149,11 @@ namespace bomberman {
         animationFrame = int (round(tick));
         if (animationFrame >= animations[animationSelected].frameCount)
            ResetAnimation();
+    }
+
+    void AnimatedGameObject::Move(MyVector3 velocity) {
+        if (animationSelected)
+            SetAnimation(0);
+        GameObject::Move(velocity);
     }
 }

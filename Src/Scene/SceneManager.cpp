@@ -29,38 +29,35 @@ namespace bomberman {
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Fox.iqm",
                                        "../Assets/AnimalsCharacters/TexFox.png",
                                        "../Assets/AnimalsCharacters/Fox.iqm",
-                                       0, 0.1f));
+                                       1, 0.1f));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Pig.iqm",
                                        "../Assets/AnimalsCharacters/TexPig.png",
                                        "../Assets/AnimalsCharacters/Pig.iqm",
-                                       0, 0.1f));
+                                       1, 0.1f));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Pigeon.iqm",
                                        "../Assets/AnimalsCharacters/TexPigeon.png",
                                        "../Assets/AnimalsCharacters/Pigeon.iqm",
-                                       0, 0.1f));
+                                       1, 0.1f));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Toucan.iqm",
                                        "../Assets/AnimalsCharacters/TexToucan.png",
                                        "../Assets/AnimalsCharacters/Toucan.iqm",
-                                       0,
-                                       0.1f));
+                                       1, 0.1f));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Fox.iqm",
                                        "../Assets/AnimalsCharacters/TexWolf.png",
                                        "../Assets/AnimalsCharacters/Fox.iqm",
-                                       0,
-                                       0.1f));
+                                       1, 0.1f));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Cat.iqm",
                                        "../Assets/AnimalsCharacters/TexCat.png",
                                        "../Assets/AnimalsCharacters/Cat.iqm",
-                                       0,
-                                       0.1f));
+                                       1, 0.1f));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Owl.iqm",
                                        "../Assets/AnimalsCharacters/TexOwl.png",
                                        "../Assets/AnimalsCharacters/Owl.iqm",
-                                       0, 0.1f));
+                                       1, 0.1f));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Gazelle.iqm",
                                        "../Assets/AnimalsCharacters/TexGazelle.png",
                                        "../Assets/AnimalsCharacters/Gazelle.iqm",
-                                       0, 0.1f));
+                                       1, 0.1f));
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Forest Bomberman", 525, 100, 200, WHITE));
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Press Enter To Play", 625, 400, 125, WHITE, true));
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Select players", 645, 100, 200, WHITE));
