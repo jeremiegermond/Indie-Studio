@@ -54,10 +54,13 @@ namespace bomberman {
             BeginTextureMode(target);
             ClearBackground(BLACK);
             GetScene()->DrawScene(skybox);
+            scenes.GetScene(2)->Draw2DAssets();
+            if (scenes.GetScene(2)->GetButton(0)->GetState())
+                scenes.GetScene(3)->Draw2DAssets();
             EndTextureMode();
             BeginDrawing();
             ClearBackground(BLACK);
-            if (scenes.GetScene(0)->GetButtons()[0]->GetState()) {
+            if (scenes.GetScene(3)->GetButton(0)->GetState()) {
                 BeginShaderMode(shader);
                 DrawTextureRec(target.texture, rTarget, MyVector2{0, 0}, WHITE);
                 EndShaderMode();

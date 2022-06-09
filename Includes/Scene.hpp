@@ -33,6 +33,8 @@ namespace bomberman {
         std::vector<GameDrawMap *> GameDrawMaps;
         std::vector<GameImage *> GameImages;
         std::vector<GameButton *> GameButtons;
+
+        bool CamSwitch{};
     public:
         Scene() = default;
 
@@ -44,11 +46,17 @@ namespace bomberman {
 
         void DrawScene(Model skybox);
 
+        void Draw3DAssets();
+
+        void Draw2DAssets();
+
         void UnloadScene();
 
-        bool ChangeCamera{};
+        void Start3D();
 
-        bool ChangedCamera{};
+        void NextCamera();
+
+        void MoveCamera();
 
         GameCamera *GetCamera(int i);
 
@@ -63,6 +71,8 @@ namespace bomberman {
         void ChangePlayer(int i);
 
         std::vector<GameButton *> GetButtons();
+
+        GameButton *GetButton(int i);
     };
 }
 

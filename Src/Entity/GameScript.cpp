@@ -61,7 +61,7 @@ namespace bomberman {
             }
             _game->GetScene()->Populate(players);
             _game->GetScene()->GetCamera(0)->SetMode(CAMERA_CUSTOM);
-            _game->GetScene()->ChangeCamera = true;
+            _game->GetScene()->NextCamera();
             _game->GetScene()->GetText(0)->SetActive(false);
             _game->GetScene()->GetText(1)->SetActive(false);
             _game->GetScene()->GetText(2)->SetActive(true);

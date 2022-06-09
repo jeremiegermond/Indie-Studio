@@ -27,6 +27,12 @@ namespace bomberman {
         void CreateLevelScene();
 
         Scene *GetScene(int sceneId);
+
+        void CreateUiScene();
+
+        void CreateSettingsScene();
+
+        void CreateHowToPlayScene();
     };
 }
 

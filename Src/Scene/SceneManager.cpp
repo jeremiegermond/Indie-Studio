@@ -13,6 +13,9 @@ namespace bomberman {
         gameRef = pGame;
         CreateMenuScene();
         CreateLevelScene();
+        CreateUiScene();
+        CreateSettingsScene();
+        CreateHowToPlayScene();
     }
 
     void SceneManager::CreateMenuScene() {
@@ -61,8 +64,6 @@ namespace bomberman {
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Forest Bomberman", 525, 100, 200, WHITE));
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Press Enter To Play", 625, 400, 125, WHITE, true));
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Select players", 645, 100, 200, WHITE));
-        menu->AddEntity(new GameButton(50, 50, "../Assets/Buttons/darkmode.png", "../Assets/Buttons/lightmode.png"));
-        menu->AddEntity(new GameButton(1750, 50, "../Assets/Buttons/settings.png"));
         menu->AddEntity(new GameButton(1750, 950, "../Assets/Buttons/howtoplay.png"));
         menu->AddEntity(new GameButton(450, 750, "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
         menu->AddEntity(new GameButton(800, 750, "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
@@ -86,11 +87,28 @@ namespace bomberman {
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Level 1", 875, 80, 125, WHITE));
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 3; x++) {
-                level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 10 + 100 * x, 10 + 900 * y));
-                level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1610 + 100 * x, 10 + 900 * y));
+                level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 10 + 100 * x, 100 + 800 * y));
+                level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1610 + 100 * x, 100 + 800 * y));
             }
         }
         scenes.push_back(level);
+    }
+
+    void SceneManager::CreateUiScene() {
+        auto *ui = new Scene;
+        ui->AddEntity(new GameButton(1750, 10, "../Assets/Buttons/settings.png"));
+        scenes.push_back(ui);
+    }
+
+    void SceneManager::CreateSettingsScene() {
+        auto *settings = new Scene;
+        settings->AddEntity(new GameImage("../Assets/UI/text_box.png", 500, 200));
+        settings->AddEntity(new GameButton(850, 500, "../Assets/Buttons/darkmode.png", "../Assets/Buttons/lightmode.png"));
+        scenes.push_back(settings);
+    }
+
+    void SceneManager::CreateHowToPlayScene() {
+
     }
 
     Scene *SceneManager::GetScene(int sceneId) {
