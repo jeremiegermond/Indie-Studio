@@ -14,26 +14,18 @@
 namespace bomberman {
     class GameImage : public IEntity {
         private:
-            Image _image;
-            Texture2D _texture;
+            Image _image{};
+            Texture2D _texture{};
             MyColor _color;
-            MyVector2 _position;
+            int posX;
+            int posY;
             bool active{};
 
         public:
-            GameImage(const std::string &image, float x, float y, MyColor color);
+            GameImage(const std::string &image, int x, int y, MyColor color = WHITE);
             ~GameImage() override = default;
-            void DrawPlayerOne();
-            void DrawPlayerTwo();
-            void DrawPlayerThree();
-            void DrawPlayerFour();
-
-            void Update() {}
-            void Reset() {}
+            void Draw();
             void SetActive(bool activate);
-            void Move(MyVector3 velocity) {
-                (void) velocity;
-            }
     };
 }
 

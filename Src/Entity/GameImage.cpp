@@ -8,37 +8,17 @@
 #include "GameImage.hpp"
 
 namespace bomberman {
-    GameImage::GameImage(const std::string &image, float x, float y, MyColor color) {
-        _image = LoadImage(image.c_str());
-        _texture = LoadTextureFromImage(_image);
-        _position.x = x;
-        _position.y = y;
+    GameImage::GameImage(const std::string &image, int x, int y, MyColor color) {
+        _texture = LoadTexture(image.c_str());
+        posX = x;
+        posY = y;
         _color = color;
-        UnloadImage(_image);
+        active = true;
     }
 
-    void GameImage::DrawPlayerOne() {
-        DrawTexture(_texture, _position.x, _position.y, _color);
-        DrawTexture(_texture, _position.x + 100, _position.y, _color);
-        DrawTexture(_texture, _position.x + 200, _position.y, _color);
-    }
-
-    void GameImage::DrawPlayerTwo() {
-        DrawTexture(_texture, _position.x + 1600, _position.y, _color);
-        DrawTexture(_texture, _position.x + 1700, _position.y, _color);
-        DrawTexture(_texture, _position.x + 1800, _position.y, _color);
-    }
-
-    void GameImage::DrawPlayerThree() {
-        DrawTexture(_texture, _position.x, _position.y + 900, _color);
-        DrawTexture(_texture, _position.x + 100, _position.y + 900, _color);
-        DrawTexture(_texture, _position.x + 200, _position.y + 900, _color);
-    }
-
-    void GameImage::DrawPlayerFour() {
-        DrawTexture(_texture, _position.x + 1600, _position.y + 900, _color);
-        DrawTexture(_texture, _position.x + 1700, _position.y + 900, _color);
-        DrawTexture(_texture, _position.x + 1800, _position.y + 900, _color);
+    void GameImage::Draw() {
+        if (active)
+            DrawTexture(_texture, posX, posY, _color);
     }
 
     void GameImage::SetActive(bool activate) {

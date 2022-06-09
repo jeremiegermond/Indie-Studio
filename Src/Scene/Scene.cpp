@@ -113,10 +113,7 @@ namespace bomberman {
             script->Update();
         }
         for (auto image: GameImages) {
-            image->DrawPlayerOne();
-            image->DrawPlayerTwo();
-            image->DrawPlayerThree();
-            image->DrawPlayerFour();
+            image->Draw();
         }
         for (auto button: GameButtons) {
             button->Update();
