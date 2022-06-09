@@ -61,6 +61,8 @@ namespace bomberman {
         virtual void Move(MyVector3 velocity);
 
         void SetRotation(MyVector3 newRotation);
+
+        void SetScale(float newScale);
     };
 
     class AnimatedGameObject : public GameObject {

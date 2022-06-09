@@ -78,6 +78,10 @@ namespace bomberman {
         position.z += velocity.z * GetFrameTime();
     }
 
+    void GameObject::SetScale(float newScale) {
+        scale = newScale;
+    }
+
     AnimatedGameObject::AnimatedGameObject(const std::string &modelPath,
                                            const std::string &texturePath,
                                            const std::string &animationPath,
@@ -117,7 +121,6 @@ namespace bomberman {
             rotation.z = 3;
             NextFrame();
         } else if (animationNb > 1) {
-            std::cout << animationNb <<std::endl;
             if (!animationSelected)
                 SetAnimation(1);
             NextFrame();

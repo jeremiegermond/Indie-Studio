@@ -18,6 +18,10 @@ namespace bomberman {
         positions.emplace_back(-.44f, 0.0f, -.54f);
         positions.emplace_back(-.65f, 0.0f, -.1f);
         positions.emplace_back(-.88f, 0.0f, -.06f);
+        positions.emplace_back(8.0f, 0.0f, -8.0f);
+        positions.emplace_back(-8.0f, 0.0f, -8.0f);
+        positions.emplace_back(-8.0f, 0.0f, 8.0f);
+        positions.emplace_back(8.0f, 0.0f, 8.0f);
         rotations.emplace_back(.0f, .0f, 1.5f);
         rotations.emplace_back(.0f, .0f, 1.5f);
         rotations.emplace_back(.0f, .0f, 3.0f);
@@ -87,10 +91,12 @@ namespace bomberman {
         }
         if (IsKeyPressed(KEY_ENTER)) {
             std::vector<GamePlayer *> players;
-            players.push_back(_game->GetScene()->GetPlayer(0));
-            players.push_back(_game->GetScene()->GetPlayer(1));
-            players.push_back(_game->GetScene()->GetPlayer(2));
-            players.push_back(_game->GetScene()->GetPlayer(3));
+            for (int x = 0; x < 4; x++) {
+                auto player = _game->GetScene()->GetPlayer(x);
+                player->SetScale(.4f);
+                player->SetPosition(positions[4+x]);
+                players.push_back(player);
+            }
             _game->ChangeScene(1);
             _game->GetScene()->Populate(players);
         }
