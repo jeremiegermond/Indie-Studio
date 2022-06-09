@@ -89,10 +89,10 @@ namespace bomberman {
             ChangedCamera = false;
         camera->Update();
         BeginMode3D(camera->GetCamera());
-        rlDisableDepthMask();
-        DrawModel(skybox, (Vector3){0, 0, 0}, 1.0f, WHITE);
-        rlEnableDepthMask();
-        DrawGrid(15, 1.0);
+        // rlDisableDepthMask();
+        // DrawModel(skybox, (Vector3){0, 0, 0}, 1.0f, WHITE);
+        // rlEnableDepthMask();
+        // DrawGrid(15, 1.0);
         for (auto object: GameObjects) {
             object->Update();
             object->Draw();
