@@ -19,8 +19,13 @@ struct MyVector3 : Vector3 {
     constexpr MyVector3(float x, float y, float z) : Vector3{x, y, z} {}
 };
 
+struct MyCamera2D : Camera2D {
+    constexpr MyCamera2D() : Camera2D{{0, 0}, {0, 0}, 0, 0} {}
+    constexpr MyCamera2D(MyVector2 offset, MyVector2 target, float rotation, float zoom) : Camera2D{offset, target, rotation, zoom} {}
+};
+
 struct MyCamera : Camera {
-    constexpr MyCamera() : Camera {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, 0, 0} {}
+    constexpr MyCamera() : Camera{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, 0, 0} {}
     constexpr MyCamera(MyVector3 position, MyVector3 target, MyVector3 up, float fovy, int projection) : Camera{position, target, up, fovy, projection} {}
 };
 
