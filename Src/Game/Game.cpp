@@ -55,8 +55,23 @@ namespace bomberman {
             ClearBackground(BLACK);
             GetScene()->DrawScene(skybox);
             scenes.GetScene(2)->Draw2DAssets();
-            if (scenes.GetScene(2)->GetButton(0)->GetState())
+            if (scenes.GetScene(2)->GetButton(0)->GetState()) {
                 scenes.GetScene(3)->Draw2DAssets();
+                if (scenes.GetScene(3)->GetButton(1)->GetState()) {
+                    scenes.GetScene(2)->GetButton(0)->SetState(false);
+                    scenes.GetScene(3)->GetButton(1)->SetState(false);
+                }
+            }
+            if (scenes.GetScene(0)->GetButton(0)->GetState()) {
+                scenes.GetScene(4)->Draw2DAssets();
+                if (scenes.GetScene(4)->GetButton(0)->GetState()) {
+                    scenes.GetScene(0)->GetButton(0)->SetState(false);
+                    scenes.GetScene(4)->GetButton(0)->SetState(false);
+                }
+            }
+            if (IsKeyPressed(KEY_P)) {
+                printf("x:%f y:%f\n", GetMousePosition().x, GetMousePosition().y);
+            }
             EndTextureMode();
             BeginDrawing();
             ClearBackground(BLACK);

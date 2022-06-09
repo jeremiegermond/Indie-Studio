@@ -104,11 +104,15 @@ namespace bomberman {
         auto *settings = new Scene;
         settings->AddEntity(new GameImage("../Assets/UI/text_box.png", 500, 200));
         settings->AddEntity(new GameButton(850, 500, "../Assets/Buttons/darkmode.png", "../Assets/Buttons/lightmode.png"));
+        settings->AddEntity(new GameButton(1220, 770, "../Assets/UI/close_button90.png"));
         scenes.push_back(settings);
     }
 
     void SceneManager::CreateHowToPlayScene() {
-
+        auto *howToPlay = new Scene;
+        howToPlay->AddEntity(new GameImage("../Assets/UI/how_to_play.png", 550, 280));
+        howToPlay->AddEntity(new GameButton(1220, 770, "../Assets/UI/close_button90.png"));
+        scenes.push_back(howToPlay);
     }
 
     Scene *SceneManager::GetScene(int sceneId) {
