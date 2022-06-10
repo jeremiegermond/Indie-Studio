@@ -76,6 +76,8 @@ namespace bomberman {
     }
 
     void Scene::DrawScene(Model skybox) {
+        for (auto music: GameSounds)
+            music->Update();
         for (auto script: GameScripts) {
             script->Update();
         }

@@ -9,8 +9,8 @@
 
 namespace bomberman {
 
-    GameSound::GameSound(const std::string &soundPath)
-            : active(true), startActive(true) {
+    GameSound::GameSound(const std::string &soundPath, bool looping)
+            : active(true), startActive(true), looping(looping) {
         sound = LoadSound(soundPath.c_str());
     }
 
@@ -37,6 +37,13 @@ namespace bomberman {
     }
 
     void GameSound::Stop() {
-        StopSound(sound);
+        if (IsSoundPlaying(sound))
+            StopSound(sound);
+    }
+
+    void GameSound::Update() {
+        if (active)
+            if (!IsSoundPlaying(sound))
+                PlaySound(sound);
     }
 }

@@ -16,17 +16,14 @@ namespace bomberman {
         Sound sound{};
         bool active;
         bool startActive;
-
+        bool looping;
     public:
-        explicit GameSound(const std::string &soundPath);
+        explicit GameSound(const std::string &soundPath, bool looping = false);
         ~GameSound() override;
 
-        void Update() {}
+        void Update();
         void Reset();
         void SetActive(bool activate);
-        void Move(MyVector3 velocity) {
-            (void) velocity;
-        }
         void Play();
         void Stop();
     };
