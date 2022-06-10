@@ -21,10 +21,10 @@ namespace bomberman {
         int startProjection;
         bool active;
     public:
-        GameCamera() : GameCamera(MyVector3{-10.0f, 15.0f, -10.0f},
+        GameCamera() : GameCamera(MyVector3{-2.0f, 4.0f, -2.0f},
                              MyVector3{0.0f, 0.0f, 0.0f},
                              MyVector3{0.0f, 1.0f, 0.0f},
-                             20.0f,
+                             27.0f,
                              CAMERA_PERSPECTIVE) {
         };
 

@@ -9,11 +9,14 @@
 
 namespace bomberman {
 
-    GameDrawMap::GameDrawMap(const std::string &texturePath, MyColor color) {
+    GameDrawMap::GameDrawMap(const std::string &texturePathBrick, const std::string &texturePathWood, MyColor color) {
         _cubePosition.x = 0;
         _cubePosition.y = 0;
         _cubePosition.z = 0;
-        _texture = LoadTexture(texturePath.c_str());
+        _imageBrick = LoadImage(texturePathBrick.c_str());
+        _imageWood = LoadImage(texturePathWood.c_str());
+        _textureBrick = LoadTextureFromImage(_imageBrick);
+        _textureWood = LoadTextureFromImage(_imageWood);
         _color = color;
         GenerateMap();
     }
@@ -28,7 +31,19 @@ namespace bomberman {
             _cubePosition.x = -10;
             for (auto x: y) {  
                 if (x == '1') {
-                    DrawCubeTexture(_texture, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
+                    DrawCubeTexture(_textureBrick, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
+                }
+                else if (x == '2') {
+                    DrawCubeTexture(_textureWood, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
+                }
+                else if (x == '3') {    // DEBUG
+                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, BLUE);
+                }
+                else if (x == '4') {    // DEBUG
+                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, RED);
+                }
+                else if (x != '0') {    //
+                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, GREEN);
                 }
                 _cubePosition.x++;
             }
@@ -51,15 +66,12 @@ namespace bomberman {
         std::cout << "creating map" << std::endl;
         for (int row = 0; row < height; row++) {
             _map[row].resize(width);
-            for (int col = 1; col <= width; col++)
-            {
-                if (col == 3 && row == 2)
+            for (int col = 1; col <= width; col++) {
+                if ((row == 2 || row == height - 3) && (col == 3 || col == width - 2))
                     type = '3';
-                else if ((col == 4 && row == 2) || (col == 3 && row == 3))
+                else if ((row == 2 || row == height - 3) && (col == 4 || col == width - 3))
                     type = '0';
-                else if ((col == 5 && row == 2) || (col == 3 && row == 4))
-                    type = '0';
-                else if (col == 1 || col == width || row == 0 || row == height - 1)
+                else if ((row == 3 || row == height - 4) && (col == 3 || col == width - 2))
                     type = '0';
                 else if ((row + 1) % 2 == 0 && col % 2 == 0)
                     type = '1';
@@ -82,19 +94,34 @@ namespace bomberman {
     char GameDrawMap::Populate(int enemyTotal) {
         int random = static_cast<int>(rand() % 100);
 
-        if (random >= 80) {
-            if (rand() % 100 < 5) {
-                return ('7');
-            }
-            else if (rand() % 100 < 7) {
-                return ('6');
-            }
+        if (random >= 50)
             return ('2');
+        if (random > 0 && random <= 5) {
+            if (random % 100 < 25)
+                return '5';
+            else if (random % 100 < 50)
+                return '6';
+            else if (random % 100 < 75)
+                return '7';
+            else
+                return '8';
         }
-        if (random > 20 && random <= 25 && enemyTotal > 0) {
+        if (random > 5 && random <= 10 && enemyTotal > 0) {
             enemyTotal -= 1;
-            return (rand() % 10 <= 5 ? '4' : '5');
+            return (rand() % 10 <= 5 ? '4' : '0');
         }
-        return ('0');
+        return '0';
     }
 }
+
+/*
+0 : void
+1 : stone block
+2 : wood block
+3 : player
+4 : enemy
+5 : bomb up 
+6 : speed up 
+7 : fire up 
+8 : wall pass 
+*/

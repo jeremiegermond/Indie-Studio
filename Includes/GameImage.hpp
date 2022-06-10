@@ -9,24 +9,23 @@
 #define GAMEIMAGE_HPP_
 
 #include "IEntity.hpp"
+#include "Color.hpp"
 
 namespace bomberman {
-    class GameImage {
+    class GameImage : public IEntity {
         private:
-            Image _image;
+            Image _image{};
+            Texture2D _texture{};
+            MyColor _color;
+            int posX;
+            int posY;
             bool active{};
 
         public:
-            GameImage(const std::string &image);
-            ~GameImage();
+            GameImage(const std::string &image, int x, int y, MyColor color = WHITE);
+            ~GameImage() override = default;
             void Draw();
-
-            void Update() {}
-            void Reset() {}
             void SetActive(bool activate);
-            void Move(MyVector3 velocity) {
-                (void) velocity;
-            }
     };
 }
 

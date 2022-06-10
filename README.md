@@ -3,7 +3,7 @@
 ![](bomberman.png)
 
 > binary name: `bomberman` <br>
-> language: `c` <br>
+> language: `c++` <br>
 > compilation: `cmake 3.17`
 
 The aim of the **Indie Studio** is to implement a **cross-platform** 3D video game with **real-world** tools.

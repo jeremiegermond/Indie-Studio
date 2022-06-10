@@ -18,7 +18,9 @@ namespace bomberman {
             bool active{};
             int currentScript;
             Game *_game;
-        
+            std::vector<MyVector3> positions;
+            std::vector<MyVector3> rotations;
+
         public:
             GameScript(Game *game, int script);
             ~GameScript() override = default;

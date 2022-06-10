@@ -31,7 +31,6 @@ namespace bomberman {
 
     void GameObject::Draw() {
         if (active) {
-            // DrawModel(model, position, scale, tint);
             model.transform = MatrixRotateXYZ(rotation);
             DrawModelEx(model, position, MyVector3{1.0f, 0.0f, 0.0f}, -90.0f, MyVector3{scale, scale, scale}, tint);
         }
@@ -65,6 +64,10 @@ namespace bomberman {
         position = newPosition;
     }
 
+    void GameObject::SetRotation(MyVector3 newRotation) {
+        rotation = newRotation;
+    }
+
     void GameObject::SetActive(bool activate) {
         active = activate;
     }
@@ -73,6 +76,10 @@ namespace bomberman {
         position.x += velocity.x * GetFrameTime();
         position.y += velocity.y * GetFrameTime();
         position.z += velocity.z * GetFrameTime();
+    }
+
+    void GameObject::SetScale(float newScale) {
+        scale = newScale;
     }
 
     AnimatedGameObject::AnimatedGameObject(const std::string &modelPath,
@@ -113,16 +120,20 @@ namespace bomberman {
             Move(MyVector3{0.0f, 0.0f, -1.0f});
             rotation.z = 3;
             NextFrame();
-        } else if (animationFrame)
+        } else if (animationNb > 1) {
+            if (!animationSelected)
+                SetAnimation(1);
             NextFrame();
+        } else if (animationFrame) {
+            NextFrame();
+        }
+        if (IsKeyDown(KEY_P))
+            printf("Ppos: %f %f %f\n", position.x, position.y, position.z);
     }
 
     void AnimatedGameObject::Reset() {
-        ResetPosition();
-        ResetScale();
-        ResetTint();
+        GameObject::Reset();
         ResetAnimation();
-        SetActive(true);
     }
 
     void AnimatedGameObject::ResetAnimation() {
@@ -141,5 +152,11 @@ namespace bomberman {
         animationFrame = int (round(tick));
         if (animationFrame >= animations[animationSelected].frameCount)
            ResetAnimation();
+    }
+
+    void AnimatedGameObject::Move(MyVector3 velocity) {
+        if (animationSelected)
+            SetAnimation(0);
+        GameObject::Move(velocity);
     }
 }

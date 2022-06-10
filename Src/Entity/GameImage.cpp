@@ -8,15 +8,17 @@
 #include "GameImage.hpp"
 
 namespace bomberman {
-    GameImage::GameImage(const std::string &image) {
-        _image = LoadImage("../Assets/Heart/life.png");
-    }
-
-    GameImage::~GameImage() {
+    GameImage::GameImage(const std::string &image, int x, int y, MyColor color) {
+        _texture = LoadTexture(image.c_str());
+        posX = x;
+        posY = y;
+        _color = color;
+        active = true;
     }
 
     void GameImage::Draw() {
-
+        if (active)
+            DrawTexture(_texture, posX, posY, _color);
     }
 
     void GameImage::SetActive(bool activate) {

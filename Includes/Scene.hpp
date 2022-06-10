@@ -18,6 +18,8 @@
 #include "GameScript.hpp"
 #include "GameDrawMap.hpp"
 #include "GameBomb.hpp"
+#include "GameImage.hpp"
+#include "GameButton.hpp"
 
 namespace bomberman {
     class Scene {
@@ -31,8 +33,10 @@ namespace bomberman {
         std::vector<GameScript *> GameScripts;
         std::vector<GameDrawMap *> GameDrawMaps;
         std::vector<GameBomb *> GameBombs;
-        // std::vector<Camera> GameCameras;
-        // std::vector<Shader> GameShaders;
+        std::vector<GameImage *> GameImages;
+        std::vector<GameButton *> GameButtons;
+
+        bool CamSwitch{};
     public:
         Scene() = default;
 
@@ -42,17 +46,35 @@ namespace bomberman {
 
         void StartScene();
 
-        void DrawScene();
+        void DrawScene(Model skybox);
+
+        void Draw3DAssets();
+
+        void Draw2DAssets();
 
         void UnloadScene();
 
-        bool ChangeCamera{};
+        void Start3D();
 
-        bool ChangedCamera{};
+        void NextCamera();
+
+        void MoveCamera();
 
         GameCamera *GetCamera(int i);
 
         GameText *GetText(int i);
+
+        GamePlayer *GetPlayer(int i);
+
+        void Populate(const std::vector<GamePlayer *>& newPlayers);
+
+        GamePlayer *PopPlayer(GamePlayer *push = nullptr);
+
+        void ChangePlayer(int i);
+
+        std::vector<GameButton *> GetButtons();
+
+        GameButton *GetButton(int i);
     };
 }
 
