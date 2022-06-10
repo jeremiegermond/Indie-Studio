@@ -28,7 +28,7 @@ namespace bomberman {
                                        32.0f,
                                        CAMERA_PERSPECTIVE));
         menu->AddEntity(new GameObject("../Assets/Level/forest.obj"));
-        menu->AddEntity(new GameSound("../Assets/Songs/ForestSong.mp3"));
+        menu->AddEntity(new GameSound("../Assets/Songs/ForestSong.mp3", true));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Fox.iqm",
                                        "../Assets/AnimalsCharacters/TexFox.png",
                                        "../Assets/AnimalsCharacters/Fox.iqm",
@@ -82,7 +82,7 @@ namespace bomberman {
                                        MyVector3{0.0f, 1.0f, 0.0f},
                                        50.0f,
                                        CAMERA_PERSPECTIVE));
-        level->AddEntity(new GameSound("../Assets/Songs/CoffeeSong.mp3"));
+        level->AddEntity(new GameSound("../Assets/Songs/CoffeeSong.mp3", true));
         level->AddEntity(new GameDrawMap("../Assets/Texture/brick.png", "../Assets/Texture/wood.png", WHITE));
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Level 1", 875, 80, 125, WHITE));
         for (int y = 0; y < 2; y++) {
