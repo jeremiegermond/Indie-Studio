@@ -13,7 +13,7 @@ namespace bomberman {
                            float scale,
                            MyColor tint)
             : position(position),
-              rotation(MyVector3 {0.0f, 0.0f, 0.0f}),
+              rotation(MyVector3{0.0f, 0.0f, 0.0f}),
               startPosition(position),
               startRotation(rotation),
               scale(scale),
@@ -32,7 +32,12 @@ namespace bomberman {
     void GameObject::Draw() {
         if (active) {
             model.transform = MatrixRotateXYZ(rotation);
-            DrawModelEx(model, position, MyVector3{1.0f, 0.0f, 0.0f}, -90.0f, MyVector3{scale, scale, scale}, tint);
+            DrawModelEx(model,
+                        position,
+                        MyVector3{1.0f, 0.0f, 0.0f},
+                        -90.0f,
+                        MyVector3{scale, scale, scale},
+                        tint);
         }
     }
 
@@ -90,11 +95,16 @@ namespace bomberman {
                                            const std::string &texturePath,
                                            const std::string &animationPath,
                                            unsigned int animationCount,
-                                           float scale)
-            : GameObject(modelPath, MyVector3{0, 0, 0}, scale, WHITE), animationNb(animationCount) {
+                                           float scale,
+                                           bool hasTexture)
+            : GameObject(modelPath, MyVector3{0, 0, 0}, scale, WHITE),
+              hasTexture(hasTexture),
+              animationNb(animationCount) {
         tick = .0f;
-        texture = LoadTexture(texturePath.c_str());
-        SetMaterialTexture(&model.materials[0], MATERIAL_MAP_DIFFUSE, texture);
+        if (hasTexture) {
+            texture = LoadTexture(texturePath.c_str());
+            SetMaterialTexture(&model.materials[0], MATERIAL_MAP_DIFFUSE, texture);
+        }
         animations = LoadModelAnimations(animationPath.c_str(), &animationNb);
     }
 
@@ -103,36 +113,13 @@ namespace bomberman {
         for (unsigned int i = 0; i < animationNb; i++)
             UnloadModelAnimation(animations[i]);
         RL_FREE(animations);
-        UnloadTexture(texture);
+        if (hasTexture)
+            UnloadTexture(texture);
         UnloadModel(model);
     }
 
     void AnimatedGameObject::Update() {
-        if (IsKeyDown(KEY_A)) {
-            Move(MyVector3{1.0f, 0.0f, 0.0f});
-            rotation.z = -1.5;
-            NextFrame();
-        } else if (IsKeyDown(KEY_D)) {
-            Move(MyVector3{-1.0f, 0.0f, 0.0f});
-            rotation.z = 1.5;
-            NextFrame();
-        } else if (IsKeyDown(KEY_W)) {
-            Move(MyVector3{0.0f, 0.0f, 1.0f});
-            rotation.z = 0;
-            NextFrame();
-        } else if (IsKeyDown(KEY_S)) {
-            Move(MyVector3{0.0f, 0.0f, -1.0f});
-            rotation.z = 3;
-            NextFrame();
-        } else if (animationNb > 1) {
-            if (!animationSelected)
-                SetAnimation(1);
-            NextFrame();
-        } else if (animationFrame) {
-            NextFrame();
-        }
-        if (IsKeyDown(KEY_P))
-            printf("Ppos: %f %f %f\n", position.x, position.y, position.z);
+        NextFrame();
     }
 
     void AnimatedGameObject::Reset() {
@@ -146,6 +133,8 @@ namespace bomberman {
     }
 
     void AnimatedGameObject::SetAnimation(int newSelectedAnimation) {
+        if (animationSelected == newSelectedAnimation)
+            return;
         animationSelected = newSelectedAnimation;
         ResetAnimation();
     }
@@ -153,9 +142,9 @@ namespace bomberman {
     void AnimatedGameObject::NextFrame() {
         UpdateModelAnimation(model, animations[animationSelected], animationFrame);
         tick += 24.0f * GetFrameTime();
-        animationFrame = int (round(tick));
+        animationFrame = int(round(tick));
         if (animationFrame >= animations[animationSelected].frameCount)
-           ResetAnimation();
+            ResetAnimation();
     }
 
     void AnimatedGameObject::Move(MyVector3 velocity) {

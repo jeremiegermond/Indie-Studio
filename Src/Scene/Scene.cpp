@@ -15,12 +15,6 @@ namespace bomberman {
             return;
         }
 
-        auto bomb = dynamic_cast<GameBomb *>(entity);
-        if (bomb) {
-            GameBombs.push_back(bomb);
-            return;
-        }
-
         auto player = dynamic_cast<GamePlayer *>(entity);
         if (player) {
             PlayerQueue.push_back(player);
@@ -102,14 +96,6 @@ namespace bomberman {
         }
         for (auto drawmap: GameDrawMaps) {
             drawmap->Draw();
-        }
-        for (auto bomb: GameBombs) {
-            bomb->Update();
-            bomb->Draw();
-            if (!bomb->GetActive())
-                PopBomb();
-            if (bomb->GetExplode())
-                continue;
         }
     }
 
@@ -193,11 +179,5 @@ namespace bomberman {
             GameCameras.erase(GameCameras.begin());
             camera->Reset();
         }
-    }
-
-    void Scene::PopBomb() {
-        if (GameBombs.empty())
-            return;
-        GameBombs.erase(GameBombs.begin());
     }
 }

@@ -95,6 +95,7 @@ namespace bomberman {
                 auto player = _game->GetScene()->GetPlayer(x);
                 player->SetScale(.4f);
                 player->SetPosition(positions[4+x]);
+                player->SetPlay(true);
                 players.push_back(player);
             }
             _game->ChangeScene(1);

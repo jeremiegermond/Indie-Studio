@@ -10,12 +10,15 @@
 #include "GameObject.hpp"
 
 namespace bomberman {
-    typedef  std::chrono::system_clock::time_point tPoint;
+    typedef std::chrono::system_clock::time_point tPoint;
+
     class GameBomb : public AnimatedGameObject {
     private:
         tPoint explode;
         tPoint end_life;
         bool exploded{};
+        AnimatedGameObject *explosion{};
+        Sound boom;
     public:
         GameBomb(const std::string &modelPath,
                  const std::string &texturePath,
@@ -33,6 +36,8 @@ namespace bomberman {
         void Update() override;
 
         bool GetExplode() const;
+
+        void Draw() override;
     };
 }
 #endif //BOMBERMAN_GAMEBOMB_HPP

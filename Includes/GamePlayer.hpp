@@ -11,28 +11,32 @@
 #include "GameObject.hpp"
 
 namespace bomberman {
-    class Game;
+    class GameBomb;
 
     class GamePlayer : public AnimatedGameObject {
     private:
-        Game *pGame;
+        bool canPlay{};
+        std::vector<GameBomb *> bombs;
     public:
         GamePlayer(const std::string &modelPath,
                    const std::string &texturePath,
                    const std::string &animationPath,
-                   Game *game,
-                   unsigned int animationCount = 0,
-                   float scale = 1.0f);
+                   float scale = 1.0f,
+                   unsigned int animationCount = 1) : AnimatedGameObject(modelPath, texturePath, animationPath, animationCount, scale) {}
 
         GamePlayer(const std::string &modelPath,
                    const std::string &texturePath,
-                   Game *game,
-                   unsigned int animationCount = 0,
-                   float scale = 1.0f)
-                : GamePlayer(modelPath, texturePath, modelPath, game, animationCount, scale) {
+                   float scale = 1.0f,
+                   unsigned int animationCount = 1)
+                : GamePlayer(modelPath, texturePath, modelPath, scale, animationCount) {
         }
 
         void Update() override;
+
+        void SetPlay(bool play);
+
+        std::vector<GameBomb *>GetBombs();
+
     };
 }
 

@@ -18,6 +18,8 @@ namespace bomberman {
         rotation.z = 3.f;
         explode = std::chrono::system_clock::now() + std::chrono::seconds(5);
         end_life = std::chrono::system_clock::now() + std::chrono::seconds(6);
+        boom = LoadSound("../Assets/Bomb/boom.mp3");
+        SetSoundVolume(boom, 0.5f);
     }
 
     void GameBomb::Update() {
@@ -26,13 +28,25 @@ namespace bomberman {
         if (!exploded && now >= explode) {
             exploded = true;
             explode = std::chrono::system_clock::now() + std::chrono::seconds(10);
+            explosion = new AnimatedGameObject("../Assets/Level/explosion.iqm", 0);
+            explosion->SetPosition(position);
+            PlaySound(boom);
         }
-        if (now >= end_life) {
+        if (explosion && now >= end_life) {
             SetActive(false);
+            explosion->SetActive(false);
+        } else if (exploded && explosion) {
+            explosion->Update();
         }
     }
 
     bool GameBomb::GetExplode() const {
         return exploded;
+    }
+
+    void GameBomb::Draw() {
+        AnimatedGameObject::Draw();
+        if (exploded && explosion)
+            explosion->Draw();
     }
 }

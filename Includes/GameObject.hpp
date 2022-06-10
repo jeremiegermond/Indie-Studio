@@ -35,7 +35,7 @@ namespace bomberman {
 
         ~GameObject() override;
 
-        void Draw();
+        virtual void Draw();
 
         virtual void Update() {
         };
@@ -66,6 +66,7 @@ namespace bomberman {
     class AnimatedGameObject : public GameObject {
     private:
         Texture2D texture{};
+        bool hasTexture{};
         unsigned int animationNb;
         ModelAnimation *animations{};
         int animationSelected{};
@@ -76,7 +77,14 @@ namespace bomberman {
                            const std::string &texturePath,
                            const std::string &animationPath,
                            unsigned int animationCount,
-                           float scale = 1.0f);
+                           float scale = 1.0f,
+                           bool hasTexture = true);
+
+        AnimatedGameObject(const std::string &modelPath,
+                           unsigned int animationCount,
+                           float scale = 1.0f)
+                : AnimatedGameObject(modelPath, "", modelPath, animationCount, scale, false) {
+        }
 
         ~AnimatedGameObject() override;
 

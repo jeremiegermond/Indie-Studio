@@ -32,7 +32,6 @@ namespace bomberman {
         std::vector<GameText *> GameTexts;
         std::vector<GameScript *> GameScripts;
         std::vector<GameDrawMap *> GameDrawMaps;
-        std::vector<GameBomb *> GameBombs;
         std::vector<GameImage *> GameImages;
         std::vector<GameButton *> GameButtons;
 
@@ -75,8 +74,6 @@ namespace bomberman {
         std::vector<GameButton *> GetButtons();
 
         GameButton *GetButton(int i);
-
-        void PopBomb();
     };
 }
 
