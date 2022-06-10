@@ -104,6 +104,10 @@ namespace bomberman {
         for (auto bomb: GameBombs) {
             bomb->Update();
             bomb->Draw();
+            if (!bomb->GetActive())
+                PopBomb();
+            if (bomb->GetExplode())
+                continue;
         }
     }
 
@@ -187,5 +191,11 @@ namespace bomberman {
             GameCameras.erase(GameCameras.begin());
             camera->Reset();
         }
+    }
+
+    void Scene::PopBomb() {
+        if (GameBombs.empty())
+            return;
+        GameBombs.erase(GameBombs.begin());
     }
 }

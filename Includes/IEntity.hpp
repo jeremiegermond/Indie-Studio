@@ -11,6 +11,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <chrono>
 
 #include "raylib.h"
 
@@ -21,6 +22,8 @@
 #pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 #include "raymath.h"
 #pragma GCC diagnostic pop
+
+#include "Color.hpp"
 #include "rlgl.h"
 #include "Objects.hpp"
 

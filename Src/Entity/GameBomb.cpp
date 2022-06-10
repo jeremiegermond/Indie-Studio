@@ -4,6 +4,7 @@
 ** File description:
 ** TODO
 */
+
 #include "GameBomb.hpp"
 
 namespace bomberman {
@@ -14,10 +15,24 @@ namespace bomberman {
                        float scale)
             : AnimatedGameObject(modelPath, texturePath, animationPath, animationCount, scale) {
         position = MyVector3 {-.5f, 0.0f, -.5f};
-        rotation.z = 1.5;
+        rotation.z = 3.f;
+        explode = std::chrono::system_clock::now() + std::chrono::seconds(5);
+        end_life = std::chrono::system_clock::now() + std::chrono::seconds(6);
     }
 
     void GameBomb::Update() {
         NextFrame();
+        tPoint now = std::chrono::system_clock::now();
+        if (!exploded && now >= explode) {
+            exploded = true;
+            explode = std::chrono::system_clock::now() + std::chrono::seconds(10);
+        }
+        if (now >= end_life) {
+            SetActive(false);
+        }
+    }
+
+    bool GameBomb::GetExplode() const {
+        return exploded;
     }
 }

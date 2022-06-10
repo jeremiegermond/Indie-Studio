@@ -10,14 +10,29 @@
 #include "GameObject.hpp"
 
 namespace bomberman {
+    typedef  std::chrono::system_clock::time_point tPoint;
     class GameBomb : public AnimatedGameObject {
+    private:
+        tPoint explode;
+        tPoint end_life;
+        bool exploded{};
     public:
         GameBomb(const std::string &modelPath,
-                   const std::string &texturePath,
-                   const std::string &animationPath,
-                   unsigned int animationCount,
-                   float scale = 1.0f);
+                 const std::string &texturePath,
+                 const std::string &animationPath,
+                 unsigned int animationCount = 0,
+                 float scale = 1.0f);
+
+        GameBomb(const std::string &modelPath,
+                 const std::string &texturePath,
+                 unsigned int animationCount = 0,
+                 float scale = 1.0f)
+                : GameBomb(modelPath, texturePath, modelPath, animationCount, scale) {
+        }
+
         void Update() override;
+
+        bool GetExplode() const;
     };
 }
 #endif //BOMBERMAN_GAMEBOMB_HPP

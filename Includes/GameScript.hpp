@@ -9,7 +9,6 @@
 #define GAMESCRIPT_HPP_
 
 #include "IEntity.hpp"
-#include "Objects.hpp"
 
 namespace bomberman {
     class Game;

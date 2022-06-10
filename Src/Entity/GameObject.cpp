@@ -82,6 +82,10 @@ namespace bomberman {
         scale = newScale;
     }
 
+    bool GameObject::GetActive() const {
+        return active;
+    }
+
     AnimatedGameObject::AnimatedGameObject(const std::string &modelPath,
                                            const std::string &texturePath,
                                            const std::string &animationPath,

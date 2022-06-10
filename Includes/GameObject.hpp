@@ -7,10 +7,6 @@
 
 #pragma once
 
-#include <cmath>
-#include <vector>
-#include "Objects.hpp"
-#include "Color.hpp"
 #include "IEntity.hpp"
 
 namespace bomberman {
@@ -63,6 +59,8 @@ namespace bomberman {
         void SetRotation(MyVector3 newRotation);
 
         void SetScale(float newScale);
+
+        bool GetActive() const;
     };
 
     class AnimatedGameObject : public GameObject {

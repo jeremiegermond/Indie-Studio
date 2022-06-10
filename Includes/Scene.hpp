@@ -75,6 +75,8 @@ namespace bomberman {
         std::vector<GameButton *> GetButtons();
 
         GameButton *GetButton(int i);
+
+        void PopBomb();
     };
 }
 
