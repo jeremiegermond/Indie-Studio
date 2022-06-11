@@ -61,6 +61,8 @@ namespace bomberman {
         void SetScale(float newScale);
 
         bool GetActive() const;
+
+        MyVector3 GetPosition(bool rounded = false);
     };
 
     class AnimatedGameObject : public GameObject {

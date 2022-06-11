@@ -8,45 +8,73 @@
 #include "GameBomb.hpp"
 
 namespace bomberman {
-    GameBomb::GameBomb(const std::string &modelPath,
-                       const std::string &texturePath,
-                       const std::string &animationPath,
-                       unsigned int animationCount,
-                       float scale)
-            : AnimatedGameObject(modelPath, texturePath, animationPath, animationCount, scale) {
-        position = MyVector3 {-.5f, 0.0f, -.5f};
+    GameBomb::GameBomb(int fireUp)
+            : AnimatedGameObject("../Assets/Level/bomb.iqm",
+                                 "../Assets/Level/bomb.png",
+                                 "../Assets/Level/bomb.iqm",
+                                 0,
+                                 .8f), fireUp(fireUp) {
+        position = MyVector3{-.5f, 0.0f, -.5f};
         rotation.z = 3.f;
-        explode = std::chrono::system_clock::now() + std::chrono::seconds(5);
-        end_life = std::chrono::system_clock::now() + std::chrono::seconds(6);
+        previous = std::chrono::system_clock::now();
         boom = LoadSound("../Assets/Bomb/boom.mp3");
         SetSoundVolume(boom, 0.5f);
     }
 
     void GameBomb::Update() {
-        NextFrame();
-        tPoint now = std::chrono::system_clock::now();
-        if (!exploded && now >= explode) {
-            exploded = true;
-            explode = std::chrono::system_clock::now() + std::chrono::seconds(10);
-            explosion = new AnimatedGameObject("../Assets/Level/explosion.iqm", 0);
-            explosion->SetPosition(position);
-            PlaySound(boom);
+        now = std::chrono::system_clock::now();
+        if (GetActive()) {
+            elapsed += std::chrono::duration<double, std::milli>(now - previous).count();
+            NextFrame();
+            if (!exploded && elapsed >= 4000) {
+                exploded = 1;
+                explosion = new AnimatedGameObject("../Assets/Level/explosion.iqm", 0, .8f);
+                explosion->SetPosition(position);
+                PlaySound(boom);
+            }
+            if (explosion) {
+                if (elapsed >= 4650) {
+                    SetActive(false);
+                    explosion->SetActive(false);
+                } else {
+                    explosion->Update();
+                }
+            }
         }
-        if (explosion && now >= end_life) {
-            SetActive(false);
-            explosion->SetActive(false);
-        } else if (exploded && explosion) {
-            explosion->Update();
-        }
+        previous = now;
     }
 
-    bool GameBomb::GetExplode() const {
+    int GameBomb::GetExplode() {
+        if (exploded == 1) {
+            exploded = 2;
+            return 1;
+        }
         return exploded;
     }
 
     void GameBomb::Draw() {
-        AnimatedGameObject::Draw();
-        if (exploded && explosion)
+        if (!exploded)
+            AnimatedGameObject::Draw();
+        if (exploded && explosion) {
             explosion->Draw();
+            MyVector3 bombPos = explosion->GetPosition();
+            MyVector3 bombDisplay = bombPos;
+            for (int x = -fireUp; x <= fireUp; x++) {
+                bombDisplay.x = bombPos.x + float(x);
+                explosion->SetPosition(bombDisplay);
+                explosion->Draw();
+            }
+            bombDisplay.x = bombPos.x;
+            for (int z = -fireUp; z <= fireUp; z++) {
+                bombDisplay.z = bombPos.z + float(z);
+                explosion->SetPosition(bombDisplay);
+                explosion->Draw();
+            }
+            explosion->SetPosition(bombPos);
+        }
+    }
+
+    int GameBomb::GetFire() const {
+        return fireUp;
     }
 }

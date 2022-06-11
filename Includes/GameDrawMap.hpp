@@ -9,8 +9,6 @@
 #define GAMEDRAWMAP_HPP_
 
 #include "IEntity.hpp"
-#include "Color.hpp"
-#include "vector"
 
 namespace bomberman {
     class GameDrawMap : public IEntity {
@@ -18,11 +16,11 @@ namespace bomberman {
             bool active{};
             MyVector3 _cubePosition;
             MyColor _color;
-            Texture2D _textureBrick;
-            Texture2D _textureWood;
+            Texture2D _textureBrick{};
+            Texture2D _textureWood{};
             std::vector<std::vector<char>> _map;
-            Image _imageBrick;
-            Image _imageWood;
+            Image _imageBrick{};
+            Image _imageWood{};
         
         public:
             GameDrawMap(const std::string &texturePathBrick, const std::string &texturePathWood, MyColor color);
@@ -30,13 +28,9 @@ namespace bomberman {
             void Draw();
             void GenerateMap();
             char Populate(int enemyTotal);
-
-            void Update() {}
-            void Reset() {}
-            void SetActive(bool activate);
-            void Move(MyVector3 velocity) {
-                (void) velocity;
-            }
+            bool isIn(int posX, int posY);
+            char GetBlock(int posX, int posY);
+            void BreakBlock(int posX, int posY);
     };
 }
 

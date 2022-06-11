@@ -84,6 +84,7 @@ namespace bomberman {
                 level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1610 + 100 * x, 100 + 800 * y));
             }
         }
+        level->AddEntity(new GameScript(gameRef, 3));
         scenes.push_back(level);
     }
 

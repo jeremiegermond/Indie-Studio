@@ -91,6 +91,15 @@ namespace bomberman {
         return active;
     }
 
+    MyVector3 GameObject::GetPosition(bool rounded) {
+        MyVector3 currentPos = position;
+        if (rounded) {
+            currentPos.x = round(currentPos.x);
+            currentPos.z = round(currentPos.z);
+        }
+        return currentPos;
+    }
+
     AnimatedGameObject::AnimatedGameObject(const std::string &modelPath,
                                            const std::string &texturePath,
                                            const std::string &animationPath,

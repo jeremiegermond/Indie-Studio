@@ -14,28 +14,21 @@ namespace bomberman {
 
     class GameBomb : public AnimatedGameObject {
     private:
-        tPoint explode;
-        tPoint end_life;
-        bool exploded{};
+        tPoint now;
+        tPoint previous;
+        double elapsed{};
+        int exploded{};
+        int fireUp;
         AnimatedGameObject *explosion{};
-        Sound boom;
+        Sound boom{};
     public:
-        GameBomb(const std::string &modelPath,
-                 const std::string &texturePath,
-                 const std::string &animationPath,
-                 unsigned int animationCount = 0,
-                 float scale = 1.0f);
-
-        GameBomb(const std::string &modelPath,
-                 const std::string &texturePath,
-                 unsigned int animationCount = 0,
-                 float scale = 1.0f)
-                : GameBomb(modelPath, texturePath, modelPath, animationCount, scale) {
-        }
+        GameBomb(int fireUp);
 
         void Update() override;
 
-        bool GetExplode() const;
+        int GetExplode();
+
+        int GetFire() const;
 
         void Draw() override;
     };

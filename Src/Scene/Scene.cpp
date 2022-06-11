@@ -45,9 +45,9 @@ namespace bomberman {
             return;
         }
 
-        auto drawmap = dynamic_cast<GameDrawMap *>(entity);
-        if (drawmap) {
-            GameDrawMaps.push_back(drawmap);
+        auto gameMap = dynamic_cast<GameDrawMap *>(entity);
+        if (gameMap) {
+            GameMap = gameMap;
             return;
         }
 
@@ -94,9 +94,8 @@ namespace bomberman {
             player->Update();
             player->Draw();
         }
-        for (auto drawmap: GameDrawMaps) {
-            drawmap->Draw();
-        }
+        if (GameMap)
+            GameMap->Draw();
     }
 
     void Scene::Draw2DAssets() {
@@ -127,7 +126,9 @@ namespace bomberman {
     }
 
     GamePlayer *Scene::GetPlayer(int i) {
-        return  Players.at(i);
+        if (Players.size() <= size_t(i))
+            return nullptr;
+        return Players.at(i);
     }
 
     GamePlayer *Scene::PopPlayer(GamePlayer *push) {
@@ -179,5 +180,9 @@ namespace bomberman {
             GameCameras.erase(GameCameras.begin());
             camera->Reset();
         }
+    }
+
+    GameDrawMap *Scene::GetMap() {
+        return GameMap;
     }
 }

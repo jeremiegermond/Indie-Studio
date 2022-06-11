@@ -51,10 +51,6 @@ namespace bomberman {
         }
     }
 
-    void GameDrawMap::SetActive(bool activate) {
-        active = activate;
-    }
-
     void GameDrawMap::GenerateMap() {
         char type = '0';
         int enemyTotal = 4;
@@ -111,6 +107,34 @@ namespace bomberman {
             return (rand() % 10 <= 5 ? '4' : '0');
         }
         return '0';
+    }
+
+    char GameDrawMap::GetBlock(int posX,
+                               int posY) {
+        posX += 10;
+        posY += 10;
+        if (isIn(posX, posY))
+            return _map[posY][posX];
+        return '1';
+    }
+
+    void GameDrawMap::BreakBlock(int posX,
+                                 int posY) {
+        posX += 10;
+        posY += 10;
+        if (!isIn(posX, posY))
+            return;
+        printf("%c[%d][%d]\n", _map[posY][posX], posY, posX);
+        if (_map[posY][posX] != '0' && _map[posY][posX] != '1')
+            _map[posY][posX] = '0';
+    }
+
+    bool GameDrawMap::isIn(int posX, int posY) {
+        if (posY < 0 || posX < 0 || posY >= int(_map.size()))
+            return false;
+        if (posX >= int(_map[posY].size()))
+            return false;
+        return true;
     }
 }
 

@@ -9,20 +9,28 @@
 #define BOMBERMAN_GAMEPLAYER_HPP
 
 #include "GameObject.hpp"
+#include "GameBomb.hpp"
 
 namespace bomberman {
-    class GameBomb;
 
     class GamePlayer : public AnimatedGameObject {
     private:
         bool canPlay{};
         std::vector<GameBomb *> bombs;
+        int fireUp;
+        int lives;
+        tPoint now;
+        tPoint previous;
+        double elapsed{};
     public:
         GamePlayer(const std::string &modelPath,
                    const std::string &texturePath,
                    const std::string &animationPath,
                    float scale = 1.0f,
-                   unsigned int animationCount = 1) : AnimatedGameObject(modelPath, texturePath, animationPath, animationCount, scale) {}
+                   unsigned int animationCount = 1)
+                : AnimatedGameObject(modelPath, texturePath, animationPath, animationCount, scale),
+                  fireUp(3), lives(3), previous(std::chrono::system_clock::now()) {
+        }
 
         GamePlayer(const std::string &modelPath,
                    const std::string &texturePath,
@@ -35,8 +43,9 @@ namespace bomberman {
 
         void SetPlay(bool play);
 
-        std::vector<GameBomb *>GetBombs();
+        std::vector<GameBomb *> GetBombs();
 
+        void RemoveLive();
     };
 }
 

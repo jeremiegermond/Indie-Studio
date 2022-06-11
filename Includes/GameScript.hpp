@@ -29,6 +29,7 @@ namespace bomberman {
             void Reset();
             void Update();
             void SetActive(bool activate);
+            void UpdateBomb();
     };
 }
 

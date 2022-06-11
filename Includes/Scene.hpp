@@ -31,7 +31,7 @@ namespace bomberman {
         std::vector<GameCamera *> GameCameras;
         std::vector<GameText *> GameTexts;
         std::vector<GameScript *> GameScripts;
-        std::vector<GameDrawMap *> GameDrawMaps;
+        GameDrawMap *GameMap{};
         std::vector<GameImage *> GameImages;
         std::vector<GameButton *> GameButtons;
 
@@ -74,6 +74,8 @@ namespace bomberman {
         std::vector<GameButton *> GetButtons();
 
         GameButton *GetButton(int i);
+
+        GameDrawMap *GetMap();
     };
 }
 

@@ -38,6 +38,9 @@ namespace bomberman {
             case 2:
                 PressToPlay();
                 break;
+            case 3:
+                UpdateBomb();
+                break;
             default:
                 break;
         }
@@ -100,6 +103,92 @@ namespace bomberman {
             }
             _game->ChangeScene(1);
             _game->GetScene()->Populate(players);
+        }
+    }
+
+    void GameScript::UpdateBomb() {
+        std::vector<GameBomb *> bombs;
+        std::vector<GamePlayer *> players;
+        std::vector<MyVector3> cases;
+        std::vector<MyVector3> playersPos;
+        for (int x = 0; x < 4; x++) {
+            auto player = _game->GetScene()->GetPlayer(x);
+            if (player == nullptr)
+                break;
+            players.push_back(player);
+            playersPos.push_back(player->GetPosition(true));
+            for (auto bomb: player->GetBombs())
+                bombs.push_back(bomb);
+        }
+        GameDrawMap *map = _game->GetScene()->GetMap();
+        for (auto bomb: bombs) {
+            if (!bomb->GetActive())
+                continue;
+            int exploded = bomb->GetExplode();
+            if (exploded == 0)
+                continue;
+            MyVector3 pos = bomb->GetPosition(true);
+            MyVector3 tmpP = pos;
+            int fire = bomb->GetFire();
+            cases.push_back(pos);
+            int x = int(pos.x);
+            bool posX = false;
+            bool negX = false;
+            bool posZ = false;
+            bool negZ = false;
+            int z = int(pos.z);
+            for (int i = 1; i < fire; i++) {
+                if (!posX) {
+                    tmpP.x = pos.x + float(i);
+                    if (map->GetBlock(x + i, z) != '0') {
+                        if (exploded == 1)
+                            map->BreakBlock(x + i, z);
+                        posX = true;
+                    }
+                    cases.push_back(tmpP);
+                }
+                if (!negX) {
+                    tmpP.x = pos.x - float(i);
+                    if (map->GetBlock(x - i, z) != '0') {
+                        if (exploded == 1)
+                            map->BreakBlock(x - i, z);
+                        negX = true;
+                    }
+                    cases.push_back(tmpP);
+                }
+                tmpP.x = pos.x;
+                if (!posZ) {
+                    tmpP.z = pos.z + float(i);
+                    if (map->GetBlock(x, z + i) != '0') {
+                        if (exploded == 1)
+                            map->BreakBlock(x, z + i);
+                        posZ = true;
+                    }
+                    cases.push_back(tmpP);
+                }
+                if (!negZ) {
+                    tmpP.z = pos.z - float(i);
+                    if (map->GetBlock(x, z - i) != '0') {
+                        if (exploded == 1)
+                            map->BreakBlock(x, z - i);
+                        negZ = true;
+                    }
+                    cases.push_back(tmpP);
+                }
+            }
+            for (auto collide: cases) {
+                for (int i = 0; i < 4; i++) {
+                    if (players[i] == nullptr)
+                        break;
+
+                    // printf("c: %f %f\n", collide.x, collide.z);
+                    // printf("p: %f %f\n", playersPos[i].x, playersPos[i].z);
+                    if (Vector3Distance(playersPos[i], collide) < .5f) {
+                        // printf("%f\n", Vector3Distance(playersPos[i], collide));
+                        players[i]->RemoveLive();
+                    }
+                }
+            }
         }
     }
 }

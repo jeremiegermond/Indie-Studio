@@ -9,17 +9,18 @@
 
 namespace bomberman {
     void GamePlayer::Update() {
+        now = std::chrono::system_clock::now();
         AnimatedGameObject::Update();
         if (!canPlay) {
             SetAnimation(1);
             return;
         }
-
+        elapsed += std::chrono::duration<double, std::milli>(now - previous).count();
         if (IsKeyDown(KEY_P))
             printf("Ppos: %f %f %f\n", position.x, position.y, position.z);
         if (IsKeyPressed(KEY_SPACE)) {
-            auto *bomb = new GameBomb("../Assets/Level/bomb.iqm", "../Assets/Level/bomb.png");
-            bomb->SetPosition(position);
+            auto *bomb = new GameBomb(fireUp);
+            bomb->SetPosition(GetPosition(true));
             bomb->SetScale(3.5f);
             bombs.push_back(bomb);
         }
@@ -50,6 +51,7 @@ namespace bomberman {
                 size--;
             }
         }
+        previous = now;
     }
 
     void GamePlayer::SetPlay(bool play) {
@@ -58,5 +60,13 @@ namespace bomberman {
 
     std::vector<GameBomb *> GamePlayer::GetBombs() {
         return bombs;
+    }
+
+    void GamePlayer::RemoveLive() {
+        if (elapsed < 800)
+            return;
+        elapsed = .0f;
+        lives--;
+        std::cout << lives << std::endl;
     }
 }
