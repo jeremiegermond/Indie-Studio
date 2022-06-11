@@ -26,6 +26,7 @@
 #include "Color.hpp"
 #include "rlgl.h"
 #include "Objects.hpp"
+#include "Keyboard.hpp"
 
 namespace bomberman {
     class IEntity {

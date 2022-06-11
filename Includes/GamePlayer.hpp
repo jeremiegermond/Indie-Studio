@@ -17,6 +17,7 @@ namespace bomberman {
     private:
         bool canPlay{};
         std::vector<GameBomb *> bombs;
+        Keyboard *keys{};
     public:
         GamePlayer(const std::string &modelPath,
                    const std::string &texturePath,
@@ -34,6 +35,10 @@ namespace bomberman {
         void Update() override;
 
         void SetPlay(bool play);
+    
+        void SetKeys(KeysLayout playerNB);
+    
+        void SetKeys(int playerNB);
 
         std::vector<GameBomb *>GetBombs();
 
