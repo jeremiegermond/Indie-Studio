@@ -33,9 +33,11 @@ namespace bomberman {
                     state = !state;
                 } else {
                     tint = GRAY;
+                    SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
                 }
             } else {
                 tint = WHITE;
+                SetMouseCursor(MOUSE_CURSOR_DEFAULT);
             }
         }
     }

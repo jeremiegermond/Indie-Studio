@@ -99,6 +99,7 @@ namespace bomberman {
                 player->SetScale(.4f);
                 player->SetPosition(positions[4+x]);
                 player->SetPlay(true);
+                player->SetKeys(x);
                 players.push_back(player);
             }
             _game->ChangeScene(1);

@@ -18,22 +18,22 @@ namespace bomberman {
         elapsed += std::chrono::duration<double, std::milli>(now - previous).count();
         if (IsKeyDown(KEY_P))
             printf("Ppos: %f %f %f\n", position.x, position.y, position.z);
-        if (IsKeyPressed(KEY_SPACE)) {
+        if (IsKeyPressed(keys->bomb())) {
             auto *bomb = new GameBomb(fireUp);
             bomb->SetPosition(GetPosition(true));
             bomb->SetScale(3.5f);
             bombs.push_back(bomb);
         }
-        if (IsKeyDown(KEY_A)) {
+        if (IsKeyDown(keys->left())) {
             Move(MyVector3{1.0f, 0.0f, 0.0f});
             rotation.z = -1.5;
-        } else if (IsKeyDown(KEY_D)) {
+        } else if (IsKeyDown(keys->right())) {
             Move(MyVector3{-1.0f, 0.0f, 0.0f});
             rotation.z = 1.5;
-        } else if (IsKeyDown(KEY_W)) {
+        } else if (IsKeyDown(keys->up())) {
             Move(MyVector3{0.0f, 0.0f, 1.0f});
             rotation.z = 0;
-        } else if (IsKeyDown(KEY_S)) {
+        } else if (IsKeyDown(keys->down())) {
             Move(MyVector3{0.0f, 0.0f, -1.0f});
             rotation.z = 3;
         } else {
@@ -56,6 +56,14 @@ namespace bomberman {
 
     void GamePlayer::SetPlay(bool play) {
         canPlay = play;
+    }
+
+    void GamePlayer::SetKeys(KeysLayout playerNB) {
+        keys = new Keyboard(playerNB);
+    }
+
+    void GamePlayer::SetKeys(int playerNB) {
+        keys = new Keyboard(playerNB);
     }
 
     std::vector<GameBomb *> GamePlayer::GetBombs() {

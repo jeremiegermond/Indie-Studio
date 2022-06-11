@@ -19,6 +19,7 @@ namespace bomberman {
             Game *_game;
             std::vector<MyVector3> positions;
             std::vector<MyVector3> rotations;
+            std::vector<KeyboardKey[4]> keys;
 
         public:
             GameScript(Game *game, int script);
