@@ -25,6 +25,8 @@ namespace bomberman {
         SetConfigFlags(FLAG_MSAA_4X_HINT);
         InitAudioDevice();
         SetTargetFPS(60);
+        GameText text("../Assets/Font/Beauty_Forest.free.ttf", "Loading...", 875, 80, 125, WHITE);
+        text.Draw();
         scenes = SceneManager(this);
     }
 
