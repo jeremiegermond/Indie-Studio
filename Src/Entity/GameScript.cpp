@@ -18,10 +18,10 @@ namespace bomberman {
         positions.emplace_back(-.44f, 0.0f, -.54f);
         positions.emplace_back(-.65f, 0.0f, -.1f);
         positions.emplace_back(-.88f, 0.0f, -.06f);
-        positions.emplace_back(8.0f, 0.0f, -8.0f);
-        positions.emplace_back(-8.0f, 0.0f, -8.0f);
-        positions.emplace_back(-8.0f, 0.0f, 8.0f);
         positions.emplace_back(8.0f, 0.0f, 8.0f);
+        positions.emplace_back(8.0f, 0.0f, -8.0f);
+        positions.emplace_back(-8.0f, 0.0f, 8.0f);
+        positions.emplace_back(-8.0f, 0.0f, -8.0f);
         rotations.emplace_back(.0f, .0f, 1.5f);
         rotations.emplace_back(.0f, .0f, 1.5f);
         rotations.emplace_back(.0f, .0f, 3.0f);
@@ -97,12 +97,10 @@ namespace bomberman {
                             player->SetKeys(x);
                         players.push_back(player);
                     }
+                    _game->ChangeScene(1);
+                    _game->GetScene()->Populate(players);
                     if (i) {
-                        printf("load\n");
-                    }
-                    else {
-                        _game->ChangeScene(1);
-                        _game->GetScene()->Populate(players);
+                        _game->GetScene()->GetMap()->LoadMap();
                     }
                 }
                 button->SetActive(true);
@@ -154,6 +152,8 @@ namespace bomberman {
             if (player == nullptr)
                 break;
             players.push_back(player);
+            if (player->GetActive() == false)
+                _game->GetScene()->GetImage(x)->SetColor(GRAY);
             playersPos.push_back(player->GetPosition(true));
             map->GetBlock(int (playersPos.back().x), int(playersPos.back().z));
             for (auto bomb: player->GetBombs())

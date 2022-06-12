@@ -72,8 +72,8 @@ namespace bomberman {
         menu->AddEntity(new GameButton(250, 875, "../Assets/Buttons/p1.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
         menu->GetButtons().back()->SetState(true);
         menu->AddEntity(new GameButton(600, 875, "../Assets/Buttons/p2.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
-        menu->AddEntity(new GameButton(550, 400, "../Assets/Buttons/newgame.png", BUTTON_LOAD));
-        menu->AddEntity(new GameButton(550, 650, "../Assets/Buttons/load.png", BUTTON_LOAD));
+        menu->AddEntity(new GameButton(550, 300, "../Assets/Buttons/newgame.png", BUTTON_LOAD));
+        menu->AddEntity(new GameButton(550, 550, "../Assets/Buttons/load.png", BUTTON_LOAD));
         menu->AddEntity(new GameButton(1200, 875, "../Assets/Buttons/p2.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
         menu->AddEntity(new GameButton(1500, 875, "../Assets/Buttons/p2.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
         
@@ -96,7 +96,7 @@ namespace bomberman {
         level->AddEntity(forest);
         level->AddEntity(new GameSound("../Assets/Songs/CoffeeSong.mp3", true));
         level->AddEntity(new GameDrawMap("../Assets/Texture/brick.png", "../Assets/Texture/wood.png", WHITE));
-        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Level 1", 875, 30, 125, WHITE));
+        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Forest Bomberman", 710, 30, 125, WHITE));
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 1", 60, 150, 80, WHITE));
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 2", 60, 770, 80, WHITE));
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 3", 1690, 150, 80, WHITE));
@@ -105,6 +105,7 @@ namespace bomberman {
         level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 75, 840));
         level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1710, 220));
         level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1710, 840));
+        level->AddEntity(new GameButton(50, 50, "../Assets/Buttons/return.png"));
         level->AddEntity(new GameScript(gameRef, 4));
         scenes.push_back(level);
     }

@@ -24,4 +24,8 @@ namespace bomberman {
     void GameImage::SetActive(bool activate) {
         active = activate;
     }
+
+    void GameImage::SetColor(MyColor color) {
+        _color = color;
+    }
 }

@@ -32,6 +32,7 @@ namespace bomberman {
             char GetBlock(int posX, int posY);
             void BreakBlock(int posX, int posY);
             void Save();
+            void LoadMap();
     };
 }
 

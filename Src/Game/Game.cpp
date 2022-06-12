@@ -89,10 +89,12 @@ namespace bomberman {
             }
             EndDrawing();
         }
+        scenes.GetScene(1)->GetMap()->Save();
     }
 
     void Game::ChangeScene(int i) {
         GetScene()->UnloadScene();
+        SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         currentScene = i;
         GetScene()->StartScene();
     }
