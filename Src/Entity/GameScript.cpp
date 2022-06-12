@@ -93,7 +93,7 @@ namespace bomberman {
                         player->SetScale(.4f);
                         player->SetPosition(positions[4+x]);
                         player->SetPlay(true);
-                        if (!player->is_cpu())
+                        if (!player->isCpu())
                             player->SetKeys(x);
                         players.push_back(player);
                     }
@@ -148,16 +148,17 @@ namespace bomberman {
         std::vector<GamePlayer *> players;
         std::vector<MyVector3> cases;
         std::vector<MyVector3> playersPos;
+        GameDrawMap *map = _game->GetScene()->GetMap();
         for (int x = 0; x < 4; x++) {
             auto player = _game->GetScene()->GetPlayer(x);
             if (player == nullptr)
                 break;
             players.push_back(player);
             playersPos.push_back(player->GetPosition(true));
+            map->GetBlock(int (playersPos.back().x), int(playersPos.back().z));
             for (auto bomb: player->GetBombs())
                 bombs.push_back(bomb);
         }
-        GameDrawMap *map = _game->GetScene()->GetMap();
         for (auto bomb: bombs) {
             if (!bomb->GetActive())
                 continue;

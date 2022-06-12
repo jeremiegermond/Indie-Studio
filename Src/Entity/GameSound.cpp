@@ -12,6 +12,7 @@ namespace bomberman {
     GameSound::GameSound(const std::string &soundPath, bool looping)
             : active(true), startActive(true), looping(looping) {
         sound = LoadSound(soundPath.c_str());
+        SetSoundVolume(sound, .2f);
     }
 
     GameSound::~GameSound() {

@@ -11,6 +11,7 @@
 #include "GameObject.hpp"
 #include "GameBomb.hpp"
 #include "GameDrawMap.hpp"
+#include "GameSound.hpp"
 
 namespace bomberman {
 
@@ -19,6 +20,7 @@ namespace bomberman {
         bool canPlay{};
         std::vector<GameBomb *> bombs;
         GameDrawMap *map{};
+        Sound step{};
         int fireUp;
         int lives;
         int maxBombsStat;
@@ -34,7 +36,11 @@ namespace bomberman {
                    float scale = 1.0f,
                    unsigned int animationCount = 1)
                 : AnimatedGameObject(modelPath, texturePath, animationPath, animationCount, scale),
-                  fireUp(3), lives(1), maxBombsStat(1), previous(std::chrono::system_clock::now()) {
+                  step(LoadSound("../Assets/Bomb/step.mp3")),
+                  fireUp(3),
+                  lives(1),
+                  maxBombsStat(1),
+                  previous(std::chrono::system_clock::now()) {
         }
 
         GamePlayer(const std::string &modelPath,
@@ -58,11 +64,13 @@ namespace bomberman {
 
         void SetMap(GameDrawMap *newMap);
 
-        bool is_cpu();
+        bool isCpu();
 
         void switchPlayer();
 
         void setCpu(bool nv);
+
+        void Move(MyVector3 velocity);
     };
 }
 

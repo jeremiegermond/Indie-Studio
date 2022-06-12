@@ -37,11 +37,20 @@ namespace bomberman {
                 else if (x == '2') {
                     DrawCubeTexture(_textureWood, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 }
-                else if (x == '3') {    // DEBUG
-                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, BLUE);
-                }
                 else if (x == '4') {    // DEBUG
                     DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, RED);
+                }
+                else if (x == '5') {    // DEBUG
+                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, BLUE);
+                }
+                else if (x == '6') {    // DEBUG
+                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, YELLOW);
+                }
+                else if (x == '7') {    // DEBUG
+                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, PURPLE);
+                }
+                else if (x == '8') {    // DEBUG
+                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, ORANGE);
                 }
                 else if (x != '0') {    //
                     DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, GREEN);
@@ -91,23 +100,17 @@ namespace bomberman {
     char GameDrawMap::Populate(int enemyTotal) {
         int random = static_cast<int>(rand() % 100);
 
-        if (random >= 50)
-            return ('2');
-        if (random > 0 && random <= 5) {
-            if (random % 100 < 25)
+        if (random % 5 == 0) {
+            if (random <= 25)
                 return '5';
-            else if (random % 100 < 50)
+            else if (random <= 50)
                 return '6';
-            else if (random % 100 < 75)
+            else if (random <= 75)
                 return '7';
             else
                 return '8';
         }
-        if (random > 5 && random <= 10 && enemyTotal > 0) {
-            enemyTotal -= 1;
-            return (rand() % 10 <= 5 ? '4' : '0');
-        }
-        return '0';
+        return random % 2 == 0 ? '0' : '2';
     }
 
     char GameDrawMap::GetBlock(int posX,
@@ -126,8 +129,9 @@ namespace bomberman {
         if (!isIn(posX, posY))
             return;
         printf("%c[%d][%d]\n", _map[posY][posX], posY, posX);
-        if (_map[posY][posX] != '0' && _map[posY][posX] != '1')
+        if (_map[posY][posX] != '0' && _map[posY][posX] != '1') {
             _map[posY][posX] = '0';
+        }
     }
 
     bool GameDrawMap::isIn(int posX, int posY) {

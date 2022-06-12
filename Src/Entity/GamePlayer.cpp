@@ -85,7 +85,7 @@ namespace bomberman {
         std::cout << lives << std::endl;
     }
 
-    bool GamePlayer::is_cpu() {
+    bool GamePlayer::isCpu() {
         return cpu;
     }
 
@@ -99,5 +99,11 @@ namespace bomberman {
 
     void GamePlayer::SetMap(GameDrawMap *newMap) {
         map = newMap;
+    }
+
+    void GamePlayer::Move(MyVector3 velocity) {
+        AnimatedGameObject::Move(velocity);
+        if (!IsSoundPlaying(step))
+            PlaySound(step);
     }
 }
