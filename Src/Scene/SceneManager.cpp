@@ -23,6 +23,7 @@ namespace bomberman {
         display_loading(99);
         CreateHowToPlayScene();
         display_loading(100);
+        scenes.front()->StartScene();
     }
 
     void SceneManager::CreateMenuScene() {
@@ -90,11 +91,9 @@ namespace bomberman {
         menu->AddEntity(new GameButton(550, 550, "../Assets/Buttons/load.png", BUTTON_LOAD));
         menu->AddEntity(new GameButton(1200, 875, "../Assets/Buttons/p3.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
         menu->AddEntity(new GameButton(1500, 875, "../Assets/Buttons/p4.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
-        
         display_loading(60);
         menu->GetText(2)->SetActive(false);
         menu->AddEntity(new GameScript(gameRef, 1));
-        menu->StartScene();
         scenes.push_back(menu);
     }
 

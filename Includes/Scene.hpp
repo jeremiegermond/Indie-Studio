@@ -46,7 +46,7 @@ namespace bomberman {
 
         void StartScene();
 
-        void DrawScene(Model skybox);
+        void DrawScene();
 
         void Draw3DAssets();
 

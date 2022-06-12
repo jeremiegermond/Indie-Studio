@@ -69,7 +69,7 @@ namespace bomberman {
             sound->Play();
     }
 
-    void Scene::DrawScene(Model skybox) {
+    void Scene::DrawScene() {
         for (auto music: GameSounds)
             music->Update();
         for (auto script: GameScripts) {
@@ -82,10 +82,6 @@ namespace bomberman {
     }
 
     void Scene::Draw3DAssets() {
-        // rlDisableDepthMask();
-        // DrawModel(skybox, (Vector3){0, 0, 0}, 1.0f, WHITE);
-        // rlEnableDepthMask();
-        // DrawGrid(15, 1.0);
         for (auto object: GameObjects) {
             object->Update();
             object->Draw();

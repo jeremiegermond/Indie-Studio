@@ -33,27 +33,10 @@ namespace bomberman {
         RenderTexture2D target = LoadRenderTexture(width, height);
         auto rTarget = Rectangle{0, 0, float(width), float(-height)};
 
-        Mesh cube = GenMeshCube(1.0f, 1.0f, 1.0f);
-        Model skybox = LoadModelFromMesh(cube);
-
-
-        skybox.materials[0].shader = LoadShader("../Assets/Shaders/skybox.vs", "../Assets/Shaders/skybox.fs");
-
-        int t[1] = {MATERIAL_MAP_CUBEMAP};
-        int x[1] =  { 0 };
-        int y[1] = { 0 };
-
-        SetShaderValue(skybox.materials[0].shader, GetShaderLocation(skybox.materials[0].shader, "environmentMap"), t, SHADER_UNIFORM_INT);
-        SetShaderValue(skybox.materials[0].shader, GetShaderLocation(skybox.materials[0].shader, "doGamma"), x, SHADER_UNIFORM_INT);
-        SetShaderValue(skybox.materials[0].shader, GetShaderLocation(skybox.materials[0].shader, "vflipped"), y, SHADER_UNIFORM_INT);
-
-        Image img = LoadImage("../Assets/Level/skybox.png");
-        skybox.materials[0].maps[MATERIAL_MAP_CUBEMAP].texture = LoadTextureCubemap(img, CUBEMAP_LAYOUT_AUTO_DETECT);
-        UnloadImage(img);
         while (!WindowShouldClose()) {
             BeginTextureMode(target);
             ClearBackground(BLACK);
-            GetScene()->DrawScene(skybox);
+            GetScene()->DrawScene();
             scenes.GetScene(2)->Draw2DAssets();
             if (scenes.GetScene(2)->GetButton(0)->GetState()) {
                 scenes.GetScene(3)->Draw2DAssets();
@@ -68,9 +51,6 @@ namespace bomberman {
                     scenes.GetScene(0)->GetButton(0)->SetState(false);
                     scenes.GetScene(4)->GetButton(0)->SetState(false);
                 }
-            }
-            if (IsKeyPressed(KEY_P)) {
-                printf("x:%f y:%f\n", GetMousePosition().x, GetMousePosition().y);
             }
             EndTextureMode();
             BeginDrawing();
