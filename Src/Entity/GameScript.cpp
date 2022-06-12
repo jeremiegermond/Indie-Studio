@@ -39,6 +39,9 @@ namespace bomberman {
                 PressToPlay();
                 break;
             case 3:
+                SelectLoad();
+                break;
+            case 4:
                 UpdateBomb();
                 break;
             default:
@@ -78,6 +81,36 @@ namespace bomberman {
         }
     }
 
+    void GameScript::SelectLoad() {
+        auto buttons = _game->GetScene()->GetButtons();
+        int i = 0;
+        for (auto button: buttons) {
+            if (button->GetType() == BUTTON_LOAD) {
+                if (button->GetState()) {
+                    std::vector<GamePlayer *> players;
+                    for (int x = 0; x < 4; x++) {
+                        auto player = _game->GetScene()->GetPlayer(x);
+                        player->SetScale(.4f);
+                        player->SetPosition(positions[4+x]);
+                        player->SetPlay(true);
+                        if (!player->is_cpu())
+                            player->SetKeys(x);
+                        players.push_back(player);
+                    }
+                    if (i) {
+                        printf("load\n");
+                    }
+                    else {
+                        _game->ChangeScene(1);
+                        _game->GetScene()->Populate(players);
+                    }
+                }
+                button->SetActive(true);
+                i++;
+            }
+        }
+    }
+
     void GameScript::PressToPlay() {
         auto buttons = _game->GetScene()->GetButtons();
         int i = 0;
@@ -93,25 +126,20 @@ namespace bomberman {
             }
         }
         if (IsKeyPressed(KEY_ENTER)) {
-            std::vector<GamePlayer *> players;
+            currentScript = 3;
             int cpuselect = 0;
-            for (auto button: buttons)
+            _game->GetScene()->GetText(2)->SetActive(false);
+            for (auto button: buttons) {
                 if (button->GetType() == BUTTON_AI) {
                     if (button->GetState())
                         _game->GetScene()->GetPlayer(cpuselect)->setCpu(false);
                     cpuselect++;
+                    button->SetActive(false);
                 }
-            for (int x = 0; x < 4; x++) {
-                auto player = _game->GetScene()->GetPlayer(x);
-                player->SetScale(.4f);
-                player->SetPosition(positions[4+x]);
-                player->SetPlay(true);
-                if (!player->is_cpu())
-                    player->SetKeys(x);
-                players.push_back(player);
+                if (button->GetType() == BUTTON_SELECT) {
+                    button->SetActive(false);
+                }
             }
-            _game->ChangeScene(1);
-            _game->GetScene()->Populate(players);
         }
     }
 

@@ -26,6 +26,7 @@ namespace bomberman {
             ~GameScript() override = default;
             void PressToZoom();
             void PressToPlay();
+            void SelectLoad();
 
             void Reset();
             void Update();

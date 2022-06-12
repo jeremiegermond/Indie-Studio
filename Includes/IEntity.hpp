@@ -13,6 +13,7 @@
 #include <vector>
 #include <chrono>
 #include <random>
+#include <fstream>
 
 #include "raylib.h"
 

@@ -19,6 +19,7 @@ namespace bomberman {
         _textureWood = LoadTextureFromImage(_imageWood);
         _color = color;
         GenerateMap();
+        Save();
     }
 
     GameDrawMap::~GameDrawMap() {
@@ -135,6 +136,21 @@ namespace bomberman {
         if (posX >= int(_map[posY].size()))
             return false;
         return true;
+    }
+
+    void GameDrawMap::Save() {
+        std::ofstream file;
+
+        file.open("map.txt");
+        if (!file.is_open())
+            return;
+        for (auto y: _map) {
+            for (auto x: y) {
+                file << x;
+            }
+            file << '\n';
+        }
+        file.close();
     }
 }
 
