@@ -27,7 +27,6 @@ namespace bomberman {
             float posX = pos.x;
             float posZ = pos.z;
             float speed = 2.f;
-            // std::cout  << "x: " << posX << "\ty: " << posZ <<  std::endl;
             if (IsKeyDown(keys->left())) {
                 if (map->GetBlock(int(round(posX + .6)), int(round(posZ))) == '0')
                     Move(MyVector3{speed, 0.0f, 0.0f});
