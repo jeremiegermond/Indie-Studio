@@ -18,7 +18,7 @@ namespace bomberman {
         elapsed += std::chrono::duration<double, std::milli>(now - previous).count();
         if (IsKeyDown(KEY_P))
             printf("Ppos: %f %f %f\n", position.x, position.y, position.z);
-        if (IsKeyPressed(keys->bomb())) {
+        if (IsKeyPressed(keys->bomb()) && maxBombs - bombs.size() > 0) {
             auto *bomb = new GameBomb(fireUp);
             bomb->SetPosition(GetPosition(true));
             bomb->SetScale(3.5f);
