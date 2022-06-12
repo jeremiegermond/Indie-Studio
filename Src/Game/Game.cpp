@@ -100,4 +100,8 @@ namespace bomberman {
     Scene *Game::GetScene() {
         return scenes.GetScene(currentScene);
     }
+
+    SceneManager Game::GetSceneManager() {
+        return scenes;
+    }
 }
