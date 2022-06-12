@@ -62,9 +62,9 @@ namespace bomberman {
             scenes.GetScene(2)->Draw2DAssets();
             if (scenes.GetScene(2)->GetButton(0)->GetState()) {
                 scenes.GetScene(3)->Draw2DAssets();
-                if (scenes.GetScene(3)->GetButton(1)->GetState()) {
+                if (scenes.GetScene(3)->GetButton(0)->GetState()) {
                     scenes.GetScene(2)->GetButton(0)->SetState(false);
-                    scenes.GetScene(3)->GetButton(1)->SetState(false);
+                    scenes.GetScene(3)->GetButton(0)->SetState(false);
                 }
             }
             if (scenes.GetScene(0)->GetButton(0)->GetState()) {
@@ -100,5 +100,9 @@ namespace bomberman {
 
     Scene *Game::GetScene() {
         return scenes.GetScene(currentScene);
+    }
+
+    SceneManager Game::GetSceneManager() {
+        return scenes;
     }
 }
