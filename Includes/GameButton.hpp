@@ -18,6 +18,7 @@ namespace bomberman {
     private:
         bool active;
         bool state;
+        bool hover{};
         Texture onTexture{};
         Texture offTexture{};
         int posX;
@@ -52,6 +53,8 @@ namespace bomberman {
         bool GetState() const;
 
         int GetType() const;
+
+        bool GetHover() const;
     };
 }
 #endif //BOMBERMAN_GAMEBUTTON_HPP

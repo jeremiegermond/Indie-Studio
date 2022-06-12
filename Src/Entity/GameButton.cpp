@@ -33,11 +33,11 @@ namespace bomberman {
                     state = !state;
                 } else {
                     tint = GRAY;
-                    SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
                 }
+                hover = true;
             } else {
                 tint = WHITE;
-                SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+                hover = false;
             }
         }
     }
@@ -66,5 +66,9 @@ namespace bomberman {
 
     int GameButton::GetType() const {
         return type;
+    }
+
+    bool GameButton::GetHover() const {
+        return hover;
     }
 }

@@ -36,6 +36,7 @@ namespace bomberman {
         std::vector<GameButton *> GameButtons;
 
         bool CamSwitch{};
+        bool Hover{};
     public:
         Scene() = default;
 
@@ -76,6 +77,8 @@ namespace bomberman {
         GameButton *GetButton(int i);
 
         GameDrawMap *GetMap();
+
+        void SetCursor(bool hover);
     };
 }
 

@@ -106,10 +106,13 @@ namespace bomberman {
             text->Update();
             text->Draw();
         }
+        bool hover = false;
         for (auto button: GameButtons) {
             button->Update();
             button->Draw();
+            hover += button->GetHover();
         }
+        SetCursor(hover);
     }
 
     void Scene::UnloadScene() {
@@ -184,5 +187,15 @@ namespace bomberman {
 
     GameDrawMap *Scene::GetMap() {
         return GameMap;
+    }
+
+    void Scene::SetCursor(bool hover) {
+        if (Hover == hover)
+            return;
+        Hover = hover;
+        if (hover)
+            SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+        else
+            SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
 }
