@@ -25,7 +25,7 @@ namespace bomberman {
         SetConfigFlags(FLAG_MSAA_4X_HINT);
         InitAudioDevice();
         SetTargetFPS(60);
-        GameText text("../Assets/Font/Beauty_Forest.free.ttf", "Loading...", 875, 80, 125, WHITE);
+        GameText text("../Assets/Font/Beauty_Forest.free.ttf", "Loading...", 855, 400, 125, WHITE);
         BeginDrawing();
         ClearBackground(BLACK);
         text.Draw();
@@ -80,7 +80,7 @@ namespace bomberman {
             EndTextureMode();
             BeginDrawing();
             ClearBackground(BLACK);
-            if (scenes.GetScene(3)->GetButton(0)->GetState()) {
+            if (scenes.GetScene(0)->GetButton(1)->GetState()) {
                 BeginShaderMode(shader);
                 DrawTextureRec(target.texture, rTarget, MyVector2{0, 0}, WHITE);
                 EndShaderMode();

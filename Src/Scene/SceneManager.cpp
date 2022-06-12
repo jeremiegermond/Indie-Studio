@@ -63,7 +63,8 @@ namespace bomberman {
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Forest Bomberman", 525, 100, 200, WHITE));
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Press Enter To Play", 625, 400, 125, WHITE, true));
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Select players", 645, 100, 200, WHITE));
-        menu->AddEntity(new GameButton(1750, 950, "../Assets/Buttons/howtoplay.png"));
+        menu->AddEntity(new GameButton(1750, 900, "../Assets/Buttons/howtoplay.png"));
+        menu->AddEntity(new GameButton(50, 50, "../Assets/Buttons/darkmode.png", "../Assets/Buttons/lightmode.png"));
         menu->AddEntity(new GameButton(450, 750, "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
         menu->AddEntity(new GameButton(800, 750, "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
         menu->AddEntity(new GameButton(1400, 750, "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
@@ -91,10 +92,14 @@ namespace bomberman {
         level->AddEntity(forest);
         level->AddEntity(new GameSound("../Assets/Songs/CoffeeSong.mp3", true));
         level->AddEntity(new GameDrawMap("../Assets/Texture/brick.png", "../Assets/Texture/wood.png", WHITE));
-        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Level 1", 875, 80, 125, WHITE));
+        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Level 1", 875, 30, 125, WHITE));
+        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 1", 60, 150, 80, WHITE));
+        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 2", 60, 770, 80, WHITE));
+        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 3", 1690, 150, 80, WHITE));
+        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 4", 1690, 770, 80, WHITE));
         for (int y = 0; y < 2; y++) {
-            level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 10, 100 + 800 * y));
-            level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1610, 100 + 800 * y));
+            level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 75, 220 + 620 * y));
+            level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1710, 220 + 620 * y));
         }
         level->AddEntity(new GameScript(gameRef, 3));
         scenes.push_back(level);
@@ -102,14 +107,13 @@ namespace bomberman {
 
     void SceneManager::CreateUiScene() {
         auto *ui = new Scene;
-        ui->AddEntity(new GameButton(1750, 10, "../Assets/Buttons/settings.png"));
+        ui->AddEntity(new GameButton(1750, 50, "../Assets/Buttons/settings.png"));
         scenes.push_back(ui);
     }
 
     void SceneManager::CreateSettingsScene() {
         auto *settings = new Scene;
         settings->AddEntity(new GameImage("../Assets/UI/text_box.png", 500, 200));
-        settings->AddEntity(new GameButton(850, 500, "../Assets/Buttons/darkmode.png", "../Assets/Buttons/lightmode.png"));
         settings->AddEntity(new GameButton(1220, 770, "../Assets/UI/close_button90.png"));
         scenes.push_back(settings);
     }
