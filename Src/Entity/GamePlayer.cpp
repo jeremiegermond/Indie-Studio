@@ -5,35 +5,35 @@
 ** TODO
 */
 #include "GamePlayer.hpp"
-#include "GameBomb.hpp"
 
 namespace bomberman {
     void GamePlayer::Update() {
         now = std::chrono::system_clock::now();
         AnimatedGameObject::Update();
-        if (!canPlay) {
+        if (!canPlay || map == nullptr) {
             SetAnimation(1);
             return;
         }
         elapsed += std::chrono::duration<double, std::milli>(now - previous).count();
-        if (IsKeyDown(KEY_P))
-            printf("Ppos: %f %f %f\n", position.x, position.y, position.z);
         if (IsKeyPressed(keys->bomb())) {
             auto *bomb = new GameBomb(fireUp);
             bomb->SetPosition(GetPosition(true));
             bomb->SetScale(3.5f);
             bombs.push_back(bomb);
         }
-        if (IsKeyDown(keys->left())) {
+        MyVector3 pos = GetPosition();
+        float posX = pos.x;
+        float posZ = pos.z;
+        if (IsKeyDown(keys->left()) && map->GetBlock(int(round(posX + .6)), int(round(posZ))) == '0') {
             Move(MyVector3{1.0f, 0.0f, 0.0f});
             rotation.z = -1.5;
-        } else if (IsKeyDown(keys->right())) {
+        } else if (IsKeyDown(keys->right()) && map->GetBlock(int(round(posX - .6)), int(round(posZ))) == '0') {
             Move(MyVector3{-1.0f, 0.0f, 0.0f});
             rotation.z = 1.5;
-        } else if (IsKeyDown(keys->up())) {
+        } else if (IsKeyDown(keys->up()) && map->GetBlock(int(round(posX)), int(round(posZ + .6))) == '0') {
             Move(MyVector3{0.0f, 0.0f, 1.0f});
             rotation.z = 0;
-        } else if (IsKeyDown(keys->down())) {
+        } else if (IsKeyDown(keys->down()) && map->GetBlock(int(round(posX)), int(round(posZ - .6))) == '0') {
             Move(MyVector3{0.0f, 0.0f, -1.0f});
             rotation.z = 3;
         } else {
@@ -76,5 +76,9 @@ namespace bomberman {
         elapsed = .0f;
         lives--;
         std::cout << lives << std::endl;
+    }
+
+    void GamePlayer::SetMap(GameDrawMap *newMap) {
+        map = newMap;
     }
 }

@@ -10,14 +10,15 @@
 
 #include "GameObject.hpp"
 #include "GameBomb.hpp"
+#include "GameDrawMap.hpp"
 
 namespace bomberman {
-    class GameBomb;
 
     class GamePlayer : public AnimatedGameObject {
     private:
         bool canPlay{};
         std::vector<GameBomb *> bombs;
+        GameDrawMap *map{};
         int fireUp;
         int lives;
         tPoint now;
@@ -52,6 +53,8 @@ namespace bomberman {
         std::vector<GameBomb *> GetBombs();
 
         void RemoveLive();
+
+        void SetMap(GameDrawMap *newMap);
     };
 }
 

@@ -64,7 +64,7 @@ namespace bomberman {
             _map[row].resize(width);
             for (int col = 1; col <= width; col++) {
                 if ((row == 2 || row == height - 3) && (col == 3 || col == width - 2))
-                    type = '3';
+                    type = '0';
                 else if ((row == 2 || row == height - 3) && (col == 4 || col == width - 3))
                     type = '0';
                 else if ((row == 3 || row == height - 4) && (col == 3 || col == width - 2))

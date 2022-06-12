@@ -138,7 +138,7 @@ namespace bomberman {
             bool posZ = false;
             bool negZ = false;
             int z = int(pos.z);
-            for (int i = 1; i < fire; i++) {
+            for (int i = 1; i <= fire; i++) {
                 if (!posX) {
                     tmpP.x = pos.x + float(i);
                     if (map->GetBlock(x + i, z) != '0') {
@@ -181,11 +181,7 @@ namespace bomberman {
                 for (int i = 0; i < 4; i++) {
                     if (players[i] == nullptr)
                         break;
-
-                    // printf("c: %f %f\n", collide.x, collide.z);
-                    // printf("p: %f %f\n", playersPos[i].x, playersPos[i].z);
                     if (Vector3Distance(playersPos[i], collide) < .5f) {
-                        // printf("%f\n", Vector3Distance(playersPos[i], collide));
                         players[i]->RemoveLive();
                     }
                 }

@@ -143,8 +143,10 @@ namespace bomberman {
     }
 
     void Scene::Populate(const std::vector<GamePlayer *>& newPlayers) {
-        for (auto player: newPlayers)
+        for (auto player: newPlayers) {
+            player->SetMap(GameMap);
             Players.push_back(player);
+        }
     }
 
     std::vector<GameButton *> Scene::GetButtons() {
