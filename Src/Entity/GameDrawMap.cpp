@@ -109,7 +109,7 @@ namespace bomberman {
             else
                 return '8';
         }
-        return random % 2 == 0 ? '0' : '2';
+        return random % 6 == 0 ? '0' : '2';
     }
 
     char GameDrawMap::GetBlock(int posX,

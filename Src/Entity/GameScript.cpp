@@ -154,8 +154,8 @@ namespace bomberman {
             players.push_back(player);
             if (player->GetActive() == false)
                 _game->GetScene()->GetImage(x)->SetColor(GRAY);
-            playersPos.push_back(player->GetPosition(true));
-            map->GetBlock(int (playersPos.back().x), int(playersPos.back().z));
+            playersPos.push_back(player->GetPosition());
+            map->GetBlock(int (round(playersPos.back().x)), int(round(playersPos.back().z)));
             for (auto bomb: player->GetBombs())
                 bombs.push_back(bomb);
         }
@@ -163,18 +163,18 @@ namespace bomberman {
             if (!bomb->GetActive())
                 continue;
             int exploded = bomb->GetExplode();
-            if (exploded == 0)
+            if (exploded != 1)
                 continue;
             MyVector3 pos = bomb->GetPosition(true);
             MyVector3 tmpP = pos;
             int fire = bomb->GetFire();
             cases.push_back(pos);
             int x = int(pos.x);
+            int z = int(pos.z);
             bool posX = false;
             bool negX = false;
             bool posZ = false;
             bool negZ = false;
-            int z = int(pos.z);
             for (int i = 1; i <= fire; i++) {
                 if (!posX) {
                     tmpP.x = pos.x + float(i);
@@ -194,9 +194,10 @@ namespace bomberman {
                     }
                     cases.push_back(tmpP);
                 }
-                tmpP.x = pos.x;
+                tmpP = pos;
                 if (!posZ) {
                     tmpP.z = pos.z + float(i);
+                    printf("posZ %f %f\n", tmpP.x, tmpP.z);
                     if (map->GetBlock(x, z + i) != '0') {
                         if (exploded == 1)
                             map->BreakBlock(x, z + i);
@@ -206,6 +207,7 @@ namespace bomberman {
                 }
                 if (!negZ) {
                     tmpP.z = pos.z - float(i);
+                    printf("negZ %f %f\n", tmpP.x, tmpP.z);
                     if (map->GetBlock(x, z - i) != '0') {
                         if (exploded == 1)
                             map->BreakBlock(x, z - i);
@@ -218,7 +220,7 @@ namespace bomberman {
                 for (int i = 0; i < 4; i++) {
                     if (players[i] == nullptr)
                         break;
-                    if (Vector3Distance(playersPos[i], collide) < .5f) {
+                    if (Vector3Distance(playersPos[i], collide) < .7f) {
                         players[i]->RemoveLive();
                     }
                 }
