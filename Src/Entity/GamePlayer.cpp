@@ -18,27 +18,30 @@ namespace bomberman {
         elapsed += std::chrono::duration<double, std::milli>(now - previous).count();
         if (IsKeyDown(KEY_P))
             printf("Ppos: %f %f %f\n", position.x, position.y, position.z);
-        if (IsKeyPressed(keys->bomb()) && maxBombsStat - bombs.size() > 0) {
-            auto *bomb = new GameBomb(fireUp);
-            bomb->SetPosition(GetPosition(true));
-            bomb->SetScale(3.5f);
-            bombs.push_back(bomb);
+        if (!cpu) {
+            if (IsKeyPressed(keys->bomb()) && maxBombsStat - bombs.size() > 0) {
+                auto *bomb = new GameBomb(fireUp);
+                bomb->SetPosition(GetPosition(true));
+                bomb->SetScale(3.5f);
+                bombs.push_back(bomb);
+            }
+            if (IsKeyDown(keys->left())) {
+                Move(MyVector3{1.0f, 0.0f, 0.0f});
+                rotation.z = -1.5;
+            } else if (IsKeyDown(keys->right())) {
+                Move(MyVector3{-1.0f, 0.0f, 0.0f});
+                rotation.z = 1.5;
+            } else if (IsKeyDown(keys->up())) {
+                Move(MyVector3{0.0f, 0.0f, 1.0f});
+                rotation.z = 0;
+            } else if (IsKeyDown(keys->down())) {
+                Move(MyVector3{0.0f, 0.0f, -1.0f});
+                rotation.z = 3;
+            } else {
+                SetAnimation(1);
+            }
         }
-        if (IsKeyDown(keys->left())) {
-            Move(MyVector3{1.0f, 0.0f, 0.0f});
-            rotation.z = -1.5;
-        } else if (IsKeyDown(keys->right())) {
-            Move(MyVector3{-1.0f, 0.0f, 0.0f});
-            rotation.z = 1.5;
-        } else if (IsKeyDown(keys->up())) {
-            Move(MyVector3{0.0f, 0.0f, 1.0f});
-            rotation.z = 0;
-        } else if (IsKeyDown(keys->down())) {
-            Move(MyVector3{0.0f, 0.0f, -1.0f});
-            rotation.z = 3;
-        } else {
-            SetAnimation(1);
-        }
+        else;//  set ai input
         for (auto bomb : bombs) {
             bomb->Update();
             bomb->Draw();
@@ -76,5 +79,17 @@ namespace bomberman {
         elapsed = .0f;
         lives--;
         std::cout << lives << std::endl;
+    }
+
+    bool GamePlayer::is_cpu() {
+        return cpu;
+    }
+
+    void GamePlayer::switchPlayer() {
+        cpu = !cpu;
+    }
+
+    void GamePlayer::setCpu(bool nv) {
+        cpu = nv;
     }
 }

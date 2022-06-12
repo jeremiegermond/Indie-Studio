@@ -70,7 +70,7 @@ namespace bomberman {
             _game->GetScene()->GetText(2)->SetActive(true);
             auto buttons = _game->GetScene()->GetButtons();
             for (auto button: buttons) {
-                if (button->GetType() == BUTTON_SELECT) {
+                if (button->GetType() == BUTTON_SELECT || button->GetType() == BUTTON_AI) {
                     button->SetActive(true);
                 }
             }
@@ -94,12 +94,20 @@ namespace bomberman {
         }
         if (IsKeyPressed(KEY_ENTER)) {
             std::vector<GamePlayer *> players;
+            int cpuselect = 0;
+            for (auto button: buttons)
+                if (button->GetType() == BUTTON_AI) {
+                    if (button->GetState())
+                        _game->GetScene()->GetPlayer(cpuselect)->setCpu(false);
+                    cpuselect++;
+                }
             for (int x = 0; x < 4; x++) {
                 auto player = _game->GetScene()->GetPlayer(x);
                 player->SetScale(.4f);
                 player->SetPosition(positions[4+x]);
                 player->SetPlay(true);
-                player->SetKeys(x);
+                if (!player->is_cpu())
+                    player->SetKeys(x);
                 players.push_back(player);
             }
             _game->ChangeScene(1);

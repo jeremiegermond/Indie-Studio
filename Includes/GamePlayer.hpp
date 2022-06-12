@@ -24,7 +24,8 @@ namespace bomberman {
         tPoint now;
         tPoint previous;
         double elapsed{};
-        Keyboard *keys{};
+        bool cpu = true;
+        Keyboard *keys = nullptr;
     public:
         GamePlayer(const std::string &modelPath,
                    const std::string &texturePath,
@@ -53,6 +54,12 @@ namespace bomberman {
         std::vector<GameBomb *> GetBombs();
 
         void RemoveLive();
+    
+        bool is_cpu();
+
+        void switchPlayer();
+
+        void setCpu(bool nv);
     };
 }
 
