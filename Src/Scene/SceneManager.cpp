@@ -93,8 +93,8 @@ namespace bomberman {
         level->AddEntity(new GameDrawMap("../Assets/Texture/brick.png", "../Assets/Texture/wood.png", WHITE));
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Level 1", 875, 80, 125, WHITE));
         for (int y = 0; y < 2; y++) {
-            level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 10 + 100 * x, 100 + 800 * y));
-            level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1610 + 100 * x, 100 + 800 * y));
+            level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 10, 100 + 800 * y));
+            level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1610, 100 + 800 * y));
         }
         level->AddEntity(new GameScript(gameRef, 3));
         scenes.push_back(level);
