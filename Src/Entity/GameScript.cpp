@@ -97,12 +97,10 @@ namespace bomberman {
                             player->SetKeys(x);
                         players.push_back(player);
                     }
+                    _game->ChangeScene(1);
+                    _game->GetScene()->Populate(players);
                     if (i) {
-                        printf("load\n");
-                    }
-                    else {
-                        _game->ChangeScene(1);
-                        _game->GetScene()->Populate(players);
+                        _game->GetScene()->GetMap()->LoadMap();
                     }
                 }
                 button->SetActive(true);

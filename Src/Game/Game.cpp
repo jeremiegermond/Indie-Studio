@@ -89,6 +89,7 @@ namespace bomberman {
             }
             EndDrawing();
         }
+        scenes.GetScene(1)->GetMap()->Save();
     }
 
     void Game::ChangeScene(int i) {

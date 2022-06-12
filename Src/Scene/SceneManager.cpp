@@ -72,8 +72,8 @@ namespace bomberman {
         menu->AddEntity(new GameButton(250, 875, "../Assets/Buttons/p1.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
         menu->GetButtons().back()->SetState(true);
         menu->AddEntity(new GameButton(600, 875, "../Assets/Buttons/p2.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
-        menu->AddEntity(new GameButton(550, 400, "../Assets/Buttons/newgame.png", BUTTON_LOAD));
-        menu->AddEntity(new GameButton(550, 650, "../Assets/Buttons/load.png", BUTTON_LOAD));
+        menu->AddEntity(new GameButton(550, 300, "../Assets/Buttons/newgame.png", BUTTON_LOAD));
+        menu->AddEntity(new GameButton(550, 550, "../Assets/Buttons/load.png", BUTTON_LOAD));
         menu->AddEntity(new GameButton(1200, 875, "../Assets/Buttons/p2.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
         menu->AddEntity(new GameButton(1500, 875, "../Assets/Buttons/p2.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
         
