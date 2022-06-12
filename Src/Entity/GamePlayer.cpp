@@ -26,22 +26,23 @@ namespace bomberman {
             MyVector3 pos = GetPosition();
             float posX = pos.x;
             float posZ = pos.z;
-            std::cout  << "x: " << posX << "\ty: " << posZ <<  std::endl;
+            float speed = 2.f;
+            // std::cout  << "x: " << posX << "\ty: " << posZ <<  std::endl;
             if (IsKeyDown(keys->left())) {
                 if (map->GetBlock(int(round(posX + .6)), int(round(posZ))) == '0')
-                    Move(MyVector3{7.5f, 0.0f, 0.0f});
+                    Move(MyVector3{speed, 0.0f, 0.0f});
                 rotation.z = -1.5;
             } else if (IsKeyDown(keys->right())) {
                 if (map->GetBlock(int(round(posX - .6)), int(round(posZ))) == '0')
-                    Move(MyVector3{-7.5f, 0.0f, 0.0f});
+                    Move(MyVector3{-speed, 0.0f, 0.0f});
                 rotation.z = 1.5;
             } else if (IsKeyDown(keys->up())) {
                 if (map->GetBlock(int(round(posX)), int(round(posZ + .6))) == '0')
-                    Move(MyVector3{0.0f, 0.0f, 7.5f});
+                    Move(MyVector3{0.0f, 0.0f, speed});
                 rotation.z = 0;
             } else if (IsKeyDown(keys->down())) {
                 if (map->GetBlock(int(round(posX)), int(round(posZ - .6))) == '0')
-                    Move(MyVector3{0.0f, 0.0f, -7.5f});
+                    Move(MyVector3{0.0f, 0.0f, -speed});
                 rotation.z = 3;
             } else {
                 SetAnimation(1);
