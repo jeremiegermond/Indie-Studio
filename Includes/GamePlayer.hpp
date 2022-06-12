@@ -20,7 +20,7 @@ namespace bomberman {
         std::vector<GameBomb *> bombs;
         int fireUp;
         int lives;
-        int maxBombs;
+        int maxBombsStat;
         tPoint now;
         tPoint previous;
         double elapsed{};
@@ -32,7 +32,7 @@ namespace bomberman {
                    float scale = 1.0f,
                    unsigned int animationCount = 1)
                 : AnimatedGameObject(modelPath, texturePath, animationPath, animationCount, scale),
-                  fireUp(3), lives(3), maxBombs(1), previous(std::chrono::system_clock::now()) {
+                  fireUp(3), lives(3), maxBombsStat(1), previous(std::chrono::system_clock::now()) {
         }
 
         GamePlayer(const std::string &modelPath,
