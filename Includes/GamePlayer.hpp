@@ -22,6 +22,7 @@ namespace bomberman {
         GameDrawMap *map{};
         Sound step{};
         Sound dead{};
+        Sound place{};
         int fireUp;
         int lives;
         int maxBombsStat;
@@ -39,6 +40,7 @@ namespace bomberman {
                 : AnimatedGameObject(modelPath, texturePath, animationPath, animationCount, scale),
                   step(LoadSound("../Assets/Bomb/step.mp3")),
                   dead(LoadSound("../Assets/Bomb/squish.mp3")),
+                  place(LoadSound("../Assets/Bomb/place.mp3")),
                   fireUp(3),
                   lives(1),
                   maxBombsStat(1),

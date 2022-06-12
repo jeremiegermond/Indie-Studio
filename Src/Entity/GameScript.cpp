@@ -26,6 +26,7 @@ namespace bomberman {
         rotations.emplace_back(.0f, .0f, 1.5f);
         rotations.emplace_back(.0f, .0f, 3.0f);
         rotations.emplace_back(.0f, .0f, 3.0f);
+        click = LoadSound("../Assets/Bomb/click.mp3");
     }
 
     void GameScript::Update() {
@@ -59,6 +60,7 @@ namespace bomberman {
 
     void GameScript::PressToZoom() {
         if (IsKeyPressed(KEY_ENTER)) {
+            PlaySound(click);
             std::vector<GamePlayer *> players;
             for (int i = 0; i < 4; i++) {
                 players.push_back(_game->GetScene()->PopPlayer());
@@ -124,6 +126,7 @@ namespace bomberman {
             }
         }
         if (IsKeyPressed(KEY_ENTER)) {
+            PlaySound(click);
             currentScript = 3;
             int cpuselect = 0;
             _game->GetScene()->GetText(2)->SetActive(false);

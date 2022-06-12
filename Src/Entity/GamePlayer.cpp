@@ -18,6 +18,7 @@ namespace bomberman {
         elapsed += std::chrono::duration<double, std::milli>(now - previous).count();
         if (!cpu) {
             if (IsKeyPressed(keys->bomb()) && maxBombsStat - bombs.size() > 0) {
+                PlaySound(place);
                 auto *bomb = new GameBomb(fireUp);
                 bomb->SetPosition(GetPosition(true));
                 bomb->SetScale(3.5f);

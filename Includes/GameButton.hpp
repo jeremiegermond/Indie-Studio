@@ -26,6 +26,7 @@ namespace bomberman {
         int type;
         Rectangle collision{};
         Color tint{};
+        Sound click{};
     public:
         GameButton(int x,
                    int y,
