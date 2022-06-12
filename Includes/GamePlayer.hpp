@@ -21,6 +21,7 @@ namespace bomberman {
         std::vector<GameBomb *> bombs;
         GameDrawMap *map{};
         Sound step{};
+        Sound dead{};
         int fireUp;
         int lives;
         int maxBombsStat;
@@ -37,6 +38,7 @@ namespace bomberman {
                    unsigned int animationCount = 1)
                 : AnimatedGameObject(modelPath, texturePath, animationPath, animationCount, scale),
                   step(LoadSound("../Assets/Bomb/step.mp3")),
+                  dead(LoadSound("../Assets/Bomb/squish.mp3")),
                   fireUp(3),
                   lives(1),
                   maxBombsStat(1),

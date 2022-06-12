@@ -85,7 +85,7 @@ namespace bomberman {
             return;
         elapsed = .0f;
         lives--;
-        std::cout << lives << std::endl;
+        PlaySound(dead);
         SetActive(false);
     }
 
