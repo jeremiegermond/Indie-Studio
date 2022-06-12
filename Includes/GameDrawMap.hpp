@@ -31,6 +31,7 @@ namespace bomberman {
             bool isIn(int posX, int posY);
             char GetBlock(int posX, int posY);
             void BreakBlock(int posX, int posY);
+            void Save();
     };
 }
 
