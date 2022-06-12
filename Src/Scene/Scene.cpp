@@ -134,6 +134,12 @@ namespace bomberman {
         return Players.at(i);
     }
 
+    GameImage *Scene::GetImage(int i) {
+        if (GameImages.size() <= size_t(i))
+            return nullptr;
+        return GameImages.at(i);
+    }
+
     GamePlayer *Scene::PopPlayer(GamePlayer *push) {
         GamePlayer *pop = PlayerQueue.front();
         PlayerQueue.erase(PlayerQueue.begin());

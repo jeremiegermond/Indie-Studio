@@ -94,6 +94,7 @@ namespace bomberman {
 
     void Game::ChangeScene(int i) {
         GetScene()->UnloadScene();
+        SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         currentScene = i;
         GetScene()->StartScene();
     }

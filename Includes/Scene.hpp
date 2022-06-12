@@ -78,6 +78,8 @@ namespace bomberman {
 
         GameDrawMap *GetMap();
 
+        GameImage *GetImage(int i);
+
         void SetCursor(bool hover);
     };
 }

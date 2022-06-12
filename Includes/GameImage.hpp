@@ -26,6 +26,7 @@ namespace bomberman {
             ~GameImage() override = default;
             void Draw();
             void SetActive(bool activate);
+            void SetColor(MyColor color);
     };
 }
 

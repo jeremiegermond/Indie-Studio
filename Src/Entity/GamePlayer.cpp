@@ -83,6 +83,7 @@ namespace bomberman {
         elapsed = .0f;
         lives--;
         std::cout << lives << std::endl;
+        SetActive(false);
     }
 
     bool GamePlayer::is_cpu() {

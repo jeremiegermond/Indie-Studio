@@ -18,10 +18,10 @@ namespace bomberman {
         positions.emplace_back(-.44f, 0.0f, -.54f);
         positions.emplace_back(-.65f, 0.0f, -.1f);
         positions.emplace_back(-.88f, 0.0f, -.06f);
-        positions.emplace_back(8.0f, 0.0f, -8.0f);
-        positions.emplace_back(-8.0f, 0.0f, -8.0f);
-        positions.emplace_back(-8.0f, 0.0f, 8.0f);
         positions.emplace_back(8.0f, 0.0f, 8.0f);
+        positions.emplace_back(8.0f, 0.0f, -8.0f);
+        positions.emplace_back(-8.0f, 0.0f, 8.0f);
+        positions.emplace_back(-8.0f, 0.0f, -8.0f);
         rotations.emplace_back(.0f, .0f, 1.5f);
         rotations.emplace_back(.0f, .0f, 1.5f);
         rotations.emplace_back(.0f, .0f, 3.0f);
@@ -151,6 +151,8 @@ namespace bomberman {
             if (player == nullptr)
                 break;
             players.push_back(player);
+            if (player->GetActive() == false)
+                _game->GetScene()->GetImage(x)->SetColor(GRAY);
             playersPos.push_back(player->GetPosition(true));
             for (auto bomb: player->GetBombs())
                 bombs.push_back(bomb);
