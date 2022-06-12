@@ -5,40 +5,47 @@
 ** TODO
 */
 #include "GamePlayer.hpp"
+#include "GameBomb.hpp"
 
 namespace bomberman {
     void GamePlayer::Update() {
         now = std::chrono::system_clock::now();
         AnimatedGameObject::Update();
-        if (!canPlay || map == nullptr) {
+        if (!canPlay) {
             SetAnimation(1);
             return;
         }
         elapsed += std::chrono::duration<double, std::milli>(now - previous).count();
-        if (IsKeyPressed(keys->bomb())) {
-            auto *bomb = new GameBomb(fireUp);
-            bomb->SetPosition(GetPosition(true));
-            bomb->SetScale(3.5f);
-            bombs.push_back(bomb);
+        if (!cpu) {
+            if (IsKeyPressed(keys->bomb()) && maxBombsStat - bombs.size() > 0) {
+                auto *bomb = new GameBomb(fireUp);
+                bomb->SetPosition(GetPosition(true));
+                bomb->SetScale(3.5f);
+                bombs.push_back(bomb);
+            }
+            MyVector3 pos = GetPosition();
+            float posX = pos.x;
+            float posZ = pos.z;
+            if (IsKeyDown(keys->left()) && map->GetBlock(int(round(posX + .6)), int(round(posZ))) == '0') {
+                Move(MyVector3{1.0f, 0.0f, 0.0f});
+                rotation.z = -1.5;
+            } else if (IsKeyDown(keys->right()) &&
+                       map->GetBlock(int(round(posX - .6)), int(round(posZ))) == '0') {
+                Move(MyVector3{-1.0f, 0.0f, 0.0f});
+                rotation.z = 1.5;
+            } else if (IsKeyDown(keys->up()) &&
+                       map->GetBlock(int(round(posX)), int(round(posZ + .6))) == '0') {
+                Move(MyVector3{0.0f, 0.0f, 1.0f});
+                rotation.z = 0;
+            } else if (IsKeyDown(keys->down()) &&
+                       map->GetBlock(int(round(posX)), int(round(posZ - .6))) == '0') {
+                Move(MyVector3{0.0f, 0.0f, -1.0f});
+                rotation.z = 3;
+            } else {
+                SetAnimation(1);
+            }
         }
-        MyVector3 pos = GetPosition();
-        float posX = pos.x;
-        float posZ = pos.z;
-        if (IsKeyDown(keys->left()) && map->GetBlock(int(round(posX + .6)), int(round(posZ))) == '0') {
-            Move(MyVector3{1.0f, 0.0f, 0.0f});
-            rotation.z = -1.5;
-        } else if (IsKeyDown(keys->right()) && map->GetBlock(int(round(posX - .6)), int(round(posZ))) == '0') {
-            Move(MyVector3{-1.0f, 0.0f, 0.0f});
-            rotation.z = 1.5;
-        } else if (IsKeyDown(keys->up()) && map->GetBlock(int(round(posX)), int(round(posZ + .6))) == '0') {
-            Move(MyVector3{0.0f, 0.0f, 1.0f});
-            rotation.z = 0;
-        } else if (IsKeyDown(keys->down()) && map->GetBlock(int(round(posX)), int(round(posZ - .6))) == '0') {
-            Move(MyVector3{0.0f, 0.0f, -1.0f});
-            rotation.z = 3;
-        } else {
-            SetAnimation(1);
-        }
+        else;//  set ai input
         for (auto bomb : bombs) {
             bomb->Update();
             bomb->Draw();
@@ -76,6 +83,18 @@ namespace bomberman {
         elapsed = .0f;
         lives--;
         std::cout << lives << std::endl;
+    }
+
+    bool GamePlayer::is_cpu() {
+        return cpu;
+    }
+
+    void GamePlayer::switchPlayer() {
+        cpu = !cpu;
+    }
+
+    void GamePlayer::setCpu(bool nv) {
+        cpu = nv;
     }
 
     void GamePlayer::SetMap(GameDrawMap *newMap) {

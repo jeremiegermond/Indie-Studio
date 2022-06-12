@@ -21,10 +21,12 @@ namespace bomberman {
         GameDrawMap *map{};
         int fireUp;
         int lives;
+        int maxBombsStat;
         tPoint now;
         tPoint previous;
         double elapsed{};
-        Keyboard *keys{};
+        bool cpu = true;
+        Keyboard *keys = nullptr;
     public:
         GamePlayer(const std::string &modelPath,
                    const std::string &texturePath,
@@ -55,6 +57,12 @@ namespace bomberman {
         void RemoveLive();
 
         void SetMap(GameDrawMap *newMap);
+
+        bool is_cpu();
+
+        void switchPlayer();
+
+        void setCpu(bool nv);
     };
 }
 

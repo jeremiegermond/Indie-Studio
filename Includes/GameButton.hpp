@@ -11,7 +11,7 @@
 
 namespace bomberman {
     typedef enum {
-        BUTTON_MENU = 0, BUTTON_SELECT, BUTTON_GAME, BUTTON_SETTINGS
+        BUTTON_MENU = 0, BUTTON_SELECT, BUTTON_GAME, BUTTON_SETTINGS, BUTTON_AI
     } ButtonType;
 
     class GameButton : public IEntity {
