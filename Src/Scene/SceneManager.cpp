@@ -11,11 +11,18 @@
 namespace bomberman {
     SceneManager::SceneManager(Game *pGame) {
         gameRef = pGame;
+        loading = new GameLoading();
+        display_loading(5);
         CreateMenuScene();
+        display_loading(70);
         CreateLevelScene();
+        display_loading(90);
         CreateUiScene();
+        display_loading(95);
         CreateSettingsScene();
+        display_loading(99);
         CreateHowToPlayScene();
+        display_loading(100);
     }
 
     void SceneManager::CreateMenuScene() {
@@ -27,48 +34,55 @@ namespace bomberman {
                                        MyVector3{0.0f, 1.0f, 0.0f},
                                        32.0f,
                                        CAMERA_PERSPECTIVE));
-
         menu->AddEntity(new GameCamera(MyVector3{0.0f, 22.0f, -12.0f},
                                         MyVector3{0.0f, 0.0f, 0.0f},
                                         MyVector3{0.0f, 1.0f, 0.0f},
                                         50.0f,
                                         CAMERA_PERSPECTIVE));
         menu->AddEntity(new GameObject("../Assets/Level/forest.obj"));
+        display_loading(8);
         menu->AddEntity(new GameSound("../Assets/Songs/ForestSong.mp3", true));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Fox.iqm",
                                        "../Assets/AnimalsCharacters/TexFox.png",
                                        0.1f));
+        display_loading(10);
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Pig.iqm",
                                        "../Assets/AnimalsCharacters/TexPig.png",
                                        0.1f));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Pigeon.iqm",
                                        "../Assets/AnimalsCharacters/TexPigeon.png",
                                        0.1f));
+        display_loading(13);
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Toucan.iqm",
                                        "../Assets/AnimalsCharacters/TexToucan.png",
                                        0.1f));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Fox.iqm",
                                        "../Assets/AnimalsCharacters/TexWolf.png",
                                        0.1f));
+        display_loading(15);
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Cat.iqm",
                                        "../Assets/AnimalsCharacters/TexCat.png",
                                        0.1f));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Owl.iqm",
                                        "../Assets/AnimalsCharacters/TexOwl.png",
                                        0.1f));
+        display_loading(20);
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Gazelle.iqm",
                                        "../Assets/AnimalsCharacters/TexGazelle.png",
                                        "../Assets/AnimalsCharacters/Gazelle.iqm",
                                        0.1f));
+        display_loading(30);
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Forest Bomberman", 525, 100, 200, WHITE));
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Press Enter To Play", 625, 400, 125, WHITE, true));
         menu->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Select players", 645, 100, 200, WHITE));
         menu->AddEntity(new GameButton(1750, 900, "../Assets/Buttons/howtoplay.png"));
         menu->AddEntity(new GameButton(50, 50, "../Assets/Buttons/darkmode.png", "../Assets/Buttons/lightmode.png"));
+        display_loading(40);
         menu->AddEntity(new GameButton(450, 750, "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
         menu->AddEntity(new GameButton(800, 750, "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
         menu->AddEntity(new GameButton(1400, 750, "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
         menu->AddEntity(new GameButton(1700, 750, "../Assets/Buttons/rightOn.png", BUTTON_SELECT));
+        display_loading(50);
         menu->AddEntity(new GameButton(250, 875, "../Assets/Buttons/p1.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
         menu->GetButtons().back()->SetState(true);
         menu->AddEntity(new GameButton(600, 875, "../Assets/Buttons/p2.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
@@ -77,6 +91,7 @@ namespace bomberman {
         menu->AddEntity(new GameButton(1200, 875, "../Assets/Buttons/p3.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
         menu->AddEntity(new GameButton(1500, 875, "../Assets/Buttons/p4.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
         
+        display_loading(60);
         menu->GetText(2)->SetActive(false);
         menu->AddEntity(new GameScript(gameRef, 1));
         menu->StartScene();
@@ -91,16 +106,19 @@ namespace bomberman {
                                        50.0f,
                                        CAMERA_PERSPECTIVE));
         auto *forest = new GameObject("../Assets/Level/forest.obj");
+        display_loading(75);
         forest->SetScale(50.f);
         forest->SetPosition(MyVector3{35.f, .0f, 30.f});
         level->AddEntity(forest);
         level->AddEntity(new GameSound("../Assets/Songs/CoffeeSong.mp3", true));
         level->AddEntity(new GameDrawMap("../Assets/Texture/brick.png", "../Assets/Texture/wood.png", WHITE));
+        display_loading(80);
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Forest Bomberman", 710, 30, 125, WHITE));
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 1", 60, 150, 80, WHITE));
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 2", 60, 770, 80, WHITE));
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 3", 1690, 150, 80, WHITE));
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 4", 1690, 770, 80, WHITE));
+        display_loading(85);
         level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 75, 220));
         level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 75, 840));
         level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1710, 220));

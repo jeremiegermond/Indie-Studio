@@ -31,6 +31,26 @@ namespace bomberman {
             void Draw();
             void Update();
             void SetActive(bool activate);
+            void SetText(std::string new_msg) {
+                _msg = new_msg;
+            }
+    };
+
+    class GameLoading : public GameText {
+        private:
+            int _percentage;
+        public:
+            GameLoading() : GameText("../Assets/Font/Beauty_Forest.free.ttf", "Loading...\n\t0%", 855, 400, 125, WHITE) {
+                _percentage = 0;
+            };
+            void UpdateAndDraw(int new_percentage) {
+                _percentage = new_percentage;
+                BeginDrawing();
+                ClearBackground(BLACK);
+                SetText("Loading...\n\t" + std::to_string(_percentage) + "%");
+                Draw();
+                EndDrawing();
+            }
     };
 }
 

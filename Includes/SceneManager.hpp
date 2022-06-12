@@ -15,6 +15,7 @@ namespace bomberman {
     private:
         std::vector<Scene *> scenes;
         Game *gameRef{};
+        GameLoading *loading;
 
     public:
         SceneManager() = default;
@@ -33,6 +34,10 @@ namespace bomberman {
         void CreateSettingsScene();
 
         void CreateHowToPlayScene();
+    
+        void display_loading(int percentage) {
+            loading->UpdateAndDraw(percentage);
+        }
     };
 }
 
