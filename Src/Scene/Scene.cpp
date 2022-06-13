@@ -150,7 +150,7 @@ namespace bomberman {
 
     void Scene::Populate(const std::vector<GamePlayer *> &newPlayers) {
         if (!Players.empty())
-            Players.erase(Players.begin());
+            Players.clear();
         for (auto player: newPlayers) {
             player->SetMap(GameMap);
             Players.push_back(player);

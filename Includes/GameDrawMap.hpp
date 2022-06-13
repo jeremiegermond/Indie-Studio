@@ -18,9 +18,11 @@ namespace bomberman {
             MyColor _color;
             Texture2D _textureBrick{};
             Texture2D _textureWood{};
+            Texture2D _textureFire{};
+            Texture2D _textureBomb{};
+            Texture2D _textureSpeed{};
+            Texture2D _textureWall{};
             std::vector<std::vector<char>> _map;
-            Image _imageBrick{};
-            Image _imageWood{};
         public:
             GameDrawMap(const std::string &texturePathBrick, const std::string &texturePathWood, MyColor color);
             ~GameDrawMap() override;
