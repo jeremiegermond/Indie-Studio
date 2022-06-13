@@ -17,7 +17,7 @@ namespace bomberman {
         _cubePosition.z = 0;
         _textureBrick = LoadTexture(texturePathBrick.c_str());
         _textureWood = LoadTexture(texturePathWood.c_str());
-        _textureFire = LoadTexture("../Assets/PowerUps/fire.png");
+        _textureFire = LoadTexture("../Assets/PowerUps/fireUp.png");
         _textureBomb = LoadTexture("../Assets/PowerUps/bomb.png");
         _textureSpeed = LoadTexture("../Assets/PowerUps/speed.png");
         _textureWall = LoadTexture("../Assets/PowerUps/wall.png");
