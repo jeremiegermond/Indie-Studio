@@ -127,6 +127,8 @@ namespace bomberman {
                     scene = _game->GetScene();
                     auto map = scene->GetMap();
                     scene->Populate(players);
+                    for (int x = 0; x < 4; x++)
+                        scene->GetImage(x)->SetColor(WHITE);
                     if (map && i) {
                         map->LoadMap();
                     } else if (map) {
@@ -176,7 +178,7 @@ namespace bomberman {
             if (exploded != 1)
                 continue;
             MyVector3 pos = bomb->GetPosition(true);
-            MyVector3 tmpP = pos;
+            MyVector3 tmpP;
             int fire = bomb->GetFire();
             cases.push_back(pos);
             int x = int(pos.x);
@@ -186,6 +188,7 @@ namespace bomberman {
             bool posZ = false;
             bool negZ = false;
             for (int i = 1; i <= fire; i++) {
+                tmpP = pos;
                 if (!posX) {
                     tmpP.x = pos.x + float(i);
                     if (map->GetBlock(x + i, z) != '0') {
@@ -205,7 +208,6 @@ namespace bomberman {
                 tmpP = pos;
                 if (!posZ) {
                     tmpP.z = pos.z + float(i);
-                    printf("posZ %f %f\n", tmpP.x, tmpP.z);
                     if (map->GetBlock(x, z + i) != '0') {
                         map->BreakBlock(x, z + i);
                         posZ = true;
@@ -214,7 +216,6 @@ namespace bomberman {
                 }
                 if (!negZ) {
                     tmpP.z = pos.z - float(i);
-                    printf("negZ %f %f\n", tmpP.x, tmpP.z);
                     if (map->GetBlock(x, z - i) != '0') {
                         map->BreakBlock(x, z - i);
                         negZ = true;
@@ -239,10 +240,12 @@ namespace bomberman {
         auto scene = _game->GetScene();
         for (int i = 0; i < 4; i++) {
             auto player = populated ? scene->GetPlayer(i) : scene->PopPlayer();
+            player->Reset();
             player->SetPosition(positions[i]);
             player->SetRotation(rotations[i]);
             player->SetScale(.1f);
             player->SetPlay(false);
+            player->SetActive(true);
             players.push_back(player);
         }
         if (!populated)

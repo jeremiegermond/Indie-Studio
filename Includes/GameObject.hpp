@@ -52,7 +52,7 @@ namespace bomberman {
 
         void SetPosition(MyVector3 newPosition);
 
-        void SetActive(bool activate);
+        virtual void SetActive(bool activate);
 
         virtual void Move(MyVector3 velocity);
 

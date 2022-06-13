@@ -57,7 +57,6 @@ namespace bomberman {
 
     void GameDrawMap::GenerateMap() {
         char type = '0';
-        int enemyTotal = 4;
         int width = 21;
         int height = 21;
 
@@ -80,7 +79,7 @@ namespace bomberman {
                 else if ((row >= 1 && row <= height - 2) && (col == 2 || col == width - 1))
                     type = '1';
                 else if (row > 1 && row < height - 1 && col > 2 && col < width)
-                    type = Populate(enemyTotal);
+                    type = Populate();
                 else
                     type = '0';
                 std::cout << type << " ";
@@ -91,10 +90,10 @@ namespace bomberman {
         }
     }
 
-    char GameDrawMap::Populate(int enemyTotal) {
+    char GameDrawMap::Populate(bool Break) {
         int random = static_cast<int>(rand() % 100);
 
-        if (random % 5 == 0) {
+        if (Break && random % 5 == 0) {
             if (random <= 25)
                 return '5';
             else if (random <= 50)
@@ -104,7 +103,7 @@ namespace bomberman {
             else
                 return '8';
         }
-        return random % 6 == 0 ? '0' : '2';
+        return (Break || random % 6 == 0) ? '0' : '2';
     }
 
     char GameDrawMap::GetBlock(int posX,
@@ -116,15 +115,20 @@ namespace bomberman {
         return '1';
     }
 
+    bool GameDrawMap::Collide(int posX,
+                              int posY) {
+        auto block = GetBlock(posX, posY);
+        return (block == '1' || block == '2');
+    }
+
     void GameDrawMap::BreakBlock(int posX,
-                                 int posY) {
+                                 int posY, bool GetPowerUp) {
         posX += 10;
         posY += 10;
         if (!isIn(posX, posY))
             return;
-        printf("%c[%d][%d]\n", _map[posY][posX], posY, posX);
         if (_map[posY][posX] != '0' && _map[posY][posX] != '1') {
-            _map[posY][posX] = '0';
+            _map[posY][posX] = GetPowerUp ? '0' : Populate(true);
         }
     }
 

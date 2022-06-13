@@ -15,44 +15,6 @@ namespace bomberman {
             SetAnimation(1);
             return;
         }
-        if (!GetActive())
-            return;
-        elapsed += std::chrono::duration<double, std::milli>(now - previous).count();
-        if (!cpu) {
-            if (IsKeyPressed(keys->bomb()) && maxBombsStat - bombs.size() > 0) {
-                PlaySound(place);
-                auto *bomb = new GameBomb(fireUp);
-                bomb->SetPosition(GetPosition(true));
-                bomb->SetScale(3.5f);
-                bombs.push_back(bomb);
-            }
-            
-            
-            MyVector3 pos = GetPosition();
-            float posX = pos.x;
-            float posZ = pos.z;
-            float speed = 2.f;
-            if (IsKeyDown(keys->left())) {
-                if (map->GetBlock(int(round(posX + .6)), int(round(posZ))) == '0')
-                    Move(MyVector3{speed, 0.0f, 0.0f});
-                rotation.z = -1.5;
-            } else if (IsKeyDown(keys->right())) {
-                if (map->GetBlock(int(round(posX - .6)), int(round(posZ))) == '0')
-                    Move(MyVector3{-speed, 0.0f, 0.0f});
-                rotation.z = 1.5;
-            } else if (IsKeyDown(keys->up())) {
-                if (map->GetBlock(int(round(posX)), int(round(posZ + .6))) == '0')
-                    Move(MyVector3{0.0f, 0.0f, speed});
-                rotation.z = 0;
-            } else if (IsKeyDown(keys->down())) {
-                if (map->GetBlock(int(round(posX)), int(round(posZ - .6))) == '0')
-                    Move(MyVector3{0.0f, 0.0f, -speed});
-                rotation.z = 3;
-            } else {
-                SetAnimation(1);
-            }
-        }
-        else;//  set ai input
         for (auto bomb : bombs) {
             bomb->Update();
             bomb->Draw();
@@ -65,6 +27,41 @@ namespace bomberman {
                 size--;
             }
         }
+        if (!GetActive())
+            return;
+        elapsed += std::chrono::duration<double, std::milli>(now - previous).count();
+        MyVector3 pos = GetPosition();
+        float posX = pos.x;
+        float posZ = pos.z;
+        int rPosX = int(round(posX));
+        int rPosZ = int(round(posZ));
+        GetPowerUp(map->GetBlock(rPosX, rPosZ));
+        map->BreakBlock(rPosX, rPosZ, true);
+        if (!cpu && keys) {
+            if (IsKeyPressed(keys->bomb())) {
+                AddBomb();
+            }
+            if (IsKeyDown(keys->left())) {
+                if (!map->Collide(int(round(posX + .6)), rPosZ))
+                    Move(MyVector3{speed, 0.0f, 0.0f});
+                rotation.z = -1.5;
+            } else if (IsKeyDown(keys->right())) {
+                if (!map->Collide(int(round(posX - .6)), rPosZ))
+                    Move(MyVector3{-speed, 0.0f, 0.0f});
+                rotation.z = 1.5;
+            } else if (IsKeyDown(keys->up())) {
+                if (!map->Collide(rPosX, int(round(posZ + .6))))
+                    Move(MyVector3{0.0f, 0.0f, speed});
+                rotation.z = 0;
+            } else if (IsKeyDown(keys->down())) {
+                if (!map->Collide(rPosX, int(round(posZ - .6))))
+                    Move(MyVector3{0.0f, 0.0f, -speed});
+                rotation.z = 3;
+            } else {
+                SetAnimation(1);
+            }
+        }
+        else;//  set ai input
         previous = now;
     }
 
@@ -92,7 +89,8 @@ namespace bomberman {
         elapsed = .0f;
         lives--;
         PlaySound(dead);
-        SetActive(false);
+        if (lives <= 0)
+            SetActive(false);
     }
 
     bool GamePlayer::isCpu() {
@@ -123,5 +121,50 @@ namespace bomberman {
 
     void GamePlayer::LoadPlayer() {
 
+    }
+
+    void GamePlayer::SetActive(bool activate) {
+        GameObject::SetActive(activate);
+        if (activate)
+            lives = 1;
+    }
+
+    void GamePlayer::AddBomb() {
+        if (maxBombsStat - bombs.size() <= 0)
+            return;
+        PlaySound(place);
+        auto *bomb = new GameBomb(fireUp);
+        bomb->SetPosition(GetPosition(true));
+        bomb->SetScale(3.5f);
+        bombs.push_back(bomb);
+    }
+
+    void GamePlayer::GetPowerUp(char block) {
+        switch (block) {
+            case '5':
+                maxBombsStat++;
+                break;
+            case '6':
+                speed += 1.f;
+                break;
+            case '7':
+                lives++;
+                break;
+            case '8':
+                fireUp++;
+                break;
+            default:
+                return;
+
+        }
+        PlaySound(levelUp);
+    }
+
+    void GamePlayer::Reset() {
+        AnimatedGameObject::Reset();
+        maxBombsStat = 1;
+        lives = 1;
+        fireUp = 3;
+        speed = 2.f;
     }
 }

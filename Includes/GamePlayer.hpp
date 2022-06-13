@@ -23,9 +23,11 @@ namespace bomberman {
         Sound step{};
         Sound dead{};
         Sound place{};
+        Sound levelUp{};
         int fireUp;
         int lives;
         int maxBombsStat;
+        float speed;
         tPoint now;
         tPoint previous;
         double elapsed{};
@@ -41,9 +43,11 @@ namespace bomberman {
                   step(LoadSound("../Assets/Bomb/step.mp3")),
                   dead(LoadSound("../Assets/Bomb/squish.mp3")),
                   place(LoadSound("../Assets/Bomb/place.mp3")),
+                  levelUp(LoadSound("../Assets/Bomb/up.mp3")),
                   fireUp(3),
                   lives(1),
                   maxBombsStat(1),
+                  speed(2.f),
                   previous(std::chrono::system_clock::now()) {
         }
 
@@ -79,6 +83,14 @@ namespace bomberman {
         void SavePlayer();
 
         void LoadPlayer();
+
+        void SetActive(bool activate) override;
+
+        void AddBomb();
+
+        void GetPowerUp(char block);
+
+        void Reset() override;
     };
 }
 
