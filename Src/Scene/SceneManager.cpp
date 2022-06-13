@@ -126,13 +126,13 @@ namespace bomberman {
             level->AddEntity(new GameImage("../Assets/PowerUps/background3.png", 40, 320 + 400 * y));
             level->AddEntity(new GameImage("../Assets/PowerUps/bomb.png", 80, 345 + 400 * y));
             level->AddEntity(new GameImage("../Assets/PowerUps/speed.png", 270, 345 + 400 * y));
-            level->AddEntity(new GameImage("../Assets/PowerUps/shield.png", 60, 430 + 400 * y));
+            level->AddEntity(new GameImage("../Assets/PowerUps/fireUp.png", 60, 430 + 400 * y));
             level->AddEntity(new GameImage("../Assets/PowerUps/wall.png", 230, 425 + 400 * y));
 
             level->AddEntity(new GameImage("../Assets/PowerUps/background3.png", 1500, 320 + 400 * y));
             level->AddEntity(new GameImage("../Assets/PowerUps/bomb.png", 1545, 345 + 400 * y));
             level->AddEntity(new GameImage("../Assets/PowerUps/speed.png", 1725, 345 + 400 * y));
-            level->AddEntity(new GameImage("../Assets/PowerUps/shield.png", 1530, 430 + 400 * y));
+            level->AddEntity(new GameImage("../Assets/PowerUps/fireUp.png", 1530, 430 + 400 * y));
             level->AddEntity(new GameImage("../Assets/PowerUps/wall.png", 1695, 425 + 400 * y));
         }
         level->AddEntity(new GameButton(50, 40, "../Assets/Buttons/home.png"));

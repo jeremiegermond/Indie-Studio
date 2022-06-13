@@ -92,6 +92,26 @@ namespace bomberman {
 
         void Reset() override;
     };
+
+    // class GamePowerUps : public GamePlayer {
+    //     private:
+    //         int _maxBombsStat;
+    //         int _speed;
+    //         int _fireUp;
+
+    //     public:
+    //         GamePowerUps(GamePlayer *player) {
+    //             _maxBombsStat = player->
+    //         }
+    //         void UpdateAndDraw() {
+    //             BeginDrawing();
+    //             ClearBackground(BLACK);
+    //             SetText(std::to_string(maxBombsStat) + " " + std::to_string(speed) + "\n" + std::to_string(fireUp) + " X");
+    //             Draw();
+    //             EndDrawing();
+    //         }
+
+    // };
 }
 
 #endif //BOMBERMAN_GAMEPLAYER_HPP
