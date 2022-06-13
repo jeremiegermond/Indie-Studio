@@ -15,16 +15,26 @@ namespace bomberman {
         _cubePosition.x = 0;
         _cubePosition.y = 0;
         _cubePosition.z = 0;
-        _imageBrick = LoadImage(texturePathBrick.c_str());
-        _imageWood = LoadImage(texturePathWood.c_str());
-        _textureBrick = LoadTextureFromImage(_imageBrick);
-        _textureWood = LoadTextureFromImage(_imageWood);
+        _textureBrick = LoadTexture(texturePathBrick.c_str());
+        _textureWood = LoadTexture(texturePathWood.c_str());
+        _textureFire = LoadTexture("../Assets/PowerUps/fire.png");
+        _textureBomb = LoadTexture("../Assets/PowerUps/bomb.png");
+        _textureSpeed = LoadTexture("../Assets/PowerUps/speed.png");
+        _textureWall = LoadTexture("../Assets/PowerUps/wall.png");
         _color = color;
-        GenerateMap();
+        _map.resize(21);
+        for (int row = 0; row < 21; row++)
+            _map[row].resize(21);
     }
 
     GameDrawMap::~GameDrawMap() {
-        _map.erase(_map.begin());
+        _map.clear();
+        UnloadTexture(_textureWood);
+        UnloadTexture(_textureWood);
+        UnloadTexture(_textureFire);
+        UnloadTexture(_textureBomb);
+        UnloadTexture(_textureSpeed);
+        UnloadTexture(_textureWall);
     }
 
     void GameDrawMap::Draw() {
@@ -36,16 +46,14 @@ namespace bomberman {
                     DrawCubeTexture(_textureBrick, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x == '2') {
                     DrawCubeTexture(_textureWood, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
-                } else if (x == '4') {    // DEBUG
-                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, RED);
                 } else if (x == '5') {    // DEBUG
-                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, BLUE);
+                    DrawCubeTexture(_textureBomb, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x == '6') {    // DEBUG
-                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, YELLOW);
+                    DrawCubeTexture(_textureSpeed, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x == '7') {    // DEBUG
-                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, PURPLE);
+                    DrawCubeTexture(_textureWall, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x == '8') {    // DEBUG
-                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, ORANGE);
+                    DrawCubeTexture(_textureFire, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x != '0') {    //
                     DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, GREEN);
                 }
@@ -93,7 +101,7 @@ namespace bomberman {
     char GameDrawMap::Populate(bool Break) {
         int random = static_cast<int>(rand() % 100);
 
-        if (Break && random % 5 == 0) {
+        if (Break ) {
             if (random <= 25)
                 return '5';
             else if (random <= 50)
@@ -161,8 +169,10 @@ namespace bomberman {
         std::string oldmap;
 
         _loadmap.open("map.txt");
-        if (!_loadmap.is_open())
+        if (!_loadmap.is_open()) {
+            GenerateMap();
             return;
+        }
         for (auto &y: _map) {
             std::getline(_loadmap, oldmap);
             for (int x = 0; x < int(y.size()); x++) {

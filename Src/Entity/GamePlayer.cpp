@@ -68,7 +68,7 @@ namespace bomberman {
     void GamePlayer::SetPlay(bool play) {
         canPlay = play;
         if (!bombs.empty())
-            bombs.erase(bombs.begin());
+            bombs.clear();
     }
 
     void GamePlayer::SetKeys(KeysLayout playerNB) {
