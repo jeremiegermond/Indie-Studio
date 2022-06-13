@@ -35,9 +35,9 @@ namespace bomberman {
                 {KEY_KP_8, KEY_KP_4, KEY_KP_5, KEY_KP_6, KEY_KP_ADD},
             };
         public:
-            Keyboard(KeysLayout playernb);
-            Keyboard(int playernb);
-            ~Keyboard();
+            explicit Keyboard(KeysLayout playernb);
+            explicit Keyboard(int playernb);
+            ~Keyboard() = default;
             KeyboardKey up();
             KeyboardKey down();
             KeyboardKey left();

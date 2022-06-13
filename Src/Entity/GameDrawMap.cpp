@@ -9,7 +9,9 @@
 
 namespace bomberman {
 
-    GameDrawMap::GameDrawMap(const std::string &texturePathBrick, const std::string &texturePathWood, MyColor color) {
+    GameDrawMap::GameDrawMap(const std::string &texturePathBrick,
+                             const std::string &texturePathWood,
+                             MyColor color) {
         _cubePosition.x = 0;
         _cubePosition.y = 0;
         _cubePosition.z = 0;
@@ -24,34 +26,27 @@ namespace bomberman {
     GameDrawMap::~GameDrawMap() {
         _map.erase(_map.begin());
     }
-            
+
     void GameDrawMap::Draw() {
         _cubePosition.z = -10;
         for (auto y: _map) {
             _cubePosition.x = -10;
-            for (auto x: y) {  
+            for (auto x: y) {
                 if (x == '1') {
                     DrawCubeTexture(_textureBrick, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
-                }
-                else if (x == '2') {
+                } else if (x == '2') {
                     DrawCubeTexture(_textureWood, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
-                }
-                else if (x == '4') {    // DEBUG
+                } else if (x == '4') {    // DEBUG
                     DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, RED);
-                }
-                else if (x == '5') {    // DEBUG
+                } else if (x == '5') {    // DEBUG
                     DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, BLUE);
-                }
-                else if (x == '6') {    // DEBUG
+                } else if (x == '6') {    // DEBUG
                     DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, YELLOW);
-                }
-                else if (x == '7') {    // DEBUG
+                } else if (x == '7') {    // DEBUG
                     DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, PURPLE);
-                }
-                else if (x == '8') {    // DEBUG
+                } else if (x == '8') {    // DEBUG
                     DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, ORANGE);
-                }
-                else if (x != '0') {    //
+                } else if (x != '0') {    //
                     DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, GREEN);
                 }
                 _cubePosition.x++;
@@ -80,7 +75,7 @@ namespace bomberman {
                     type = '0';
                 else if ((row + 1) % 2 == 0 && col % 2 == 0)
                     type = '1';
-                else if ((col >= 2 && col <= width -1) && (row == 1 || row == height - 2))
+                else if ((col >= 2 && col <= width - 1) && (row == 1 || row == height - 2))
                     type = '1';
                 else if ((row >= 1 && row <= height - 2) && (col == 2 || col == width - 1))
                     type = '1';
@@ -94,7 +89,7 @@ namespace bomberman {
             type = '0';
             std::cout << " | " << row + 1 << std::endl;
         }
-    } 
+    }
 
     char GameDrawMap::Populate(int enemyTotal) {
         int random = static_cast<int>(rand() % 100);
@@ -133,7 +128,8 @@ namespace bomberman {
         }
     }
 
-    bool GameDrawMap::isIn(int posX, int posY) {
+    bool GameDrawMap::isIn(int posX,
+                           int posY) {
         if (posY < 0 || posX < 0 || posY >= int(_map.size()))
             return false;
         if (posX >= int(_map[posY].size()))
@@ -159,14 +155,14 @@ namespace bomberman {
     void GameDrawMap::LoadMap() {
         std::ifstream _loadmap;
         std::string oldmap;
-        
+
         _loadmap.open("map.txt");
-        if(!_loadmap.is_open())
+        if (!_loadmap.is_open())
             return;
-        for (int y = 0; y < int(_map.size()); y++) {
+        for (auto &y: _map) {
             std::getline(_loadmap, oldmap);
-            for (int x = 0; x < int(_map[y].size()); x++) {
-                _map[y][x] = oldmap[x];
+            for (int x = 0; x < int(y.size()); x++) {
+                y[x] = oldmap[x];
             }
         }
     }

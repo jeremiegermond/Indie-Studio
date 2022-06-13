@@ -66,7 +66,7 @@ namespace bomberman {
 
         GamePlayer *GetPlayer(int i);
 
-        void Populate(const std::vector<GamePlayer *>& newPlayers);
+        void Populate(const std::vector<GamePlayer *> &newPlayers);
 
         GamePlayer *PopPlayer(GamePlayer *push = nullptr);
 
@@ -80,7 +80,13 @@ namespace bomberman {
 
         GameImage *GetImage(int i);
 
+        GameScript *GetScript(int i);
+
         void SetCursor(bool hover);
+
+        void SetActiveButton(ButtonType type,
+                             bool active = true,
+                             bool reset = false);
     };
 }
 

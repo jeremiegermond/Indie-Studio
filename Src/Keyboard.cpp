@@ -26,10 +26,6 @@ namespace bomberman {
         bomb_key = keys.at(4);
     };
 
-    Keyboard::~Keyboard()
-    {
-    }
-
     KeyboardKey Keyboard::up() {
         return up_key;
     };
