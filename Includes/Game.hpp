@@ -25,6 +25,8 @@ namespace bomberman {
         int height;
         int currentScene;
         SceneManager scenes;
+        Image flavicon;
+    
     public:
         Game();
         ~Game();

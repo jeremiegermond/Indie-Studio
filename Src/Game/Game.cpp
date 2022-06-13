@@ -25,6 +25,8 @@ namespace bomberman {
         SetConfigFlags(FLAG_MSAA_4X_HINT);
         InitAudioDevice();
         SetTargetFPS(60);
+        flavicon = LoadImage("../Assets/Bomb/bombFlavicon.png");
+        SetWindowIcon(flavicon);
         scenes = SceneManager(this);
     }
 
