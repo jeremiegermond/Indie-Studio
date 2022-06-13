@@ -68,7 +68,6 @@ namespace bomberman {
         int width = 21;
         int height = 21;
 
-        srand(time(NULL));
         _map.resize(height);
         std::cout << "creating map" << std::endl;
         for (int row = 0; row < height; row++) {
@@ -99,7 +98,7 @@ namespace bomberman {
     }
 
     char GameDrawMap::Populate(bool Break) {
-        int random = static_cast<int>(rand() % 100);
+        int random = static_cast<int>(std::rand() % 100);
 
         if (Break ) {
             if (random <= 25)

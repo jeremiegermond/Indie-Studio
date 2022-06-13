@@ -32,6 +32,7 @@ namespace bomberman {
         tPoint previous;
         double elapsed{};
         bool cpu = true;
+        int direction;
         Keyboard *keys = nullptr;
     public:
         GamePlayer(const std::string &modelPath,
@@ -91,6 +92,8 @@ namespace bomberman {
         void GetPowerUp(char block);
 
         void Reset() override;
+        
+        void CPUPlay();
     };
 
     // class GamePowerUps : public GamePlayer {

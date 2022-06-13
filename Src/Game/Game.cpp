@@ -27,6 +27,7 @@ namespace bomberman {
         SetTargetFPS(60);
         flavicon = LoadImage("../Assets/Bomb/bombFlavicon.png");
         SetWindowIcon(flavicon);
+        std::srand(std::time(nullptr));
         scenes = SceneManager(this);
     }
 
