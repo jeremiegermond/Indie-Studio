@@ -122,7 +122,7 @@ namespace bomberman {
         level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 75, 840));
         level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1710, 220));
         level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1710, 840));
-        level->AddEntity(new GameButton(50, 50, "../Assets/Buttons/return.png"));
+        level->AddEntity(new GameButton(50, 40, "../Assets/Buttons/home.png"));
         level->AddEntity(new GameScript(gameRef, 4));
         scenes.push_back(level);
     }
