@@ -15,6 +15,8 @@ namespace bomberman {
             SetAnimation(1);
             return;
         }
+        if (GetActive() == false)
+            return;
         elapsed += std::chrono::duration<double, std::milli>(now - previous).count();
         if (!cpu) {
             if (IsKeyPressed(keys->bomb()) && maxBombsStat - bombs.size() > 0) {
@@ -24,6 +26,8 @@ namespace bomberman {
                 bomb->SetScale(3.5f);
                 bombs.push_back(bomb);
             }
+            
+            
             MyVector3 pos = GetPosition();
             float posX = pos.x;
             float posZ = pos.z;
@@ -109,5 +113,13 @@ namespace bomberman {
         AnimatedGameObject::Move(velocity);
         if (!IsSoundPlaying(step))
             PlaySound(step);
+    }
+
+    void GamePlayer::SavePlayer() {
+
+    }
+
+    void GamePlayer::LoadPlayer() {
+
     }
 }

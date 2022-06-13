@@ -75,6 +75,10 @@ namespace bomberman {
         void setCpu(bool nv);
 
         void Move(MyVector3 velocity);
+
+        void SavePlayer();
+
+        void LoadPlayer();
     };
 }
 
