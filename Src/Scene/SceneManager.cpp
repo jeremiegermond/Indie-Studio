@@ -113,15 +113,28 @@ namespace bomberman {
         level->AddEntity(new GameDrawMap("../Assets/Texture/brick.png", "../Assets/Texture/wood.png", WHITE));
         display_loading(80);
         level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Forest Bomberman", 710, 30, 125, WHITE));
-        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 1", 60, 150, 80, WHITE));
-        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 2", 60, 770, 80, WHITE));
-        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 3", 1690, 150, 80, WHITE));
-        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 4", 1690, 770, 80, WHITE));
+        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 1", 145, 150, 80, WHITE));
+        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 2", 145, 550, 80, WHITE));
+        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 3", 1605, 150, 80, WHITE));
+        level->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Player 4", 1605, 550, 80, WHITE));
         display_loading(85);
-        level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 75, 220));
-        level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 75, 840));
-        level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1710, 220));
-        level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1710, 840));
+        level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 160, 220));
+        level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 160, 620));
+        level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1625, 220));
+        level->AddEntity(new GameImage("../Assets/Heart/little_life.png", 1625, 620));
+        for (int y = 0; y < 2; y++) {
+            level->AddEntity(new GameImage("../Assets/PowerUps/background3.png", 40, 320 + 400 * y));
+            level->AddEntity(new GameImage("../Assets/PowerUps/bomb.png", 80, 345 + 400 * y));
+            level->AddEntity(new GameImage("../Assets/PowerUps/speed.png", 270, 345 + 400 * y));
+            level->AddEntity(new GameImage("../Assets/PowerUps/shield.png", 60, 430 + 400 * y));
+            level->AddEntity(new GameImage("../Assets/PowerUps/wall.png", 230, 425 + 400 * y));
+
+            level->AddEntity(new GameImage("../Assets/PowerUps/background3.png", 1500, 320 + 400 * y));
+            level->AddEntity(new GameImage("../Assets/PowerUps/bomb.png", 1545, 345 + 400 * y));
+            level->AddEntity(new GameImage("../Assets/PowerUps/speed.png", 1725, 345 + 400 * y));
+            level->AddEntity(new GameImage("../Assets/PowerUps/shield.png", 1530, 430 + 400 * y));
+            level->AddEntity(new GameImage("../Assets/PowerUps/wall.png", 1695, 425 + 400 * y));
+        }
         level->AddEntity(new GameButton(50, 40, "../Assets/Buttons/home.png"));
         level->AddEntity(new GameScript(gameRef, 4));
         scenes.push_back(level);
