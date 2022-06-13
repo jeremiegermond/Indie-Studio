@@ -15,7 +15,7 @@ namespace bomberman {
             SetAnimation(1);
             return;
         }
-        if (GetActive() == false)
+        if (!GetActive())
             return;
         elapsed += std::chrono::duration<double, std::milli>(now - previous).count();
         if (!cpu) {
@@ -70,6 +70,8 @@ namespace bomberman {
 
     void GamePlayer::SetPlay(bool play) {
         canPlay = play;
+        if (!bombs.empty())
+            bombs.erase(bombs.begin());
     }
 
     void GamePlayer::SetKeys(KeysLayout playerNB) {

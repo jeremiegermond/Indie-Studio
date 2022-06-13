@@ -117,10 +117,14 @@ namespace bomberman {
     }
 
     GameCamera *Scene::GetCamera(int i) {
+        if (GameCameras.size() <= size_t(i))
+            return nullptr;
         return GameCameras.at(i);
     }
 
     GameText *Scene::GetText(int i) {
+        if (GameTexts.size() <= size_t(i))
+            return nullptr;
         return GameTexts.at(i);
     }
 
@@ -145,6 +149,8 @@ namespace bomberman {
     }
 
     void Scene::Populate(const std::vector<GamePlayer *> &newPlayers) {
+        if (!Players.empty())
+            Players.erase(Players.begin());
         for (auto player: newPlayers) {
             player->SetMap(GameMap);
             Players.push_back(player);

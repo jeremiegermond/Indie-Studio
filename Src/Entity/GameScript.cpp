@@ -114,21 +114,19 @@ namespace bomberman {
                 if (button->GetState()) {
                     button->SetState(false);
                     for (int x = 0; x < 4; x++) {
-                        players.push_back(scene->GetPlayer(x));
-                    }
-                    scene->SetActiveButton(BUTTON_MENU, false, true);
-                    _game->ChangeScene(1);
-                    scene = _game->GetScene();
-                    auto map = scene->GetMap();
-                    scene->Populate(players);
-                    for (int x = 0; x < 4; x++) {
                         auto player = scene->GetPlayer(x);
                         player->SetScale(.4f);
                         player->SetPosition(positions[4+x]);
                         player->SetPlay(true);
                         if (!player->isCpu())
                             player->SetKeys(x);
+                        players.push_back(player);
                     }
+                    scene->SetActiveButton(BUTTON_MENU, false, true);
+                    _game->ChangeScene(1);
+                    scene = _game->GetScene();
+                    auto map = scene->GetMap();
+                    scene->Populate(players);
                     if (map && i) {
                         map->LoadMap();
                     } else if (map) {
@@ -150,21 +148,22 @@ namespace bomberman {
         auto btnReturn = scene->GetButton(0);
         if (btnReturn && btnReturn->GetState()) {
             btnReturn->SetState(false);
+            map->Save();
             _game->ChangeScene(0);
             scene = _game->GetScene();
             auto *script = scene->GetScript(0);
             script->currentScript = 2;
             script->ActivateSelection();
-            // script->LoadPlayers();
+            script->LoadPlayers(true);
             return;
         }
         for (int x = 0; x < 4; x++) {
-            auto player = _game->GetScene()->GetPlayer(x);
+            auto player = scene->GetPlayer(x);
             if (player == nullptr)
                 break;
             players.push_back(player);
             if (!player->GetActive())
-                _game->GetScene()->GetImage(x)->SetColor(GRAY);
+                scene->GetImage(x)->SetColor(GRAY);
             playersPos.push_back(player->GetPosition());
             map->GetBlock(int (round(playersPos.back().x)), int(round(playersPos.back().z)));
             for (auto bomb: player->GetBombs())
@@ -235,14 +234,19 @@ namespace bomberman {
         }
     }
 
-    void GameScript::LoadPlayers() {
+    void GameScript::LoadPlayers(bool populated) {
         std::vector<GamePlayer *> players;
+        auto scene = _game->GetScene();
         for (int i = 0; i < 4; i++) {
-            players.push_back(_game->GetScene()->PopPlayer());
-            players.back()->SetPosition(positions[i]);
-            players.back()->SetRotation(rotations[i]);
+            auto player = populated ? scene->GetPlayer(i) : scene->PopPlayer();
+            player->SetPosition(positions[i]);
+            player->SetRotation(rotations[i]);
+            player->SetScale(.1f);
+            player->SetPlay(false);
+            players.push_back(player);
         }
-        _game->GetScene()->Populate(players);
+        if (!populated)
+            scene->Populate(players);
     }
 
     void GameScript::ActivateSelection() {

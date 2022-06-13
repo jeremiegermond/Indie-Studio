@@ -148,6 +148,8 @@ namespace bomberman {
     }
 
     Scene *SceneManager::GetScene(int sceneId) {
+        if (scenes.size() <= size_t(sceneId))
+            return nullptr;
         return scenes.at(sceneId);
     }
 }
