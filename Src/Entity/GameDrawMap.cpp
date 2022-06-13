@@ -175,6 +175,10 @@ namespace bomberman {
         }
         for (auto &y: _map) {
             std::getline(_loadmap, oldmap);
+            if (oldmap.size() < 21)  {
+                GenerateMap();
+                return;
+            }
             for (int x = 0; x < int(y.size()); x++) {
                 y[x] = oldmap[x];
             }
