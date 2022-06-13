@@ -112,7 +112,7 @@ namespace bomberman {
     }
 
     void Scene::UnloadScene() {
-        for (auto sound : GameSounds)
+        for (auto sound: GameSounds)
             sound->Stop();
     }
 
@@ -144,7 +144,7 @@ namespace bomberman {
         return pop;
     }
 
-    void Scene::Populate(const std::vector<GamePlayer *>& newPlayers) {
+    void Scene::Populate(const std::vector<GamePlayer *> &newPlayers) {
         for (auto player: newPlayers) {
             player->SetMap(GameMap);
             Players.push_back(player);
@@ -156,6 +156,8 @@ namespace bomberman {
     }
 
     GameButton *Scene::GetButton(int i) {
+        if (GameButtons.size() <= size_t(i))
+            return nullptr;
         return GameButtons.at(i);
     }
 
@@ -202,4 +204,23 @@ namespace bomberman {
         else
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
+
+    GameScript *Scene::GetScript(int i) {
+        if (GameScripts.size() <= size_t(i))
+            return nullptr;
+        return GameScripts.at(i);
+    }
+
+    void Scene::SetActiveButton(ButtonType type,
+                                bool active,
+                                bool reset) {
+        for (auto button: GameButtons) {
+            if (button->GetType() == type) {
+                button->SetActive(active);
+                if (reset)
+                    button->SetState(false);
+            }
+        }
+    }
+
 }

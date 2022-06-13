@@ -33,6 +33,8 @@ namespace bomberman {
             void Update();
             void SetActive(bool activate);
             void UpdateBomb();
+            void LoadPlayers();
+            void ActivateSelection();
     };
 }
 

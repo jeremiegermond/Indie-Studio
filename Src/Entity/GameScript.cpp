@@ -61,65 +61,24 @@ namespace bomberman {
     void GameScript::PressToZoom() {
         if (IsKeyPressed(KEY_ENTER)) {
             PlaySound(click);
-            std::vector<GamePlayer *> players;
-            for (int i = 0; i < 4; i++) {
-                players.push_back(_game->GetScene()->PopPlayer());
-                players.back()->SetPosition(positions[i]);
-                players.back()->SetRotation(rotations[i]);
-            }
-            _game->GetScene()->Populate(players);
             _game->GetScene()->GetCamera(0)->SetMode(CAMERA_CUSTOM);
             _game->GetScene()->NextCamera();
-            _game->GetScene()->GetText(0)->SetActive(false);
-            _game->GetScene()->GetText(1)->SetActive(false);
-            _game->GetScene()->GetText(2)->SetActive(true);
-            auto buttons = _game->GetScene()->GetButtons();
-            for (auto button: buttons) {
-                if (button->GetType() == BUTTON_SELECT || button->GetType() == BUTTON_AI) {
-                    button->SetActive(true);
-                }
-            }
+            LoadPlayers();
+            ActivateSelection();
             currentScript = 2;
         }
     }
 
-    void GameScript::SelectLoad() {
-        auto buttons = _game->GetScene()->GetButtons();
-        int i = 0;
-        for (auto button: buttons) {
-            if (button->GetType() == BUTTON_LOAD) {
-                if (button->GetState()) {
-                    std::vector<GamePlayer *> players;
-                    for (int x = 0; x < 4; x++) {
-                        auto player = _game->GetScene()->GetPlayer(x);
-                        player->SetScale(.4f);
-                        player->SetPosition(positions[4+x]);
-                        player->SetPlay(true);
-                        if (!player->isCpu())
-                            player->SetKeys(x);
-                        players.push_back(player);
-                    }
-                    _game->ChangeScene(1);
-                    _game->GetScene()->Populate(players);
-                    if (i) {
-                        _game->GetScene()->GetMap()->LoadMap();
-                    }
-                }
-                button->SetActive(true);
-                i++;
-            }
-        }
-    }
-
     void GameScript::PressToPlay() {
-        auto buttons = _game->GetScene()->GetButtons();
+        auto scene = _game->GetScene();
+        auto buttons = scene->GetButtons();
         int i = 0;
         for (auto button: buttons) {
             if (button->GetType() == BUTTON_SELECT) {
                 if (button->GetState()) {
-                    _game->GetScene()->ChangePlayer(i);
-                    _game->GetScene()->GetPlayer(i)->SetPosition(positions[i]);
-                    _game->GetScene()->GetPlayer(i)->SetRotation(rotations[i]);
+                    scene->ChangePlayer(i);
+                    scene->GetPlayer(i)->SetPosition(positions[i]);
+                    scene->GetPlayer(i)->SetRotation(rotations[i]);
                     button->SetState(false);
                 }
                 i++;
@@ -133,13 +92,50 @@ namespace bomberman {
             for (auto button: buttons) {
                 if (button->GetType() == BUTTON_AI) {
                     if (button->GetState())
-                        _game->GetScene()->GetPlayer(cpuselect)->setCpu(false);
+                        scene->GetPlayer(cpuselect)->setCpu(false);
                     cpuselect++;
                     button->SetActive(false);
                 }
-                if (button->GetType() == BUTTON_SELECT) {
-                    button->SetActive(false);
+            }
+            scene->SetActiveButton(BUTTON_SELECT, false, true);
+            scene->SetActiveButton(BUTTON_AI, false);
+            scene->SetActiveButton(BUTTON_LOAD, true, true);
+        }
+    }
+
+
+    void GameScript::SelectLoad() {
+        auto scene = _game->GetScene();
+        auto buttons = scene->GetButtons();
+        std::vector<GamePlayer *> players;
+        int i = 0;
+        for (auto button: buttons) {
+            if (button->GetType() == BUTTON_LOAD) {
+                if (button->GetState()) {
+                    button->SetState(false);
+                    for (int x = 0; x < 4; x++) {
+                        players.push_back(scene->GetPlayer(x));
+                    }
+                    scene->SetActiveButton(BUTTON_MENU, false, true);
+                    _game->ChangeScene(1);
+                    scene = _game->GetScene();
+                    auto map = scene->GetMap();
+                    scene->Populate(players);
+                    for (int x = 0; x < 4; x++) {
+                        auto player = scene->GetPlayer(x);
+                        player->SetScale(.4f);
+                        player->SetPosition(positions[4+x]);
+                        player->SetPlay(true);
+                        if (!player->isCpu())
+                            player->SetKeys(x);
+                    }
+                    if (map && i) {
+                        map->LoadMap();
+                    } else if (map) {
+                        map->GenerateMap();
+                    }
                 }
+                i++;
             }
         }
     }
@@ -149,13 +145,25 @@ namespace bomberman {
         std::vector<GamePlayer *> players;
         std::vector<MyVector3> cases;
         std::vector<MyVector3> playersPos;
-        GameDrawMap *map = _game->GetScene()->GetMap();
+        auto scene = _game->GetScene();
+        auto map = scene->GetMap();
+        auto btnReturn = scene->GetButton(0);
+        if (btnReturn && btnReturn->GetState()) {
+            btnReturn->SetState(false);
+            _game->ChangeScene(0);
+            scene = _game->GetScene();
+            auto *script = scene->GetScript(0);
+            script->currentScript = 2;
+            script->ActivateSelection();
+            // script->LoadPlayers();
+            return;
+        }
         for (int x = 0; x < 4; x++) {
             auto player = _game->GetScene()->GetPlayer(x);
             if (player == nullptr)
                 break;
             players.push_back(player);
-            if (player->GetActive() == false)
+            if (!player->GetActive())
                 _game->GetScene()->GetImage(x)->SetColor(GRAY);
             playersPos.push_back(player->GetPosition());
             map->GetBlock(int (round(playersPos.back().x)), int(round(playersPos.back().z)));
@@ -182,8 +190,7 @@ namespace bomberman {
                 if (!posX) {
                     tmpP.x = pos.x + float(i);
                     if (map->GetBlock(x + i, z) != '0') {
-                        if (exploded == 1)
-                            map->BreakBlock(x + i, z);
+                        map->BreakBlock(x + i, z);
                         posX = true;
                     }
                     cases.push_back(tmpP);
@@ -191,8 +198,7 @@ namespace bomberman {
                 if (!negX) {
                     tmpP.x = pos.x - float(i);
                     if (map->GetBlock(x - i, z) != '0') {
-                        if (exploded == 1)
-                            map->BreakBlock(x - i, z);
+                        map->BreakBlock(x - i, z);
                         negX = true;
                     }
                     cases.push_back(tmpP);
@@ -202,8 +208,7 @@ namespace bomberman {
                     tmpP.z = pos.z + float(i);
                     printf("posZ %f %f\n", tmpP.x, tmpP.z);
                     if (map->GetBlock(x, z + i) != '0') {
-                        if (exploded == 1)
-                            map->BreakBlock(x, z + i);
+                        map->BreakBlock(x, z + i);
                         posZ = true;
                     }
                     cases.push_back(tmpP);
@@ -212,8 +217,7 @@ namespace bomberman {
                     tmpP.z = pos.z - float(i);
                     printf("negZ %f %f\n", tmpP.x, tmpP.z);
                     if (map->GetBlock(x, z - i) != '0') {
-                        if (exploded == 1)
-                            map->BreakBlock(x, z - i);
+                        map->BreakBlock(x, z - i);
                         negZ = true;
                     }
                     cases.push_back(tmpP);
@@ -229,5 +233,25 @@ namespace bomberman {
                 }
             }
         }
+    }
+
+    void GameScript::LoadPlayers() {
+        std::vector<GamePlayer *> players;
+        for (int i = 0; i < 4; i++) {
+            players.push_back(_game->GetScene()->PopPlayer());
+            players.back()->SetPosition(positions[i]);
+            players.back()->SetRotation(rotations[i]);
+        }
+        _game->GetScene()->Populate(players);
+    }
+
+    void GameScript::ActivateSelection() {
+        auto *scene = _game->GetScene();
+        scene->SetActiveButton(BUTTON_SELECT, true, true);
+        scene->SetActiveButton(BUTTON_AI);
+        scene->SetActiveButton(BUTTON_LOAD, false);
+        _game->GetScene()->GetText(0)->SetActive(false);
+        _game->GetScene()->GetText(1)->SetActive(false);
+        _game->GetScene()->GetText(2)->SetActive(true);
     }
 }
