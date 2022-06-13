@@ -9,6 +9,7 @@
 #define GAMESCRIPT_HPP_
 
 #include "IEntity.hpp"
+#include "Gamepad.hpp"
 
 namespace bomberman {
     class Game;
@@ -20,6 +21,7 @@ namespace bomberman {
             std::vector<MyVector3> positions;
             std::vector<MyVector3> rotations;
             std::vector<KeyboardKey*> keys;
+            std::vector<Gamepad*> gamepads;
             Sound click{};
 
         public:
@@ -35,6 +37,7 @@ namespace bomberman {
             void UpdateBomb();
             void LoadPlayers(bool populated = false);
             void ActivateSelection();
+            bool CheckGamepadsButtonPressed(int nb);
     };
 }
 

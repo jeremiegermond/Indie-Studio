@@ -84,22 +84,22 @@ namespace bomberman {
         GetPowerUp(map->GetBlock(rPosX, rPosZ));
         map->BreakBlock(rPosX, rPosZ, true);
         if (!cpu && keys) {
-            if (IsKeyPressed(keys->bomb())) {
+            if (IsKeyPressed(keys->bomb()) || GetGamepad()->button(7)) {
                 AddBomb();
             }
-            if (IsKeyDown(keys->left())) {
+            if (IsKeyDown(keys->left()) || GetGamepad()->left()) {
                 if (!map->Collide(int(round(posX + .6)), rPosZ))
                     Move(MyVector3{speed, 0.0f, 0.0f});
                 rotation.z = -1.5;
-            } else if (IsKeyDown(keys->right())) {
+            } else if (IsKeyDown(keys->right()) || GetGamepad()->right()) {
                 if (!map->Collide(int(round(posX - .6)), rPosZ))
                     Move(MyVector3{-speed, 0.0f, 0.0f});
                 rotation.z = 1.5;
-            } else if (IsKeyDown(keys->up())) {
+            } else if (IsKeyDown(keys->up()) || GetGamepad()->up()) {
                 if (!map->Collide(rPosX, int(round(posZ + .6))))
                     Move(MyVector3{0.0f, 0.0f, speed});
                 rotation.z = 0;
-            } else if (IsKeyDown(keys->down())) {
+            } else if (IsKeyDown(keys->down()) || GetGamepad()->down()) {
                 if (!map->Collide(rPosX, int(round(posZ - .6))))
                     Move(MyVector3{0.0f, 0.0f, -speed});
                 rotation.z = 3;
@@ -111,15 +111,6 @@ namespace bomberman {
             CPUPlay();
         previous = now;
     }
-
-
-/*
-
-rand / 4 -> if direction = wall rand again
-
-
-
-*/
 
     void GamePlayer::SetPlay(bool play) {
         canPlay = play;
@@ -133,6 +124,14 @@ rand / 4 -> if direction = wall rand again
 
     void GamePlayer::SetKeys(int playerNB) {
         keys = new Keyboard(playerNB);
+    }
+
+    void GamePlayer::SetGamepad(Gamepad *gp) {
+        gamepad = gp;
+    }
+
+    Gamepad *GamePlayer::GetGamepad() {
+        return gamepad;
     }
 
     std::vector<GameBomb *> GamePlayer::GetBombs() {
