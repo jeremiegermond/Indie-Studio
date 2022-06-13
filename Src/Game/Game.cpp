@@ -6,9 +6,10 @@
 */
 
 #include "Game.hpp"
+#include "Exception.hpp"
 
 namespace bomberman {
-    Game::Game::Game() {
+    Game::Game() {
         width = 1920;
         height = 1080;
         currentScene = 0;
@@ -27,7 +28,13 @@ namespace bomberman {
         SetTargetFPS(60);
         flavicon = LoadImage("../Assets/Bomb/bombFlavicon.png");
         SetWindowIcon(flavicon);
-        scenes = SceneManager(this);
+        std::srand(std::time(nullptr));
+        try {
+            scenes = SceneManager(this);
+        } catch (Exception &e) {
+            std::cout << "Build error :" << e.what() << std::endl;
+            throw (CriticalError("Loading failed, aborting.", __FILE__, __LINE__));
+        }
     }
 
     void Game::run() {

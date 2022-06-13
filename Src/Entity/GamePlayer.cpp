@@ -8,6 +8,52 @@
 #include "GameBomb.hpp"
 
 namespace bomberman {
+    void GamePlayer::CPUPlay() {
+        MyVector3 pos = GetPosition();
+        float posX = pos.x;
+        float posZ = pos.z;
+        int rPosX = int(round(posX));
+        int rPosZ = int(round(posZ));
+
+        if (IsKeyPressed(KEY_P))
+            printf("%f\n", Vector3Distance(pos, GetPosition(true)));
+        if (Vector3Distance(pos, GetPosition(true)) < .01f)
+            direction = std::rand() % 4;
+        if (direction == 0) {
+            if (!map->Collide(int(round(posX + .6)), rPosZ)) {
+                Move(MyVector3{speed, 0.0f, 0.0f});
+                rotation.z = -1.5;
+            }
+            else
+                direction = std::rand() % 5;
+            
+        } else if (direction == 1) {
+            if (!map->Collide(int(round(posX - .6)), rPosZ)) {
+                Move(MyVector3{-speed, 0.0f, 0.0f});
+                rotation.z = 1.5;
+            }
+            else
+                direction = std::rand() % 5;
+        } else if (direction == 2) {
+            if (!map->Collide(rPosX, int(round(posZ + .6)))) {
+                Move(MyVector3{0.0f, 0.0f, speed});
+                rotation.z = 0;
+            }
+            else
+                direction = std::rand() % 5;
+        } else if (direction == 3) {
+            if (!map->Collide(rPosX, int(round(posZ - .6)))) {
+                Move(MyVector3{0.0f, 0.0f, -speed});
+                rotation.z = 3;
+            }
+            else
+                direction = std::rand() % 5;
+        } else if (direction == 4) {
+            AddBomb();
+            direction = std::rand() % 4;
+        }
+    }
+
     void GamePlayer::Update() {
         now = std::chrono::system_clock::now();
         AnimatedGameObject::Update();
@@ -61,9 +107,19 @@ namespace bomberman {
                 SetAnimation(1);
             }
         }
-        else;//  set ai input
+        else
+            CPUPlay();
         previous = now;
     }
+
+
+/*
+
+rand / 4 -> if direction = wall rand again
+
+
+
+*/
 
     void GamePlayer::SetPlay(bool play) {
         canPlay = play;

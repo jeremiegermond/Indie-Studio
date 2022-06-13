@@ -10,6 +10,7 @@ add_executable(bomberman
         Src/Game/Game.cpp
         Src/Map.cpp
         Src/Main.cpp
+        Src/Exception.cpp
         Src/Keyboard.cpp
         Src/Entity/GameObject.cpp
         Src/Entity/GameScript.cpp
@@ -20,6 +21,7 @@ add_executable(bomberman
         Src/Entity/GameText.cpp
         Src/Scene/Scene.cpp
         Src/Scene/SceneManager.cpp
+        Src/Encapsulation/Load.cpp
         Src/Encapsulation/Window.cpp
         Src/Encapsulation/Draw.cpp
         Src/Encapsulation/Models.cpp

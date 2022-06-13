@@ -6,6 +6,7 @@
 */
 
 #include "Main.hpp"
+#include "Exception.hpp"
 
 int main() {
     try {
@@ -13,8 +14,8 @@ int main() {
 
         game.createWindow();
         game.run();
-    } catch (const std::exception &e) {
-        std::cout << e.what() << std::endl;
+    } catch (bomberman::CriticalError &e) {
+        std::cout << "Critical Error : " << e.what() << std::endl;
     } catch (...) {}
     return 0;
 }

@@ -7,6 +7,7 @@
 
 #include "SceneManager.hpp"
 #include "Game.hpp"
+#include "Exception.hpp"
 
 namespace bomberman {
     SceneManager::SceneManager(Game *pGame) {
