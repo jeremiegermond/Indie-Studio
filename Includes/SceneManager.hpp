@@ -34,6 +34,8 @@ namespace bomberman {
         void CreateSettingsScene();
 
         void CreateHowToPlayScene();
+
+        void CreateVictoryOrDefeatScene();
     
         void display_loading(int percentage) {
             loading->UpdateAndDraw(percentage);

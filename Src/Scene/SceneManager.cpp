@@ -23,6 +23,7 @@ namespace bomberman {
         display_loading(99);
         CreateHowToPlayScene();
         display_loading(100);
+        CreateVictoryOrDefeatScene();
         scenes.front()->StartScene();
     }
 
@@ -158,6 +159,13 @@ namespace bomberman {
         howToPlay->AddEntity(new GameImage("../Assets/UI/how_to_play.png", 550, 280));
         howToPlay->AddEntity(new GameButton(1220, 770, "../Assets/UI/close_button90.png"));
         scenes.push_back(howToPlay);
+    }
+
+    void SceneManager::CreateVictoryOrDefeatScene() {
+        auto *victoryOrDefeat = new Scene;
+        victoryOrDefeat->AddEntity(new GameImage("../Assets/UI/how_to_play.png", 550, 280));
+        victoryOrDefeat->AddEntity(new GameButton(1220, 770, "../Assets/UI/close_button90.png"));
+        scenes.push_back(victoryOrDefeat);
     }
 
     Scene *SceneManager::GetScene(int sceneId) {
