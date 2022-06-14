@@ -75,7 +75,7 @@ namespace bomberman {
         }
         if (!GetActive())
             return;
-        double time = std::chrono::duration_cast<std::chrono::milliseconds>(now - previous).count();
+        double time = double(std::chrono::duration_cast<std::chrono::milliseconds>(now - previous).count());
         elapsed += time;
         wallPass -= time;
         wallPass = wallPass > 0 ? wallPass : 0;

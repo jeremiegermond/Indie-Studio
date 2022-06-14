@@ -93,6 +93,14 @@ namespace bomberman {
         menu->AddEntity(new GameButton(550, 550, "../Assets/Buttons/load.png", BUTTON_LOAD));
         menu->AddEntity(new GameButton(1200, 875, "../Assets/Buttons/p3.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
         menu->AddEntity(new GameButton(1500, 875, "../Assets/Buttons/p4.png", "../Assets/Buttons/cpu.png", BUTTON_AI));
+        auto *bomb = new AnimatedGameObject("../Assets/Level/bomb.iqm",
+                                            "../Assets/Level/bomb.png",
+                                            "../Assets/Level/bomb.iqm",
+                                            0,
+                                            1.5f);
+        bomb->SetPosition(MyVector3{.6f, .0f, .6f});
+        bomb->SetRotation(MyVector3{0.f, 0.f, 2.3f});
+        menu->AddEntity(bomb);
         display_loading(60);
         menu->GetText(2)->SetActive(false);
         menu->AddEntity(new GameScript(gameRef, 1));
