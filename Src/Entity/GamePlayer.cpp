@@ -200,16 +200,19 @@ namespace bomberman {
     void GamePlayer::GetPowerUp(char block) {
         switch (block) {
             case '5':
-                maxBombsStat++;
+                if (maxBombsStat < 6)
+                    maxBombsStat++;
                 break;
             case '6':
-                speed += 1.f;
+                if (speed < 6)
+                    speed += 1.f;
                 break;
             case '7':
                 wallPass = 10000;
                 break;
             case '8':
-                fireUp++;
+                if (fireUp < 8)
+                    fireUp++;
                 break;
             default:
                 return;
