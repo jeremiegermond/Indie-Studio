@@ -173,12 +173,63 @@ namespace bomberman {
             PlaySound(step);
     }
 
-    void GamePlayer::SavePlayer() {
-
+    void GamePlayer::SavePlayer(int i) {
+        std::ofstream file;
+        file.open(TextFormat("player%d.txt", i));
+        if (!file.is_open())
+            return;
+        MyVector3 pos = GetPosition(true);
+        file << lives << std::endl;
+        file << pos.x << std::endl;
+        file << pos.z << std::endl;
+        file << GetMaxBombs() << std::endl;
+        file << GetSpeed() << std::endl;
+        file << wallPass << std::endl;
+        file << GetFireUps() << std::endl;
+        file.close();
     }
 
-    void GamePlayer::LoadPlayer() {
-
+    void GamePlayer::LoadPlayer(int i) {
+        std::ifstream file;
+        std::string setting;
+        MyVector3 newPos = GetPosition(true);
+        file.open(TextFormat("player%d.txt", i));
+        if (!file.is_open()) {
+            return;
+        }
+        try {
+            std::getline(file, setting);
+            if (setting.empty())
+                return;
+            lives = std::stoi(setting);
+            std::getline(file, setting);
+            if (setting.empty())
+                return;
+            newPos.x = std::stof(setting);
+            std::getline(file, setting);
+            if (setting.empty())
+                return;
+            newPos.z = std::stof(setting);
+            SetPosition(newPos);
+            std::getline(file, setting);
+            if (setting.empty())
+                return;
+            maxBombsStat = std::stoi(setting);
+            std::getline(file, setting);
+            if (setting.empty())
+                return;
+            speed = std::stof(setting);
+            std::getline(file, setting);
+            if (setting.empty())
+                return;
+            wallPass = double(std::stoi(setting));
+            std::getline(file, setting);
+            if (setting.empty())
+                return;
+            fireUp = std::stoi(setting);
+        } catch (...) {}
+        if (lives <= 0)
+            SetActive(false);
     }
 
     void GamePlayer::SetActive(bool activate) {

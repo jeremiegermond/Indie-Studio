@@ -78,8 +78,8 @@ namespace bomberman {
         void switchPlayer();
         void setCpu(bool nv);
         void Move(MyVector3 velocity) override;
-        void SavePlayer();
-        void LoadPlayer();
+        void SavePlayer(int i);
+        void LoadPlayer(int i);
         void SetActive(bool activate) override;
         void AddBomb();
 

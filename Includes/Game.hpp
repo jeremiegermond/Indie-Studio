@@ -35,6 +35,7 @@ namespace bomberman {
         void ChangeScene(int i);
         Scene *GetScene();
         SceneManager GetSceneManager();
+        void CloseGame();
     };
 
 }

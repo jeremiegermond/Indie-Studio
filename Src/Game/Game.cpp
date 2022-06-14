@@ -73,7 +73,7 @@ namespace bomberman {
             }
             EndDrawing();
         }
-        scenes.GetScene(1)->GetMap()->Save();
+        CloseGame();
     }
 
     void Game::ChangeScene(int i) {
@@ -89,5 +89,12 @@ namespace bomberman {
 
     SceneManager Game::GetSceneManager() {
         return scenes;
+    }
+
+    void Game::CloseGame() {
+        scenes.GetScene(1)->GetMap()->Save();
+        for (int i = 0; i < 4; i++)
+            scenes.GetScene(1)->GetPlayer(i)->SavePlayer(i);
+
     }
 }

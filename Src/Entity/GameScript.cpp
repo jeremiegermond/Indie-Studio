@@ -127,6 +127,8 @@ namespace bomberman {
                             player->SetKeys(x);
                             player->SetGamepad(gamepads[x]);
                         }
+                        if (i)
+                            player->LoadPlayer(x);
                         players.push_back(player);
                     }
                     scene->SetActiveButton(BUTTON_MENU, false, true);
@@ -257,6 +259,8 @@ namespace bomberman {
         auto scene = _game->GetScene();
         for (int i = 0; i < 4; i++) {
             auto player = populated ? scene->GetPlayer(i) : scene->PopPlayer();
+            if (populated)
+                player->SavePlayer(i);
             player->Reset();
             player->SetPosition(positions[i]);
             player->SetRotation(rotations[i]);
