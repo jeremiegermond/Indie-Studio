@@ -244,4 +244,10 @@ namespace bomberman {
             return nullptr;
         return GamePowerUps.at(i);
     }
+
+    GameObject *Scene::GetObject(int i) {
+        if (GameObjects.size() <= size_t(i))
+            return nullptr;
+        return GameObjects.at(i);
+    }
 }

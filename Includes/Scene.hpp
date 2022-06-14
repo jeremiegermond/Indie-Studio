@@ -85,6 +85,8 @@ namespace bomberman {
 
         GamePowerUp *GetGamePowerUp(int i);
 
+        GameObject *GetObject(int i);
+
         void SetCursor(bool hover);
 
         void SetActiveButton(ButtonType type,

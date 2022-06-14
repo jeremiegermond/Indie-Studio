@@ -29,6 +29,7 @@
 #include "rlgl.h"
 #include "Objects.hpp"
 #include "Keyboard.hpp"
+#include "Exception.hpp"
 
 namespace bomberman {
     class IEntity {

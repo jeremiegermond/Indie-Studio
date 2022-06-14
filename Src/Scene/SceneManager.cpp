@@ -7,13 +7,13 @@
 
 #include "SceneManager.hpp"
 #include "Game.hpp"
-#include "Exception.hpp"
 
 namespace bomberman {
     SceneManager::SceneManager(Game *pGame) {
         gameRef = pGame;
         loading = new GameLoading();
         display_loading(5);
+        tree = new GameObject("../Assets/Level/forest.obj");
         CreateMenuScene();
         display_loading(70);
         CreateLevelScene();
@@ -42,7 +42,7 @@ namespace bomberman {
                                         MyVector3{0.0f, 1.0f, 0.0f},
                                         50.0f,
                                         CAMERA_PERSPECTIVE));
-        menu->AddEntity(new GameObject("../Assets/Level/forest.obj"));
+        menu->AddEntity(tree);
         display_loading(8);
         menu->AddEntity(new GameSound("../Assets/Songs/ForestSong.mp3", true));
         menu->AddEntity(new GamePlayer("../Assets/AnimalsCharacters/Fox.iqm",
@@ -106,11 +106,8 @@ namespace bomberman {
                                        MyVector3{0.0f, 1.0f, 0.0f},
                                        50.0f,
                                        CAMERA_PERSPECTIVE));
-        auto *forest = new GameObject("../Assets/Level/forest.obj");
         display_loading(75);
-        forest->SetScale(50.f);
-        forest->SetPosition(MyVector3{25.f, -5.f, 25.f});
-        level->AddEntity(forest);
+        level->AddEntity(tree);
         level->AddEntity(new GameSound("../Assets/Songs/CoffeeSong.mp3", true));
         level->AddEntity(new GameDrawMap("../Assets/Texture/brick.png", "../Assets/Texture/wood.png", WHITE));
         display_loading(80);
@@ -167,6 +164,7 @@ namespace bomberman {
 
     void SceneManager::CreateVictoryOrDefeatScene() {
         auto *victoryOrDefeat = new Scene;
+        victoryOrDefeat->AddEntity(tree);
         victoryOrDefeat->AddEntity(new GameImage("../Assets/UI/how_to_play.png", 550, 280));
         victoryOrDefeat->AddEntity(new GameButton(1220, 770, "../Assets/UI/close_button90.png"));
         scenes.push_back(victoryOrDefeat);

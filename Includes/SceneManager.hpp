@@ -16,6 +16,7 @@ namespace bomberman {
         std::vector<Scene *> scenes;
         Game *gameRef{};
         GameLoading *loading;
+        GameObject *tree;
 
     public:
         SceneManager() = default;
@@ -36,7 +37,7 @@ namespace bomberman {
         void CreateHowToPlayScene();
 
         void CreateVictoryOrDefeatScene();
-    
+
         void display_loading(int percentage) {
             loading->UpdateAndDraw(percentage);
         }

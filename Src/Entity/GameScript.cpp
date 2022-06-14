@@ -141,6 +141,8 @@ namespace bomberman {
                         powerUp->SetPosition(powerUpPos[x]);
                         scene->GetImage(x)->SetColor(WHITE);
                     }
+                    scene->GetObject(0)->SetScale(50.f);
+                    scene->GetObject(0)->SetPosition(MyVector3{25.f, -5.f, 25.f});
                     if (map && i) {
                         map->LoadMap();
                     } else if (map) {
@@ -169,6 +171,9 @@ namespace bomberman {
             script->currentScript = 2;
             script->ActivateSelection();
             script->LoadPlayers(true);
+            scene->SetActiveButton(BUTTON_MENU, true, true);
+            scene->GetObject(0)->SetScale(1.f);
+            scene->GetObject(0)->SetPosition(MyVector3{0.f, 0.f, 0.f});
             return;
         }
         for (int x = 0; x < 4; x++) {
