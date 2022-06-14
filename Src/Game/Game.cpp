@@ -93,8 +93,10 @@ namespace bomberman {
 
     void Game::CloseGame() {
         scenes.GetScene(1)->GetMap()->Save();
-        for (int i = 0; i < 4; i++)
-            scenes.GetScene(1)->GetPlayer(i)->SavePlayer(i);
-
+        for (int i = 0; i < 4; i++) {
+            auto player = scenes.GetScene(1)->GetPlayer(i);
+            if (player)
+                player->SavePlayer(i);
+        }
     }
 }
