@@ -22,6 +22,8 @@ namespace bomberman {
               startTint(tint),
               active(true) {
 
+        if (!std::ifstream(modelPath).good())
+            throw BuildError("Failed to load model " + modelPath, __FILE__, __LINE__);
         model = LoadModel(modelPath.c_str());
     };
 

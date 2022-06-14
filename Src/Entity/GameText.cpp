@@ -18,6 +18,8 @@ namespace bomberman {
         _flash = flash;
         _framesCounter = 0;
         active = true;
+        if (!std::ifstream(font).good())
+            throw BuildError("Failed to load font " + font, __FILE__, __LINE__);
     }
 
     void GameText::Draw() {

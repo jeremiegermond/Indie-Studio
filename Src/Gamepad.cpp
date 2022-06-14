@@ -27,37 +27,45 @@ namespace bomberman
     bool Gamepad::up() {
         if (!IsAvailable())
             return false;
-        if (GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_Y) < -0.10f &&
+        if (IsGamepadButtonDown(id, GAMEPAD_BUTTON_LEFT_FACE_UP) ||
+            (GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_Y) < -0.10f &&
             (fabs(GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_Y)) >
-            (fabs(GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_X)))))
+            (fabs(GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_X))))))
             return true;
+        return false;
     }
 
     bool Gamepad::down() {
         if (!IsAvailable())
             return false;
-        if (GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_Y) > 0.10f &&
+        if (IsGamepadButtonDown(id, GAMEPAD_BUTTON_LEFT_FACE_DOWN) ||
+            (GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_Y) > 0.10f &&
             (fabs(GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_Y)) >
-            (fabs(GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_X)))))
+            (fabs(GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_X))))))
             return true;
+        return false;
     }
 
     bool Gamepad::left() {
         if (!IsAvailable())
             return false;
-        if (GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_X) < -0.10f &&
+        if (IsGamepadButtonDown(id, GAMEPAD_BUTTON_LEFT_FACE_LEFT) ||
+            (GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_X) < -0.10f &&
             (fabs(GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_X)) >
-            (fabs(GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_Y)))))
+            (fabs(GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_Y))))))
             return true;
+        return false;
     }
 
     bool Gamepad::right() {
         if (!IsAvailable())
             return false;
-        if (GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_X) > 0.10f &&
+        if (IsGamepadButtonDown(id, GAMEPAD_BUTTON_LEFT_FACE_RIGHT) ||
+            (GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_X) > 0.10f &&
             (fabs(GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_X)) >
-            (fabs(GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_Y)))))
+            (fabs(GetGamepadAxisMovement(id, GAMEPAD_AXIS_LEFT_Y))))))
             return true;
+        return false;
     }
 
     bool Gamepad::button(int nb) {

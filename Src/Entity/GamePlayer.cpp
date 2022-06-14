@@ -20,7 +20,7 @@ namespace bomberman {
         if (Vector3Distance(pos, GetPosition(true)) < .01f)
             direction = std::rand() % 4;
         if (direction == 0) {
-            if (!map->Collide(int(round(posX + .6)), rPosZ)) {
+            if (!map->Collide(int(round(posX + .6)), rPosZ, wallPass)) {
                 Move(MyVector3{speed, 0.0f, 0.0f});
                 rotation.z = -1.5;
             }
@@ -28,21 +28,21 @@ namespace bomberman {
                 direction = std::rand() % 5;
             
         } else if (direction == 1) {
-            if (!map->Collide(int(round(posX - .6)), rPosZ)) {
+            if (!map->Collide(int(round(posX - .6)), rPosZ, wallPass)) {
                 Move(MyVector3{-speed, 0.0f, 0.0f});
                 rotation.z = 1.5;
             }
             else
                 direction = std::rand() % 5;
         } else if (direction == 2) {
-            if (!map->Collide(rPosX, int(round(posZ + .6)))) {
+            if (!map->Collide(rPosX, int(round(posZ + .6)), wallPass)) {
                 Move(MyVector3{0.0f, 0.0f, speed});
                 rotation.z = 0;
             }
             else
                 direction = std::rand() % 5;
         } else if (direction == 3) {
-            if (!map->Collide(rPosX, int(round(posZ - .6)))) {
+            if (!map->Collide(rPosX, int(round(posZ - .6)), wallPass)) {
                 Move(MyVector3{0.0f, 0.0f, -speed});
                 rotation.z = 3;
             }
@@ -295,5 +295,8 @@ namespace bomberman {
         fireUp = 3;
         speed = 2.f;
         wallPass = 0;
+        keys = nullptr;
+        gamepad = nullptr;
+        cpu = true;
     }
 }
