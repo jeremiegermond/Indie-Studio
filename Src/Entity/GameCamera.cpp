@@ -45,25 +45,13 @@ namespace bomberman {
                 camera.position.x += .01;
                 objectiveCam.position.x += .01;
             }
-            if (IsKeyDown(KEY_K)) {
-                camera.position.x -= .01;
-                objectiveCam.position.x -= .01;
-            }
             if (IsKeyDown(KEY_N)) {
                 camera.position.z += .01;
              objectiveCam.position.z += .01;
             }
-            if (IsKeyDown(KEY_M)) {
-                camera.position.z -= .01;
-                objectiveCam.position.z -= .01;
-            }
             if (IsKeyDown(KEY_I)) {
                 camera.position.y += .01;
                 objectiveCam.position.y += .01;
-            }
-            if (IsKeyDown(KEY_O)) {
-                camera.position.y -= .01;
-                objectiveCam.position.y -= .01;
             }
             if (IsKeyDown(KEY_R))
                 objectiveCam.position = startPosition;
@@ -72,10 +60,6 @@ namespace bomberman {
             }
             if (IsKeyDown(KEY_V)) {
                 objectiveCam.fovy += 1;
-            }
-            if (IsKeyPressed(KEY_P)) {
-                printf("targ: %f %f %f\n", camera.position.x, camera.position.y, camera.position.z);
-                printf("fov: %f\n", camera.fovy);
             }
             UpdateCamera(&camera);
         }
