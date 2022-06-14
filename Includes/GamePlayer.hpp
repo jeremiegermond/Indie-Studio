@@ -34,7 +34,7 @@ namespace bomberman {
         double elapsed{};
         double wallPass{};
         bool cpu = true;
-        int direction;
+        int direction{};
         Keyboard *keys = nullptr;
         Gamepad *gamepad = nullptr;
     public:
@@ -84,10 +84,10 @@ namespace bomberman {
         void AddBomb();
 
         void GetPowerUp(char block);
-        int GetMaxBombs();
-        float GetSpeed();
-        int GetFireUps();
-        float GetWall();
+        [[nodiscard]] int GetMaxBombs() const;
+        [[nodiscard]] float GetSpeed() const;
+        [[nodiscard]] int GetFireUps() const;
+        [[nodiscard]] float GetWall() const;
 
         void Reset() override;
         void CPUPlay();

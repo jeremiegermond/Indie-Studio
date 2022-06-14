@@ -218,19 +218,19 @@ namespace bomberman {
         PlaySound(levelUp);
     }
 
-    int GamePlayer::GetMaxBombs() {
+    int GamePlayer::GetMaxBombs() const {
         return maxBombsStat;
     }
 
-    float GamePlayer::GetSpeed() {
+    float GamePlayer::GetSpeed() const {
         return speed;
     }
 
-    int GamePlayer::GetFireUps() {
+    int GamePlayer::GetFireUps() const {
         return fireUp;
     }
 
-    float GamePlayer::GetWall() {
+    float GamePlayer::GetWall() const {
         return wallPass ? wallPass / 1000.f : 0.f;
     }
 
