@@ -173,13 +173,13 @@ namespace bomberman {
     void SceneManager::CreateVictoryOrDefeatScene() {
         auto *victoryOrDefeat = new Scene;
         victoryOrDefeat->AddEntity(tree);
-        victoryOrDefeat->AddEntity(new GameCamera(MyVector3{0.0f, 22.0f, -12.0f},
-                                        MyVector3{0.0f, 0.0f, 0.0f},
-                                        MyVector3{0.0f, 1.0f, 0.0f},
-                                        50.0f,
-                                        CAMERA_PERSPECTIVE));
+        victoryOrDefeat->AddEntity(new GameCamera(MyVector3{-1.7f, 0.5f, -1.1f},
+                                       MyVector3{0.0f, 0.0f, 0.0f},
+                                       MyVector3{0.0f, 1.0f, 0.0f},
+                                       32.0f,
+                                       CAMERA_PERSPECTIVE));
         victoryOrDefeat->AddEntity(new GameSound("../Assets/Songs/Victory.mp3", true));
-        victoryOrDefeat->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "WINNER !", 525, 100, 200, WHITE));
+        victoryOrDefeat->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "WINNER !", 725, 100, 200, WHITE, true));
         victoryOrDefeat->AddEntity(new GameButton(50, 40, "../Assets/Buttons/home.png"));
         // victoryOrDefeat->AddEntity(new GameScript(gameRef, 4));
         scenes.push_back(victoryOrDefeat);

@@ -164,6 +164,7 @@ namespace bomberman {
         auto scene = _game->GetScene();
         auto map = scene->GetMap();
         auto btnReturn = scene->GetButton(0);
+        int playerAlive = 4;
         if (btnReturn && btnReturn->GetState()) {
             btnReturn->SetState(false);
             map->Save();
@@ -183,8 +184,14 @@ namespace bomberman {
             if (player == nullptr)
                 break;
             players.push_back(player);
-            if (!player->GetActive())
+            if (!player->GetActive()) {
+                playerAlive--;
                 scene->GetImage(x)->SetColor(GRAY);
+            }
+            if (playerAlive <= 1) {
+                _game->ChangeScene(5);
+                scene = _game->GetScene();
+            }
             playersPos.push_back(player->GetPosition());
             map->GetBlock(int (round(playersPos.back().x)), int(round(playersPos.back().z)));
             for (auto bomb: player->GetBombs())
