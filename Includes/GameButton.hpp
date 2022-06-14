@@ -39,6 +39,8 @@ namespace bomberman {
                    const std::string &onPath,
                    int type = BUTTON_MENU)
                 : GameButton(x, y, onPath, onPath, type) {
+        if (!std::ifstream(onPath).good())
+            throw BuildError("Failed to load model " + onPath, __FILE__, __LINE__);
         }
 
         ~GameButton() override;

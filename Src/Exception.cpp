@@ -12,7 +12,7 @@ namespace bomberman {
     {
         file = (std::string)file_path;
         line = line_nb;
-        message = msg;
+        message = "In file " + file + " at line " + std::to_string(line) + "\n" + msg;
     }
 
     std::string Exception::prefix() const

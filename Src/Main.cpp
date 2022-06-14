@@ -15,7 +15,7 @@ int main() {
         game.createWindow();
         game.run();
     } catch (bomberman::CriticalError &e) {
-        std::cout << "Critical Error : " << e.what() << std::endl;
+        std::cout << e.what() << std::endl;
     } catch (...) {}
     return 0;
 }

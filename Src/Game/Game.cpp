@@ -32,7 +32,7 @@ namespace bomberman {
         try {
             scenes = SceneManager(this);
         } catch (Exception &e) {
-            std::cout << "Build error :" << e.what() << std::endl;
+            std::cout << e.what() << std::endl;
             throw (CriticalError("Loading failed, aborting.", __FILE__, __LINE__));
         }
     }

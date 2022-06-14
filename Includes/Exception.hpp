@@ -29,25 +29,25 @@ namespace bomberman {
 
     class RuntimeError : public Exception {
         public :
-            RuntimeError(const std::string &message, const char* file, int line) : Exception(message, file, line) {};
+            RuntimeError(const std::string &message, const char* file, int line) : Exception("RuntimeError :" + message, file, line) {};
             virtual ~RuntimeError() {}
     };
 
     class BuildError : public Exception {
         public :
-            BuildError(const std::string &message, const char* file, int line) : Exception(message, file, line) {};
+            BuildError(const std::string &message, const char* file, int line) : Exception("Build Error :" + message, file, line) {};
             virtual ~BuildError() {}
     };
 
     class InputError : public Exception {
         public :
-            InputError(const std::string &message, const char* file, int line) : Exception(message, file, line) {};
+            InputError(const std::string &message, const char* file, int line) : Exception("Input Error :" + message, file, line) {};
             virtual ~InputError() {}
     };
 
     class CriticalError : public Exception {
         public :
-            CriticalError(const std::string &message, const char* file, int line) : Exception(message, file, line) {};
+            CriticalError(const std::string &message, const char* file, int line) : Exception("Critical Error :" + message, file, line) {};
             virtual ~CriticalError() {}
     };
 }

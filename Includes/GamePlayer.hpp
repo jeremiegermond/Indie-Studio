@@ -60,6 +60,8 @@ namespace bomberman {
                    float scale = 1.0f,
                    unsigned int animationCount = 1)
                 : GamePlayer(modelPath, texturePath, modelPath, scale, animationCount) {
+        if (!std::ifstream(modelPath).good())
+            throw BuildError("Failed to load model " + modelPath, __FILE__, __LINE__);
         }
 
         void Update() override;
