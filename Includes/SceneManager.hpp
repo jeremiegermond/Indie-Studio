@@ -38,6 +38,8 @@ namespace bomberman {
 
         void CreateVictoryOrDefeatScene();
 
+        void CreateTieScene();
+
         void display_loading(int percentage) {
             loading->UpdateAndDraw(percentage);
         }

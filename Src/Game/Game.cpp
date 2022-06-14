@@ -77,6 +77,7 @@ namespace bomberman {
     }
 
     void Game::ChangeScene(int i) {
+        printf("Changing scene to %d\n", i);
         GetScene()->UnloadScene();
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         currentScene = i;

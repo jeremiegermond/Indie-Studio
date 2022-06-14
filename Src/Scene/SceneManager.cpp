@@ -21,10 +21,12 @@ namespace bomberman {
         CreateUiScene();
         display_loading(95);
         CreateSettingsScene();
-        display_loading(99);
+        display_loading(98);
         CreateHowToPlayScene();
-        display_loading(100);
+        display_loading(99);
         CreateVictoryOrDefeatScene();
+        display_loading(100);
+        CreateTieScene();
         scenes.front()->StartScene();
     }
 
@@ -176,13 +178,28 @@ namespace bomberman {
         victoryOrDefeat->AddEntity(new GameCamera(MyVector3{-1.7f, 0.5f, -1.1f},
                                        MyVector3{0.0f, 0.0f, 0.0f},
                                        MyVector3{0.0f, 1.0f, 0.0f},
-                                       32.0f,
+                                       20.0f,
                                        CAMERA_PERSPECTIVE));
         victoryOrDefeat->AddEntity(new GameSound("../Assets/Songs/Victory.mp3", true));
-        victoryOrDefeat->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "WINNER !", 725, 100, 200, WHITE, true));
+        victoryOrDefeat->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "WINNER !", 725, 700, 200, WHITE, true));
         victoryOrDefeat->AddEntity(new GameButton(50, 40, "../Assets/Buttons/home.png"));
         victoryOrDefeat->AddEntity(new GameScript(gameRef, 5));
         scenes.push_back(victoryOrDefeat);
+    }
+
+    void SceneManager::CreateTieScene() {
+        auto *tie = new Scene;
+        tie->AddEntity(tree);
+        tie->AddEntity(new GameCamera(MyVector3{-1.7f, 0.5f, -1.1f},
+                                       MyVector3{0.0f, 0.0f, 0.0f},
+                                       MyVector3{0.0f, 1.0f, 0.0f},
+                                       25.0f,
+                                       CAMERA_PERSPECTIVE));
+        tie->AddEntity(new GameSound("../Assets/Songs/Tie.mp3", true));
+        tie->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "TIE ...", 800, 100, 200, WHITE, true));
+        tie->AddEntity(new GameButton(50, 40, "../Assets/Buttons/home.png"));
+        tie->AddEntity(new GameScript(gameRef, 5));
+        scenes.push_back(tie);
     }
 
     Scene *SceneManager::GetScene(int sceneId) {

@@ -186,20 +186,49 @@ namespace bomberman {
             auto player = scene->GetPlayer(x);
             if (player == nullptr)
                 break;
-            players.push_back(player);
             if (!player->GetActive()) {
                 playerAlive--;
                 scene->GetImage(x)->SetColor(GRAY);
+            } else {
+                players.push_back(player);
+                playersPos.push_back(player->GetPosition());
             }
-            if (playerAlive <= 1) {
+            if (playerAlive == 1 && !players.empty()) {
+                printf("alive 1\n");
+                auto winner = players.back();
+                winner->Reset();
+                winner->SetPosition(MyVector3{0.f, 0.f, 0.f});
+                winner->SetRotation(MyVector3{0.f, 0.f, 1.8f});
+                winner->SetScale(.1f);
+                winner->SetPlay(false);
+                winner->SetActive(true);
                 _game->ChangeScene(5);
                 scene = _game->GetScene();
                 scene->GetObject(0)->SetScale(1.f);
+                scene->Populate(players);
                 scene->GetObject(0)->SetPosition(MyVector3{0.f, 0.f, 0.f});
                 return;
             }
-            playersPos.push_back(player->GetPosition());
-            map->GetBlock(int (round(playersPos.back().x)), int(round(playersPos.back().z)));
+            else if (playerAlive == 0) {
+                printf("alive 0\n");
+                std::vector<GamePlayer *> ties;
+                for (int i = 0; i < 4; i++) {
+                    auto tie = scene->GetPlayer(i);
+                    tie->Reset();
+                    tie->SetPosition(positions[i]);
+                    tie->SetRotation(rotations[i]);
+                    tie->SetScale(.1f);
+                    tie->SetPlay(false);
+                    tie->SetActive(true);
+                    ties.push_back(tie);
+                }
+                _game->ChangeScene(6);
+                scene = _game->GetScene();
+                scene->GetObject(0)->SetScale(1.f);
+                scene->Populate(ties);
+                scene->GetObject(0)->SetPosition(MyVector3{0.f, 0.f, 0.f});
+                return;
+            }
             for (auto bomb: player->GetBombs())
                 bombs.push_back(bomb);
         }
