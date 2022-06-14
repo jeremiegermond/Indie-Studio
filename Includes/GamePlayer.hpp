@@ -12,6 +12,7 @@
 #include "GameBomb.hpp"
 #include "GameDrawMap.hpp"
 #include "GameSound.hpp"
+#include "Gamepad.hpp"
 
 namespace bomberman {
 
@@ -35,6 +36,7 @@ namespace bomberman {
         bool cpu = true;
         int direction;
         Keyboard *keys = nullptr;
+        Gamepad *gamepad = nullptr;
     public:
         GamePlayer(const std::string &modelPath,
                    const std::string &texturePath,
@@ -64,6 +66,11 @@ namespace bomberman {
         void SetPlay(bool play);
         void SetKeys(KeysLayout playerNB);
         void SetKeys(int playerNB);
+    
+        void SetGamepad(Gamepad *gp);
+    
+        Gamepad *GetGamepad();
+
         std::vector<GameBomb *> GetBombs();
         void RemoveLive();
         void SetMap(GameDrawMap *newMap);

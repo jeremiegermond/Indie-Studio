@@ -87,7 +87,7 @@ namespace bomberman {
         GetPowerUp(map->GetBlock(rPosX, rPosZ));
         map->BreakBlock(rPosX, rPosZ, true, wallPass);
         if (!cpu && keys) {
-            if (IsKeyPressed(keys->bomb())) {
+            if (IsKeyPressed(keys->bomb()) || GetGamepad()->button(7)) {
                 AddBomb();
             }
             if (IsKeyDown(keys->left())) {
@@ -115,15 +115,6 @@ namespace bomberman {
         previous = now;
     }
 
-
-/*
-
-rand / 4 -> if direction = wall rand again
-
-
-
-*/
-
     void GamePlayer::SetPlay(bool play) {
         canPlay = play;
         if (!bombs.empty())
@@ -136,6 +127,14 @@ rand / 4 -> if direction = wall rand again
 
     void GamePlayer::SetKeys(int playerNB) {
         keys = new Keyboard(playerNB);
+    }
+
+    void GamePlayer::SetGamepad(Gamepad *gp) {
+        gamepad = gp;
+    }
+
+    Gamepad *GamePlayer::GetGamepad() {
+        return gamepad;
     }
 
     std::vector<GameBomb *> GamePlayer::GetBombs() {

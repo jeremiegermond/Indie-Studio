@@ -9,6 +9,7 @@ include_directories(Includes/Encapsulation)
 add_executable(bomberman
         Src/Game/Game.cpp
         Src/Map.cpp
+        Src/Gamepad.cpp
         Src/Main.cpp
         Src/Exception.cpp
         Src/Keyboard.cpp

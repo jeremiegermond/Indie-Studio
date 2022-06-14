@@ -30,6 +30,7 @@ namespace bomberman {
         powerUpPos.emplace_back(175.0f, 755.0f);
         powerUpPos.emplace_back(1635.0f, 355.0f);
         powerUpPos.emplace_back(1635.0f, 755.0f);
+        gamepads = std::vector({new Gamepad(0), new Gamepad(1), new Gamepad(2), new Gamepad(3)});
         click = LoadSound("../Assets/Bomb/click.mp3");
     }
 
@@ -63,7 +64,7 @@ namespace bomberman {
     }
 
     void GameScript::PressToZoom() {
-        if (IsKeyPressed(KEY_ENTER)) {
+        if (IsKeyPressed(KEY_ENTER) || CheckGamepadsButtonPressed(7)) {
             PlaySound(click);
             _game->GetScene()->GetCamera(0)->SetMode(CAMERA_CUSTOM);
             _game->GetScene()->NextCamera();
@@ -88,7 +89,7 @@ namespace bomberman {
                 i++;
             }
         }
-        if (IsKeyPressed(KEY_ENTER)) {
+        if (IsKeyPressed(KEY_ENTER) || CheckGamepadsButtonPressed(7)) {
             PlaySound(click);
             currentScript = 3;
             int cpuselect = 0;
@@ -122,8 +123,10 @@ namespace bomberman {
                         player->SetScale(.4f);
                         player->SetPosition(positions[4+x]);
                         player->SetPlay(true);
-                        if (!player->isCpu())
+                        if (!player->isCpu()) {
                             player->SetKeys(x);
+                            player->SetGamepad(gamepads[x]);
+                        }
                         players.push_back(player);
                     }
                     scene->SetActiveButton(BUTTON_MENU, false, true);
@@ -269,5 +272,12 @@ namespace bomberman {
         _game->GetScene()->GetText(0)->SetActive(false);
         _game->GetScene()->GetText(1)->SetActive(false);
         _game->GetScene()->GetText(2)->SetActive(true);
+    }
+
+    bool GameScript::CheckGamepadsButtonPressed(int nb) {
+        for (int i = 0; i < 4; i++)
+            if (gamepads[i]->button(nb))
+                return true;
+        return false;
     }
 }
