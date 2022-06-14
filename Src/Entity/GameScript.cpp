@@ -50,6 +50,9 @@ namespace bomberman {
             case 4:
                 UpdateBomb();
                 break;
+            case 5:
+                WinningScript();
+                break;
             default:
                 break;
         }
@@ -191,6 +194,9 @@ namespace bomberman {
             if (playerAlive <= 1) {
                 _game->ChangeScene(5);
                 scene = _game->GetScene();
+                scene->GetObject(0)->SetScale(1.f);
+                scene->GetObject(0)->SetPosition(MyVector3{0.f, 0.f, 0.f});
+                return;
             }
             playersPos.push_back(player->GetPosition());
             map->GetBlock(int (round(playersPos.back().x)), int(round(playersPos.back().z)));
@@ -295,5 +301,20 @@ namespace bomberman {
             if (gamepads[i]->button(nb))
                 return true;
         return false;
+    }
+
+    void GameScript::WinningScript() {
+        auto scene = _game->GetScene();
+        auto btnReturn = scene->GetButton(0);
+        if (btnReturn && btnReturn->GetState()) {
+            btnReturn->SetState(false);
+            _game->ChangeScene(0);
+            scene = _game->GetScene();
+            auto *script = scene->GetScript(0);
+            script->currentScript = 2;
+            script->ActivateSelection();
+            script->LoadPlayers(true);
+            scene->SetActiveButton(BUTTON_MENU, true, true);
+        }
     }
 }

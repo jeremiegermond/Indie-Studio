@@ -181,7 +181,7 @@ namespace bomberman {
         victoryOrDefeat->AddEntity(new GameSound("../Assets/Songs/Victory.mp3", true));
         victoryOrDefeat->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "WINNER !", 725, 100, 200, WHITE, true));
         victoryOrDefeat->AddEntity(new GameButton(50, 40, "../Assets/Buttons/home.png"));
-        // victoryOrDefeat->AddEntity(new GameScript(gameRef, 4));
+        victoryOrDefeat->AddEntity(new GameScript(gameRef, 5));
         scenes.push_back(victoryOrDefeat);
     }
 
