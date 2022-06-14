@@ -34,6 +34,7 @@ namespace bomberman {
         GameDrawMap *GameMap{};
         std::vector<GameImage *> GameImages;
         std::vector<GameButton *> GameButtons;
+        std::vector<GamePowerUp *> GamePowerUps;
 
         bool CamSwitch{};
         bool Hover{};
@@ -81,6 +82,8 @@ namespace bomberman {
         GameImage *GetImage(int i);
 
         GameScript *GetScript(int i);
+
+        GamePowerUp *GetGamePowerUp(int i);
 
         void SetCursor(bool hover);
 

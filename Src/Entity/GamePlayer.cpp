@@ -75,32 +75,35 @@ namespace bomberman {
         }
         if (!GetActive())
             return;
-        elapsed += std::chrono::duration<double, std::milli>(now - previous).count();
+        double time = std::chrono::duration_cast<std::chrono::milliseconds>(now - previous).count();
+        elapsed += time;
+        wallPass -= time;
+        wallPass = wallPass > 0 ? wallPass : 0;
         MyVector3 pos = GetPosition();
         float posX = pos.x;
         float posZ = pos.z;
         int rPosX = int(round(posX));
         int rPosZ = int(round(posZ));
         GetPowerUp(map->GetBlock(rPosX, rPosZ));
-        map->BreakBlock(rPosX, rPosZ, true);
+        map->BreakBlock(rPosX, rPosZ, true, wallPass);
         if (!cpu && keys) {
             if (IsKeyPressed(keys->bomb())) {
                 AddBomb();
             }
             if (IsKeyDown(keys->left())) {
-                if (!map->Collide(int(round(posX + .6)), rPosZ))
+                if (!map->Collide(int(round(posX + .6)), rPosZ, wallPass))
                     Move(MyVector3{speed, 0.0f, 0.0f});
                 rotation.z = -1.5;
             } else if (IsKeyDown(keys->right())) {
-                if (!map->Collide(int(round(posX - .6)), rPosZ))
+                if (!map->Collide(int(round(posX - .6)), rPosZ, wallPass))
                     Move(MyVector3{-speed, 0.0f, 0.0f});
                 rotation.z = 1.5;
             } else if (IsKeyDown(keys->up())) {
-                if (!map->Collide(rPosX, int(round(posZ + .6))))
+                if (!map->Collide(rPosX, int(round(posZ + .6)), wallPass))
                     Move(MyVector3{0.0f, 0.0f, speed});
                 rotation.z = 0;
             } else if (IsKeyDown(keys->down())) {
-                if (!map->Collide(rPosX, int(round(posZ - .6))))
+                if (!map->Collide(rPosX, int(round(posZ - .6)), wallPass))
                     Move(MyVector3{0.0f, 0.0f, -speed});
                 rotation.z = 3;
             } else {
@@ -204,7 +207,7 @@ rand / 4 -> if direction = wall rand again
                 speed += 1.f;
                 break;
             case '7':
-                lives++;
+                wallPass = 10000;
                 break;
             case '8':
                 fireUp++;
@@ -216,11 +219,28 @@ rand / 4 -> if direction = wall rand again
         PlaySound(levelUp);
     }
 
+    int GamePlayer::GetMaxBombs() {
+        return maxBombsStat;
+    }
+
+    float GamePlayer::GetSpeed() {
+        return speed;
+    }
+
+    int GamePlayer::GetFireUps() {
+        return fireUp;
+    }
+
+    float GamePlayer::GetWall() {
+        return wallPass ? wallPass / 1000.f : 0.f;
+    }
+
     void GamePlayer::Reset() {
         AnimatedGameObject::Reset();
         maxBombsStat = 1;
         lives = 1;
         fireUp = 3;
         speed = 2.f;
+        wallPass = 0;
     }
 }

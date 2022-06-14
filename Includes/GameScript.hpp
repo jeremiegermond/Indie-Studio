@@ -19,6 +19,7 @@ namespace bomberman {
             Game *_game;
             std::vector<MyVector3> positions;
             std::vector<MyVector3> rotations;
+            std::vector<MyVector2> powerUpPos;
             std::vector<KeyboardKey*> keys;
             Sound click{};
 

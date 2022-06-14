@@ -10,8 +10,7 @@
 
 #pragma once
 #include "IEntity.hpp"
-#include "Color.hpp"
-#include "Objects.hpp"
+#include "GamePlayer.hpp"
 
 namespace bomberman {
     class GameText : public IEntity {
@@ -28,11 +27,19 @@ namespace bomberman {
         public:
             GameText(const std::string &font, const std::string &msg, float x, float y, float fontSize, MyColor color, bool flash = false);
             ~GameText() override = default;
-            void Draw();
-            void Update();
+            virtual void Draw();
+            virtual void Update();
             void SetActive(bool activate);
+            bool IsActive() { return active; }
             void SetText(std::string new_msg) {
                 _msg = new_msg;
+            }
+            void SetPosition(MyVector2 new_pos) {
+                _fontPosition.x = new_pos.x;
+                _fontPosition.y = new_pos.y;
+            }
+            MyVector2 GetPosition() {
+                return _fontPosition;
             }
     };
 
@@ -50,6 +57,44 @@ namespace bomberman {
                 SetText("Loading...\n\t" + std::to_string(_percentage) + "%");
                 Draw();
                 EndDrawing();
+            }
+    };
+
+    class GamePowerUp : public GameText {
+        private:
+            GamePlayer *pPlayer{};
+            int _maxBombsStat;
+            float _speed;
+            int _fireUp;
+            float _wall;
+
+        public:
+            GamePowerUp() : GameText("../Assets/Font/Beauty_Forest.free.ttf", "", 0, 0, 80, BLACK) {
+            }
+
+            void SetPlayer(GamePlayer *player) {
+                pPlayer = player;
+            }
+
+            void Update() override {
+                GameText::Update();
+                if (!IsActive() || pPlayer == nullptr)
+                    return;
+                _maxBombsStat = pPlayer->GetMaxBombs();
+                _speed = pPlayer->GetSpeed();
+                _fireUp = pPlayer->GetFireUps();
+                _wall = pPlayer->GetWall();
+                SetText(TextFormat("%d\t%.f", _maxBombsStat, _speed));
+            }
+            void Draw() override {
+                GameText::Draw();
+                SetText(TextFormat("%d %.f", _fireUp, _wall));
+                MyVector2 currentPos = GetPosition();
+                currentPos.y += 90;
+                SetPosition(currentPos);
+                GameText::Draw();
+                currentPos.y -= 90;
+                SetPosition(currentPos);
             }
     };
 }

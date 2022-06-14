@@ -31,6 +31,7 @@ namespace bomberman {
         tPoint now;
         tPoint previous;
         double elapsed{};
+        double wallPass{};
         bool cpu = true;
         int direction;
         Keyboard *keys = nullptr;
@@ -60,61 +61,30 @@ namespace bomberman {
         }
 
         void Update() override;
-
         void SetPlay(bool play);
-
         void SetKeys(KeysLayout playerNB);
-
         void SetKeys(int playerNB);
-
         std::vector<GameBomb *> GetBombs();
-
         void RemoveLive();
-
         void SetMap(GameDrawMap *newMap);
-
         bool isCpu();
-
         void switchPlayer();
-
         void setCpu(bool nv);
-
-        void Move(MyVector3 velocity);
-
+        void Move(MyVector3 velocity) override;
         void SavePlayer();
-
         void LoadPlayer();
-
         void SetActive(bool activate) override;
-
         void AddBomb();
 
         void GetPowerUp(char block);
+        int GetMaxBombs();
+        float GetSpeed();
+        int GetFireUps();
+        float GetWall();
 
         void Reset() override;
-        
         void CPUPlay();
     };
-
-    // class GamePowerUps : public GamePlayer {
-    //     private:
-    //         int _maxBombsStat;
-    //         int _speed;
-    //         int _fireUp;
-
-    //     public:
-    //         GamePowerUps(GamePlayer *player) {
-    //             _maxBombsStat = player->
-    //         }
-    //         void UpdateAndDraw() {
-    //             BeginDrawing();
-    //             ClearBackground(BLACK);
-    //             SetText(std::to_string(maxBombsStat) + " " + std::to_string(speed) + "\n" + std::to_string(fireUp) + " X");
-    //             Draw();
-    //             EndDrawing();
-    //         }
-
-    // };
 }
 
 #endif //BOMBERMAN_GAMEPLAYER_HPP

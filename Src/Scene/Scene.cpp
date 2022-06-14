@@ -21,6 +21,12 @@ namespace bomberman {
             return;
         }
 
+        auto powerup = dynamic_cast<GamePowerUp *>(entity);
+        if (powerup) {
+            GamePowerUps.push_back(powerup);
+            return;
+        }
+
         auto object = dynamic_cast<GameObject *>(entity);
         if (object) {
             GameObjects.push_back(object);
@@ -101,6 +107,10 @@ namespace bomberman {
         for (auto text: GameTexts) {
             text->Update();
             text->Draw();
+        }
+        for (auto powerup: GamePowerUps) {
+            powerup->Update();
+            powerup->Draw();
         }
         bool hover = false;
         for (auto button: GameButtons) {
@@ -229,4 +239,9 @@ namespace bomberman {
         }
     }
 
+    GamePowerUp *Scene::GetGamePowerUp(int i) {
+        if (GamePowerUps.size() <= size_t(i))
+            return nullptr;
+        return GamePowerUps.at(i);
+    }
 }

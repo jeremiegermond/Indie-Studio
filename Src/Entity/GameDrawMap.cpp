@@ -22,6 +22,9 @@ namespace bomberman {
         _textureSpeed = LoadTexture("../Assets/PowerUps/speed.png");
         _textureWall = LoadTexture("../Assets/PowerUps/wall.png");
         _color = color;
+        _planeTexture = LoadTexture("../Assets/Level/plane.png");
+        planeModel = LoadModelFromMesh(GenMeshPlane(19, 19, 19, 19));
+        SetMaterialTexture(&planeModel.materials[0], MATERIAL_MAP_DIFFUSE, _planeTexture);
         _map.resize(21);
         for (int row = 0; row < 21; row++)
             _map[row].resize(21);
@@ -35,9 +38,11 @@ namespace bomberman {
         UnloadTexture(_textureBomb);
         UnloadTexture(_textureSpeed);
         UnloadTexture(_textureWall);
+        UnloadTexture(_planeTexture);
     }
 
     void GameDrawMap::Draw() {
+        DrawModel(planeModel, Vector3{.0f,-.5f,.0f}, 1.f, LIGHTGRAY);
         _cubePosition.z = -10;
         for (auto y: _map) {
             _cubePosition.x = -10;
@@ -100,7 +105,7 @@ namespace bomberman {
     char GameDrawMap::Populate(bool Break) {
         int random = static_cast<int>(std::rand() % 100);
 
-        if (Break ) {
+        if (Break && random % 4 == 0) {
             if (random <= 25)
                 return '5';
             else if (random <= 50)
@@ -123,18 +128,30 @@ namespace bomberman {
     }
 
     bool GameDrawMap::Collide(int posX,
-                              int posY) {
+                              int posY,
+                              double wallPass) {
         auto block = GetBlock(posX, posY);
-        return (block == '1' || block == '2');
+        if (block == '1')
+            return true;
+        if (block == '2' && wallPass == 0)
+            return true;
+        return false;
     }
 
     void GameDrawMap::BreakBlock(int posX,
-                                 int posY, bool GetPowerUp) {
+                                 int posY,
+                                 bool GetPowerUp,
+                                 double wallPass) {
         posX += 10;
         posY += 10;
         if (!isIn(posX, posY))
             return;
         if (_map[posY][posX] != '0' && _map[posY][posX] != '1') {
+            if (wallPass) {
+                if (_map[posY][posX] != '2')
+                    _map[posY][posX] = '0';
+                return;
+            }
             _map[posY][posX] = GetPowerUp ? '0' : Populate(true);
         }
     }

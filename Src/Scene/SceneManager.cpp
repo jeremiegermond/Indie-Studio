@@ -109,7 +109,7 @@ namespace bomberman {
         auto *forest = new GameObject("../Assets/Level/forest.obj");
         display_loading(75);
         forest->SetScale(50.f);
-        forest->SetPosition(MyVector3{35.f, .0f, 30.f});
+        forest->SetPosition(MyVector3{25.f, -5.f, 25.f});
         level->AddEntity(forest);
         level->AddEntity(new GameSound("../Assets/Songs/CoffeeSong.mp3", true));
         level->AddEntity(new GameDrawMap("../Assets/Texture/brick.png", "../Assets/Texture/wood.png", WHITE));
@@ -136,6 +136,9 @@ namespace bomberman {
             level->AddEntity(new GameImage("../Assets/PowerUps/speed.png", 1725, 345 + 400 * y));
             level->AddEntity(new GameImage("../Assets/PowerUps/fireUp.png", 1530, 430 + 400 * y));
             level->AddEntity(new GameImage("../Assets/PowerUps/wall.png", 1695, 425 + 400 * y));
+        }
+        for (int i = 0; i < 4; i++) {
+            level->AddEntity(new GamePowerUp());
         }
         level->AddEntity(new GameButton(50, 40, "../Assets/Buttons/home.png"));
         level->AddEntity(new GameScript(gameRef, 4));

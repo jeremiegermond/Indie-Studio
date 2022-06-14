@@ -26,6 +26,10 @@ namespace bomberman {
         rotations.emplace_back(.0f, .0f, 1.5f);
         rotations.emplace_back(.0f, .0f, 3.0f);
         rotations.emplace_back(.0f, .0f, 3.0f);
+        powerUpPos.emplace_back(175.0f, 355.0f);
+        powerUpPos.emplace_back(175.0f, 755.0f);
+        powerUpPos.emplace_back(1635.0f, 355.0f);
+        powerUpPos.emplace_back(1635.0f, 755.0f);
         click = LoadSound("../Assets/Bomb/click.mp3");
     }
 
@@ -127,8 +131,13 @@ namespace bomberman {
                     scene = _game->GetScene();
                     auto map = scene->GetMap();
                     scene->Populate(players);
-                    for (int x = 0; x < 4; x++)
+                    for (int x = 0; x < 4; x++) {
+                        auto player = scene->GetPlayer(x);
+                        auto powerUp = scene->GetGamePowerUp(x);
+                        powerUp->SetPlayer(player);
+                        powerUp->SetPosition(powerUpPos[x]);
                         scene->GetImage(x)->SetColor(WHITE);
+                    }
                     if (map && i) {
                         map->LoadMap();
                     } else if (map) {
