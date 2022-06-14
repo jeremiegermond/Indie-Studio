@@ -22,6 +22,7 @@ namespace bomberman {
 
     void Game::createWindow() {
         InitWindow(width, height, "Bomberman");
+        ToggleFullscreen();
         rlDisableBackfaceCulling();
         SetConfigFlags(FLAG_MSAA_4X_HINT);
         InitAudioDevice();
@@ -49,10 +50,7 @@ namespace bomberman {
             scenes.GetScene(2)->Draw2DAssets();
             if (scenes.GetScene(2)->GetButton(0)->GetState()) {
                 scenes.GetScene(3)->Draw2DAssets();
-                if (scenes.GetScene(3)->GetButton(0)->GetState()) {
-                    scenes.GetScene(2)->GetButton(0)->SetState(false);
-                    scenes.GetScene(3)->GetButton(0)->SetState(false);
-                }
+                scenes.GetScene(3)->GetScript(0)->Update();
             }
             if (scenes.GetScene(0)->GetButton(0)->GetState()) {
                 scenes.GetScene(4)->Draw2DAssets();

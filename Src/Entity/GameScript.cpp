@@ -52,6 +52,8 @@ namespace bomberman {
                 break;
             case 5:
                 WinningScript();
+            case 6:
+                Settings();
                 break;
             default:
                 break;
@@ -345,5 +347,25 @@ namespace bomberman {
             script->LoadPlayers(true);
             scene->SetActiveButton(BUTTON_MENU, true, true);
         }
+    }
+
+    void GameScript::Settings() {
+        auto *scene = _game->GetSceneManager().GetScene(3);
+        static bool switch_fs = IsWindowFullscreen();
+        if (_game->GetSceneManager().GetScene(3)->GetButton(0)->GetState()) {
+            _game->GetSceneManager().GetScene(2)->GetButton(0)->SetState(false);
+            _game->GetSceneManager().GetScene(3)->GetButton(0)->SetState(false);
+        }
+        if (!scene->GetButton(2)->GetState())
+            SetMasterVolume(0);
+        else
+            SetMasterVolume(1);
+        if (switch_fs != scene->GetButton(1)->GetState()) {
+            ToggleFullscreen();
+            if (!IsWindowFullscreen()) {
+                SetWindowSize(1920, 1050);
+            }
+        }
+        switch_fs = scene->GetButton(1)->GetState();
     }
 }

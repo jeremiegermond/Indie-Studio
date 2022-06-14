@@ -38,6 +38,7 @@ namespace bomberman {
             void UpdateBomb();
             void LoadPlayers(bool populated = false);
             void ActivateSelection();
+            void Settings();
             bool CheckGamepadsButtonPressed(int nb);
             void WinningScript();
     };
