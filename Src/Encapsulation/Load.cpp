@@ -48,4 +48,12 @@ namespace bomberman {
     void Load::setMaterialTexture(Material *material, int mapType, Texture2D texture) {
         return SetMaterialTexture(material, mapType, texture);
     }
+
+    void Load::updateCamera(Camera *camera) {
+        return UpdateCamera(camera);
+    }
+
+    void Load::setCameraMode(Camera camera, int mode) {
+        return SetCameraMode(camera, mode);
+    }
 }

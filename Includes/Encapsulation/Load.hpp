@@ -44,6 +44,12 @@ namespace bomberman {
 
         // Set texture for a material map type (MATERIAL_MAP_DIFFUSE, MATERIAL_MAP_SPECULAR...)
         static void setMaterialTexture(Material *material, int mapType, Texture2D texture);
+
+        // Update camera position for selected mode
+        static void updateCamera(Camera *camera);
+
+        // Set camera mode (multiple camera modes available)
+        static void setCameraMode(Camera camera, int mode);
     };
 }
 

@@ -41,7 +41,7 @@ namespace bomberman {
             if (!IsOnObjective()) {
                 MoveToObjective();
             }
-            UpdateCamera(&camera);
+            Load::updateCamera(&camera);
         }
     }
 
@@ -56,7 +56,7 @@ namespace bomberman {
     }
 
     void GameCamera::SetMode(int mode) {
-        SetCameraMode(camera, mode);
+        Load::setCameraMode(camera, mode);
     }
 
     void GameCamera::SetObjectiveCam(MyCamera objective) {
