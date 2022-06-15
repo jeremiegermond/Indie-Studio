@@ -222,6 +222,9 @@ namespace bomberman {
     }
 
     void GamePlayer::AddBomb() {
+        MyVector3 rPos = GetPosition(true);
+        if (IsBreakable(rPos.x, rPos.z))
+            return;
         if (maxBombsStat - bombs.size() <= 0)
             return;
         MySound::playSound(place);
