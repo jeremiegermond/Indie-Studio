@@ -10,45 +10,28 @@
 namespace bomberman {
     void GamePlayer::CPUPlay() {
         MyVector3 pos = GetPosition();
-        float posX = pos.x;
-        float posZ = pos.z;
-        int rPosX = int(round(posX));
-        int rPosZ = int(round(posZ));
+        MyVector3 rPos = GetPosition(true);
 
-        if (Vector3Distance(pos, GetPosition(true)) < .01f)
-            direction = std::rand() % 4;
+        if (decision > 500) {
+            direction = GetRandomValue(0, 5);
+            decision = 0;
+        }
+
         if (direction == 0) {
-            if (!map->Collide(int(round(posX + .6)), rPosZ, wallPass)) {
-                Move(MyVector3{speed, 0.0f, 0.0f});
-                rotation.z = -1.5;
-            }
-            else
-                direction = std::rand() % 5;
-            
+            MoveTo(round(pos.x + .6f), rPos.z);
+            rotation.z = -1.5;
         } else if (direction == 1) {
-            if (!map->Collide(int(round(posX - .6)), rPosZ, wallPass)) {
-                Move(MyVector3{-speed, 0.0f, 0.0f});
-                rotation.z = 1.5;
-            }
-            else
-                direction = std::rand() % 5;
+            MoveTo(round(pos.x - .6f), rPos.z);
+            rotation.z = 1.5;
         } else if (direction == 2) {
-            if (!map->Collide(rPosX, int(round(posZ + .6)), wallPass)) {
-                Move(MyVector3{0.0f, 0.0f, speed});
-                rotation.z = 0;
-            }
-            else
-                direction = std::rand() % 5;
+            MoveTo(rPos.x, round(pos.z + .6f));
+            rotation.z = 0;
         } else if (direction == 3) {
-            if (!map->Collide(rPosX, int(round(posZ - .6)), wallPass)) {
-                Move(MyVector3{0.0f, 0.0f, -speed});
-                rotation.z = 3;
-            }
-            else
-                direction = std::rand() % 5;
+            MoveTo(rPos.x, round(pos.z - .6f));
+            rotation.z = 3;
         } else if (direction == 4) {
             AddBomb();
-            direction = std::rand() % 4;
+            direction = GetRandomValue(0, 4);
         }
     }
 
@@ -75,39 +58,12 @@ namespace bomberman {
             return;
         double time = double(std::chrono::duration_cast<std::chrono::milliseconds>(now - previous).count());
         elapsed += time;
+        decision += time;
         wallPass -= time;
         wallPass = wallPass > 0 ? wallPass : 0;
-        MyVector3 pos = GetPosition();
-        float posX = pos.x;
-        float posZ = pos.z;
-        int rPosX = int(round(posX));
-        int rPosZ = int(round(posZ));
-        GetPowerUp(map->GetBlock(rPosX, rPosZ));
-        map->BreakBlock(rPosX, rPosZ, true, wallPass);
-        if (!cpu && keys) {
-            if (IsKeyPressed(keys->bomb()) || GetGamepad()->button(7)) {
-                AddBomb();
-            }
-            if (IsKeyDown(keys->left()) || GetGamepad()->left()) {
-                if (!map->Collide(int(round(posX + .6)), rPosZ, wallPass))
-                    Move(MyVector3{speed, 0.0f, 0.0f});
-                rotation.z = -1.5;
-            } else if (IsKeyDown(keys->right()) || GetGamepad()->right()) {
-                if (!map->Collide(int(round(posX - .6)), rPosZ, wallPass))
-                    Move(MyVector3{-speed, 0.0f, 0.0f});
-                rotation.z = 1.5;
-            } else if (IsKeyDown(keys->up()) || GetGamepad()->up()) {
-                if (!map->Collide(rPosX, int(round(posZ + .6)), wallPass))
-                    Move(MyVector3{0.0f, 0.0f, speed});
-                rotation.z = 0;
-            } else if (IsKeyDown(keys->down()) || GetGamepad()->down()) {
-                if (!map->Collide(rPosX, int(round(posZ - .6)), wallPass))
-                    Move(MyVector3{0.0f, 0.0f, -speed});
-                rotation.z = 3;
-            } else {
-                SetAnimation(1);
-            }
-        }
+        UpdateMovement();
+        if (!cpu && keys)
+            PlayPlayer();
         else
             CPUPlay();
         previous = now;
@@ -296,5 +252,69 @@ namespace bomberman {
         keys = nullptr;
         gamepad = nullptr;
         cpu = true;
+        intention.x = position.x;
+        intention.y = position.z;
+    }
+
+    void GamePlayer::SetPosition(MyVector3 position) {
+        GameObject::SetPosition(position);
+        intention.x = position.x;
+        intention.y = position.z;
+    }
+
+    void GamePlayer::MoveTo(float x,
+                            float z) {
+        int newX = int(x);
+        int newZ = int(z);
+        if (!map->Collide(newX, newZ, wallPass)) {
+            intention.x = float(newX);
+            intention.y = float(newZ);
+        }
+    }
+
+    void GamePlayer::Move(MyVector2 velocity) {
+        MyVector3 newVelocity = {velocity.x, .0f, velocity.y};
+        AnimatedGameObject::Move(newVelocity);
+    }
+
+    void GamePlayer::PlayPlayer() {
+        MyVector3 pos = GetPosition();
+        MyVector3 rPos = GetPosition(true);
+        if (IsKeyPressed(keys->bomb()) || GetGamepad()->button(7)) {
+            AddBomb();
+        }
+        if (IsKeyDown(keys->left()) || GetGamepad()->left()) {
+            MoveTo(round(pos.x + .6f), rPos.z);
+            rotation.z = -1.5;
+        } else if (IsKeyDown(keys->right()) || GetGamepad()->right()) {
+            MoveTo(round(pos.x - .6f), rPos.z);
+            rotation.z = 1.5;
+        } else if (IsKeyDown(keys->up()) || GetGamepad()->up()) {
+            MoveTo(rPos.x, round(pos.z + .6f));
+            rotation.z = 0;
+        } else if (IsKeyDown(keys->down()) || GetGamepad()->down()) {
+            MoveTo(rPos.x, round(pos.z - .6f));
+            rotation.z = 3;
+        }
+    }
+
+    void GamePlayer::UpdateMovement() {
+        MyVector3 pos = GetPosition();
+        MyVector3 rPos = GetPosition(true);
+        int rPosX = int(rPos.x);
+        int rPosZ = int(rPos.z);
+        bool moveX = fabs(pos.x - intention.x) > .1f;
+        bool moveZ = fabs(pos.z - intention.y) > .1f;
+        GetPowerUp(map->GetBlock(rPosX, rPosZ));
+        map->BreakBlock(rPosX, rPosZ, true, wallPass);
+        if (moveX) {
+            Move(MyVector2{speed * (pos.x - intention.x > 0 ? -1.f : 1.f), .0f});
+        }
+        if (moveZ) {
+            Move(MyVector2{.0f, speed * (pos.z - intention.y > 0 ? -1.f : 1.f)});
+        }
+        if (!moveX && !moveZ) {
+            SetAnimation(1);
+        }
     }
 }

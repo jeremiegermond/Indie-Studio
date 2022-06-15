@@ -50,7 +50,7 @@ namespace bomberman {
 
         void ResetTint();
 
-        void SetPosition(MyVector3 newPosition);
+        virtual void SetPosition(MyVector3 newPosition);
 
         virtual void SetActive(bool activate);
 

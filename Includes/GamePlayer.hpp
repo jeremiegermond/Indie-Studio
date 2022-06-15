@@ -32,11 +32,13 @@ namespace bomberman {
         tPoint now;
         tPoint previous;
         double elapsed{};
+        double decision{};
         double wallPass{};
         bool cpu = true;
         int direction{};
         Keyboard *keys = nullptr;
         Gamepad *gamepad = nullptr;
+        MyVector2 intention{};
     public:
         GamePlayer(const std::string &modelPath,
                    const std::string &texturePath,
@@ -84,6 +86,9 @@ namespace bomberman {
         void LoadPlayer(int i);
         void SetActive(bool activate) override;
         void AddBomb();
+        void SetPosition(MyVector3 position) override;
+        void MoveTo(float x, float z);
+        void Move(MyVector2 velocity);
 
         void GetPowerUp(char block);
         [[nodiscard]] int GetMaxBombs() const;
@@ -93,6 +98,8 @@ namespace bomberman {
 
         void Reset() override;
         void CPUPlay();
+        void PlayPlayer();
+        void UpdateMovement();
     };
 }
 
