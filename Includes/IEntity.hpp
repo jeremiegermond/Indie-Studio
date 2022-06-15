@@ -31,6 +31,7 @@
 #include "Keyboard.hpp"
 #include "Exception.hpp"
 #include "Sound.hpp"
+#include "Window.hpp"
 
 namespace bomberman {
     class IEntity {

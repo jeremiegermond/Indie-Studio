@@ -17,17 +17,17 @@ namespace bomberman {
 
     Game::~Game() {
         CloseAudioDevice();
-        CloseWindow();
+        Window::closeWindow();
     }
 
     void Game::createWindow() {
-        InitWindow(width, height, "Bomberman");
+        Window::initWindow(width, height, "Bomberman");
         rlDisableBackfaceCulling();
         SetConfigFlags(FLAG_MSAA_4X_HINT);
         InitAudioDevice();
         SetTargetFPS(60);
         flavicon = LoadImage("../Assets/Bomb/bombFlavicon.png");
-        SetWindowIcon(flavicon);
+        Window::setIcon(flavicon);
         std::srand(std::time(nullptr));
         try {
             scenes = SceneManager(this);
@@ -42,7 +42,7 @@ namespace bomberman {
         RenderTexture2D target = LoadRenderTexture(width, height);
         auto rTarget = Rectangle{0, 0, float(width), float(-height)};
 
-        while (!WindowShouldClose()) {
+        while (!Window::shouldClose()) {
             BeginTextureMode(target);
             ClearBackground(BLACK);
             GetScene()->DrawScene();
