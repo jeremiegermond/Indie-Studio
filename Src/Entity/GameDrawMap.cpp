@@ -201,15 +201,3 @@ namespace bomberman {
         }
     }
 }
-
-/*
-0 : void
-1 : stone block
-2 : wood block
-3 : player
-4 : enemy
-5 : bomb up 
-6 : speed up 
-7 : fire up 
-8 : wall pass 
-*/
