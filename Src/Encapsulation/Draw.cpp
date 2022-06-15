@@ -145,6 +145,10 @@ namespace bomberman {
         return DrawTexture(texture, posX, posY, tint);
     }
 
+    void Draw::drawModel(Model model, MyVector3 position, float scale, MyColor tint) {
+        return DrawModel(model, position, scale, tint);
+    }
+
 
 
     void Draw::draw(const std::function<void()> &function) {

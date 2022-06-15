@@ -15,16 +15,16 @@ namespace bomberman {
         _cubePosition.x = 0;
         _cubePosition.y = 0;
         _cubePosition.z = 0;
-        _textureBrick = LoadTexture(texturePathBrick.c_str());
-        _textureWood = LoadTexture(texturePathWood.c_str());
-        _textureFire = LoadTexture("../Assets/PowerUps/fireUp.png");
-        _textureBomb = LoadTexture("../Assets/PowerUps/bomb.png");
-        _textureSpeed = LoadTexture("../Assets/PowerUps/speed.png");
-        _textureWall = LoadTexture("../Assets/PowerUps/wall.png");
+        _textureBrick = Load::loadTexture(texturePathBrick.c_str());
+        _textureWood = Load::loadTexture(texturePathWood.c_str());
+        _textureFire = Load::loadTexture("../Assets/PowerUps/fireUp.png");
+        _textureBomb = Load::loadTexture("../Assets/PowerUps/bomb.png");
+        _textureSpeed = Load::loadTexture("../Assets/PowerUps/speed.png");
+        _textureWall = Load::loadTexture("../Assets/PowerUps/wall.png");
         _color = color;
-        _planeTexture = LoadTexture("../Assets/Level/plane.png");
-        planeModel = LoadModelFromMesh(GenMeshPlane(19, 19, 19, 19));
-        SetMaterialTexture(&planeModel.materials[0], MATERIAL_MAP_DIFFUSE, _planeTexture);
+        _planeTexture = Load::loadTexture("../Assets/Level/plane.png");
+        planeModel = Load::loadModelFromMesh(GenMeshPlane(19, 19, 19, 19));
+        Load::setMaterialTexture(&planeModel.materials[0], MATERIAL_MAP_DIFFUSE, _planeTexture);
         _map.resize(21);
         for (int row = 0; row < 21; row++)
             _map[row].resize(21);
@@ -32,35 +32,35 @@ namespace bomberman {
 
     GameDrawMap::~GameDrawMap() {
         _map.clear();
-        UnloadTexture(_textureWood);
-        UnloadTexture(_textureWood);
-        UnloadTexture(_textureFire);
-        UnloadTexture(_textureBomb);
-        UnloadTexture(_textureSpeed);
-        UnloadTexture(_textureWall);
-        UnloadTexture(_planeTexture);
+        Load::unloadTexture(_textureWood);
+        Load::unloadTexture(_textureWood);
+        Load::unloadTexture(_textureFire);
+        Load::unloadTexture(_textureBomb);
+        Load::unloadTexture(_textureSpeed);
+        Load::unloadTexture(_textureWall);
+        Load::unloadTexture(_planeTexture);
     }
 
     void GameDrawMap::Draw() {
-        DrawModel(planeModel, Vector3{.0f,-.5f,.0f}, 1.f, LIGHTGRAY);
+        Draw::drawModel(planeModel, MyVector3{.0f,-.5f,.0f}, 1.f, LIGHTGRAY);
         _cubePosition.z = -10;
         for (auto y: _map) {
             _cubePosition.x = -10;
             for (auto x: y) {
                 if (x == '1') {
-                    DrawCubeTexture(_textureBrick, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
+                    Draw::drawCubeTexture(_textureBrick, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x == '2') {
-                    DrawCubeTexture(_textureWood, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
+                    Draw::drawCubeTexture(_textureWood, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x == '5') {    // DEBUG
-                    DrawCubeTexture(_textureBomb, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
+                    Draw::drawCubeTexture(_textureBomb, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x == '6') {    // DEBUG
-                    DrawCubeTexture(_textureSpeed, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
+                    Draw::drawCubeTexture(_textureSpeed, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x == '7') {    // DEBUG
-                    DrawCubeTexture(_textureWall, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
+                    Draw::drawCubeTexture(_textureWall, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x == '8') {    // DEBUG
-                    DrawCubeTexture(_textureFire, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
+                    Draw::drawCubeTexture(_textureFire, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x != '0') {    //
-                    DrawCube(_cubePosition, 1.0f, 1.0f, 1.0f, GREEN);
+                    Draw::drawCube(_cubePosition, 1.0f, 1.0f, 1.0f, GREEN);
                 }
                 _cubePosition.x++;
             }

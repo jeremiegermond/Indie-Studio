@@ -36,4 +36,16 @@ namespace bomberman {
     Texture2D Load::loadTexture(const char *fileName) {
         return LoadTexture(fileName);
     }
+
+    void Load::unloadTexture(Texture2D texture) {
+        return UnloadTexture(texture);
+    }
+
+    Model Load::loadModelFromMesh(Mesh mesh) {
+        return LoadModelFromMesh(mesh);
+    }
+
+    void Load::setMaterialTexture(Material *material, int mapType, Texture2D texture) {
+        return SetMaterialTexture(material, mapType, texture);
+    }
 }

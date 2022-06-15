@@ -121,6 +121,9 @@ namespace bomberman {
         // Draw a Texture2D
         static void drawTexture(Texture2D texture, int posX, int posY, MyColor tint);
 
+        // Draw a model (with texture if set)
+        static void drawModel(Model model, MyVector3 position, float scale, MyColor tint);
+
 
 
         //additional function: draw

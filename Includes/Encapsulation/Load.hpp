@@ -35,6 +35,15 @@ namespace bomberman {
 
         // Load texture from file into GPU memory (VRAM)
         static Texture2D loadTexture(const char *fileName);
+
+        // Unload texture from GPU memory (VRAM)
+        static void unloadTexture(Texture2D texture);
+
+        // Load model from generated mesh (default material)
+        static Model loadModelFromMesh(Mesh mesh);
+
+        // Set texture for a material map type (MATERIAL_MAP_DIFFUSE, MATERIAL_MAP_SPECULAR...)
+        static void setMaterialTexture(Material *material, int mapType, Texture2D texture);
     };
 }
 
