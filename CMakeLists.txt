@@ -6,7 +6,7 @@ add_compile_options(-Wall -fpermissive)
 include_directories(Includes)
 include_directories(Includes/Encapsulation)
 if(WIN32)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build)
 endif()
 
 add_executable(bomberman

@@ -15,8 +15,6 @@ namespace bomberman {
         int rPosX = int(round(posX));
         int rPosZ = int(round(posZ));
 
-        if (IsKeyPressed(KEY_P))
-            printf("%f\n", Vector3Distance(pos, GetPosition(true)));
         if (Vector3Distance(pos, GetPosition(true)) < .01f)
             direction = std::rand() % 4;
         if (direction == 0) {

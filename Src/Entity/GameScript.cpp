@@ -196,7 +196,6 @@ namespace bomberman {
                 playersPos.push_back(player->GetPosition());
             }
             if (playerAlive == 1 && !players.empty()) {
-                printf("alive 1\n");
                 auto winner = players.back();
                 winner->Reset();
                 winner->SetPosition(MyVector3{0.f, 0.f, 0.f});
@@ -212,7 +211,6 @@ namespace bomberman {
                 return;
             }
             else if (playerAlive == 0) {
-                printf("alive 0\n");
                 std::vector<GamePlayer *> ties;
                 for (int i = 0; i < 4; i++) {
                     auto tie = scene->GetPlayer(i);

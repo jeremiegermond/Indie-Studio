@@ -20,9 +20,26 @@ A working game which is no fun to play is pointless!
 You **MUST** use **CMake** as a cross-platform build system:
 
 - **Linux**: it must generate a `Makefile` to be able to build the project
+
+```
+mkdir build && cd build
+cmake .. -G "Unix Makefiles"
+cmake --build .
+./bomberman
+```
+
 - **Windows**: it must generate a Visual Studio solution `.sln` (will be tested with Visual Studio 2022)
 
+```
+mkdir build && cd build
+cmake .. -G "Visual Studio 17"
+cmake --build .
+bomberman.exe
+```
+
 > We will provide a `CMAKE_MODULE_PATH` cmake variable when building the project.
+
+
 
 ## Library
 
