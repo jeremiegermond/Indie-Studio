@@ -28,6 +28,7 @@ namespace bomberman {
         _map.resize(21);
         for (int row = 0; row < 21; row++)
             _map[row].resize(21);
+        GenerateMap();
     }
 
     GameDrawMap::~GameDrawMap() {
