@@ -35,9 +35,15 @@ The winner is the last player alive ...
 
 > We then display a victory screen with the winner and some cool particle effects. The music will differ whether there is a winner or it ended with a tie.
 
+# Shader
+
+![alt text](./assets/shader.png)
+
+We have implemented a shader than we can toggle in game. 
+
 # Compilation
 
-It is a cross-platform build system:
+It is a cross-platform built system:
 
 - **Linux**: it must generate a `Makefile` to be able to build the project
 
