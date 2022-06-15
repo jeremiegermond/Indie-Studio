@@ -175,8 +175,8 @@ namespace bomberman {
 
     void SceneManager::CreateHowToPlayScene() {
         auto *howToPlay = new Scene;
-        howToPlay->AddEntity(new GameImage("../Assets/UI/how_to_play.png", 550, 280));
-        howToPlay->AddEntity(new GameButton(1220, 770, "../Assets/UI/close_button90.png"));
+        howToPlay->AddEntity(new GameImage("../Assets/UI/how_to_play.png", 0, 0));
+        howToPlay->AddEntity(new GameButton(1477, 900, "../Assets/UI/close_button90.png"));
         scenes.push_back(howToPlay);
     }
 
