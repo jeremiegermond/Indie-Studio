@@ -18,10 +18,27 @@ namespace bomberman {
             dir[1] += fabs(rPos.x - 1.f - bRPos.x) < .1f;
             dir[2] += fabs(rPos.z + 1.f - bRPos.z) < .1f;
             dir[3] += fabs(rPos.z - 1.f - bRPos.z) < .1f;
+            dir[0] += fabs(rPos.z - bRPos.z) < .1f && (bRPos.x - rPos.x) > .0f;
+            dir[1] += fabs(rPos.z - bRPos.z) < .1f && (bRPos.x - rPos.x) < .0f;
+            dir[2] += fabs(rPos.x - bRPos.x) < .1f && (bRPos.z - rPos.z) > .0f;
+            dir[3] += fabs(rPos.x - bRPos.x) < .1f && (bRPos.z - rPos.z) < .0f;
+            dir[0] += Collide(round(pos.x + .6f), rPos.z);
+            dir[1] += Collide(round(pos.x - .6f), rPos.z);
+            dir[2] += Collide(rPos.x, round(pos.z + .6f));
+            dir[3] += Collide(rPos.x, round(pos.z -  .6f));
         }
         if (decision > 500) {
             direction = GetRandomValue(0, 5);
             decision = 0;
+        }
+        int decisions = 4;
+        for (bool i : dir) {
+            decisions -= i;
+        }
+        if (direction != 4 && decisions == 1) {
+            for (int i = 0; i < 4; i++)
+                if (!dir[i])
+                    direction = i;
         }
 
         if (direction == 0 && !dir[0]) {
@@ -279,7 +296,7 @@ namespace bomberman {
                             float z) {
         int newX = int(x);
         int newZ = int(z);
-        if (!map->Collide(newX, newZ, wallPass)) {
+        if (!Collide(x, z)) {
             intention.x = float(newX);
             intention.y = float(newZ);
         } else {
@@ -341,5 +358,12 @@ namespace bomberman {
             return true;
         }
         return false;
+    }
+
+    bool GamePlayer::Collide(float x,
+                             float z) {
+        int newX = int(x);
+        int newZ = int(z);
+        return map->Collide(newX, newZ, wallPass);
     }
 }

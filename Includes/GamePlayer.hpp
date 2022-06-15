@@ -103,6 +103,9 @@ namespace bomberman {
 
         bool IsBreakable(float round,
                          float z);
+
+        bool Collide(float x,
+                     float z);
     };
 }
 
