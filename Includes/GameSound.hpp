@@ -9,7 +9,6 @@
 
 #include "IEntity.hpp"
 #include "Objects.hpp"
-#include "Sound.hpp"
 
 namespace bomberman {
     class GameSound : public IEntity {
