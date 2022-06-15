@@ -43,7 +43,7 @@ We have implemented a shader than we can toggle in game.
 
 # Compilation
 
-It is a cross-platform build system:
+It is a cross-platform built system:
 
 - **Linux**: it must generate a `Makefile` to be able to build the project
 
