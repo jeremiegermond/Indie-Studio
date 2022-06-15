@@ -10,7 +10,7 @@
 namespace bomberman {
     GameText::GameText(const std::string &font, const std::string &msg, float x, float y, float fontSize, MyColor color, bool flash) {
         _fontSize = fontSize;
-        _font = LoadFontEx(font.c_str(), (int)_fontSize, nullptr, 250);
+        _font = Load::loadFontEx(font.c_str(), (int)_fontSize, nullptr, 250);
         _msg = msg;
         _fontPosition.x = x;
         _fontPosition.y = y;
@@ -26,10 +26,10 @@ namespace bomberman {
         if (!active)
             return;
         if (!_flash)
-            DrawTextEx(_font, _msg.c_str(), _fontPosition, _fontSize, 0, _color);
+            Draw::drawTextEx(_font, _msg.c_str(), _fontPosition, _fontSize, 0, _color);
         else {
             if (((_framesCounter / 30) % 2)) 
-                DrawTextEx(_font, _msg.c_str(), _fontPosition, _fontSize, 0, _color);
+                Draw::drawTextEx(_font, _msg.c_str(), _fontPosition, _fontSize, 0, _color);
         }
     }
 

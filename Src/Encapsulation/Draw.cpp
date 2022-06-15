@@ -133,10 +133,13 @@ namespace bomberman {
         DrawGrid(slices, spacing);
     }
 
-    void Draw::drawTextureRec(Texture2D texture, Rectangle source, Vector2 position, Color tint) {
+    void Draw::drawTextureRec(Texture2D texture, MyRectangle source, MyVector2 position, MyColor tint) {
         return DrawTextureRec(texture, source, position, tint);
     }
 
+    void Draw::drawTextEx(Font font, const char *text, MyVector2 position, float fontSize, float spacing, MyColor tint) {
+        return DrawTextEx(font, text, position, fontSize, spacing, tint);
+    }
 
 
 

@@ -34,6 +34,7 @@
 #include "Window.hpp"
 #include "Load.hpp"
 #include "Draw.hpp"
+#include "MyGamepad.hpp"
 
 namespace bomberman {
     class IEntity {

@@ -10,7 +10,7 @@
 namespace bomberman {
 
     GameSound::GameSound(const std::string &soundPath, bool looping)
-            : active(true), startActive(true), looping(looping) {
+            : active(true), startActive(true) {
         if (!std::ifstream(soundPath).good())
             throw BuildError("Failed to load sound " + soundPath, __FILE__, __LINE__);
         sound = MySound::loadSound(soundPath.c_str());

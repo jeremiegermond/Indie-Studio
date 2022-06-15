@@ -113,7 +113,10 @@ namespace bomberman {
         static void drawGrid(const int &slices, const float &spacing);
 
         // Draw a part of a texture defined by a rectangle
-        static void drawTextureRec(Texture2D texture, Rectangle source, Vector2 position, Color tint);
+        static void drawTextureRec(Texture2D texture, MyRectangle source, MyVector2 position, MyColor tint);
+
+        // Draw text using font and additional parameters
+        static void drawTextEx(Font font, const char *text, MyVector2 position, float fontSize, float spacing, MyColor tint);
 
 
 

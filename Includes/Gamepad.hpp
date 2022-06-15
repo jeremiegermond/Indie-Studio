@@ -16,7 +16,7 @@ namespace bomberman {
             int id{};
         public:
             Gamepad(int nb);
-            ~Gamepad();
+            virtual ~Gamepad() = delete;
             bool IsAvailable();
             bool up();
             bool down();

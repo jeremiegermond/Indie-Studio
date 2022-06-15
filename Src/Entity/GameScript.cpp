@@ -94,7 +94,7 @@ namespace bomberman {
                 i++;
             }
         }
-        if (IsKeyPressed(KEY_ENTER) || CheckGamepadsButtonPressed(7)) {
+        if (MyGamepad::isKeyPressed(KEY_ENTER) || CheckGamepadsButtonPressed(7)) {
             MySound::playSound(click);
             currentScript = 3;
             int cpuselect = 0;

@@ -24,4 +24,8 @@ namespace bomberman {
     RenderTexture2D Load::loadRenderTexture(int width, int height) {
         return LoadRenderTexture(width, height);
     }
+
+    Font Load::loadFontEx(const char *fileName, int fontSize, int *fontChars, int glyphCount) {
+        return LoadFontEx(fileName, fontSize, fontChars, glyphCount);
+    }
 }

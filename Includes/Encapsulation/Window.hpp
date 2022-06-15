@@ -13,8 +13,6 @@
 namespace bomberman {
     class Window {
     private:
-        int width;
-        int height;
         const std::string title;
 
     public:
