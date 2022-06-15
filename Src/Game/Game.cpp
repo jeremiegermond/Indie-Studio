@@ -22,7 +22,6 @@ namespace bomberman {
 
     void Game::createWindow() {
         InitWindow(width, height, "Bomberman");
-        ToggleFullscreen();
         rlDisableBackfaceCulling();
         SetConfigFlags(FLAG_MSAA_4X_HINT);
         InitAudioDevice();
