@@ -31,7 +31,7 @@ namespace bomberman {
         powerUpPos.emplace_back(1635.0f, 355.0f);
         powerUpPos.emplace_back(1635.0f, 755.0f);
         gamepads = std::vector({new Gamepad(0), new Gamepad(1), new Gamepad(2), new Gamepad(3)});
-        click = LoadSound("../Assets/Bomb/click.mp3");
+        click = MySound::loadSound("../Assets/Bomb/click.mp3");
     }
 
     void GameScript::Update() {
@@ -70,7 +70,7 @@ namespace bomberman {
 
     void GameScript::PressToZoom() {
         if (IsKeyPressed(KEY_ENTER) || CheckGamepadsButtonPressed(7)) {
-            PlaySound(click);
+            MySound::playSound(click);
             _game->GetScene()->GetCamera(0)->SetMode(CAMERA_CUSTOM);
             _game->GetScene()->NextCamera();
             LoadPlayers();
@@ -95,7 +95,7 @@ namespace bomberman {
             }
         }
         if (IsKeyPressed(KEY_ENTER) || CheckGamepadsButtonPressed(7)) {
-            PlaySound(click);
+            MySound::playSound(click);
             currentScript = 3;
             int cpuselect = 0;
             _game->GetScene()->GetText(2)->SetActive(false);

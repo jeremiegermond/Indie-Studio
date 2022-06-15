@@ -30,6 +30,7 @@
 #include "Objects.hpp"
 #include "Keyboard.hpp"
 #include "Exception.hpp"
+#include "Sound.hpp"
 
 namespace bomberman {
     class IEntity {

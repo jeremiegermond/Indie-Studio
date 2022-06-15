@@ -167,8 +167,8 @@ namespace bomberman {
 
     void GamePlayer::Move(MyVector3 velocity) {
         AnimatedGameObject::Move(velocity);
-        if (!IsSoundPlaying(step))
-            PlaySound(step);
+        if (!MySound::isSoundPlaying(step))
+            MySound::playSound(step);
     }
 
     void GamePlayer::SavePlayer(int i) {
@@ -239,7 +239,7 @@ namespace bomberman {
     void GamePlayer::AddBomb() {
         if (maxBombsStat - bombs.size() <= 0)
             return;
-        PlaySound(place);
+        MySound::playSound(place);
         auto *bomb = new GameBomb(fireUp);
         bomb->SetPosition(GetPosition(true));
         bomb->SetScale(3.5f);
@@ -267,7 +267,7 @@ namespace bomberman {
                 return;
 
         }
-        PlaySound(levelUp);
+        MySound::playSound(levelUp);
     }
 
     int GamePlayer::GetMaxBombs() const {

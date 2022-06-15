@@ -13,13 +13,13 @@ namespace bomberman {
             : active(true), startActive(true), looping(looping) {
         if (!std::ifstream(soundPath).good())
             throw BuildError("Failed to load sound " + soundPath, __FILE__, __LINE__);
-        sound = LoadSound(soundPath.c_str());
+        sound = MySound::loadSound(soundPath.c_str());
         SetSoundVolume(sound, .2f);
     }
 
     GameSound::~GameSound() {
         Stop();
-        UnloadSound(sound);
+        MySound::unloadSound(sound);
     }
 
     void GameSound::Reset() {
@@ -34,19 +34,19 @@ namespace bomberman {
 
     void GameSound::Play() {
         if (active) {
-            PlaySound(sound);
+            MySound::playSound(sound);
         } else
             Stop();
     }
 
     void GameSound::Stop() {
         if (IsSoundPlaying(sound))
-            StopSound(sound);
+            MySound::stopSound(sound);
     }
 
     void GameSound::Update() {
         if (active)
-            if (!IsSoundPlaying(sound))
-                PlaySound(sound);
+            if (!MySound::isSoundPlaying(sound))
+                MySound::playSound(sound);
     }
 }
