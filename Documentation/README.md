@@ -63,4 +63,3 @@ cmake --build .
 bomberman.exe
 ```
 
-> We will provide a `CMAKE_MODULE_PATH` cmake variable when building the project.

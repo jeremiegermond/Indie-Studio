@@ -80,3 +80,7 @@ The goal of this project is not only to code a video game, but it’s to code a 
 This means that the efforts you make to polish your game will count as much as the technical aspect.
 
 Do your best to avoid clunky animations or graphical glitches, manage your camera in a way that the “out-side” of the game is never visible, pay attention to game design, level design and sound design, add variations in enemies and environments, etc.
+
+## Documentation
+
+You can see our documentation in the Documentation folder. Use vscode to open a better view, on a live server.
