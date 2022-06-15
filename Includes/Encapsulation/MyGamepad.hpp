@@ -13,6 +13,9 @@
 namespace bomberman {
     class MyGamepad {
     public:
+        // Check if a key has been pressed once
+        static bool isKeyPressed(int key);
+
         // Check if a gamepad is available
         static bool isGamepadAvailable(int gamepad);
 

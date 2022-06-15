@@ -8,6 +8,10 @@
 #include "MyGamepad.hpp"
 
 namespace bomberman {
+    bool MyGamepad::isKeyPressed(int key) {
+        return IsKeyPressed(key);
+    }
+
     bool MyGamepad::isGamepadAvailable(int gamepad) {
         return IsGamepadAvailable(gamepad);
     }
