@@ -26,6 +26,9 @@ namespace bomberman {
 
         // Load texture for rendering (framebuffer)
         static RenderTexture2D loadRenderTexture(int width, int height);
+
+        // Load font from file with extended parameters
+        static Font loadFontEx(const char *fileName, int fontSize, int *fontChars, int glyphCount);
     };
 }
 
