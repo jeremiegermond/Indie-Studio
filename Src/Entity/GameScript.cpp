@@ -136,7 +136,7 @@ namespace bomberman {
                             player->LoadPlayer(x);
                         players.push_back(player);
                     }
-                    scene->SetActiveButton(BUTTON_MENU, false, true);
+                    scene->SetActiveButton(BUTTON_MENU, false);
                     _game->ChangeScene(1);
                     scene = _game->GetScene();
                     auto map = scene->GetMap();
@@ -179,7 +179,7 @@ namespace bomberman {
             script->currentScript = 2;
             script->ActivateSelection();
             script->LoadPlayers(true);
-            scene->SetActiveButton(BUTTON_MENU, true, true);
+            scene->SetActiveButton(BUTTON_MENU, true);
             scene->GetObject(0)->SetScale(1.f);
             scene->GetObject(0)->SetPosition(MyVector3{0.f, 0.f, 0.f});
             return;
@@ -343,7 +343,7 @@ namespace bomberman {
             script->currentScript = 2;
             script->ActivateSelection();
             script->LoadPlayers(true);
-            scene->SetActiveButton(BUTTON_MENU, true, true);
+            scene->SetActiveButton(BUTTON_MENU, true);
         }
     }
 
