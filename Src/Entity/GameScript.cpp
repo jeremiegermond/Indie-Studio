@@ -196,7 +196,7 @@ namespace bomberman {
                 playersPos.push_back(player->GetPosition());
             }
             if (playerAlive == 1 && !players.empty()) {
-                auto winner = players.back();
+                auto winner = players.at(0);
                 winner->Reset();
                 winner->SetPosition(MyVector3{0.f, 0.f, 0.f});
                 winner->SetRotation(MyVector3{0.f, 0.f, 1.8f});
@@ -286,7 +286,7 @@ namespace bomberman {
             }
             for (auto collide: cases) {
                 for (int i = 0; i < 4; i++) {
-                    if (players[i] == nullptr)
+                    if (players.size() < i || playersPos.size() < i)
                         break;
                     if (Vector3Distance(playersPos[i], collide) < .7f) {
                         players[i]->RemoveLive();
