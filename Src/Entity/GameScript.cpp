@@ -286,7 +286,7 @@ namespace bomberman {
             }
             for (auto collide: cases) {
                 for (int i = 0; i < 4; i++) {
-                    if (players.size() < i || playersPos.size() < i)
+                    if (players.size() <= i || playersPos.size() <= i)
                         break;
                     if (Vector3Distance(playersPos[i], collide) < .7f) {
                         players[i]->RemoveLive();
