@@ -56,4 +56,8 @@ namespace bomberman {
     void Load::setCameraMode(Camera camera, int mode) {
         return SetCameraMode(camera, mode);
     }
+
+    bool Load::checkCollisionPointRec(Vector2 point, Rectangle rec) {
+        return CheckCollisionPointRec(point, rec);
+    }
 }

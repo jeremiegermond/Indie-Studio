@@ -30,6 +30,12 @@ namespace bomberman {
 
         // Check if a gamepad button has been pressed once
         static bool isGamepadButtonPressed(int gamepad, int button);
+
+        // Check if a mouse button has been pressed once
+        static bool isMouseButtonPressed(int button);
+
+        /// Get mouse position XY
+        static Vector2 getMousePosition(void);
     };
 }
 

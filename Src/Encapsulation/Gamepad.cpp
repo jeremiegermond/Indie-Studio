@@ -31,4 +31,13 @@ namespace bomberman {
     bool MyGamepad::isGamepadButtonPressed(int gamepad, int button) {
         return IsGamepadButtonPressed(gamepad, button);
     }
+
+    bool MyGamepad::isMouseButtonPressed(int button) {
+        return IsMouseButtonPressed(button);
+    }
+
+    // Get mouse position XY
+    Vector2 MyGamepad::getMousePosition(void) {
+        return GetMousePosition();
+    }
 }

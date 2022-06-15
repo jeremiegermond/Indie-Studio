@@ -50,6 +50,9 @@ namespace bomberman {
 
         // Set camera mode (multiple camera modes available)
         static void setCameraMode(Camera camera, int mode);
+
+        // Check if point is inside rectangle
+        static bool checkCollisionPointRec(Vector2 point, Rectangle rec);
     };
 }
 

@@ -13,24 +13,24 @@ namespace bomberman {
                            const std::string &offPath,
                            int type)
             : posX(x), posY(y), type(type) {
-        onTexture = LoadTexture(onPath.c_str());
-        offTexture = LoadTexture(offPath.c_str());
+        onTexture = Load::loadTexture(onPath.c_str());
+        offTexture = Load::loadTexture(offPath.c_str());
         active = type == BUTTON_MENU;
         state = false;
-        collision = Rectangle{float(posX), float(posY), float(onTexture.width), float(onTexture.height)};
+        collision = MyRectangle{float(posX), float(posY), float(onTexture.width), float(onTexture.height)};
         tint = WHITE;
         click = MySound::loadSound("../Assets/Bomb/click.mp3");
     }
 
     GameButton::~GameButton() {
-        UnloadTexture(onTexture);
-        UnloadTexture(offTexture);
+        Load::unloadTexture(onTexture);
+        Load::unloadTexture(offTexture);
     }
 
     void GameButton::Update() {
         if (active) {
-            if (CheckCollisionPointRec(GetMousePosition(), collision)) {
-                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            if (Load::checkCollisionPointRec(MyGamepad::getMousePosition(), collision)) {
+                if (MyGamepad::isMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                     state = !state;
                     MySound::playSound(click);
                 } else {
@@ -47,9 +47,9 @@ namespace bomberman {
     void GameButton::Draw() {
         if (active) {
             if (state) {
-                DrawTexture(onTexture, posX, posY, tint);
+                Draw::drawTexture(onTexture, posX, posY, tint);
             } else {
-                DrawTexture(offTexture, posX, posY, tint);
+                Draw::drawTexture(offTexture, posX, posY, tint);
             }
         }
     }
