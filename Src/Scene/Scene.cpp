@@ -68,6 +68,12 @@ namespace bomberman {
             GameButtons.push_back(button);
             return;
         }
+
+        auto particleSystem = dynamic_cast<ParticleSystem *>(entity);
+        if (particleSystem) {
+            pSystem = particleSystem;
+            return;
+        }
     }
 
     void Scene::StartScene() {
@@ -101,6 +107,10 @@ namespace bomberman {
     }
 
     void Scene::Draw2DAssets() {
+        if (pSystem) {
+            pSystem->Update();
+            pSystem->Draw();
+        }
         for (auto image: GameImages) {
             image->Draw();
         }

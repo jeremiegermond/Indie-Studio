@@ -192,6 +192,7 @@ namespace bomberman {
         victoryOrDefeat->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "WINNER !", 725, 700, 200, WHITE, true));
         victoryOrDefeat->AddEntity(new GameButton(50, 40, "../Assets/Buttons/home.png"));
         victoryOrDefeat->AddEntity(new GameScript(gameRef, 5));
+        victoryOrDefeat->AddEntity(new ParticleSystem());
         scenes.push_back(victoryOrDefeat);
     }
 
