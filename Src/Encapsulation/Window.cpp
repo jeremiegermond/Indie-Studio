@@ -164,4 +164,16 @@ namespace bomberman {
     const char *Window::getClipboardText(void) {
         return GetClipboardText();
     }
+
+    void Window::setTargetFPS(int fps) {
+        return SetTargetFPS(fps);
+    }
+
+    void Window::setConfigFlags(unsigned int flags) {
+        return SetConfigFlags(flags);
+    }
+
+    void Window::setMouseCursor(int cursor) {
+        return SetMouseCursor(cursor);
+    }
 }

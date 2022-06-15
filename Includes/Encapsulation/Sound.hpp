@@ -34,6 +34,12 @@ namespace bomberman {
 
         // Set volume for a sound (1.0 is max level)
         static void setSoundVolume(Sound sound, float volume);
+
+        // Initialize audio device and context
+        static void initAudioDevice(void);
+
+        // Close the audio device and context
+        static void closeAudioDevice(void);
     };
 }
 

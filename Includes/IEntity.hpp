@@ -32,6 +32,8 @@
 #include "Exception.hpp"
 #include "Sound.hpp"
 #include "Window.hpp"
+#include "Load.hpp"
+#include "Draw.hpp"
 
 namespace bomberman {
     class IEntity {

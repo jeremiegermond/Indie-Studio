@@ -140,5 +140,14 @@ namespace bomberman {
 
         // Get clipboard text content
         static const char *getClipboardText(void);
+
+        // Set target FPS (maximum)
+        static void setTargetFPS(int fps);
+
+        // Setup init configuration flags (view FLAGS)
+        static void setConfigFlags(unsigned int flags);
+
+        // Set mouse cursor
+        static void setMouseCursor(int cursor);
     };
 }
