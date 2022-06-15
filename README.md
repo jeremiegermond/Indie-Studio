@@ -66,7 +66,7 @@ Here’s the required features:
 - A main game menu (to start a new game or load an existing one).
 - Your game must feature 3D graphics but a 2D gameplay.
 - Your game must feature **procedurally generated maps** (random obstacles, random bonus. . . ).
-- Save/Load a game
+- Save/Load a game (game auto save on quit)
 - Animation and sounds to give life to the game (especially during various interactions)
   - Think about bomb explosion, player walking, background music, ...
 - Some Power-ups
