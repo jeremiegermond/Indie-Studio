@@ -16,6 +16,9 @@ namespace bomberman {
         // Check if a key has been pressed once
         static bool isKeyPressed(int key);
 
+        // Check if a key is being pressed
+        static bool isKeyDown(int key);
+
         // Check if a gamepad is available
         static bool isGamepadAvailable(int gamepad);
 

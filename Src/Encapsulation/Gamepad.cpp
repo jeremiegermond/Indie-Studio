@@ -12,6 +12,10 @@ namespace bomberman {
         return IsKeyPressed(key);
     }
 
+    bool MyGamepad::isKeyDown(int key) {
+        return IsKeyDown(key);
+    }
+
     bool MyGamepad::isGamepadAvailable(int gamepad) {
         return IsGamepadAvailable(gamepad);
     }
