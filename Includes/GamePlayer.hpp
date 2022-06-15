@@ -100,6 +100,9 @@ namespace bomberman {
         void CPUPlay();
         void PlayPlayer();
         void UpdateMovement();
+
+        bool IsBreakable(float round,
+                         float z);
     };
 }
 

@@ -11,26 +11,37 @@ namespace bomberman {
     void GamePlayer::CPUPlay() {
         MyVector3 pos = GetPosition();
         MyVector3 rPos = GetPosition(true);
-
+        bool dir[4] = {};
+        for (auto bomb: bombs) {
+            auto bRPos = bomb->GetPosition(true);
+            dir[0] += fabs(rPos.x + 1.f - bRPos.x) < .1f;
+            dir[1] += fabs(rPos.x - 1.f - bRPos.x) < .1f;
+            dir[2] += fabs(rPos.z + 1.f - bRPos.z) < .1f;
+            dir[3] += fabs(rPos.z - 1.f - bRPos.z) < .1f;
+        }
         if (decision > 500) {
             direction = GetRandomValue(0, 5);
             decision = 0;
         }
 
-        if (direction == 0) {
+        if (direction == 0 && !dir[0]) {
             MoveTo(round(pos.x + .6f), rPos.z);
             rotation.z = -1.5;
-        } else if (direction == 1) {
+        } else if (direction == 1 && !dir[1]) {
             MoveTo(round(pos.x - .6f), rPos.z);
             rotation.z = 1.5;
-        } else if (direction == 2) {
+        } else if (direction == 2 && !dir[2]) {
             MoveTo(rPos.x, round(pos.z + .6f));
             rotation.z = 0;
-        } else if (direction == 3) {
+        } else if (direction == 3 && !dir[3]) {
             MoveTo(rPos.x, round(pos.z - .6f));
             rotation.z = 3;
-        } else if (direction == 4) {
-            AddBomb();
+        } else if (direction == 4 && elapsed > 5000.) {
+            if (IsBreakable(round(pos.x + .6f), rPos.z) ||
+                IsBreakable(round(pos.x - .6f), rPos.z) ||
+                IsBreakable(rPos.x, round(pos.z + .6f)) ||
+                IsBreakable(rPos.x, round(pos.z - .6f)))
+                AddBomb();
             direction = GetRandomValue(0, 4);
         }
     }
@@ -70,6 +81,7 @@ namespace bomberman {
     }
 
     void GamePlayer::SetPlay(bool play) {
+        elapsed = .0f;
         canPlay = play;
         if (!bombs.empty())
             bombs.clear();
@@ -249,6 +261,7 @@ namespace bomberman {
         fireUp = 3;
         speed = 2.f;
         wallPass = 0;
+        elapsed = .0f;
         keys = nullptr;
         gamepad = nullptr;
         cpu = true;
@@ -269,6 +282,8 @@ namespace bomberman {
         if (!map->Collide(newX, newZ, wallPass)) {
             intention.x = float(newX);
             intention.y = float(newZ);
+        } else {
+            direction = GetRandomValue(0, 4);
         }
     }
 
@@ -316,5 +331,15 @@ namespace bomberman {
         if (!moveX && !moveZ) {
             SetAnimation(1);
         }
+    }
+
+    bool GamePlayer::IsBreakable(float x,
+                                 float z) {
+        int newX = int(x);
+        int newZ = int(z);
+        if (map->GetBlock(newX, newZ) == '2') {
+            return true;
+        }
+        return false;
     }
 }
