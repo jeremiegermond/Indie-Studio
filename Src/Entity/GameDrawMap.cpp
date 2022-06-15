@@ -75,7 +75,6 @@ namespace bomberman {
         int height = 21;
 
         _map.resize(height);
-        std::cout << "creating map" << std::endl;
         for (int row = 0; row < height; row++) {
             _map[row].resize(width);
             for (int col = 1; col <= width; col++) {
@@ -95,11 +94,9 @@ namespace bomberman {
                     type = Populate();
                 else
                     type = '0';
-                std::cout << type << " ";
                 _map[row][col - 1] = type;
             }
             type = '0';
-            std::cout << " | " << row + 1 << std::endl;
         }
     }
 
