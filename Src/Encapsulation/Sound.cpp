@@ -27,4 +27,8 @@ namespace bomberman {
     bool MySound::isSoundPlaying(Sound sound) {
         return IsSoundPlaying(sound);
     }
+
+    void MySound::setSoundVolume(Sound sound, float volume) {
+        return SetSoundVolume(sound, volume);
+    }
 }

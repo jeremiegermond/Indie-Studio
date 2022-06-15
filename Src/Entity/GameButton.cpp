@@ -19,7 +19,7 @@ namespace bomberman {
         state = false;
         collision = Rectangle{float(posX), float(posY), float(onTexture.width), float(onTexture.height)};
         tint = WHITE;
-        click = LoadSound("../Assets/Bomb/click.mp3");
+        click = MySound::loadSound("../Assets/Bomb/click.mp3");
     }
 
     GameButton::~GameButton() {
@@ -32,7 +32,7 @@ namespace bomberman {
             if (CheckCollisionPointRec(GetMousePosition(), collision)) {
                 if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                     state = !state;
-                    PlaySound(click);
+                    MySound::playSound(click);
                 } else {
                     tint = GRAY;
                 }
