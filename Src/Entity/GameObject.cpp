@@ -24,7 +24,7 @@ namespace bomberman {
 
         if (!std::ifstream(modelPath).good())
             throw BuildError("Failed to load model " + modelPath, __FILE__, __LINE__);
-        model = LoadModel(modelPath.c_str());
+        model = Load::loadModel(modelPath.c_str());
     };
 
     GameObject::~GameObject() {

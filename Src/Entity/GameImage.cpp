@@ -9,7 +9,7 @@
 
 namespace bomberman {
     GameImage::GameImage(const std::string &image, int x, int y, MyColor color) {
-        _texture = LoadTexture(image.c_str());
+        _texture = Load::loadTexture(image.c_str());
         posX = x;
         posY = y;
         _color = color;
@@ -18,7 +18,7 @@ namespace bomberman {
 
     void GameImage::Draw() {
         if (active)
-            DrawTexture(_texture, posX, posY, _color);
+            Draw::drawTexture(_texture, posX, posY, _color);
     }
 
     void GameImage::SetActive(bool activate) {

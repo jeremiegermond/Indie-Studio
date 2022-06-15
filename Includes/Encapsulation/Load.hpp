@@ -29,6 +29,12 @@ namespace bomberman {
 
         // Load font from file with extended parameters
         static Font loadFontEx(const char *fileName, int fontSize, int *fontChars, int glyphCount);
+
+        // Load model from files (meshes and materials)
+        static Model loadModel(const char *fileName);
+
+        // Load texture from file into GPU memory (VRAM)
+        static Texture2D loadTexture(const char *fileName);
     };
 }
 

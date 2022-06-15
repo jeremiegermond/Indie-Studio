@@ -28,4 +28,12 @@ namespace bomberman {
     Font Load::loadFontEx(const char *fileName, int fontSize, int *fontChars, int glyphCount) {
         return LoadFontEx(fileName, fontSize, fontChars, glyphCount);
     }
+
+    Model Load::loadModel(const char *fileName) {
+        return LoadModel(fileName);
+    }
+
+    Texture2D Load::loadTexture(const char *fileName) {
+        return LoadTexture(fileName);
+    }
 }

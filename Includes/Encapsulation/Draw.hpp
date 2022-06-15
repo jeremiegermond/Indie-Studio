@@ -118,6 +118,9 @@ namespace bomberman {
         // Draw text using font and additional parameters
         static void drawTextEx(Font font, const char *text, MyVector2 position, float fontSize, float spacing, MyColor tint);
 
+        // Draw a Texture2D
+        static void drawTexture(Texture2D texture, int posX, int posY, MyColor tint);
+
 
 
         //additional function: draw

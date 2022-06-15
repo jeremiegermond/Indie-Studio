@@ -141,6 +141,10 @@ namespace bomberman {
         return DrawTextEx(font, text, position, fontSize, spacing, tint);
     }
 
+    void Draw::drawTexture(Texture2D texture, int posX, int posY, MyColor tint) {
+        return DrawTexture(texture, posX, posY, tint);
+    }
+
 
 
     void Draw::draw(const std::function<void()> &function) {
