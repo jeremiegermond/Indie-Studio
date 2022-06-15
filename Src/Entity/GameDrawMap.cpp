@@ -52,13 +52,13 @@ namespace bomberman {
                     Draw::drawCubeTexture(_textureBrick, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x == '2') {
                     Draw::drawCubeTexture(_textureWood, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
-                } else if (x == '5') {    // DEBUG
+                } else if (x == '5') {
                     Draw::drawCubeTexture(_textureBomb, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
-                } else if (x == '6') {    // DEBUG
+                } else if (x == '6') {
                     Draw::drawCubeTexture(_textureSpeed, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
-                } else if (x == '7') {    // DEBUG
+                } else if (x == '7') {
                     Draw::drawCubeTexture(_textureWall, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
-                } else if (x == '8') {    // DEBUG
+                } else if (x == '8') {
                     Draw::drawCubeTexture(_textureFire, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x != '0') {    //
                     Draw::drawCube(_cubePosition, 1.0f, 1.0f, 1.0f, GREEN);
@@ -202,15 +202,3 @@ namespace bomberman {
         }
     }
 }
-
-/*
-0 : void
-1 : stone block
-2 : wood block
-3 : player
-4 : enemy
-5 : bomb up 
-6 : speed up 
-7 : fire up 
-8 : wall pass 
-*/
