@@ -41,26 +41,6 @@ namespace bomberman {
             if (!IsOnObjective()) {
                 MoveToObjective();
             }
-            if (IsKeyDown(KEY_J)) {
-                camera.position.x += .01;
-                objectiveCam.position.x += .01;
-            }
-            if (IsKeyDown(KEY_N)) {
-                camera.position.z += .01;
-             objectiveCam.position.z += .01;
-            }
-            if (IsKeyDown(KEY_I)) {
-                camera.position.y += .01;
-                objectiveCam.position.y += .01;
-            }
-            if (IsKeyDown(KEY_R))
-                objectiveCam.position = startPosition;
-            if (IsKeyDown(KEY_C)) {
-                objectiveCam.fovy -= 1;
-            }
-            if (IsKeyDown(KEY_V)) {
-                objectiveCam.fovy += 1;
-            }
             UpdateCamera(&camera);
         }
     }
