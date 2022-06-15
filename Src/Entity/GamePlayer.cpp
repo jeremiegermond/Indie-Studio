@@ -59,6 +59,8 @@ namespace bomberman {
                 IsBreakable(rPos.x, round(pos.z + .6f)) ||
                 IsBreakable(rPos.x, round(pos.z - .6f)))
                 AddBomb();
+            else if (!map->GetBreakTiles())
+                AddBomb();
             direction = GetRandomValue(0, 4);
         }
     }

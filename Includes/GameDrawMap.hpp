@@ -24,6 +24,7 @@ namespace bomberman {
             Model planeModel;
             Texture2D _planeTexture;
             std::vector<std::vector<char>> _map;
+            int breakTiles;
         public:
             GameDrawMap(const std::string &texturePathBrick, const std::string &texturePathWood, MyColor color);
             ~GameDrawMap() override;
@@ -36,6 +37,7 @@ namespace bomberman {
             void Save();
             void LoadMap();
             bool Collide(int posX, int posY, double wallPass = 0);
+            bool GetBreakTiles();
     };
 }
 

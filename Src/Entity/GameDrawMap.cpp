@@ -11,7 +11,7 @@ namespace bomberman {
 
     GameDrawMap::GameDrawMap(const std::string &texturePathBrick,
                              const std::string &texturePathWood,
-                             MyColor color) {
+                             MyColor color) : breakTiles(1) {
         _cubePosition.x = 0;
         _cubePosition.y = 0;
         _cubePosition.z = 0;
@@ -45,6 +45,7 @@ namespace bomberman {
     void GameDrawMap::Draw() {
         Draw::drawModel(planeModel, MyVector3{.0f,-.5f,.0f}, 1.f, LIGHTGRAY);
         _cubePosition.z = -10;
+        breakTiles = 0;
         for (auto y: _map) {
             _cubePosition.x = -10;
             for (auto x: y) {
@@ -52,6 +53,7 @@ namespace bomberman {
                     Draw::drawCubeTexture(_textureBrick, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x == '2') {
                     Draw::drawCubeTexture(_textureWood, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
+                    breakTiles++;
                 } else if (x == '5') {
                     Draw::drawCubeTexture(_textureBomb, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x == '6') {
@@ -197,5 +199,9 @@ namespace bomberman {
                 y[x] = oldmap[x];
             }
         }
+    }
+
+    bool GameDrawMap::GetBreakTiles() {
+        return breakTiles;
     }
 }
