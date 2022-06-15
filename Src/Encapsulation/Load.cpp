@@ -16,4 +16,12 @@ namespace bomberman {
     Image Load::loadImage(const char *fileName) {
         return LoadImage(fileName);
     }
+
+    Shader Load::loadShader(const char *vsFileName, const char *fsFileName) {
+        return LoadShader(vsFileName, fsFileName);
+    }
+
+    RenderTexture2D Load::loadRenderTexture(int width, int height) {
+        return LoadRenderTexture(width, height);
+    }
 }

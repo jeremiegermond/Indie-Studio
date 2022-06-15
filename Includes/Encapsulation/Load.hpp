@@ -15,12 +15,17 @@
 namespace bomberman {
     class Load {
     public:
-
         // Load texture from image data
-        static inline Texture2D loadTextureFromImage(const Image &image);
+        static Texture2D loadTextureFromImage(const Image &image);
 
         // Load image from file into CPU memory (RAM)
-        static inline Image loadImage(const char *fileName);
+        static Image loadImage(const char *fileName);
+
+        // Load shader from files and bind default locations
+        static Shader loadShader(const char *vsFileName, const char *fsFileName);
+
+        // Load texture for rendering (framebuffer)
+        static RenderTexture2D loadRenderTexture(int width, int height);
     };
 }
 

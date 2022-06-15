@@ -16,18 +16,18 @@ namespace bomberman {
     }
 
     Game::~Game() {
-        CloseAudioDevice();
-        CloseWindow();
+        MySound::closeAudioDevice();
+        Window::closeWindow();
     }
 
     void Game::createWindow() {
-        InitWindow(width, height, "Bomberman");
+        Window::initWindow(width, height, "Bomberman");
         rlDisableBackfaceCulling();
-        SetConfigFlags(FLAG_MSAA_4X_HINT);
-        InitAudioDevice();
-        SetTargetFPS(60);
-        flavicon = LoadImage("../Assets/Bomb/bombFlavicon.png");
-        SetWindowIcon(flavicon);
+        Window::setConfigFlags(FLAG_MSAA_4X_HINT);
+        MySound::initAudioDevice();
+        Window::setTargetFPS(60);
+        flavicon = Load::loadImage("../Assets/Bomb/bombFlavicon.png");
+        Window::setIcon(flavicon);
         std::srand(std::time(nullptr));
         try {
             scenes = SceneManager(this);
@@ -38,13 +38,13 @@ namespace bomberman {
     }
 
     void Game::run() {
-        Shader shader = LoadShader(0, TextFormat("../Assets/Shaders/bloom.fs", 330));
-        RenderTexture2D target = LoadRenderTexture(width, height);
-        auto rTarget = Rectangle{0, 0, float(width), float(-height)};
+        Shader shader = Load::loadShader(nullptr, TextFormat("../Assets/Shaders/bloom.fs", 330));
+        RenderTexture2D target = Load::loadRenderTexture(width, height);
+        auto rTarget = MyRectangle{0, 0, float(width), float(-height)};
 
-        while (!WindowShouldClose()) {
-            BeginTextureMode(target);
-            ClearBackground(BLACK);
+        while (!Window::shouldClose()) {
+            Draw::beginTextureMode(target);
+            Draw::clearBackground(BLACK);
             GetScene()->DrawScene();
             scenes.GetScene(2)->Draw2DAssets();
             if (scenes.GetScene(2)->GetButton(0)->GetState()) {
@@ -58,24 +58,24 @@ namespace bomberman {
                     scenes.GetScene(4)->GetButton(0)->SetState(false);
                 }
             }
-            EndTextureMode();
-            BeginDrawing();
-            ClearBackground(BLACK);
+            Draw::endTextureMode();
+            Draw::beginDrawing();
+            Draw::clearBackground(BLACK);
             if (scenes.GetScene(0)->GetButton(1)->GetState()) {
-                BeginShaderMode(shader);
-                DrawTextureRec(target.texture, rTarget, MyVector2{0, 0}, WHITE);
-                EndShaderMode();
+                Draw::beginShaderMode(shader);
+                Draw::drawTextureRec(target.texture, rTarget, MyVector2{0, 0}, WHITE);
+                Draw::endShaderMode();
             } else {
-                DrawTextureRec(target.texture, rTarget, MyVector2{0, 0}, WHITE);
+                Draw::drawTextureRec(target.texture, rTarget, MyVector2{0, 0}, WHITE);
             }
-            EndDrawing();
+            Draw::endDrawing();
         }
         CloseGame();
     }
 
     void Game::ChangeScene(int i) {
         GetScene()->UnloadScene();
-        SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+        Window::setMouseCursor(MOUSE_CURSOR_DEFAULT);
         currentScene = i;
         GetScene()->StartScene();
     }

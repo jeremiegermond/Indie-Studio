@@ -17,8 +17,8 @@ namespace bomberman {
         position = MyVector3{-.5f, 0.0f, -.5f};
         rotation.z = 3.f;
         previous = std::chrono::system_clock::now();
-        boom = LoadSound("../Assets/Bomb/boom.mp3");
-        SetSoundVolume(boom, 0.5f);
+        boom = MySound::loadSound("../Assets/Bomb/boom.mp3");
+        MySound::setSoundVolume(boom, 0.5f);
     }
 
     void GameBomb::Update() {
@@ -30,7 +30,7 @@ namespace bomberman {
                 exploded = 1;
                 explosion = new AnimatedGameObject("../Assets/Level/explosion.iqm", 0, .8f);
                 explosion->SetPosition(position);
-                PlaySound(boom);
+                MySound::playSound(boom);
             }
             if (explosion) {
                 if (elapsed >= 4650) {

@@ -160,12 +160,12 @@ namespace bomberman {
 
     void SceneManager::CreateSettingsScene() {
         auto *settings = new Scene;
-        settings->AddEntity(new GameImage("../Assets/UI/text_box.png", 500, 200));
-        settings->AddEntity(new GameButton(1220, 770, "../Assets/UI/close_button90.png"));
-        settings->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Fullscreen", 825, 440, 90, BLACK));
-        settings->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "    Music", 825, 590, 90, BLACK));
-        settings->AddEntity(new GameButton(1050, 450, "../Assets/UI/checkbox_checked.png", "../Assets/UI/checkbox.png"));
-        settings->AddEntity(new GameButton(1050, 600, "../Assets/UI/checkbox_checked.png", "../Assets/UI/checkbox.png"));
+        settings->AddEntity(new GameImage("../Assets/UI/text_box.png", 500, 150));
+        settings->AddEntity(new GameButton(1220, 790, "../Assets/UI/close_button90.png"));
+        settings->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "Fullscreen", 815, 430, 90, BLACK));
+        settings->AddEntity(new GameText("../Assets/Font/Beauty_Forest.free.ttf", "  Music", 815, 580, 90, BLACK));
+        settings->AddEntity(new GameButton(1040, 440, "../Assets/UI/checkbox_checked.png", "../Assets/UI/checkbox.png"));
+        settings->AddEntity(new GameButton(1040, 590, "../Assets/UI/checkbox_checked.png", "../Assets/UI/checkbox.png"));
         settings->AddEntity(new GameScript(gameRef, 6));
         if (IsWindowFullscreen())
             settings->GetButton(1)->SetState(true);

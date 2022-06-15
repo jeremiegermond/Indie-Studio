@@ -31,7 +31,7 @@ namespace bomberman {
         powerUpPos.emplace_back(1635.0f, 355.0f);
         powerUpPos.emplace_back(1635.0f, 755.0f);
         gamepads = std::vector({new Gamepad(0), new Gamepad(1), new Gamepad(2), new Gamepad(3)});
-        click = LoadSound("../Assets/Bomb/click.mp3");
+        click = MySound::loadSound("../Assets/Bomb/click.mp3");
     }
 
     void GameScript::Update() {
@@ -70,7 +70,7 @@ namespace bomberman {
 
     void GameScript::PressToZoom() {
         if (IsKeyPressed(KEY_ENTER) || CheckGamepadsButtonPressed(7)) {
-            PlaySound(click);
+            MySound::playSound(click);
             _game->GetScene()->GetCamera(0)->SetMode(CAMERA_CUSTOM);
             _game->GetScene()->NextCamera();
             LoadPlayers();
@@ -95,7 +95,7 @@ namespace bomberman {
             }
         }
         if (IsKeyPressed(KEY_ENTER) || CheckGamepadsButtonPressed(7)) {
-            PlaySound(click);
+            MySound::playSound(click);
             currentScript = 3;
             int cpuselect = 0;
             _game->GetScene()->GetText(2)->SetActive(false);
@@ -136,7 +136,7 @@ namespace bomberman {
                             player->LoadPlayer(x);
                         players.push_back(player);
                     }
-                    scene->SetActiveButton(BUTTON_MENU, false, true);
+                    scene->SetActiveButton(BUTTON_MENU, false);
                     _game->ChangeScene(1);
                     scene = _game->GetScene();
                     auto map = scene->GetMap();
@@ -179,7 +179,7 @@ namespace bomberman {
             script->currentScript = 2;
             script->ActivateSelection();
             script->LoadPlayers(true);
-            scene->SetActiveButton(BUTTON_MENU, true, true);
+            scene->SetActiveButton(BUTTON_MENU, true);
             scene->GetObject(0)->SetScale(1.f);
             scene->GetObject(0)->SetPosition(MyVector3{0.f, 0.f, 0.f});
             return;
@@ -285,7 +285,7 @@ namespace bomberman {
                 }
             }
             for (auto collide: cases) {
-                for (int i = 0; i < 4; i++) {
+                for (size_t i = 0; i < 4; i++) {
                     if (players.size() <= i || playersPos.size() <= i)
                         break;
                     if (Vector3Distance(playersPos[i], collide) < .7f) {
@@ -343,13 +343,13 @@ namespace bomberman {
             script->currentScript = 2;
             script->ActivateSelection();
             script->LoadPlayers(true);
-            scene->SetActiveButton(BUTTON_MENU, true, true);
+            scene->SetActiveButton(BUTTON_MENU, true);
         }
     }
 
     void GameScript::Settings() {
         auto *scene = _game->GetSceneManager().GetScene(3);
-        static bool switch_fs = IsWindowFullscreen();
+        static bool switch_fs = Window::isFullscreen();
         if (_game->GetSceneManager().GetScene(3)->GetButton(0)->GetState()) {
             _game->GetSceneManager().GetScene(2)->GetButton(0)->SetState(false);
             _game->GetSceneManager().GetScene(3)->GetButton(0)->SetState(false);
@@ -360,8 +360,8 @@ namespace bomberman {
             SetMasterVolume(1);
         if (switch_fs != scene->GetButton(1)->GetState()) {
             ToggleFullscreen();
-            if (!IsWindowFullscreen()) {
-                SetWindowSize(1920, 1050);
+            if (!Window::isFullscreen()) {
+                Window::setSize(1920, 1050);
             }
         }
         switch_fs = scene->GetButton(1)->GetState();

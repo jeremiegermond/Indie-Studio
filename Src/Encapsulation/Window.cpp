@@ -8,163 +8,172 @@
 #include "Window.hpp"
 
 namespace bomberman {
-    Window::Window(const int &width,
-                   const int &height,
-                   const std::string &title)
-                   : width(1920), height(1080), title("Bomberman") {
-        InitWindow(width, height, title.c_str());
+    void Window::initWindow(int width, int height, const char *title) {
+        return InitWindow(width, height, title);
     }
 
-    Window::~Window() {
-        CloseWindow();
-    }
+    void Window::closeWindow(void) {
+        return CloseWindow();
+    }                                                 // Close window and unload OpenGL context
 
-    inline bool shouldClose(void) {
+    bool Window::shouldClose(void) {
         return WindowShouldClose();
     }
     
-    inline bool isReady(void) {
+    bool Window::isReady(void) {
         return IsWindowReady();
     }
 
-    inline bool isFullscreen(void) {
+    bool Window::isFullscreen(void) {
         return IsWindowFullscreen();
     }
     
-    inline bool isHidden(void) {
+    bool Window::isHidden(void) {
         return IsWindowHidden();
     }
     
-    inline bool isMinimized(void) {
+    bool Window::isMinimized(void) {
         return IsWindowMinimized();
     }
     
-    inline bool isMaximized(void) {
+    bool Window::isMaximized(void) {
         return IsWindowMaximized();
     }
     
-    inline bool isFocused(void) {
+    bool Window::isFocused(void) {
         return IsWindowFocused();
     }
     
-    inline bool isResized(void) {
+    bool Window::isResized(void) {
         return IsWindowResized();
     }
     
-    inline bool isState(const unsigned int &flag) {
+    bool Window::isState(const unsigned int &flag) {
         return IsWindowState(flag);
     }
     
-    inline void setState(const unsigned int &flags) {
+    void Window::setState(const unsigned int &flags) {
         return SetWindowState(flags);
     }
     
-    inline void clearState(const unsigned int &flags) {
+    void Window::clearState(const unsigned int &flags) {
         return ClearWindowState(flags);
     }
     
-    inline void toggleFullscreen(void) {
+    void Window::toggleFullscreen(void) {
         return ToggleFullscreen();
     }
     
-    inline void maximize(void) {
+    void Window::maximize(void) {
         return MaximizeWindow();
     }
     
-    inline void minimize(void) {
+    void Window::minimize(void) {
         return MinimizeWindow();
     }
     
-    inline void restore(void) {
+    void Window::restore(void) {
         return RestoreWindow();
     }
     
-    inline void setIcon(const Image &image) {
+    void Window::setIcon(const Image &image) {
         return SetWindowIcon(image);
     }
     
-    inline void setTitle(const std::string &title) {
+    void Window::setTitle(const std::string &title) {
         return SetWindowTitle(title.c_str());
     }
     
-    inline void setPosition(const int &x, const int &y) {
+    void Window::setPosition(const int &x, const int &y) {
         return SetWindowPosition(x, y);
     }
     
-    inline void setMonitor(const int &monitor) {
+    void Window::setMonitor(const int &monitor) {
         return SetWindowMonitor(monitor);
     }
     
-    inline void setMinSize(const int &width, const int &height) {
+    void Window::setMinSize(const int &width, const int &height) {
         return SetWindowMinSize(width, height);
     }
     
-    inline void setSize(const int &width, const int &height) {
+    void Window::setSize(const int &width, const int &height) {
         return SetWindowSize(width, height);
     }
     
-    inline void *getHandle(void) {
+    void *Window::getHandle(void) {
         return GetWindowHandle();
     }
     
-    inline int getScreenWidth(void) {
+    int Window::getScreenWidth(void) {
         return GetScreenWidth();
     }
     
-    inline int getScreenHeight(void) {
+    int Window::getScreenHeight(void) {
         return GetScreenHeight();
     }
     
-    inline int getMonitorCount(void) {
+    int Window::getMonitorCount(void) {
         return GetMonitorCount();
     }
     
-    inline int getCurrentMonitor(void) {
+    int Window::getCurrentMonitor(void) {
         return GetCurrentMonitor();
     }
     
-    inline Vector2 getMonitorPosition(const int &monitor) {
+    Vector2 Window::getMonitorPosition(const int &monitor) {
         return GetMonitorPosition(monitor);
     }
     
-    inline int getMonitorWidth(const int &monitor) {
+    int Window::getMonitorWidth(const int &monitor) {
         return GetMonitorWidth(monitor);
     }
     
-    inline int getMonitorHeight(const int &monitor) {
+    int Window::getMonitorHeight(const int &monitor) {
         return GetMonitorHeight(monitor);
     }
     
-    inline int getMonitorPhysicalWidth(const int &monitor) {
+    int Window::getMonitorPhysicalWidth(const int &monitor) {
         return GetMonitorPhysicalWidth(monitor);
     }
     
-    inline int getMonitorPhysicalHeight(const int &monitor) {
+    int Window::getMonitorPhysicalHeight(const int &monitor) {
         return GetMonitorPhysicalHeight(monitor);
     }
     
-    inline int getMonitorRefreshRate(const int &monitor) {
+    int Window::getMonitorRefreshRate(const int &monitor) {
         return GetMonitorRefreshRate(monitor);
     }
     
-    inline Vector2 getPosition(void) {
+    Vector2 Window::getPosition(void) {
         return GetWindowPosition();
     }
     
-    inline Vector2 getScaleDPI(void) {
+    Vector2 Window::getScaleDPI(void) {
         return GetWindowScaleDPI();
     }
     
-    inline const std::string getMonitorName(const int &monitor) {
+    const std::string Window::getMonitorName(const int &monitor) {
         const std::string monitorName(GetMonitorName(monitor));
         return monitorName;
     }
     
-    inline void setClipboardText(const std::string &text) {
+    void Window::setClipboardText(const std::string &text) {
         return SetClipboardText(text.c_str());
     }
     
-    inline const char *getClipboardText(void) {
+    const char *Window::getClipboardText(void) {
         return GetClipboardText();
+    }
+
+    void Window::setTargetFPS(int fps) {
+        return SetTargetFPS(fps);
+    }
+
+    void Window::setConfigFlags(unsigned int flags) {
+        return SetConfigFlags(flags);
+    }
+
+    void Window::setMouseCursor(int cursor) {
+        return SetMouseCursor(cursor);
     }
 }
