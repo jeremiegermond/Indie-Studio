@@ -312,19 +312,19 @@ namespace bomberman {
     void GamePlayer::PlayPlayer() {
         MyVector3 pos = GetPosition();
         MyVector3 rPos = GetPosition(true);
-        if (IsKeyPressed(keys->bomb()) || GetGamepad()->button(7)) {
+        if (MyGamepad::isKeyPressed(keys->bomb()) || GetGamepad()->button(7)) {
             AddBomb();
         }
-        if (IsKeyDown(keys->left()) || GetGamepad()->left()) {
+        if (MyGamepad::isKeyDown(keys->left()) || GetGamepad()->left()) {
             MoveTo(round(pos.x + .6f), rPos.z);
             rotation.z = -1.5;
-        } else if (IsKeyDown(keys->right()) || GetGamepad()->right()) {
+        } else if (MyGamepad::isKeyDown(keys->right()) || GetGamepad()->right()) {
             MoveTo(round(pos.x - .6f), rPos.z);
             rotation.z = 1.5;
-        } else if (IsKeyDown(keys->up()) || GetGamepad()->up()) {
+        } else if (MyGamepad::isKeyDown(keys->up()) || GetGamepad()->up()) {
             MoveTo(rPos.x, round(pos.z + .6f));
             rotation.z = 0;
-        } else if (IsKeyDown(keys->down()) || GetGamepad()->down()) {
+        } else if (MyGamepad::isKeyDown(keys->down()) || GetGamepad()->down()) {
             MoveTo(rPos.x, round(pos.z - .6f));
             rotation.z = 3;
         }
