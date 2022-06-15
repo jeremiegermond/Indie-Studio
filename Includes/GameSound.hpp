@@ -16,7 +16,6 @@ namespace bomberman {
         Sound sound{};
         bool active;
         bool startActive;
-        bool looping;
     public:
         explicit GameSound(const std::string &soundPath, bool looping = false);
         ~GameSound() override;

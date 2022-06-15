@@ -14,7 +14,6 @@
 namespace bomberman {
     class GameImage : public IEntity {
         private:
-            Image _image{};
             Texture2D _texture{};
             MyColor _color;
             int posX;
