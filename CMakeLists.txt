@@ -26,6 +26,7 @@ add_executable(bomberman
         Src/Scene/Scene.cpp
         Src/Scene/SceneManager.cpp
         Src/Encapsulation/Load.cpp
+        Src/Encapsulation/Sound.cpp
         Src/Encapsulation/Window.cpp
         Src/Encapsulation/Draw.cpp
         Src/Encapsulation/Models.cpp
