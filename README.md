@@ -8,18 +8,11 @@
 
 The aim of the **Indie Studio** is to implement a **cross-platform** 3D video game with **real-world** tools.
 
-Making an enjoyable game is just as important as writing clean code.<br>
-A working game which is no fun to play is pointless!
-
-> Let’s be honest. Implementing a video game is generally not fun (at least not all the time).
-> But it can be, and having someone else enjoy a game you made is an amazing feeling.
-> The result will be worth the effort, so do your best! And most importantly, **have fun**
- 
 ## Compilation
 
-You **MUST** use **CMake** as a cross-platform build system:
+Use **CMake**:
 
-- **Linux**: it must generate a `Makefile` to be able to build the project
+- **Linux / MacOS**:
 
 ```
 mkdir build && cd build
@@ -28,7 +21,7 @@ cmake --build .
 ./bomberman
 ```
 
-- **Windows**: it must generate a Visual Studio solution `.sln` (will be tested with Visual Studio 2022)
+- **Windows**:
 
 ```
 mkdir build && cd build
@@ -37,50 +30,48 @@ cmake --build .
 bomberman.exe
 ```
 
-> We will provide a `CMAKE_MODULE_PATH` cmake variable when building the project.
-
-
 
 ## Library
 
-You must use `raylib`, a very simple C library for 2D/3D graphics. As of today, 3D animation for `.gltf` models
-files is badly handled. We advised you to use multiple `.obj` files to animate your assets.
+We used `raylib` to implement the game. It is a very simple C library for 2D/3D graphics.<br>
+Instead of using a `.gltf` file, the library uses `.obj` files to load 3D assets.<br>
+We encapsulated `raylib` because to make our code more readable and maintainable.
 
-> `raylib` is a C library, ever heard of encapsulation ?
-
-A CMakes module is provided for `raylib`, you must use it to generate your project. You mays use `Boost` to help you with some aspects of the project (or for bonuses).
-
-> There are plenty of free assets on the Internet. Creating your own should be far from being a priority. . . Do not waste time.
- 
 ## The game
 
-The game you must implement is a Bomberman-like game.<br>
+> Victory Screen
+![](Assets/Readme/victory_screen.gif)
+
+> Artifical Intelligence controlled bot
+![](Assets/Readme/ai.gif)
+
+The game we implemented is a Bomberman-like game.<br>
 **Bomberman** is one of the most famous video games of all time.<br>
 With over 70 franchises, ranging from the first version on MSX, ZX Spectrum and Sharp MZ-700 in 1983 to the latest versions on modern consoles, over 10 million units have been sold.
 
 Our gameplay reference is **Neo Bomberman**, released on the Neo Geo and MVS systems in 1997.
 
-Here’s the required features:
+Here’s the features we implemented:
 
 - Local multiplayer with the possibility to play with a friend + AI’s controlled bots.
 - A main game menu (to start a new game or load an existing one).
-- Your game must feature 3D graphics but a 2D gameplay.
-- Your game must feature **procedurally generated maps** (random obstacles, random bonus. . . ).
+- 3D graphics but a 2D gameplay.
+- **Procedurally generated maps** (random obstacles, random bonus...).
 - Save/Load a game (game auto save on quit)
 - Animation and sounds to give life to the game (especially during various interactions)
-  - Think about bomb explosion, player walking, background music, ...
-- Some Power-ups
-  - Bomb Up
-  - Speed Up
-  - Fire Up
-  - Wall Pass
+  - Bomb explosion, player walking, background music, ...
+- Power-ups
+  - Bomb Up (increase the number of bombs)
+  - Speed Up (increase the player speed)
+  - Fire Up (increase the range of the bomb)
+  - Wall Pass (10 seconds)
+- Win/Tie game over screen
 
-The goal of this project is not only to code a video game, but it’s to code a fully finished video game. 
-
+We achieved to code a fully finished game within our 5 weeks time frame.
 This means that the efforts you make to polish your game will count as much as the technical aspect.
-
-Do your best to avoid clunky animations or graphical glitches, manage your camera in a way that the “out-side” of the game is never visible, pay attention to game design, level design and sound design, add variations in enemies and environments, etc.
 
 ## Documentation
 
 You can see our documentation in the Documentation folder. Use vscode to open a better view, on a live server.
+
+![](Assets/Readme/documentation.gif)
