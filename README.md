@@ -39,10 +39,10 @@ We encapsulated `raylib` because to make our code more readable and maintainable
 
 ## The game
 
-> Victory Screen
+> Victory Screen<br>
 ![](Assets/Readme/victory_screen.gif)
 
-> Artifical Intelligence controlled bot
+> Artifical Intelligence controlled bot<br>
 ![](Assets/Readme/ai.gif)
 
 The game we implemented is a Bomberman-like game.<br>
