@@ -103,7 +103,7 @@ namespace bomberman {
             player->Draw();
         }
         if (GameMap)
-            GameMap->Draw();
+            GameMap->Draw(GameCameras.front());
     }
 
     void Scene::Draw2DAssets() {

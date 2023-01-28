@@ -13,7 +13,7 @@
 #include "GameDrawMap.hpp"
 #include "GameSound.hpp"
 #include "Gamepad.hpp"
-
+#define FIRE_UP 1
 namespace bomberman {
 
     class GamePlayer : public AnimatedGameObject {
@@ -50,7 +50,7 @@ namespace bomberman {
                   dead(LoadSound("../Assets/Bomb/squish.mp3")),
                   place(LoadSound("../Assets/Bomb/place.mp3")),
                   levelUp(LoadSound("../Assets/Bomb/up.mp3")),
-                  fireUp(3),
+                  fireUp(FIRE_UP),
                   lives(1),
                   maxBombsStat(1),
                   speed(2.f),

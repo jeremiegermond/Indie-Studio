@@ -280,7 +280,7 @@ namespace bomberman {
         AnimatedGameObject::Reset();
         maxBombsStat = 1;
         lives = 1;
-        fireUp = 3;
+        fireUp = FIRE_UP;
         speed = 2.f;
         wallPass = 0;
         elapsed = .0f;

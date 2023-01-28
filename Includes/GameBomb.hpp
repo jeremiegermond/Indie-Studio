@@ -21,6 +21,8 @@ namespace bomberman {
         int fireUp;
         AnimatedGameObject *explosion{};
         Sound boom{};
+        std::vector<MyVector3> explosionPos;
+
     public:
         GameBomb(int fireUp);
 
@@ -31,6 +33,8 @@ namespace bomberman {
         int GetFire() const;
 
         void Draw() override;
+
+        void AddExplosion(MyVector3 pos);
     };
 }
 #endif //BOMBERMAN_GAMEBOMB_HPP

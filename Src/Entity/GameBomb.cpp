@@ -29,7 +29,7 @@ namespace bomberman {
             if (!exploded && elapsed >= 4000) {
                 exploded = 1;
                 explosion = new AnimatedGameObject("../Assets/Level/explosion.iqm", 0, .8f);
-                explosion->SetPosition(position);
+                //explosion->SetPosition(position);
                 MySound::playSound(boom);
             }
             if (explosion) {
@@ -56,25 +56,18 @@ namespace bomberman {
         if (!exploded)
             AnimatedGameObject::Draw();
         if (exploded && explosion) {
-            explosion->Draw();
-            MyVector3 bombPos = explosion->GetPosition();
-            MyVector3 bombDisplay = bombPos;
-            for (int x = -fireUp; x <= fireUp; x++) {
-                bombDisplay.x = bombPos.x + float(x);
-                explosion->SetPosition(bombDisplay);
+            for (auto &pos : explosionPos) {
+                explosion->SetPosition(pos);
                 explosion->Draw();
             }
-            bombDisplay.x = bombPos.x;
-            for (int z = -fireUp; z <= fireUp; z++) {
-                bombDisplay.z = bombPos.z + float(z);
-                explosion->SetPosition(bombDisplay);
-                explosion->Draw();
-            }
-            explosion->SetPosition(bombPos);
         }
     }
 
     int GameBomb::GetFire() const {
         return fireUp;
+    }
+
+    void GameBomb::AddExplosion(MyVector3 pos) {
+        explosionPos.push_back(pos);
     }
 }

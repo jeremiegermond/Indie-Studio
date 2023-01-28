@@ -23,11 +23,11 @@ namespace bomberman {
         _textureWall = Load::loadTexture("../Assets/PowerUps/wall.png");
         _color = color;
         _planeTexture = Load::loadTexture("../Assets/Level/plane.png");
-        planeModel = Load::loadModelFromMesh(GenMeshPlane(19, 19, 19, 19));
+        planeModel = Load::loadModelFromMesh(GenMeshPlane(MAP_WIDTH - 2, MAP_HEIGHT - 2, 1, 1));
         Load::setMaterialTexture(&planeModel.materials[0], MATERIAL_MAP_DIFFUSE, _planeTexture);
-        _map.resize(21);
-        for (int row = 0; row < 21; row++)
-            _map[row].resize(21);
+        _map.resize(MAP_HEIGHT);
+        for (int row = 0; row < MAP_HEIGHT; row++)
+            _map[row].resize(MAP_WIDTH);
         GenerateMap();
     }
 
@@ -42,39 +42,51 @@ namespace bomberman {
         Load::unloadTexture(_planeTexture);
     }
 
-    void GameDrawMap::Draw() {
+    void GameDrawMap::Draw(GameCamera *camera) {
         Draw::drawModel(planeModel, MyVector3{.0f,-.5f,.0f}, 1.f, LIGHTGRAY);
-        _cubePosition.z = -10;
+        _cubePosition.z = -Y_OFFSET;
         breakTiles = 0;
+        // Draw cubes
         for (auto y: _map) {
-            _cubePosition.x = -10;
+            _cubePosition.x = -X_OFFSET;
             for (auto x: y) {
+                //TraceLog(LOG_INFO, "Camera: %f %f %f", camera->GetCamera().position.x, camera->GetCamera().position.y, camera->GetCamera().position.z );
                 if (x == '1') {
                     Draw::drawCubeTexture(_textureBrick, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                 } else if (x == '2') {
                     Draw::drawCubeTexture(_textureWood, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
                     breakTiles++;
-                } else if (x == '5') {
-                    Draw::drawCubeTexture(_textureBomb, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
-                } else if (x == '6') {
-                    Draw::drawCubeTexture(_textureSpeed, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
-                } else if (x == '7') {
-                    Draw::drawCubeTexture(_textureWall, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
-                } else if (x == '8') {
-                    Draw::drawCubeTexture(_textureFire, _cubePosition, 1.0f, 1.0f, 1.0f, _color);
-                } else if (x != '0') {    //
-                    Draw::drawCube(_cubePosition, 1.0f, 1.0f, 1.0f, GREEN);
                 }
                 _cubePosition.x++;
             }
             _cubePosition.z++;
         }
+        // Draw billboards
+        _cubePosition.z = -Y_OFFSET;
+        _cubePosition.y = 0.5f;
+        for (auto y: _map) {
+            _cubePosition.x = -X_OFFSET;
+            for (auto x: y) {
+                if (x == '5') {
+                    Draw::draw3DBillboard(camera->GetCamera(), _textureBomb, _cubePosition, 1.0f, WHITE);
+                } else if (x == '6') {
+                    Draw::draw3DBillboard(camera->GetCamera(), _textureSpeed, _cubePosition, 1.0f, WHITE);
+                } else if (x == '7') {
+                    Draw::draw3DBillboard(camera->GetCamera(), _textureWall, _cubePosition, 1.0f, WHITE);
+                } else if (x == '8') {
+                    Draw::draw3DBillboard(camera->GetCamera(), _textureFire, _cubePosition, 1.0f, WHITE);
+                }
+                _cubePosition.x++;
+            }
+            _cubePosition.z++;
+        }
+        _cubePosition.y = 0;
     }
 
     void GameDrawMap::GenerateMap() {
         char type = '0';
-        int width = 21;
-        int height = 21;
+        int width = MAP_WIDTH;
+        int height = MAP_HEIGHT;
 
         _map.resize(height);
         for (int row = 0; row < height; row++) {
@@ -120,8 +132,8 @@ namespace bomberman {
 
     char GameDrawMap::GetBlock(int posX,
                                int posY) {
-        posX += 10;
-        posY += 10;
+        posX += X_OFFSET;
+        posY += Y_OFFSET;
         if (isIn(posX, posY))
             return _map[posY][posX];
         return '1';
@@ -142,8 +154,8 @@ namespace bomberman {
                                  int posY,
                                  bool GetPowerUp,
                                  double wallPass) {
-        posX += 10;
-        posY += 10;
+        posX += X_OFFSET;
+        posY += Y_OFFSET;
         if (!isIn(posX, posY))
             return;
         if (_map[posY][posX] != '0' && _map[posY][posX] != '1') {
@@ -191,7 +203,7 @@ namespace bomberman {
         }
         for (auto &y: _map) {
             std::getline(_loadmap, oldmap);
-            if (oldmap.size() < 21)  {
+            if (oldmap.size() < MAP_HEIGHT)  {
                 GenerateMap();
                 return;
             }

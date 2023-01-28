@@ -14,14 +14,16 @@ namespace bomberman {
         currentScript = script;
         _game = game;
         active = true;
+        float offsetY = Y_OFFSET - 2;
+        float offsetX = X_OFFSET - 2;
         positions.emplace_back(-.47f, 0.0f, -.79f);
         positions.emplace_back(-.44f, 0.0f, -.54f);
         positions.emplace_back(-.65f, 0.0f, -.1f);
         positions.emplace_back(-.88f, 0.0f, -.06f);
-        positions.emplace_back(8.0f, 0.0f, 8.0f);
-        positions.emplace_back(8.0f, 0.0f, -8.0f);
-        positions.emplace_back(-8.0f, 0.0f, 8.0f);
-        positions.emplace_back(-8.0f, 0.0f, -8.0f);
+        positions.emplace_back(offsetX, 0.0f, offsetY);
+        positions.emplace_back(offsetX, 0.0f, -offsetY);
+        positions.emplace_back(-offsetX, 0.0f, offsetY);
+        positions.emplace_back(-offsetX, 0.0f, -offsetY);
         rotations.emplace_back(.0f, .0f, 1.5f);
         rotations.emplace_back(.0f, .0f, 1.5f);
         rotations.emplace_back(.0f, .0f, 3.0f);
@@ -117,46 +119,53 @@ namespace bomberman {
     void GameScript::SelectLoad() {
         auto scene = _game->GetScene();
         auto buttons = scene->GetButtons();
+        bool start = false;
+        bool load = false;
         std::vector<GamePlayer *> players;
         int i = 0;
         for (auto button: buttons) {
             if (button->GetType() == BUTTON_LOAD) {
                 if (button->GetState()) {
                     button->SetState(false);
-                    for (int x = 0; x < 4; x++) {
-                        auto player = scene->GetPlayer(x);
-                        player->SetScale(.4f);
-                        player->SetPosition(positions[4+x]);
-                        player->SetPlay(true);
-                        if (!player->isCpu()) {
-                            player->SetKeys(x);
-                            player->SetGamepad(gamepads[x]);
-                        }
-                        if (i)
-                            player->LoadPlayer(x);
-                        players.push_back(player);
-                    }
-                    scene->SetActiveButton(BUTTON_MENU, false);
-                    _game->ChangeScene(1);
-                    scene = _game->GetScene();
-                    auto map = scene->GetMap();
-                    scene->Populate(players);
-                    for (int x = 0; x < 4; x++) {
-                        auto player = scene->GetPlayer(x);
-                        auto powerUp = scene->GetGamePowerUp(x);
-                        powerUp->SetPlayer(player);
-                        powerUp->SetPosition(powerUpPos[x]);
-                        scene->GetImage(x)->SetColor(WHITE);
-                    }
-                    scene->GetObject(0)->SetScale(50.f);
-                    scene->GetObject(0)->SetPosition(MyVector3{25.f, -5.f, 25.f});
-                    if (map && i) {
-                        map->LoadMap();
-                    } else if (map) {
-                        map->GenerateMap();
-                    }
+                    start = true;
+                    load = i;
                 }
                 i++;
+            }
+        }
+        if (start || MyGamepad::isKeyPressed(KEY_ENTER) || CheckGamepadsButtonPressed(7)) {
+            //rlEnableBackfaceCulling();
+            for (int x = 0; x < 4; x++) {
+                auto player = scene->GetPlayer(x);
+                player->SetScale(.4f);
+                player->SetPosition(positions[4+x]);
+                player->SetPlay(true);
+                if (!player->isCpu()) {
+                    player->SetKeys(x);
+                    player->SetGamepad(gamepads[x]);
+                }
+                if (load)
+                    player->LoadPlayer(x);
+                players.push_back(player);
+            }
+            scene->SetActiveButton(BUTTON_MENU, false);
+            _game->ChangeScene(1);
+            scene = _game->GetScene();
+            auto map = scene->GetMap();
+            scene->Populate(players);
+            for (int x = 0; x < 4; x++) {
+                auto player = scene->GetPlayer(x);
+                auto powerUp = scene->GetGamePowerUp(x);
+                powerUp->SetPlayer(player);
+                powerUp->SetPosition(powerUpPos[x]);
+                scene->GetImage(x)->SetColor(WHITE);
+            }
+            scene->GetObject(0)->SetScale(50.f);
+            scene->GetObject(0)->SetPosition(MyVector3{25.f, -5.f, 25.f});
+            if (map && load) {
+                map->LoadMap();
+            } else if (map) {
+                map->GenerateMap();
             }
         }
     }
@@ -250,41 +259,52 @@ namespace bomberman {
             bool negZ = false;
             for (int i = 1; i <= fire; i++) {
                 tmpP = pos;
+                char block;
                 if (!posX) {
                     tmpP.x = pos.x + float(i);
-                    if (map->GetBlock(x + i, z) != '0') {
+                    block = map->GetBlock(x + i, z);
+                    if (block != '0') {
                         map->BreakBlock(x + i, z);
                         posX = true;
                     }
-                    cases.push_back(tmpP);
+                    if (block != '1')
+                        cases.push_back(tmpP);
                 }
                 if (!negX) {
                     tmpP.x = pos.x - float(i);
-                    if (map->GetBlock(x - i, z) != '0') {
+                    block = map->GetBlock(x - i, z);
+                    if (block != '0') {
                         map->BreakBlock(x - i, z);
                         negX = true;
                     }
-                    cases.push_back(tmpP);
+                    if (block != '1')
+                        cases.push_back(tmpP);
                 }
                 tmpP = pos;
                 if (!posZ) {
                     tmpP.z = pos.z + float(i);
-                    if (map->GetBlock(x, z + i) != '0') {
+                    block = map->GetBlock(x, z + i);
+                    if (block != '0') {
                         map->BreakBlock(x, z + i);
                         posZ = true;
                     }
-                    cases.push_back(tmpP);
+                    if (block != '1')
+                        cases.push_back(tmpP);
                 }
                 if (!negZ) {
                     tmpP.z = pos.z - float(i);
-                    if (map->GetBlock(x, z - i) != '0') {
+                    block = map->GetBlock(x, z - i);
+                    if (block != '0') {
                         map->BreakBlock(x, z - i);
                         negZ = true;
                     }
-                    cases.push_back(tmpP);
+                    if (block != '1')
+                        cases.push_back(tmpP);
                 }
             }
             for (auto collide: cases) {
+                TraceLog(LOG_INFO, "Collide: %f %f %f", collide.x, collide.y, collide.z);
+                bomb->AddExplosion(collide);
                 for (size_t i = 0; i < 4; i++) {
                     if (players.size() <= i || playersPos.size() <= i)
                         break;
@@ -335,9 +355,10 @@ namespace bomberman {
     void GameScript::WinningScript() {
         auto scene = _game->GetScene();
         auto btnReturn = scene->GetButton(0);
-        if (btnReturn && btnReturn->GetState()) {
+        if ((btnReturn && btnReturn->GetState()) || MyGamepad::isKeyPressed(KEY_ENTER) || CheckGamepadsButtonPressed(7)) {
             btnReturn->SetState(false);
             _game->ChangeScene(0);
+            rlDisableBackfaceCulling();
             scene = _game->GetScene();
             auto *script = scene->GetScript(0);
             script->currentScript = 2;

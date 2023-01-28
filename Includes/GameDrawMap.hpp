@@ -9,7 +9,13 @@
 #define GAMEDRAWMAP_HPP_
 
 #include "IEntity.hpp"
+#include "GameCamera.hpp"
 
+#define MAP_HEIGHT 17
+#define MAP_WIDTH 21
+//#define Y_OFFSET 8
+#define Y_OFFSET (MAP_HEIGHT/2)
+#define X_OFFSET (MAP_WIDTH/2)
 namespace bomberman {
     class GameDrawMap : public IEntity {
         private:
@@ -28,7 +34,7 @@ namespace bomberman {
         public:
             GameDrawMap(const std::string &texturePathBrick, const std::string &texturePathWood, MyColor color);
             ~GameDrawMap() override;
-            void Draw();
+            void Draw(GameCamera *camera);
             void GenerateMap();
             static char Populate(bool Break = false);
             bool isIn(int posX, int posY);

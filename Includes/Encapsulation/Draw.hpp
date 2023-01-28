@@ -124,7 +124,11 @@ namespace bomberman {
         // Draw a model (with texture if set)
         static void drawModel(Model model, MyVector3 position, float scale, MyColor tint);
 
+        // Draw a 3d billboard rec texture
+        static void draw3DBillboardRec(MyCamera camera, Texture2D texture, MyRectangle source, Vector3 position, MyVector2 size, MyColor tint);
 
+        // Draw a 3d billboard texture
+        static void draw3DBillboard(MyCamera camera, Texture2D texture, Vector3 position, float size, MyColor tint);
 
         //additional function: draw
         static void draw(const std::function<void()> &function);

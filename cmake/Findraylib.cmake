@@ -1,6 +1,6 @@
 if (NOT raylib_FOUND) 
     INCLUDE(FetchContent) 
-    FetchContent_Declare(raylib URL https://github.com/raysan5/raylib/archive/refs/tags/4.0.0.tar.gz) 
+    FetchContent_Declare(raylib URL https://github.com/raysan5/raylib/archive/refs/tags/4.2.0.tar.gz)
     FetchContent_GetProperties(raylib) 
     if (NOT raylib_POPULATED) 
         SET(FETCHCONTENT_QUIET NO) 
