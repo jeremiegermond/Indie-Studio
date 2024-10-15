@@ -75,3 +75,5 @@ This means that the efforts you make to polish your game will count as much as t
 You can see our documentation in the Documentation folder. Use vscode to open a better view, on a live server.
 
 ![](Assets/Readme/documentation.gif)
+
+**Grade A**
